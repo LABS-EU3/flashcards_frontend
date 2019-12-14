@@ -1,6 +1,10 @@
 import React from 'react';
 import './App.css';
-
+// "extends": [
+//   "eslint:recommended",
+//   "plugin:react/recommended",
+//   "prettier", "prettier/react"
+// ],
 function App() {
   return (
     <div className="App">

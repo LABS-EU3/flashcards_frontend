@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint . -c .eslintrc.js --ext js,jsx"
+    "lint": "eslint . -c .eslintrc.js --ext js,jsx",
+    "lerna:lint:js": "lerna run lint:js:fix"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,26 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.17.0",
+    "husky": "^4.0.0-beta.5",
+    "lerna": "^3.19.0",
+    "lint-staged": "^9.5.0",
     "prettier": "^1.19.1"
+  },
+  "lint-staged": {
+    "packages/**/*.{js,jsx}": [
+      "npm run --silent lerna:lint:js",
+      "git add"
+    ],
+    "*.{js,jsx}": [
+      "eslint"
+    ],
+    "*.{js,jsx,json,md}": [
+      "prettier --list-different"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
