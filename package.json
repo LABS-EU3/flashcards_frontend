@@ -41,7 +41,7 @@
       "eslint"
     ],
     "*.{js,jsx,json,md}": [
-      "prettier"
+      "prettier --list-different"
     ]
   },
   "husky": {
