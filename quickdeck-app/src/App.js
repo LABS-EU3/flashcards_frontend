@@ -6,6 +6,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Welcome to Quick Decks!</h1>
+        <h4>Yeeaaaaaa!</h4>
       </header>
     </div>
   );
