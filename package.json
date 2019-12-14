@@ -41,7 +41,7 @@
       "eslint"
     ],
     "*.{js,jsx,json,md}": [
-      "prettier --check"
+      "prettier --loglevel=debug --write \"**/*.{js,json,css,md,ts,html,component.html}\""
     ]
   },
   "husky": {
