@@ -3,10 +3,7 @@ module.exports = {
         "browser": true,
         "es6": true
     },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended"
-    ],
+    "extends": ["airbnb", "prettier", "prettier/react"],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -18,9 +15,15 @@ module.exports = {
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
-    "plugins": [
-        "react"
-    ],
+    "plugins": ["react", "prettier"],
     "rules": {
-    }
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [".js", "jsx"]
+            }
+        ],
+        "prettier/prettier": "error",
+        "max-len": ["error", 80]
+    },
 };
