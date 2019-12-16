@@ -16,7 +16,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint . -c .eslintrc.js --ext js,jsx",
-    "lint-fix": "eslint . -c .eslintrc.js --ext js,jsx, --fix"
+    "lint-fix": "eslint . -c .eslintrc.js --ext js,jsx, --fix",
+    "check-staged": "lint-staged"
   },
   "eslintConfig": {
     "extends": "react-app"
