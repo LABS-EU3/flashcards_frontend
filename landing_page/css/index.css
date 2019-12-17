@@ -130,25 +130,26 @@ html,
 body {
   height: 100%;
 }
-nav {
+.header-nav {
   background-color: aqua;
   display: flex;
   flex: 1;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
 }
-nav .links {
+.header-nav .links {
   background-color: yellow;
   display: flex;
   width: 20%;
 }
-nav .links li {
+.header-nav .links li {
   display: flex;
   flex: 1;
   align-items: center;
   justify-content: space-around;
 }
-nav .links li a {
+.header-nav .links li a {
   text-decoration: none;
   width: 44px;
   height: 17px;
@@ -158,7 +159,7 @@ nav .links li a {
   font-size: 14px;
   line-height: 17px;
 }
-nav .btn {
+.header-nav .btn {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -170,7 +171,7 @@ nav .btn {
   font-size: 14px;
   line-height: 17px;
 }
-nav .btn button {
+.header-nav .btn button {
   width: 175px;
   height: 39px;
   left: 1098px;
@@ -243,7 +244,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin: 10px;
+  margin: 100px;
 }
 .article1 aside,
 .article2 aside,
@@ -286,4 +287,115 @@ main {
   font-weight: 500;
   font-size: 28px;
   line-height: 37px;
+}
+.article4 {
+  background-color: orchid;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+.article4 section {
+  margin: 10px;
+}
+.article4 section h3 {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 37px;
+  /* or 77% */
+}
+.article4 section p {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 20px;
+}
+.article4 section h4 {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  /* or 111% */
+}
+footer {
+  background-color: palegreen;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+footer .footer1 {
+  background-color: #4ac9c9;
+  display: flex;
+  width: 100%;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+}
+footer .footer1 p {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  color: #fcf8f8;
+}
+footer .footer1 h3 {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 37px;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+}
+footer .footer1 button {
+  width: 257px;
+  height: 66px;
+  border: 2px solid #ffffff;
+  box-sizing: border-box;
+  border-radius: 4px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 27px;
+  color: #e5e5e5;
+}
+footer nav {
+  background-color: #bb2ba3;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+footer nav li {
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+footer nav li a {
+  text-decoration: none;
+  height: 17px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+}
+footer nav .social {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 20%;
+  margin: 10px;
 }
