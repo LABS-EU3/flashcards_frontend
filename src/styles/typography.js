@@ -4,10 +4,10 @@
 import styled from 'styled-components';
 
 // Fonts
-import * as f from './fonts';
+import * as f from './variables/fonts';
 
 // Colours
-import * as c from './colours';
+import * as c from './variables/colours';
 
 // Example use <H1 white></H1> | <H1 black></H1>
 // renders h1 with the perspective color font
@@ -22,7 +22,7 @@ export const H1 = styled.h1`
   color: ${c.DARK_NEUTRAL_COLOR};
 
   ${props => (props.BRAND ? `font-family:${f.BRAND_FONT}` : null)};
-  
+
   ${props => (props.LIGHT ? `color:${c.LIGHT_NEUTRAL_COLOR}` : null)};
   ${props => (props.WHITE ? `color:#FFFFFF` : null)};
   ${props => (props.PRIMARY ? `color:${c.PRIMARY_POP_COLOR}` : null)};
