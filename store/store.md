@@ -1,1 +1,0 @@
-store initializes the redux store.
