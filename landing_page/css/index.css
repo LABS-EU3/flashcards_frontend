@@ -227,3 +227,12 @@ header .header-content .header-btn button {
   font-size: 24px;
   line-height: 37px;
 }
+main {
+  background-image: url('../img/bannerImage.svg');
+  background-color: #fbff00;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  position: relative;
+  height: 800px;
+}
