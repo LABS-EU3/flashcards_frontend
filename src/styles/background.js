@@ -25,7 +25,7 @@ import bottomTriangle from '../assets/bottomTriangle.svg';
             <LineButton>
               <H3 PRIMARY>Login</H3>
             </LineButton>
-            
+
           </UnSkewDiv>
         </SkewDiv>
         <BottomTriangle />
@@ -60,12 +60,17 @@ export const SkewDiv = styled.div`
 `;
 
 export const UnSkewDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   -webkit-transform: skewY(16.27deg);
   -moz-transform: skewY(16.27deg);
   -ms-transform: skewY(16.27deg);
   -o-transform: skewY(16.27deg);
   transform: skewY(16.27deg);
   z-index: 2;
+  width: 60%;
 `;
 
 export const TopTriangle = styled.div`
