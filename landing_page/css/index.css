@@ -160,3 +160,52 @@ nav .btn p,
 nav .btn button {
   margin: 0 20px;
 }
+header {
+  background-image: url('../img/headerBackgroundImg.svg');
+  background-color: blue;
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: contain;
+  position: relative;
+  height: 800px;
+}
+header .header-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 50%;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
+header .header-content h1 {
+  background-color: red;
+  font-size: 72px;
+  font-weight: 500;
+  margin-top: 150px;
+  line-height: 88px;
+}
+header .header-content p {
+  background-color: seagreen;
+  font-size: 24px;
+  font-weight: 500;
+  margin-top: 50px;
+  line-height: 37px;
+}
+header .header-content .header-btn {
+  margin-top: 100px;
+  display: flex;
+  flex: 1;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
+header .header-content .header-btn button {
+  margin-right: 20px;
+  width: 274px;
+  height: 56px;
+  border-radius: 5px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 37px;
+}
