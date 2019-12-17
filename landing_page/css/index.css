@@ -150,15 +150,33 @@ nav .links li {
 }
 nav .links li a {
   text-decoration: none;
+  width: 44px;
+  height: 17px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
 }
 nav .btn {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  margin-left: 20px;
+  height: 17px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 17px;
 }
-nav .btn p,
 nav .btn button {
-  margin: 0 20px;
+  width: 175px;
+  height: 39px;
+  left: 1098px;
+  top: 17px;
+  background: #d21f3c;
+  border-radius: 3px;
 }
 header {
   background-image: url('../img/headerBackgroundImg.svg');
