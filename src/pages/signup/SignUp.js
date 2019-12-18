@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Tooltip, Radio, Form, Icon, Input, Button, Spin } from 'antd';
 import { NavLink, Redirect } from 'react-router-dom';
 import { withFormik } from 'formik';
 import { connect } from 'react-redux';
@@ -10,9 +9,9 @@ import { userSignUp } from '../../modules/user/userActions';
 import { H1 } from '../../styles/typography';
 import { Button } from '../../styles/buttons';
 import {
-  ParentBackground,
-  SkewDiv,
-  UnSkewDiv,
+  ParentBackgroundSecondary,
+  SkewDivSecondary,
+  UnSkewDivSecondary,
   BottomTriangle,
   TopTriangle,
 } from '../../styles/background';
@@ -28,10 +27,10 @@ const SignUpForm = props => {
     errors,
   } = props;
   return (
-    <ParentBackground>
+    <ParentBackgroundSecondary>
       <TopTriangle />
-      <SkewDiv>
-        <UnSkewDiv>
+      <SkewDivSecondary>
+        <UnSkewDivSecondary>
           <div>
             {localStorage.getItem('token') && <Redirect to="/dashboard" />}
             <div>
@@ -68,24 +67,22 @@ const SignUpForm = props => {
                 <Label>Confirm Password</Label>
                 <Input
                   type="password"
-                  size="large"
                   name="password2"
                   placeholder="Confirm Password"
                   value={values.password2}
                   onBlur={handleBlur}
                   onChange={handleChange}
                 />
-                <Button>Sign Up</Button>
+                <Button type="submit">Sign Up</Button>
                 <br />
-                Already a user? <NavLink to="/login">Sign in</NavLink>
-                <br />
+                Already a user? <NavLink to="/login">Login</NavLink>
               </Form>
             </div>
           </div>
-        </UnSkewDiv>
-      </SkewDiv>
+        </UnSkewDivSecondary>
+      </SkewDivSecondary>
       <BottomTriangle />
-    </ParentBackground>
+    </ParentBackgroundSecondary>
   );
 };
 
