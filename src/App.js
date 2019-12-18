@@ -1,36 +1,36 @@
+// import
+
+// Libraries
 import React from 'react';
+import { Route, Switch } from 'react-router';
+
+// Styles
 import './App.css';
-import { H1, H3 } from './styles/typography';
-import { Button, LineButton } from './styles/buttons';
-import {
-  ParentBackgroundSecondary,
-  SkewDivSecondary,
-  UnSkewDivSecondary,
-} from './styles/background';
-import { Form, Input, Label } from './styles/forms';
+
+// Components
+import TopBar from './components/headerBar/TopBar';
+
+// Pages
+import Landing from './pages/landing/Landing';
+import Dashboard from './pages/dashboard/Dashboard';
+import ForgotPassword from './pages/forgot_password/ForgotPassword';
+import ResetPassword from './pages/reset_password/ResetPassword';
+import SignUp from './pages/signup/SignUp';
+import Login from './pages/login/Login';
 
 function App() {
   return (
     <div>
-      <ParentBackgroundSecondary>
-        <SkewDivSecondary>
-          <UnSkewDivSecondary>
-            <H1>Welcome to Quick Decks!</H1>
-            <Form>
-              <Label>
-                <H3> Email</H3>
-                <Input type="text" name="email" placeholder="Email" />
-              </Label>
-              <Button>
-                <H3 WHITE>Login</H3>
-              </Button>
-              <LineButton>
-                <H3 PRIMARY>Login</H3>
-              </LineButton>
-            </Form>
-          </UnSkewDivSecondary>
-        </SkewDivSecondary>
-      </ParentBackgroundSecondary>
+      Test
+      <TopBar />
+      <Switch>
+        <Route exact path="/" component={Landing} />
+        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/forgot" component={ForgotPassword} />
+        <Route path="/reset" component={ResetPassword} />
+        <Route path="/signup" component={SignUp} />
+        <Route path="/login" component={Login} />
+      </Switch>
     </div>
   );
 }
