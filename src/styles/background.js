@@ -41,7 +41,7 @@ export const ParentBackground = styled.div`
   min-width: 320px;
   min-height: 524px;
   max-width: 517px;
-  max-height: 656px;
+  max-height: 94.4vh;
   z-index: -1;
 `;
 
