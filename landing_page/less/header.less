@@ -5,10 +5,10 @@ header {
   background-size: contain;
   position: relative;
   height: 80rem;
-
+  width: 100%;
   @media @tablet {
     height: auto;
-    margin-top: -5rem;
+    // margin-top: -2.5rem;
   }
   .header-content {
     display: flex;
@@ -18,9 +18,10 @@ header {
     align-items: flex-start;
     justify-content: space-evenly;
 
-    // @media @tablet {
-    //   width: auto;
-    // }
+    @media @tablet {
+      width: auto;
+      margin: auto 1.1rem;
+    }
 
     @media @phone {
       width: auto;
