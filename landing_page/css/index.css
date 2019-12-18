@@ -137,13 +137,15 @@ button {
   border: none;
   outline: none;
 }
-.container {
+.container,
+.footer-container {
   font-size: 10px;
   max-width: 900px;
   margin: auto auto;
 }
 @media (max-width: 450px) {
-  .container {
+  .container,
+  .footer-container {
     margin: auto 1.5rem;
   }
 }
@@ -514,13 +516,15 @@ main {
 }
 footer {
   background: #d21f3c;
+}
+footer .footer-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  margin: 10rem 0 4rem 0;
+  margin: auto;
 }
-footer .footer1 {
+footer .footer-container .footer1 {
   margin: 2rem 0;
   display: flex;
   width: 100%;
@@ -529,12 +533,12 @@ footer .footer1 {
   justify-content: space-between;
 }
 @media (max-width: 450px) {
-  footer .footer1 {
+  footer .footer-container .footer1 {
     display: flex;
     flex-direction: column;
   }
 }
-footer .footer1 p {
+footer .footer-container .footer1 p {
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
@@ -545,7 +549,7 @@ footer .footer1 p {
   margin: 0 4rem;
   color: #fcf8f8;
 }
-footer .footer1 h3 {
+footer .footer-container .footer1 h3 {
   font-family: Montserrat;
   font-style: normal;
   font-weight: bold;
@@ -555,7 +559,7 @@ footer .footer1 h3 {
   align-items: center;
   color: #ffffff;
 }
-footer .footer1 button {
+footer .footer-container .footer1 button {
   width: 24rem;
   height: 5.5rem;
   margin: 0 4rem;
@@ -570,23 +574,23 @@ footer .footer1 button {
   background: #d21f3c;
   color: #e5e5e5;
 }
-footer hr {
+footer .footer-container hr {
   width: 98%;
   border-color: #e5e5e5;
 }
-footer nav {
+footer .footer-container nav {
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: space-between;
 }
 @media (max-width: 450px) {
-  footer nav {
+  footer .footer-container nav {
     display: flex;
     flex-direction: column;
   }
 }
-footer nav li {
+footer .footer-container nav li {
   width: 25%;
   display: flex;
   align-items: center;
@@ -594,12 +598,12 @@ footer nav li {
   margin: 2rem 4rem 4rem 4rem;
 }
 @media (max-width: 450px) {
-  footer nav li {
+  footer .footer-container nav li {
     width: 100%;
     margin: 2rem 4rem 0 4rem;
   }
 }
-footer nav li a {
+footer .footer-container nav li a {
   text-decoration: none;
   font-family: Montserrat;
   font-style: normal;
@@ -610,7 +614,7 @@ footer nav li a {
   align-items: center;
   color: #ffffff;
 }
-footer nav .social {
+footer .footer-container nav .social {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -618,7 +622,7 @@ footer nav .social {
   margin: 2rem 4rem 4rem 4rem;
 }
 @media (max-width: 450px) {
-  footer nav .social {
+  footer .footer-container nav .social {
     width: 100%;
   }
 }
