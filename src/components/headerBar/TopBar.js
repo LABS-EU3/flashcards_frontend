@@ -2,14 +2,23 @@
 
 // Libraries
 import React from 'react';
+import styled from 'styled-components';
 
-// Styled
-import { H1 } from '../../styles/typography';
+// Assets
+import logo from '../../assets/logo.svg';
+
+const TopBarContainer = styled.div`
+  height: 44px;
+  display: flex;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.02);
+  box-sizing: border-box;
+  padding: 1em;
+`;
 
 export default function TopBar() {
   return (
-    <div>
-      <H1>TopBar Test</H1>
-    </div>
+    <TopBarContainer>
+      <img src={`${logo}`} alt="quickdecks logo" />
+    </TopBarContainer>
   );
 }

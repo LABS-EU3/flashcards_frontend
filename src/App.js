@@ -8,10 +8,12 @@ import {
   UnSkewDivSecondary,
 } from './styles/background';
 import { Form, Input, Label } from './styles/forms';
+import TopBar from './components/headerBar/TopBar';
 
 function App() {
   return (
     <div>
+      <TopBar />
       <ParentBackgroundSecondary>
         <SkewDivSecondary>
           <UnSkewDivSecondary>
