@@ -1,5 +1,4 @@
 import axios from 'axios';
-import decode from 'jwt-decode';
 import { LOADING, LOGIN, SET_ERRORS, LOGOUT } from './userTypes';
 
 export const userLogin = (email, password, history) => dispatch => {

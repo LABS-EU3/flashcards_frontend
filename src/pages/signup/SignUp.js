@@ -10,10 +10,11 @@ import { userSignUp } from '../../modules/user/userActions';
 import { H1 } from '../../styles/typography';
 import { Button } from '../../styles/buttons';
 import {
-  ParentBackgroundSecondary,
-  SkewDivSecondary,
-  UnSkewDivSecondary,
+  ParentBackground,
+  SkewDiv,
+  UnSkewDiv,
   BottomTriangle,
+  TopTriangle,
 } from '../../styles/background';
 import { Form, Input, Label } from '../../styles/forms';
 
@@ -27,7 +28,7 @@ const SignUpForm = props => {
     errors,
   } = props;
   return (
-    <ParentBackgroundSecondary>
+    <ParentBackground>
       <TopTriangle />
       <SkewDiv>
         <UnSkewDiv>
@@ -84,7 +85,7 @@ const SignUpForm = props => {
         </UnSkewDiv>
       </SkewDiv>
       <BottomTriangle />
-    </ParentBackgroundSecondary>
+    </ParentBackground>
   );
 };
 

@@ -34,15 +34,19 @@ import bottomTriangle from '../assets/bottomTriangle.svg';
 */
 
 export const ParentBackground = styled.div`
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background: ${c.LIGHT_NEUTRAL_COLOR};
   min-width: 320px;
   min-height: 524px;
+<<<<<<< HEAD
   max-width: 517px;
   max-height: 94.4vh;
   z-index: -1;
+=======
+>>>>>>> 8449a8ab8e9516412414597468a511a47be6428b
 `;
 
 export const SkewDiv = styled.div`
@@ -55,7 +59,6 @@ export const SkewDiv = styled.div`
   -ms-transform: skewY(-16.27deg);
   -o-transform: skewY(-16.27deg);
   transform: skewY(-16.27deg);
-  z-index: 1;
   height: 75vh;
 `;
 
@@ -69,7 +72,6 @@ export const UnSkewDiv = styled.div`
   -ms-transform: skewY(16.27deg);
   -o-transform: skewY(16.27deg);
   transform: skewY(16.27deg);
-  z-index: 2;
   width: 60%;
 `;
 
@@ -96,15 +98,13 @@ export const BottomTriangle = styled.div`
 // Create Account and Landing
 
 export const ParentBackgroundSecondary = styled.div`
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
   background: linear-gradient(81.25deg, #d21f3c -48.43%, #ffa987 169.92%);
   min-width: 320px;
   min-height: 524px;
-  max-width: 517px;
-  max-height: 656px;
-  z-index: -1;
 `;
 
 export const SkewDivSecondary = styled.div`
@@ -117,7 +117,6 @@ export const SkewDivSecondary = styled.div`
   -ms-transform: skewY(16.27deg);
   -o-transform: skewY(16.27deg);
   transform: skewY(16.27deg);
-  z-index: 1;
   min-height: 75vh;
 `;
 
@@ -131,6 +130,5 @@ export const UnSkewDivSecondary = styled.div`
   -ms-transform: skewY(-16.27deg);
   -o-transform: skewY(-16.27deg);
   transform: skewY(-16.27deg);
-  z-index: 2;
   width: 60%;
 `;
