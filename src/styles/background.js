@@ -143,10 +143,14 @@ export const FlexRowBackground = styled.div`
   justify-content: space-between;
   max-height: 95.4vh;
   overflow: hidden;
+  width: 100%;
   background-color: ${c.LIGHT_NEUTRAL_COLOR};
   @media (min-width: ${g.phoneMediaBreak}px) {
     justify-content: center;
     align-items: center;
+  }
+  @media (min-width: ${g.desktopMediaBreak}px) {
+    justify-content: space-between;
   }
 `;
 
