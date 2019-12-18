@@ -273,7 +273,6 @@ header .header-content h1 {
 }
 @media (max-width: 675px) {
   header .header-content h1 {
-    color: blue;
     font-size: 5.5rem;
     font-weight: 500;
     margin-top: 10rem;
@@ -529,7 +528,7 @@ footer .footer-container {
   margin: auto;
 }
 footer .footer-container .footer1 {
-  margin: 2rem 0;
+  margin: 4rem 0;
   display: flex;
   width: 100%;
   flex: 1;
