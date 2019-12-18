@@ -4,12 +4,55 @@
 import React from 'react';
 
 // Styled
-import { H1 } from '../../styles/typography';
+import { H1, H3, P, H5 } from '../../styles/typography';
+import { Button, BackArrowButton } from '../../styles/buttons';
+import { Form, Input, Label } from '../../styles/forms';
+import { FlexColumnSpaceBetween } from '../../styles/displayFlex';
+import {
+  BottomTriangle,
+  ParentBackground,
+  TopTriangle,
+  SkewDiv,
+  UnSkewDiv,
+} from '../../styles/background';
+
+// assets
+import QuestionMark from '../../assets/icons/noun_Question_3013473 1.svg';
+import BackArrow from '../../assets/icons/Arrow 1.svg';
 
 export default function ForgotPassword() {
   return (
     <div>
-      <H1>Intial Commit</H1>
+      <ParentBackground>
+        <BackArrowButton>
+          <img src={`${BackArrow}`} alt="back arrow" />
+          <H5>Back</H5>
+        </BackArrowButton>
+        <TopTriangle />
+        <SkewDiv>
+          <UnSkewDiv>
+            <FlexColumnSpaceBetween>
+              <img src={`${QuestionMark}`} alt="question mark icon" />
+              <H1 REGULAR>Forgot Password</H1>
+              <P LIGHTWEIGHT>
+                Enter your email linked to your account. An message will be sent
+                to your email to reset your password{' '}
+              </P>
+              <br />
+              <Form>
+                <Label>
+                  <H3>Email</H3>
+                  <Input type="text" name="email" placeholder="Email" />{' '}
+                </Label>
+                <Button>
+                  <H3 WHITE>Send Email</H3>
+                </Button>
+              </Form>
+            </FlexColumnSpaceBetween>
+          </UnSkewDiv>
+        </SkewDiv>
+        <BottomTriangle />
+      </ParentBackground>
     </div>
   );
 }

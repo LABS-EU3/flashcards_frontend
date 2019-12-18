@@ -41,6 +41,8 @@ export const ParentBackground = styled.div`
   background: ${c.LIGHT_NEUTRAL_COLOR};
   min-width: 320px;
   min-height: 524px;
+  max-width: 50vw;
+  max-height: 95.4vh;
 `;
 
 export const SkewDiv = styled.div`
@@ -99,6 +101,8 @@ export const ParentBackgroundSecondary = styled.div`
   background: linear-gradient(81.25deg, #d21f3c -48.43%, #ffa987 169.92%);
   min-width: 320px;
   min-height: 524px;
+  max-width: 50vw;
+  max-height: 95.4vh;
 `;
 
 export const SkewDivSecondary = styled.div`

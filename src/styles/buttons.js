@@ -11,6 +11,7 @@ export const Button = styled.button`
   border-radius: 3px;
   border: none;
   width: 100%;
+  margin: 1em 0em 1em 0em;
   box-shadow: 0px 4px 4px rgba(210, 31, 60, 0.03);
   background: linear-gradient(81.25deg, #d21f3c -48.43%, #ffa987 169.92%);
   &:hover {
@@ -27,6 +28,7 @@ export const LineButton = styled.button`
   background: #ffffff;
   border-radius: 3px;
   box-sizing: border-box;
+  margin: 1em 0em 1em 0em;
   width: 100%;
   border: 3px solid ${c.PRIMARY_POP_COLOR};
   box-shadow: 0px 4px 4px rgba(210, 31, 60, 0.03);
@@ -40,4 +42,12 @@ export const LineButton = styled.button`
       color: ${c.WHITE};
     }
   }
+`;
+
+export const BackArrowButton = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 65px;
+  left: 20px;
 `;
