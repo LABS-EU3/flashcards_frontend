@@ -142,6 +142,11 @@ button {
   max-width: 900px;
   margin: auto auto;
 }
+@media (max-width: 450px) {
+  .container {
+    margin: auto 1.5rem;
+  }
+}
 .header-nav {
   display: flex;
   flex: 1;
@@ -225,7 +230,8 @@ header {
 }
 @media (max-width: 675px) {
   header {
-    height: 50rem;
+    height: auto;
+    margin-top: -5rem;
   }
 }
 header .header-content {
@@ -236,7 +242,7 @@ header .header-content {
   align-items: flex-start;
   justify-content: space-evenly;
 }
-@media (max-width: 675px) {
+@media (max-width: 450px) {
   header .header-content {
     width: auto;
   }
@@ -276,6 +282,11 @@ header .header-content p {
 }
 @media (max-width: 675px) {
   header .header-content p {
+    margin-top: 1rem;
+  }
+}
+@media (max-width: 675px) {
+  header .header-content p {
     font-size: 2rem;
   }
 }
@@ -285,6 +296,14 @@ header .header-content .header-btn {
   flex: 1;
   align-items: flex-start;
   justify-content: space-evenly;
+}
+@media (max-width: 450px) {
+  header .header-content .header-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem 0;
+  }
 }
 header .header-content .header-btn button {
   margin-right: 2rem;
@@ -296,6 +315,11 @@ header .header-content .header-btn button {
   font-weight: bold;
   font-size: 2.4rem;
   line-height: 3.7rem;
+}
+@media (max-width: 450px) {
+  header .header-content .header-btn button {
+    margin: 0.5rem 0;
+  }
 }
 header .header-content .header-btn .btn1 {
   background: #d21f3c;
@@ -327,8 +351,8 @@ main {
 .article3 {
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  margin: 10rem;
+  justify-content: space-between;
+  margin: 10rem auto;
 }
 @media (max-width: 675px) {
   .article1,
@@ -360,6 +384,13 @@ main {
     width: 80%;
   }
 }
+@media (max-width: 450px) {
+  .article1 aside,
+  .article2 aside,
+  .article3 aside {
+    width: 100%;
+  }
+}
 .article1 section,
 .article2 section,
 .article3 section {
@@ -374,6 +405,13 @@ main {
   .article2 section,
   .article3 section {
     width: 80%;
+  }
+}
+@media (max-width: 450px) {
+  .article1 section,
+  .article2 section,
+  .article3 section {
+    width: 100%;
   }
 }
 .article1 section h1,
@@ -408,6 +446,11 @@ main {
     align-items: center;
     justify-content: space-around;
     margin: 0 10rem;
+  }
+}
+@media (max-width: 450px) {
+  .article4 {
+    margin: 0;
   }
 }
 .article4 section {
