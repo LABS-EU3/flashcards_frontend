@@ -130,12 +130,17 @@ html,
 body {
   height: 100%;
 }
-.container {
-  margin: auto 200px;
+html {
+  font-size: 62.5%;
 }
 button {
   border: none;
   outline: none;
+}
+.container {
+  font-size: 10px;
+  max-width: 900px;
+  margin: auto auto;
 }
 .header-nav {
   display: flex;
@@ -143,9 +148,9 @@ button {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 20px 10px;
-  margin-top: 40px;
-  margin-bottom: -20px;
+  padding: 2rem 1rem;
+  margin-top: 4rem;
+  margin-bottom: -2rem;
   background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
@@ -161,39 +166,39 @@ button {
 }
 .header-nav .links li a {
   text-decoration: none;
-  width: 44px;
-  height: 17px;
+  width: 4.4rem;
+  height: 1.7rem;
   font-family: Montserrat;
   font-style: normal;
   font-weight: 500;
-  font-size: 17px;
-  line-height: 17px;
+  font-size: 1.7rem;
+  line-height: 1.7rem;
   color: #000000;
 }
 .header-nav .btn .btn1 {
-  width: 90px;
-  height: 39px;
-  margin-left: 10px;
+  width: 9rem;
+  height: 3.9rem;
+  margin-left: 1rem;
   background: #ffffff;
   color: #d21f3c;
   font-family: Montserrat;
   font-style: normal;
   font-weight: bold;
-  font-size: 20px;
-  line-height: 17px;
+  font-size: 2rem;
+  line-height: 1.7rem;
 }
 .header-nav .btn .btn2 {
-  width: 150px;
-  height: 39px;
-  margin-left: 10px;
+  width: 15rem;
+  height: 3.9rem;
+  margin-left: 1rem;
   background: #d21f3c;
-  border-radius: 3px;
+  border-radius: 0.3rem;
   color: #fef7f7;
   font-family: Montserrat;
   font-style: normal;
   font-weight: bold;
-  font-size: 16px;
-  line-height: 17px;
+  font-size: 1.6rem;
+  line-height: 1.7rem;
 }
 header {
   background-image: url('../img/headerBackgroundImg.svg');
@@ -201,7 +206,12 @@ header {
   background-position: right;
   background-size: contain;
   position: relative;
-  height: 800px;
+  height: 80rem;
+}
+@media (max-width: 675px) {
+  header {
+    height: 50rem;
+  }
 }
 header .header-content {
   display: flex;
@@ -210,6 +220,11 @@ header .header-content {
   width: 50%;
   align-items: flex-start;
   justify-content: space-evenly;
+}
+@media (max-width: 675px) {
+  header .header-content {
+    width: auto;
+  }
 }
 header .header-content h1 {
   font-size: 72px;
@@ -223,35 +238,60 @@ header .header-content p {
   margin-top: 50px;
   line-height: 37px;
 }
+header .header-content h1 {
+  font-size: 7.2rem;
+  font-weight: 500;
+  margin-top: 15rem;
+  line-height: 8.8rem;
+}
+@media (max-width: 675px) {
+  header .header-content h1 {
+    color: blue;
+    font-size: 5.5rem;
+    font-weight: 500;
+    margin-top: 10rem;
+    line-height: 6rem;
+  }
+}
+header .header-content p {
+  font-size: 2.4rem;
+  font-weight: 500;
+  margin-top: 5rem;
+  line-height: 3.7rem;
+}
+@media (max-width: 675px) {
+  header .header-content p {
+    font-size: 2rem;
+  }
+}
 header .header-content .header-btn {
-  margin-top: 50px;
+  margin-top: 5rem;
   display: flex;
   flex: 1;
   align-items: flex-start;
   justify-content: space-evenly;
 }
 header .header-content .header-btn button {
-  margin-right: 20px;
-  width: 230px;
-  height: 45px;
+  margin-right: 2rem;
+  width: 23rem;
+  height: 4.5rem;
   border-radius: 5px;
   font-family: Montserrat;
   font-style: normal;
   font-weight: bold;
-  font-size: 24px;
-  line-height: 37px;
+  font-size: 2.4rem;
+  line-height: 3.7rem;
 }
 header .header-content .header-btn .btn1 {
   background: #d21f3c;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   color: #ffffff;
 }
 header .header-content .header-btn .btn2 {
   background: #ffffff;
-  /* D21F3C */
-  border: 3px solid #d21f3c;
+  border: 0.3rem solid #d21f3c;
   box-sizing: border-box;
-  border-radius: 5px;
+  border-radius: 0.5rem;
 }
 main {
   background-image: url('../img/bannerImage.svg');
@@ -259,7 +299,8 @@ main {
   background-position: center;
   background-size: 100% 100%;
   position: relative;
-  height: 600px;
+  height: 50rem;
+  margin-bottom: -10rem;
 }
 .article1,
 .article2,
@@ -267,7 +308,18 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin: 100px;
+  margin: 10rem;
+}
+@media (max-width: 675px) {
+  .article1,
+  .article2,
+  .article3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    margin: 10rem auto;
+  }
 }
 .article1 aside,
 .article2 aside,
@@ -281,6 +333,13 @@ main {
   width: 100%;
   height: auto;
 }
+@media (max-width: 675px) {
+  .article1 aside,
+  .article2 aside,
+  .article3 aside {
+    width: 80%;
+  }
+}
 .article1 section,
 .article2 section,
 .article3 section {
@@ -290,6 +349,13 @@ main {
   align-content: flex-start;
   justify-content: flex-start;
 }
+@media (max-width: 675px) {
+  .article1 section,
+  .article2 section,
+  .article3 section {
+    width: 80%;
+  }
+}
 .article1 section h1,
 .article2 section h1,
 .article3 section h1 {
@@ -297,8 +363,8 @@ main {
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 48px;
-  line-height: 37px;
+  font-size: 4.8rem;
+  line-height: 3.7rem;
 }
 .article1 section p,
 .article2 section p,
@@ -306,45 +372,69 @@ main {
   font-family: Montserrat;
   font-style: normal;
   font-weight: 500;
-  font-size: 28px;
-  line-height: 37px;
+  font-size: 2.8rem;
+  line-height: 3.7rem;
 }
 .article4 {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
+}
+@media (max-width: 675px) {
+  .article4 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0 10rem;
+  }
 }
 .article4 section {
-  margin: 10px;
+  margin: 1rem;
+}
+@media (max-width: 675px) {
+  .article4 section {
+    margin: 3rem auto;
+  }
 }
 .article4 section h3 {
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 50px;
-  line-height: 37px;
+  font-size: 5rem;
+  line-height: 3.7rem;
   /* or 77% */
+}
+@media (max-width: 675px) {
+  .article4 section h3 {
+    font-size: 7rem;
+  }
 }
 .article4 section p {
   font-family: Montserrat;
   font-style: normal;
   font-weight: 500;
-  font-size: 15px;
-  line-height: 20px;
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+@media (max-width: 675px) {
+  .article4 section p {
+    font-size: 2rem;
+  }
 }
 .article4 section figure {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin-top: 40px;
+  margin-top: 4rem;
 }
 .article4 section figure .round-div {
   border-radius: 50%;
   background: #ffa987;
-  width: 60px;
-  height: 60px;
-  margin-right: 20px;
+  width: 6rem;
+  height: 6rem;
+  margin-right: 2rem;
 }
 .article4 section figure .square-div {
   display: flex;
@@ -355,8 +445,8 @@ main {
   font-family: Montserrat;
   font-style: normal;
   font-weight: 500;
-  font-size: 20px;
-  line-height: 20px;
+  font-size: 2rem;
+  line-height: 2rem;
   /* or 111% */
 }
 footer {
@@ -365,10 +455,10 @@ footer {
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  margin: 100px 0 40px 0;
+  margin: 10rem 0 4rem 0;
 }
 footer .footer1 {
-  margin: 20px 0;
+  margin: 2rem 0;
   display: flex;
   width: 100%;
   flex: 1;
@@ -379,35 +469,35 @@ footer .footer1 p {
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 17px;
-  line-height: 22px;
+  font-size: 1.7rem;
+  line-height: 2.2rem;
   display: flex;
   align-items: center;
-  margin: 0 40px;
+  margin: 0 4rem;
   color: #fcf8f8;
 }
 footer .footer1 h3 {
   font-family: Montserrat;
   font-style: normal;
   font-weight: bold;
-  font-size: 26px;
-  line-height: 37px;
+  font-size: 2.6rem;
+  line-height: 3.7rem;
   display: flex;
   align-items: center;
   color: #ffffff;
 }
 footer .footer1 button {
-  width: 240px;
-  height: 55px;
-  margin: 0 40px;
+  width: 24rem;
+  height: 5.5rem;
+  margin: 0 4rem;
   border: 2px solid #ffffff;
   box-sizing: border-box;
-  border-radius: 4px;
+  border-radius: 0.4rem;
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 22px;
-  line-height: 27px;
+  font-size: 2.2rem;
+  line-height: 2.7rem;
   background: #d21f3c;
   color: #e5e5e5;
 }
@@ -426,15 +516,15 @@ footer nav li {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin: 20px 40px 40px 40px;
+  margin: 2rem 4rem 4rem 4rem;
 }
 footer nav li a {
   text-decoration: none;
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 17px;
-  line-height: 22px;
+  font-size: 1.7rem;
+  line-height: 2.2rem;
   display: flex;
   align-items: center;
   color: #ffffff;
@@ -444,5 +534,5 @@ footer nav .social {
   align-items: center;
   justify-content: space-around;
   width: 30%;
-  margin: 20px 40px 40px 40px;
+  margin: 2rem 4rem 4rem 4rem;
 }
