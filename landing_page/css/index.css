@@ -137,20 +137,6 @@ button {
   border: none;
   outline: none;
 }
-.container,
-.footer-container,
-.header-nav-container {
-  font-size: 10px;
-  max-width: 900px;
-  margin: auto auto;
-}
-@media (max-width: 450px) {
-  .container,
-  .footer-container,
-  .header-nav-container {
-    margin: auto 1.5rem;
-  }
-}
 .header-nav {
   background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -627,5 +613,19 @@ footer .footer-container nav .social {
 @media (max-width: 450px) {
   footer .footer-container nav .social {
     width: 100%;
+  }
+}
+.container,
+.footer-container,
+.header-nav-container {
+  font-size: 10px;
+  max-width: 900px;
+  margin: auto auto;
+}
+@media (max-width: 450px) {
+  .container,
+  .footer-container,
+  .header-nav-container {
+    margin: auto 1.5rem;
   }
 }

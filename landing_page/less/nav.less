@@ -1,0 +1,112 @@
+.header-nav {
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  .header-nav-container {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    padding: 2rem 0;
+    margin-top: 4rem;
+    margin-bottom: -2rem;
+
+    @media @phone {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1rem;
+      margin: auto;
+    }
+
+    // @media @tablet2 {
+    //   display: flex;
+    //   flex: 1;
+    //   // flex-direction: column;
+    //   // width: 20%;
+    //   margin: auto;
+    // }
+
+    .links {
+      display: flex;
+      width: 20%;
+
+      @media @phone {
+        width: 100%;
+        margin: 2rem auto;
+      }
+
+      //   @media @tablet2 {
+      //     // display: flex;
+      //     // flex-direction: column;
+      //     // width: 100%;
+      //     margin: auto;
+      //   }
+
+      li {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: space-around;
+
+        // @media @tablet2 {
+        //   display: flex;
+        //   flex-direction: column;
+        //   /* width: 100%; */
+        //   align-items: center;
+        //   justify-content: space-between;
+        //   height: 7rem;
+        // }
+        a {
+          text-decoration: none;
+          width: 4.4rem;
+          height: 1.7rem;
+
+          font-family: Montserrat;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 1.7rem;
+          line-height: 1.7rem;
+          color: #000000;
+        }
+      }
+    }
+
+    .btn {
+      // @media @tablet2 {
+      //   display: flex;
+      //   flex-direction: column;
+      //   align-items: center;
+      // }
+
+      .btn1 {
+        width: 9rem;
+        height: 3.9rem;
+        margin-left: 1rem;
+        background: #ffffff;
+        color: #d21f3c;
+
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 2rem;
+        line-height: 1.7rem;
+      }
+      .btn2 {
+        width: 15rem;
+        height: 3.9rem;
+        margin-left: 1rem;
+        background: #d21f3c;
+        border-radius: 0.3rem;
+        color: #fef7f7;
+
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 1.6rem;
+        line-height: 1.7rem;
+      }
+    }
+  }
+}
