@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 // Styles
 import * as c from './variables/colours';
+import * as g from './variables/global';
 
 // Assests
 import topTriangle from '../assets/topTriangle.svg';
@@ -137,21 +138,32 @@ export const FlexRowBackground = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
+  max-height: 95.4vh;
   overflow: hidden;
   background-color: ${c.LIGHT_NEUTRAL_COLOR};
+  @media (min-width: ${g.phoneMediaBreak}px) {
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const DesktopImage = styled.div`
   min-height: 524px;
-  max-height: 95.4vh;
+  max-height: 92.4vh;
   display: flex;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  width: 70%;
+  max-width: 70%;
   img {
-    height: 80%;
+    max-height: 90%;
+    width: 100%
     margin: 0 auto;
+  }
+  @media (min-width: ${g.phoneMediaBreak}px){
+    display:none;
+  }
+    @media (min-width: ${g.desktopMediaBreak}px){
+    display:flex;
   }
 `;
