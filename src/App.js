@@ -2,7 +2,7 @@
 
 // Libraries
 import React from 'react';
-import { Route } from 'react-router';
+import { Route, Switch } from 'react-router';
 
 // Styles
 import './App.css';
@@ -23,12 +23,14 @@ function App() {
     <div>
       Test
       <TopBar />
-      <Route exact path="/" component={Dashboard} />
-      <Route path="/landing" component={Landing} />
-      <Route path="/forgot" component={ForgotPassword} />
-      <Route path="/reset" component={ResetPassword} />
-      <Route path="/signup" component={SignUp} />
-      <Route path="/login" component={Login} />
+      <Switch>
+        <Route exact path="/" component={Dashboard} />
+        <Route path="/landing" component={Landing} />
+        <Route path="/forgot" component={ForgotPassword} />
+        <Route path="/reset" component={ResetPassword} />
+        <Route path="/signup" component={SignUp} />
+        <Route path="/login" component={Login} />
+      </Switch>
     </div>
   );
 }
