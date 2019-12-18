@@ -147,31 +147,35 @@ button {
 }
 
 @tablet: ~'(max-width: 675px)';
-@phone: ~'(max-width: 300px)';
+@phone: ~'(max-width: 450px)';
 
 .header-nav {
-  //   background-color: aqua;
-
   display: flex;
   flex: 1;
   align-items: center;
   justify-content: space-between;
 
-  //   width: 100%;
-  //   padding: 20px 10px;
-  //   margin-top: 40px;
-  //   margin-bottom: -20px;
   width: 100%;
   padding: 2rem 1rem;
   margin-top: 4rem;
   margin-bottom: -2rem;
+  @media @phone {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+    margin: auto;
+  }
 
   background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   .links {
-    // background-color: yellow;
     display: flex;
     width: 20%;
+    @media @phone {
+      width: 100%;
+      margin: 2rem auto;
+    }
 
     li {
       display: flex;
@@ -179,17 +183,6 @@ button {
       align-items: center;
       justify-content: space-around;
       a {
-        // text-decoration: none;
-        // width: 44px;
-        // height: 17px;
-
-        // font-family: Montserrat;
-        // font-style: normal;
-        // font-weight: 500;
-        // font-size: 17px;
-        // line-height: 17px;
-        // color: #000000;
-
         text-decoration: none;
         width: 4.4rem;
         height: 1.7rem;
@@ -330,8 +323,11 @@ main {
   background-position: center;
   background-size: 100% 100%;
   position: relative;
-  height: 50rem;
-  margin-bottom: -10rem;
+  height: 60rem;
+  @media @tablet {
+    height: 50rem;
+    margin-bottom: -10rem;
+  }
 }
 
 .article1,
@@ -475,6 +471,10 @@ footer {
     flex: 1;
     align-items: center;
     justify-content: space-between;
+    @media @phone {
+      display: flex;
+      flex-direction: column;
+    }
 
     p {
       font-family: Montserrat;
@@ -529,12 +529,21 @@ footer {
     align-items: center;
     justify-content: space-between;
 
+    @media @phone {
+      display: flex;
+      flex-direction: column;
+    }
+
     li {
       width: 25%;
       display: flex;
       align-items: center;
       justify-content: space-around;
       margin: 2rem 4rem 4rem 4rem;
+      @media @phone {
+        width: 100%;
+        margin: 2rem 4rem 0 4rem;
+      }
       a {
         text-decoration: none;
 
@@ -556,6 +565,9 @@ footer {
       justify-content: space-around;
       width: 30%;
       margin: 2rem 4rem 4rem 4rem;
+      @media @phone {
+        width: 100%;
+      }
     }
   }
 }
