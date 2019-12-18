@@ -92,3 +92,45 @@ export const BottomTriangle = styled.div`
   height: 30vh;
   align-self: flex-start;
 `;
+
+// Create Account and Landing
+
+export const ParentBackgroundSecondary = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(81.25deg, #d21f3c -48.43%, #ffa987 169.92%);
+  min-width: 320px;
+  min-height: 524px;
+  max-width: 517px;
+  max-height: 656px;
+  z-index: -1;
+`;
+
+export const SkewDivSecondary = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  -webkit-transform: skewY(16.27deg);
+  -moz-transform: skewY(16.27deg);
+  -ms-transform: skewY(16.27deg);
+  -o-transform: skewY(16.27deg);
+  transform: skewY(16.27deg);
+  z-index: 1;
+  min-height: 75vh;
+`;
+
+export const UnSkewDivSecondary = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  -webkit-transform: skewY(-16.27deg);
+  -moz-transform: skewY(-16.27deg);
+  -ms-transform: skewY(-16.27deg);
+  -o-transform: skewY(-16.27deg);
+  transform: skewY(-16.27deg);
+  z-index: 2;
+  width: 60%;
+`;
