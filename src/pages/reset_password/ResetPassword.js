@@ -4,9 +4,10 @@
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import styled from 'styled-components';
 
 // Styled
-import { H1, H3, P, H5 } from '../../styles/typography';
+import { H1, H3, H5 } from '../../styles/typography';
 import { Button, BackArrowButton } from '../../styles/buttons';
 import { Form, Input, Label } from '../../styles/forms';
 import { FlexColumnSpaceBetween } from '../../styles/displayFlex';
@@ -21,16 +22,17 @@ import {
 } from '../../styles/background';
 
 // assets
-import QuestionMark from '../../assets/icons/noun_Question_3013473 1.svg';
+import ExclaimationMark from '../../assets/icons/noun_attention_61745 1.svg';
 import BackArrow from '../../assets/icons/Arrow 1.svg';
-import KnowledgeSVG from '../../assets/undraw/undraw_knowledge_g5gf.svg';
+import StudyingSVG from '../../assets/undraw/undraw_studying_s3l7.svg';
 
 export default function ResetPassword() {
+  const ResetPasswordImage = styled(DesktopImage)``;
   return (
     <FlexRowBackground>
-      <DesktopImage>
-        <img src={`${KnowledgeSVG}`} alt="back arrow" />
-      </DesktopImage>
+      <ResetPasswordImage>
+        <img src={`${StudyingSVG}`} alt="back arrow" />
+      </ResetPasswordImage>
       <ParentBackground>
         <BackArrowButton>
           <img src={`${BackArrow}`} alt="back arrow" />
@@ -40,36 +42,50 @@ export default function ResetPassword() {
         <SkewDiv>
           <UnSkewDiv>
             <FlexColumnSpaceBetween>
-              <img src={`${QuestionMark}`} alt="question mark icon" />
-              <H1 REGULAR>Forgot Password</H1>
-              <P LIGHTWEIGHT>
-                Enter your email linked to your account. An message will be sent
-                to your email to reset your password{' '}
-              </P>
+              <img src={`${ExclaimationMark}`} alt="question mark icon" />
+              <H1 REGULAR>Reset Password</H1>
               <br />
               <Formik
                 initialValues={{
-                  email: '',
+                  password: '',
+                  passwordconfirm: '',
                 }}
                 validationSchema={Yup.object({
-                  email: Yup.string()
-                    .lowercase()
-                    .email('Invalid email address')
-                    .required('Email is required'),
+                  password: Yup.string()
+                    .min(8, 'new password needs to be at least 8 characters')
+                    .required('New password is required'),
+                  passwordconfirm: Yup.string()
+                    .oneOf(
+                      [Yup.ref('password'), null],
+                      'Passwords do not match',
+                    )
+                    .required('Please confirm your new password'),
                 })}
                 onSubmit={(values, { setSubmitting, resetForm }) => {
-                  // Send Email Function
+                  // Send Reset Password function
                   setSubmitting(false);
                   resetForm();
                 }}
               >
                 <Form>
                   <Label>
-                    <H3>Email</H3>
-                    <Input type="text" name="email" placeholder="Email" />{' '}
+                    <H3>Password</H3>
+                    <Input
+                      type="text"
+                      name=" password"
+                      placeholder="Password"
+                    />{' '}
+                  </Label>
+                  <Label>
+                    <H3>Re-Enter Password</H3>
+                    <Input
+                      type="text"
+                      name=" passwordconfirm"
+                      placeholder="Re-Enter Password"
+                    />{' '}
                   </Label>
                   <Button>
-                    <H3 WHITE>Send Email</H3>
+                    <H3 WHITE>Confirm</H3>
                   </Button>
                 </Form>
               </Formik>
