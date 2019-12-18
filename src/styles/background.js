@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 // Styles
 import * as c from './variables/colours';
+import * as g from './variables/global';
 
 // Assests
 import topTriangle from '../assets/topTriangle.svg';
@@ -41,6 +42,8 @@ export const ParentBackground = styled.div`
   background: ${c.LIGHT_NEUTRAL_COLOR};
   min-width: 320px;
   min-height: 524px;
+  max-width: 100%;
+  max-height: 95.4vh;
 `;
 
 export const SkewDiv = styled.div`
@@ -53,7 +56,7 @@ export const SkewDiv = styled.div`
   -ms-transform: skewY(-16.27deg);
   -o-transform: skewY(-16.27deg);
   transform: skewY(-16.27deg);
-  height: 75vh;
+  height: 130vh;
 `;
 
 export const UnSkewDiv = styled.div`
@@ -66,7 +69,7 @@ export const UnSkewDiv = styled.div`
   -ms-transform: skewY(16.27deg);
   -o-transform: skewY(16.27deg);
   transform: skewY(16.27deg);
-  width: 60%;
+  width: 70%;
 `;
 
 export const TopTriangle = styled.div`
@@ -99,6 +102,8 @@ export const ParentBackgroundSecondary = styled.div`
   background: linear-gradient(81.25deg, #d21f3c -48.43%, #ffa987 169.92%);
   min-width: 320px;
   min-height: 524px;
+  max-width: 50vw;
+  max-height: 95.4vh;
 `;
 
 export const SkewDivSecondary = styled.div`
@@ -125,4 +130,40 @@ export const UnSkewDivSecondary = styled.div`
   -o-transform: skewY(-16.27deg);
   transform: skewY(-16.27deg);
   width: 60%;
+`;
+
+// Global
+
+export const FlexRowBackground = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-height: 95.4vh;
+  overflow: hidden;
+  background-color: ${c.LIGHT_NEUTRAL_COLOR};
+  @media (min-width: ${g.phoneMediaBreak}px) {
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
+export const DesktopImage = styled.div`
+  min-height: 524px;
+  max-height: 92.4vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  max-width: 70%;
+  img {
+    max-height: 90%;
+    width: 100%
+    margin: 0 auto;
+  }
+  @media (min-width: ${g.phoneMediaBreak}px){
+    display:none;
+  }
+    @media (min-width: ${g.desktopMediaBreak}px){
+    display:flex;
+  }
 `;
