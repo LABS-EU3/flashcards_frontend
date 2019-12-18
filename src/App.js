@@ -24,8 +24,8 @@ function App() {
       Test
       <TopBar />
       <Switch>
-        <Route exact path="/" component={Dashboard} />
-        <Route path="/landing" component={Landing} />
+        <Route exact path="/" component={Landing} />
+        <Route path="/dashboard" component={Dashboard} />
         <Route path="/forgot" component={ForgotPassword} />
         <Route path="/reset" component={ResetPassword} />
         <Route path="/signup" component={SignUp} />

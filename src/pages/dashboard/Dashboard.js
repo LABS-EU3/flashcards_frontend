@@ -11,7 +11,7 @@ export default function Dashboard() {
   return (
     <div>
       <H1>Dashboard Test</H1>
-      <NavLink to="/landing">landing</NavLink>
+      <NavLink to="/dashboard">dashboard</NavLink>
       <NavLink to="/forgot">forgot password</NavLink>
       <NavLink to="/reset">reset password</NavLink>
       <NavLink to="/signup">signup</NavLink>
