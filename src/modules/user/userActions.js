@@ -1,10 +1,13 @@
 import axios from 'axios';
 import { LOADING, LOGIN, SET_ERRORS, LOGOUT } from './userTypes';
 
+const baseUrl = 'http://localhost:5000/api';
+
 export const userLogin = (email, password, history) => dispatch => {
+  console.log(email, password);
   dispatch({ type: LOADING });
   axios
-    .post('/auth/login', {
+    .post(`${baseUrl}/auth/login`, {
       email,
       password,
     })
@@ -18,10 +21,9 @@ export const userLogin = (email, password, history) => dispatch => {
 };
 
 export const userSignUp = (userData, history) => dispatch => {
-  console.log(userData);
   dispatch({ type: LOADING });
   axios
-    .post('/auth/register', userData)
+    .post(`${baseUrl}/auth/register`, userData)
     .then(({ data }) => {
       dispatch(
         userLogin(
