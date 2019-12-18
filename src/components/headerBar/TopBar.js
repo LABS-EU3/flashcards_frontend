@@ -3,6 +3,7 @@
 // Libraries
 import React from 'react';
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 // Assets
 import logo from '../../assets/logo.svg';
@@ -18,7 +19,9 @@ const TopBarContainer = styled.div`
 export default function TopBar() {
   return (
     <TopBarContainer>
-      <img src={`${logo}`} alt="quickdecks logo" />
+      <NavLink to="/">
+        <img src={`${logo}`} alt="quickdecks logo" />
+      </NavLink>
     </TopBarContainer>
   );
 }

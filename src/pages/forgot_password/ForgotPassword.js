@@ -6,10 +6,10 @@ import React from 'react';
 // Styled
 import { H1 } from '../../styles/typography';
 
-export default function ForgetPassword() {
+export default function ForgotPassword() {
   return (
     <div>
-      <H1>ForgetPassword Test</H1>
+      <H1>ForgotPassword Test</H1>
     </div>
   );
 }
