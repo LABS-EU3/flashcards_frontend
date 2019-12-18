@@ -130,16 +130,26 @@ html,
 body {
   height: 100%;
 }
+.container {
+  margin: auto 200px;
+}
+button {
+  border: none;
+  outline: none;
+}
 .header-nav {
-  background-color: aqua;
   display: flex;
   flex: 1;
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  padding: 20px 10px;
+  margin-top: 40px;
+  margin-bottom: -20px;
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .header-nav .links {
-  background-color: yellow;
   display: flex;
   width: 20%;
 }
@@ -156,32 +166,37 @@ body {
   font-family: Montserrat;
   font-style: normal;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 17px;
   line-height: 17px;
+  color: #000000;
 }
-.header-nav .btn {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  margin-left: 20px;
-  height: 17px;
+.header-nav .btn .btn1 {
+  width: 90px;
+  height: 39px;
+  margin-left: 10px;
+  background: #ffffff;
+  color: #d21f3c;
   font-family: Montserrat;
   font-style: normal;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 20px;
   line-height: 17px;
 }
-.header-nav .btn button {
-  width: 175px;
+.header-nav .btn .btn2 {
+  width: 150px;
   height: 39px;
-  left: 1098px;
-  top: 17px;
+  margin-left: 10px;
   background: #d21f3c;
   border-radius: 3px;
+  color: #fef7f7;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 17px;
 }
 header {
   background-image: url('../img/headerBackgroundImg.svg');
-  background-color: blue;
   background-repeat: no-repeat;
   background-position: right;
   background-size: contain;
@@ -197,21 +212,19 @@ header .header-content {
   justify-content: space-evenly;
 }
 header .header-content h1 {
-  background-color: red;
   font-size: 72px;
   font-weight: 500;
   margin-top: 150px;
   line-height: 88px;
 }
 header .header-content p {
-  background-color: seagreen;
   font-size: 24px;
   font-weight: 500;
   margin-top: 50px;
   line-height: 37px;
 }
 header .header-content .header-btn {
-  margin-top: 100px;
+  margin-top: 50px;
   display: flex;
   flex: 1;
   align-items: flex-start;
@@ -219,8 +232,8 @@ header .header-content .header-btn {
 }
 header .header-content .header-btn button {
   margin-right: 20px;
-  width: 274px;
-  height: 56px;
+  width: 230px;
+  height: 45px;
   border-radius: 5px;
   font-family: Montserrat;
   font-style: normal;
@@ -228,19 +241,29 @@ header .header-content .header-btn button {
   font-size: 24px;
   line-height: 37px;
 }
+header .header-content .header-btn .btn1 {
+  background: #d21f3c;
+  border-radius: 5px;
+  color: #ffffff;
+}
+header .header-content .header-btn .btn2 {
+  background: #ffffff;
+  /* D21F3C */
+  border: 3px solid #d21f3c;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
 main {
   background-image: url('../img/bannerImage.svg');
-  background-color: #fbff00;
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
   position: relative;
-  height: 800px;
+  height: 600px;
 }
 .article1,
 .article2,
 .article3 {
-  background-color: sienna;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -250,7 +273,6 @@ main {
 .article2 aside,
 .article3 aside {
   display: flex;
-  background-color: pink;
   width: 40%;
 }
 .article1 aside img,
@@ -262,7 +284,6 @@ main {
 .article1 section,
 .article2 section,
 .article3 section {
-  background-color: skyblue;
   width: 40%;
   display: flex;
   flex-direction: column;
@@ -272,7 +293,7 @@ main {
 .article1 section h1,
 .article2 section h1,
 .article3 section h1 {
-  background-color: pink;
+  color: #d21f3c;
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
@@ -289,7 +310,6 @@ main {
   line-height: 37px;
 }
 .article4 {
-  background-color: orchid;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -302,7 +322,7 @@ main {
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 48px;
+  font-size: 50px;
   line-height: 37px;
   /* or 77% */
 }
@@ -310,27 +330,45 @@ main {
   font-family: Montserrat;
   font-style: normal;
   font-weight: 500;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 20px;
 }
-.article4 section h4 {
+.article4 section figure {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 40px;
+}
+.article4 section figure .round-div {
+  border-radius: 50%;
+  background: #ffa987;
+  width: 60px;
+  height: 60px;
+  margin-right: 20px;
+}
+.article4 section figure .square-div {
+  display: flex;
+  flex: 2;
+  flex-direction: column;
+}
+.article4 section figure .square-div h4 {
   font-family: Montserrat;
   font-style: normal;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 20px;
   /* or 111% */
 }
 footer {
-  background-color: palegreen;
+  background: #d21f3c;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  margin-bottom: 20px;
+  margin: 100px 0 40px 0;
 }
 footer .footer1 {
-  background-color: #4ac9c9;
+  margin: 20px 0;
   display: flex;
   width: 100%;
   flex: 1;
@@ -341,25 +379,27 @@ footer .footer1 p {
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 17px;
   line-height: 22px;
   display: flex;
   align-items: center;
+  margin: 0 40px;
   color: #fcf8f8;
 }
 footer .footer1 h3 {
   font-family: Montserrat;
   font-style: normal;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 26px;
   line-height: 37px;
   display: flex;
   align-items: center;
   color: #ffffff;
 }
 footer .footer1 button {
-  width: 257px;
-  height: 66px;
+  width: 240px;
+  height: 55px;
+  margin: 0 40px;
   border: 2px solid #ffffff;
   box-sizing: border-box;
   border-radius: 4px;
@@ -368,34 +408,41 @@ footer .footer1 button {
   font-weight: 600;
   font-size: 22px;
   line-height: 27px;
+  background: #d21f3c;
   color: #e5e5e5;
 }
+footer hr {
+  width: 98%;
+  border-color: #e5e5e5;
+}
 footer nav {
-  background-color: #bb2ba3;
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: space-between;
 }
 footer nav li {
-  width: 20%;
+  width: 25%;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  margin: 20px 40px 40px 40px;
 }
 footer nav li a {
   text-decoration: none;
-  height: 17px;
   font-family: Montserrat;
   font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 17px;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
 }
 footer nav .social {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 20%;
-  margin: 10px;
+  width: 30%;
+  margin: 20px 40px 40px 40px;
 }
