@@ -16,15 +16,21 @@ import {
   TopTriangle,
   SkewDiv,
   UnSkewDiv,
+  FlexRowBackground,
+  DesktopImage,
 } from '../../styles/background';
 
 // assets
 import QuestionMark from '../../assets/icons/noun_Question_3013473 1.svg';
 import BackArrow from '../../assets/icons/Arrow 1.svg';
+import KnowledgeSVG from '../../assets/undraw/undraw_knowledge_g5gf.svg';
 
 export default function ForgotPassword() {
   return (
-    <div>
+    <FlexRowBackground>
+      <DesktopImage>
+        <img src={`${KnowledgeSVG}`} alt="back arrow" />
+      </DesktopImage>
       <ParentBackground>
         <BackArrowButton>
           <img src={`${BackArrow}`} alt="back arrow" />
@@ -72,6 +78,6 @@ export default function ForgotPassword() {
         </SkewDiv>
         <BottomTriangle />
       </ParentBackground>
-    </div>
+    </FlexRowBackground>
   );
 }

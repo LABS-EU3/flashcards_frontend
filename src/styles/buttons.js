@@ -48,6 +48,5 @@ export const BackArrowButton = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 65px;
-  left: 20px;
+  margin: 2em;
 `;

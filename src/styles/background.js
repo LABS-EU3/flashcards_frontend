@@ -41,7 +41,7 @@ export const ParentBackground = styled.div`
   background: ${c.LIGHT_NEUTRAL_COLOR};
   min-width: 320px;
   min-height: 524px;
-  max-width: 50vw;
+  max-width: 100%;
   max-height: 95.4vh;
 `;
 
@@ -55,7 +55,7 @@ export const SkewDiv = styled.div`
   -ms-transform: skewY(-16.27deg);
   -o-transform: skewY(-16.27deg);
   transform: skewY(-16.27deg);
-  height: 75vh;
+  height: 130vh;
 `;
 
 export const UnSkewDiv = styled.div`
@@ -68,7 +68,7 @@ export const UnSkewDiv = styled.div`
   -ms-transform: skewY(16.27deg);
   -o-transform: skewY(16.27deg);
   transform: skewY(16.27deg);
-  width: 60%;
+  width: 70%;
 `;
 
 export const TopTriangle = styled.div`
@@ -129,4 +129,29 @@ export const UnSkewDivSecondary = styled.div`
   -o-transform: skewY(-16.27deg);
   transform: skewY(-16.27deg);
   width: 60%;
+`;
+
+// Global
+
+export const FlexRowBackground = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  overflow: hidden;
+  background-color: ${c.LIGHT_NEUTRAL_COLOR};
+`;
+
+export const DesktopImage = styled.div`
+  min-height: 524px;
+  max-height: 95.4vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: 70%;
+  img {
+    height: 80%;
+    margin: 0 auto;
+  }
 `;
