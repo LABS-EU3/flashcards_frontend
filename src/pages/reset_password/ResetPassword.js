@@ -9,7 +9,7 @@ import { H1 } from '../../styles/typography';
 export default function ResetPassword() {
   return (
     <div>
-      <H1>ResetPassword Test</H1>
+      <H1>Intial Commit</H1>
     </div>
   );
 }
