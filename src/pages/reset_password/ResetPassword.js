@@ -4,10 +4,9 @@
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import styled from 'styled-components';
 
 // Styled
-import { H1, H3, H5 } from '../../styles/typography';
+import { H1, H3, H5, P } from '../../styles/typography';
 import { Button, BackArrowButton } from '../../styles/buttons';
 import { Form, Input, Label } from '../../styles/forms';
 import { FlexColumnSpaceBetween } from '../../styles/displayFlex';
@@ -27,12 +26,11 @@ import BackArrow from '../../assets/icons/Arrow 1.svg';
 import StudyingSVG from '../../assets/undraw/undraw_studying_s3l7.svg';
 
 export default function ResetPassword() {
-  const ResetPasswordImage = styled(DesktopImage)``;
   return (
     <FlexRowBackground>
-      <ResetPasswordImage>
+      <DesktopImage>
         <img src={`${StudyingSVG}`} alt="back arrow" />
-      </ResetPasswordImage>
+      </DesktopImage>
       <ParentBackground>
         <BackArrowButton>
           <img src={`${BackArrow}`} alt="back arrow" />
@@ -44,6 +42,10 @@ export default function ResetPassword() {
             <FlexColumnSpaceBetween>
               <img src={`${ExclaimationMark}`} alt="question mark icon" />
               <H1 REGULAR>Reset Password</H1>
+              <P LIGHTWEIGHT>
+                Please create your new password. If did not request to reset
+                your password please disregard this.{' '}
+              </P>
               <br />
               <Formik
                 initialValues={{
