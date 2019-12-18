@@ -2,6 +2,8 @@
 
 // Libraries
 import React from 'react';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 
 // Styled
 import { H1, H3, P, H5 } from '../../styles/typography';
@@ -39,15 +41,32 @@ export default function ForgotPassword() {
                 to your email to reset your password{' '}
               </P>
               <br />
-              <Form>
-                <Label>
-                  <H3>Email</H3>
-                  <Input type="text" name="email" placeholder="Email" />{' '}
-                </Label>
-                <Button>
-                  <H3 WHITE>Send Email</H3>
-                </Button>
-              </Form>
+              <Formik
+                initialValues={{
+                  email: '',
+                }}
+                validationSchema={Yup.object({
+                  email: Yup.string()
+                    .lowercase()
+                    .email('Invalid email address')
+                    .required('Email is required'),
+                })}
+                onSubmit={(values, { setSubmitting, resetForm }) => {
+                  // Send Email Function
+                  setSubmitting(false);
+                  resetForm();
+                }}
+              >
+                <Form>
+                  <Label>
+                    <H3>Email</H3>
+                    <Input type="text" name="email" placeholder="Email" />{' '}
+                  </Label>
+                  <Button>
+                    <H3 WHITE>Send Email</H3>
+                  </Button>
+                </Form>
+              </Formik>
             </FlexColumnSpaceBetween>
           </UnSkewDiv>
         </SkewDiv>
