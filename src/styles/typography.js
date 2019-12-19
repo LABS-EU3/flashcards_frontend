@@ -22,6 +22,7 @@ export const H1 = styled.h1`
   color: ${c.DARK_NEUTRAL_COLOR};
 
   ${props => (props.BRAND ? `font-family:${f.BRAND_FONT}` : null)};
+  ${props => (props.REGULAR ? `font-weight:${f.REGULAR}` : null)};
 
   ${props => (props.LIGHT ? `color:${c.LIGHT_NEUTRAL_COLOR}` : null)};
   ${props => (props.WHITE ? `color:#FFFFFF` : null)};
@@ -37,6 +38,7 @@ export const H2 = styled.h2`
   color: ${c.DARK_NEUTRAL_COLOR};
 
   ${props => (props.BRAND ? `font-family:${f.BRAND_FONT}` : null)};
+  ${props => (props.REGULAR ? `font-weight:${f.REGULAR}` : null)};
 
   ${props => (props.LIGHT ? `color:${c.LIGHT_NEUTRAL_COLOR}` : null)};
   ${props => (props.WHITE ? `color:#FFFFFF` : null)};
@@ -51,6 +53,7 @@ export const H3 = styled.h3`
   color: ${c.DARK_NEUTRAL_COLOR};
 
   ${props => (props.BRAND ? `font-family:${f.BRAND_FONT}` : null)};
+  ${props => (props.REGULAR ? `font-weight:${f.REGULAR}` : null)};
 
   ${props => (props.LIGHT ? `color:${c.LIGHT_NEUTRAL_COLOR}` : null)};
   ${props => (props.WHITE ? `color:#FFFFFF` : null)};
@@ -65,6 +68,7 @@ export const H4 = styled.h4`
   color: ${c.DARK_NEUTRAL_COLOR};
 
   ${props => (props.BRAND ? `font-family:${f.BRAND_FONT}` : null)};
+  ${props => (props.REGULAR ? `font-weight:${f.REGULAR}` : null)};
 
   ${props => (props.LIGHT ? `color:${c.LIGHT_NEUTRAL_COLOR}` : null)};
   ${props => (props.INPUT ? `color:${c.LIGHT_NEUTRAL_COLOR}` : null)};
@@ -80,6 +84,7 @@ export const H5 = styled.h5`
   color: ${c.DARK_NEUTRAL_COLOR};
 
   ${props => (props.BRAND ? `font-family:${f.BRAND_FONT}` : null)};
+  ${props => (props.REGULAR ? `font-weight:${f.REGULAR}` : null)};
 
   ${props => (props.LIGHT ? `color:${c.LIGHT_NEUTRAL_COLOR}` : null)};
   ${props => (props.WHITE ? `color:#FFFFFF` : null)};
@@ -95,6 +100,7 @@ export const P = styled.p`
 
   ${props => (props.BRAND ? `font-family:${f.BRAND_FONT}` : null)};
   ${props => (props.LIGHTWEIGHT ? `font-weight:${f.LIGHT}` : null)};
+  ${props => (props.REGULAR ? `font-weight:${f.REGULAR}` : null)};
 
   ${props => (props.LIGHT ? `color:${c.LIGHT_NEUTRAL_COLOR}` : null)};
   ${props => (props.WHITE ? `color:#FFFFFF` : null)};

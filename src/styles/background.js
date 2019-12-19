@@ -11,6 +11,9 @@ import * as g from './variables/global';
 import topTriangle from '../assets/topTriangle.svg';
 import bottomTriangle from '../assets/bottomTriangle.svg';
 
+// This file has all you need to create the backgrounds
+// including styling the images with responsiveness
+
 // To use this background please follow this format
 /*
 
@@ -43,12 +46,13 @@ export const ParentBackground = styled.div`
   min-width: 320px;
   min-height: 524px;
   max-width: 100%;
-  max-height: 94.4vh;
+  max-height: 95.4vh;
   @media (min-width: ${g.phoneMediaBreak}px) {
     min-width: 320px;
   }
   @media (min-width: ${g.desktopMediaBreak}px) {
     min-width: 500px;
+  }
 `;
 
 export const SkewDiv = styled.div`
