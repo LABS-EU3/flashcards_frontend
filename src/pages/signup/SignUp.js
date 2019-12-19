@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import * as yup from 'yup';
 import { userSignUp } from '../../modules/user/userActions';
 
-import { H1 } from '../../styles/typography';
+import { H1, Text } from '../../styles/typography';
 import { Button } from '../../styles/buttons';
 import {
   ParentBackgroundSecondary,
@@ -38,41 +38,71 @@ const SignUpForm = props => {
             </div>
             <div>
               <Form onSubmit={handleSubmit}>
-                <Label>Name</Label>
-                <Input
-                  type="text"
-                  name="fullName"
-                  value={values.fullName}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  placeholder="Full Name"
-                />
-                <Label>Email</Label>
-                <Input
-                  name="email"
-                  value={values.email}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  placeholder="Email"
-                />
-                <Label>Password</Label>
-                <Input
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  value={values.password}
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                />
-                <Label>Confirm Password</Label>
-                <Input
-                  type="password"
-                  name="password2"
-                  placeholder="Confirm Password"
-                  value={values.password2}
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                />
+                <Label>
+                  Name
+                  {touched.fullName && errors.fullName && (
+                    <Text color="red">{errors.fullName}</Text>
+                  )}
+                  <Input
+                    type="text"
+                    name="fullName"
+                    value={values.fullName}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    placeholder="Full Name"
+                    border={
+                      touched.fullName && errors.fullName && '2px solid red'
+                    }
+                  />
+                </Label>
+                <Label>
+                  Email
+                  {touched.email && errors.email && (
+                    <Text color="red">{errors.email}</Text>
+                  )}
+                  <Input
+                    name="email"
+                    value={values.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    placeholder="Email"
+                    border={touched.email && errors.email && '2px solid red'}
+                  />
+                </Label>
+                <Label>
+                  Password
+                  {touched.password && errors.password && (
+                    <Text color="red">{errors.password}</Text>
+                  )}
+                  <Input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    value={values.password}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    border={
+                      touched.password && errors.password && '2px solid red'
+                    }
+                  />
+                </Label>
+                <Label>
+                  Confirm Password
+                  {touched.password2 && errors.password2 && (
+                    <Text color="red">{errors.password2}</Text>
+                  )}
+                  <Input
+                    type="password"
+                    name="password2"
+                    placeholder="Confirm Password"
+                    value={values.password2}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    border={
+                      touched.password2 && errors.password2 && '2px solid red'
+                    }
+                  />
+                </Label>
                 <Button type="submit">Sign Up</Button>
                 <br />
                 Already a user? <NavLink to="/login">Login</NavLink>
