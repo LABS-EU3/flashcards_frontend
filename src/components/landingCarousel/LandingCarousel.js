@@ -3,17 +3,17 @@
 // library
 import React from 'react';
 
+// styles
+import 'react-id-swiper/lib/';
+
+// scripts
+import generateData from './swiperAnimation/data';
+import Slider from './swiperAnimation/slider';
+
 export default function LandingCarousel() {
   return (
     <div>
-      <div className="glider">
-        <div> 1 </div>
-        <div> 2 </div>
-        <div> 3 </div>
-        <div> 4 </div>
-        <div> 5 </div>
-        <div> 6 </div>
-      </div>
+      <Slider items={generateData()} />
     </div>
   );
 }

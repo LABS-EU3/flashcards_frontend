@@ -17,6 +17,7 @@ import { Button, LineButton } from '../../styles/buttons';
 
 // Assets
 import BookSVG from '../../assets/images/undraw_book_lover_mkck.svg';
+import LandingCarousel from '../../components/landingCarousel/LandingCarousel';
 
 export default function Landing() {
   const history = useHistory();
@@ -32,7 +33,7 @@ export default function Landing() {
             <UnSkewDivSecondary>
               <H1 REGULAR>Welcome to Quick Decks</H1>
               <H2 REGULAR>Here’s what you’ll be getting into</H2>
-
+              <LandingCarousel />
               <Button
                 onClick={() => {
                   history.push('/signup');
