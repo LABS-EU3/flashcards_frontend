@@ -21,7 +21,7 @@ import Login from './pages/login/Login';
 function App() {
   return (
     <div>
-      Test
+      Test2
       <TopBar />
       <Switch>
         <Route exact path="/" component={Landing} />
