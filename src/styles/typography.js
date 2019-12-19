@@ -100,3 +100,8 @@ export const P = styled.p`
   ${props => (props.WHITE ? `color:#FFFFFF` : null)};
   ${props => (props.PRIMARY ? `color:${c.PRIMARY_POP_COLOR}` : null)};
 `;
+
+export const Text = styled.p`
+  font-family: ${f.APP_FONT};
+  color: ${props => props.color || c.DARK_NEUTRAL_COLOR};
+`;
