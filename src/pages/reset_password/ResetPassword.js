@@ -29,7 +29,7 @@ export default function ResetPassword() {
   return (
     <FlexRowBackground>
       <DesktopImage>
-        <img src={`${StudyingSVG}`} alt="back arrow" />
+        <img src={`${StudyingSVG}`} alt="studying person" />
       </DesktopImage>
       <ParentBackground>
         <BackArrowButton>

@@ -31,7 +31,7 @@ export default function ForgotPassword() {
   return (
     <FlexRowBackground>
       <DesktopImage>
-        <img src={`${KnowledgeSVG}`} alt="back arrow" />
+        <img src={`${KnowledgeSVG}`} alt="knowledagble person" />
       </DesktopImage>
       <ParentBackground>
         <BackArrowButton
