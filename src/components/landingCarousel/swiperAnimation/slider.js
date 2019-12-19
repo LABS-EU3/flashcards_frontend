@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Swiper from './swiper';
 import SlideItem from './slideItem';
+import { Slider } from './styles';
 
 export default ({ items }) => {
   const [swiper, updateSwiper] = useState(null);
@@ -19,10 +20,11 @@ export default ({ items }) => {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     },
+    slidesPerView: 1,
     spaceBetween: 30,
     loop: true,
     autoplay: true,
-    getSwiper: updateSwiper, // Get swiper instance callback
+    getSwiper: updateSwiper,
   };
 
   const renderItem = useCallback(
@@ -46,17 +48,9 @@ export default ({ items }) => {
     };
   }, [swiper, updateIndex]);
 
-  const parentDiv = {
-    display: 'flex',
-    flexDirection: 'column',
-    margin: '1em 0em 1em 0em',
-    width: '50%',
-    overflow: 'hidden',
-  };
-
   return (
-    <div style={parentDiv}>
+    <Slider>
       <Swiper params={params}>{items.map(renderItem)}</Swiper>
-    </div>
+    </Slider>
   );
 };

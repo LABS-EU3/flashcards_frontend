@@ -41,7 +41,7 @@ export default function ResetPassword() {
           <UnSkewDiv>
             <FlexColumnSpaceBetween>
               <img src={`${ExclaimationMark}`} alt="question mark icon" />
-              <H1 REGULAR>Reset Password</H1>
+              <H1>Reset Password</H1>
               <P LIGHTWEIGHT>
                 Please create your new password. If did not request to reset
                 your password please disregard this.{' '}

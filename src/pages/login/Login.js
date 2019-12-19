@@ -3,12 +3,13 @@ import React from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
 import { withFormik } from 'formik';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router';
 
 import * as yup from 'yup';
 import { userLogin } from '../../modules/user/userActions';
 
-import { H1, Text, H3, P } from '../../styles/typography';
-import { Button } from '../../styles/buttons';
+import { H1, Text, H3, P, H5 } from '../../styles/typography';
+import { Button, BackArrowButton } from '../../styles/buttons';
 import {
   ParentBackground,
   SkewDiv,
@@ -21,8 +22,10 @@ import {
 import { Form, Input, Label } from '../../styles/forms';
 
 import img from '../../assets/images/undraw_online_test_gba7 (1).svg';
+import BackArrow from '../../assets/icons/Arrow 1.svg';
 
 const LoginForm = props => {
+  const history = useHistory();
   const {
     values,
     handleChange,
@@ -38,6 +41,14 @@ const LoginForm = props => {
         <img alt="online test" src={img} />
       </DesktopImage>
       <ParentBackground>
+        <BackArrowButton
+          onClick={() => {
+            history.goBack();
+          }}
+        >
+          <img src={`${BackArrow}`} alt="back arrow" />
+          <H5>Back</H5>
+        </BackArrowButton>
         <TopTriangle />
         <SkewDiv>
           <UnSkewDiv>

@@ -111,7 +111,7 @@ export const ParentBackgroundSecondary = styled.div`
   background: linear-gradient(81.25deg, #d21f3c -48.43%, #ffa987 169.92%);
   min-width: 320px;
   height: 95.4vh;
-  max-width: 100%;
+  max-width: 35%;
   @media (min-width: ${g.phoneMediaBreak}px) {
     min-width: 320px;
   }
@@ -143,7 +143,7 @@ export const UnSkewDivSecondary = styled.div`
   -ms-transform: skewY(-16.27deg);
   -o-transform: skewY(-16.27deg);
   transform: skewY(-16.27deg);
-  width: 60%;
+  width: 55%;
 `;
 
 // Global
