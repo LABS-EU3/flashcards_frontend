@@ -24,7 +24,7 @@ export const userSignUp = (userData, history) => dispatch => {
   dispatch({ type: LOADING });
   axios
     .post(`${baseUrl}/auth/register`, userData)
-    .then(({ data }) => {
+    .then(() => {
       dispatch(
         userLogin(
           userData.fullName,
