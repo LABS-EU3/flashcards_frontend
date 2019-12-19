@@ -6,7 +6,7 @@ const images = importAll(
 );
 
 const divStyle = {
-  maxHeight: '20rem',
+  maxHeight: '15em',
   alignItems: 'center',
   justifyContent: 'center',
   color: 'white',

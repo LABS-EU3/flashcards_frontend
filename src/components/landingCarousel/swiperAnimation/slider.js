@@ -50,6 +50,8 @@ export default ({ items }) => {
     display: 'flex',
     flexDirection: 'column',
     margin: '1em 0em 1em 0em',
+    width: '50%',
+    overflow: 'hidden',
   };
 
   return (
