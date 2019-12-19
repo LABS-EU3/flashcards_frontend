@@ -51,4 +51,5 @@ export const Label = styled.label`
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
+  align-items: flex-start;
 `;
