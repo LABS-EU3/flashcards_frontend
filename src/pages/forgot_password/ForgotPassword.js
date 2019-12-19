@@ -23,7 +23,7 @@ import {
 // assets
 import QuestionMark from '../../assets/icons/noun_Question_3013473 1.svg';
 import BackArrow from '../../assets/icons/Arrow 1.svg';
-import KnowledgeSVG from '../../assets/undraw/undraw_knowledge_g5gf.svg';
+import KnowledgeSVG from '../../assets/images/undraw_knowledge_g5gf.svg';
 
 export default function ForgotPassword() {
   return (

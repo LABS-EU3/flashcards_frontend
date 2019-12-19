@@ -20,7 +20,7 @@ import {
 } from '../../styles/background';
 import { Form, Input, Label } from '../../styles/forms';
 
-import img from '../../assets/images/undraw_online_test.svg';
+import img from '../../assets/images/undraw_online_test_gba7 (1).svg';
 
 const LoginForm = props => {
   const {

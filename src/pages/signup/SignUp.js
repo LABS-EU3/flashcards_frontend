@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
 import { withFormik } from 'formik';
@@ -17,7 +16,7 @@ import {
   DesktopImage,
 } from '../../styles/background';
 import { Form, Input, Label } from '../../styles/forms';
-import img from '../../assets/images/undraw_analysis.svg';
+import img from '../../assets/images/undraw_analysis_4jis.svg';
 
 const SignUpForm = props => {
   const {

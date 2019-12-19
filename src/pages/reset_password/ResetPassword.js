@@ -23,7 +23,7 @@ import {
 // assets
 import ExclaimationMark from '../../assets/icons/noun_attention_61745 1.svg';
 import BackArrow from '../../assets/icons/Arrow 1.svg';
-import StudyingSVG from '../../assets/undraw/undraw_studying_s3l7.svg';
+import StudyingSVG from '../../assets/images/undraw_studying_s3l7.svg';
 
 export default function ResetPassword() {
   return (
