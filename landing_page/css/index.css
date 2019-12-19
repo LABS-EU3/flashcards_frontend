@@ -146,6 +146,14 @@ button {
   max-width: 980px;
   margin: auto auto;
 }
+.container a,
+.footer-container a,
+.header-nav-container a {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.7rem;
+  line-height: 2.2rem;
+}
 .container button,
 .footer-container button,
 .header-nav-container button {
@@ -212,13 +220,11 @@ button {
   justify-content: space-around;
 }
 .header-nav .header-nav-container .links li a {
-  text-decoration: none;
   width: 4.4rem;
-  height: 1.7rem;
-  font-weight: 500;
-  font-size: 1.7rem;
-  line-height: 1.7rem;
   color: #000000;
+}
+.header-nav .header-nav-container .links li a:hover {
+  color: #808080;
 }
 .header-nav .header-nav-container .btn .btn1 {
   width: 9rem;
@@ -654,13 +660,12 @@ footer .footer-container nav li {
   }
 }
 footer .footer-container nav li a {
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1.7rem;
-  line-height: 2.2rem;
   display: flex;
   align-items: center;
   color: #ffffff;
+}
+footer .footer-container nav li a:hover {
+  color: #808080;
 }
 footer .footer-container nav .social {
   display: flex;
