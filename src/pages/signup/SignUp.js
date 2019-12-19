@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
 import { withFormik } from 'formik';
@@ -10,10 +11,8 @@ import { H1, Text, H3, P } from '../../styles/typography';
 import { Button } from '../../styles/buttons';
 import {
   ParentBackgroundSecondary,
-  SkewDiv,
-  UnSkewDiv,
-  BottomTriangle,
-  TopTriangle,
+  SkewDivSecondary,
+  UnSkewDivSecondary,
   FlexRowBackground,
   DesktopImage,
 } from '../../styles/background';
@@ -36,9 +35,8 @@ const SignUpForm = props => {
         <img src={img} alt="analysis" />
       </DesktopImage>
       <ParentBackgroundSecondary>
-        <TopTriangle />
-        <SkewDiv>
-          <UnSkewDiv>
+        <SkewDivSecondary>
+          <UnSkewDivSecondary>
             <H1>Create an Account</H1>
             <Form onSubmit={handleSubmit}>
               <Label>
@@ -114,9 +112,8 @@ const SignUpForm = props => {
                 Already a user? <NavLink to="/login">Login</NavLink>
               </P>
             </Form>
-          </UnSkewDiv>
-        </SkewDiv>
-        <BottomTriangle />
+          </UnSkewDivSecondary>
+        </SkewDivSecondary>
       </ParentBackgroundSecondary>
     </FlexRowBackground>
   );
