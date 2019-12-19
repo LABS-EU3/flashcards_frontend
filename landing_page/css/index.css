@@ -351,6 +351,12 @@ main {
   }
 }
 @media (max-width: 450px) {
+  main {
+    height: 35rem;
+    margin: auto 1.1rem auto 1.1rem;
+  }
+}
+@media (max-width: 450px) {
   .article2 {
     width: 100%;
   }
