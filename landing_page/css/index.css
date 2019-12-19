@@ -146,6 +146,14 @@ button {
   max-width: 980px;
   margin: auto auto;
 }
+.container button,
+.footer-container button,
+.header-nav-container button {
+  -webkit-transition-duration: 0.4s;
+  /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
 @media (max-width: 450px) {
   .container,
   .footer-container,
