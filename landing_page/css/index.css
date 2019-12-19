@@ -230,6 +230,18 @@ button {
   font-size: 2rem;
   line-height: 1.7rem;
 }
+.header-nav .header-nav-container .btn .btn1:hover {
+  width: 15rem;
+  height: 3.9rem;
+  margin-left: 1rem;
+  background: #d21f3c;
+  border-radius: 0.3rem;
+  border: 2px solid #fef7f7;
+  color: #fef7f7;
+  font-weight: bold;
+  font-size: 1.6rem;
+  line-height: 1.7rem;
+}
 .header-nav .header-nav-container .btn .btn2 {
   width: 15rem;
   height: 3.9rem;
@@ -240,6 +252,11 @@ button {
   font-weight: bold;
   font-size: 1.6rem;
   line-height: 1.7rem;
+}
+.header-nav .header-nav-container .btn .btn2:hover {
+  background: #fef7f7;
+  border: 2px solid #d21f3c;
+  color: #d21f3c;
 }
 header {
   background-image: url('../img/headerBackgroundImg.svg');
