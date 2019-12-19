@@ -262,7 +262,7 @@ header .header-content {
 }
 @media (max-width: 900px) {
   header .header-content {
-    width: auto;
+    width: 60%;
     margin: auto 1.1rem;
   }
 }
@@ -357,6 +357,11 @@ main {
     margin: auto 1.1rem -10rem 1.1rem;
   }
 }
+@media (max-width: 450px) {
+  .article2 {
+    width: 100%;
+  }
+}
 .article1,
 .article2,
 .article3 {
@@ -374,6 +379,13 @@ main {
     align-items: center;
     justify-content: space-around;
     margin: 10rem auto;
+  }
+}
+@media (max-width: 450px) {
+  .article1,
+  .article2,
+  .article3 {
+    margin-top: 0;
   }
 }
 .article1 aside,
@@ -416,6 +428,7 @@ main {
   .article2 section,
   .article3 section {
     width: 80%;
+    order: 1;
   }
 }
 @media (max-width: 450px) {
@@ -423,6 +436,7 @@ main {
   .article2 section,
   .article3 section {
     width: 100%;
+    order: 1;
   }
 }
 .article1 section h1,
@@ -457,12 +471,12 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    margin: 0 10rem;
+    margin: 0 10rem 5rem 10rem;
   }
 }
 @media (max-width: 450px) {
   .article4 {
-    margin: 0;
+    margin: 0 0 5rem 0;
   }
 }
 .article4 section {
@@ -568,6 +582,11 @@ footer .footer-container .footer1 h3 {
   display: flex;
   align-items: center;
   color: #ffffff;
+}
+@media (max-width: 450px) {
+  footer .footer-container .footer1 h3 {
+    margin: 2rem 0;
+  }
 }
 footer .footer-container .footer1 button {
   width: 24rem;

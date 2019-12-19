@@ -1,3 +1,8 @@
+.article2 {
+  @media @phone {
+    width: 100%;
+  }
+}
 .article1,
 .article2,
 .article3 {
@@ -13,7 +18,9 @@
     justify-content: space-around;
     margin: 10rem auto;
   }
-
+  @media @phone {
+    margin-top: 0;
+  }
   aside {
     display: flex;
     width: 40%;
@@ -36,10 +43,12 @@
     justify-content: flex-start;
     @media @tablet {
       width: 80%;
+      order: 1;
     }
 
     @media @phone {
       width: 100%;
+      order: 1;
     }
 
     h1 {
@@ -72,11 +81,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    margin: 0 10rem;
+    margin: 0 10rem 5rem 10rem;
   }
 
   @media @phone {
-    margin: 0;
+    margin: 0 0 5rem 0;
   }
   section {
     margin: 1rem 4rem;
