@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import * as yup from 'yup';
 import { userLogin } from '../../modules/user/userActions';
 
-import { H1, Text, H3 } from '../../styles/typography';
+import { H1, Text, H3, P } from '../../styles/typography';
 import { Button } from '../../styles/buttons';
 import { FlexColumnSpaceBetween } from '../../styles/displayFlex';
 import {
@@ -33,6 +33,7 @@ const LoginForm = props => {
   } = props;
   return (
     <FlexRowBackground>
+      {localStorage.getItem('token') && <Redirect to="/dashboard" />}
       <DesktopImage>
         <img alt="online test" src={img} />
       </DesktopImage>
@@ -40,53 +41,45 @@ const LoginForm = props => {
         <TopTriangle />
         <SkewDiv>
           <UnSkewDiv>
-            <FlexColumnSpaceBetween>
-              <div>
-                {localStorage.getItem('token') && <Redirect to="/dashboard" />}
-                <div>
-                  <H1>Login</H1>
-                </div>
-                <div>
-                  <Form onSubmit={handleSubmit}>
-                    <Label>
-                      <H3>Email</H3>
-                      {touched.email && errors.email && (
-                        <Text color="red">{errors.email}</Text>
-                      )}
-                      <Input
-                        name="email"
-                        value={values.email}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        placeholder="Email"
-                        border={
-                          touched.email && errors.email && '2px solid red'
-                        }
-                      />
-                    </Label>
-                    <Label>
-                      <H3>Password</H3>
-                      {touched.password && errors.password && (
-                        <Text color="red">{errors.password}</Text>
-                      )}
-                      <Input
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        value={values.password}
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        border={errors.password && '1px solid red'}
-                      />
-                    </Label>
-                    <Button type="submit">Login</Button>
-                    <br />
-                    {`Don't have an account?`}{' '}
-                    <NavLink to="/signup">Sign Up</NavLink>
-                  </Form>
-                </div>
-              </div>
-            </FlexColumnSpaceBetween>
+            <H1>Login</H1>
+            <Form onSubmit={handleSubmit}>
+              <Label>
+                <H3>Email</H3>
+                {touched.email && errors.email && (
+                  <Text color="red">{errors.email}</Text>
+                )}
+                <Input
+                  name="email"
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="Email"
+                  border={touched.email && errors.email && '2px solid red'}
+                />{' '}
+              </Label>
+              <Label>
+                <H3>Password</H3>
+                {touched.password && errors.password && (
+                  <Text color="red">{errors.password}</Text>
+                )}
+                <Input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  value={values.password}
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  border={errors.password && '1px solid red'}
+                />
+              </Label>{' '}
+              <Button type="submit">
+                <H3 WHITE>Login</H3>
+              </Button>
+              <br />
+              <P LIGHTWEIGHT>
+                Do not have an account? <NavLink to="/signup">Sign Up</NavLink>
+              </P>
+            </Form>
           </UnSkewDiv>
         </SkewDiv>
         <BottomTriangle />
