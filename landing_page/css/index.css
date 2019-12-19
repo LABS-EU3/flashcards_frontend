@@ -350,6 +350,9 @@ header .header-content .header-btn button {
     margin: 0.5rem 0;
   }
 }
+header .header-content .header-btn button:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
 header .header-content .header-btn .btn1 {
   background: #d21f3c;
   border-radius: 0.5rem;
