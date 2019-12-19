@@ -142,7 +142,7 @@ button {
 .header-nav-container {
   font-family: 'Montserrat', sans-serif;
   font-size: 10px;
-  max-width: 900px;
+  max-width: 980px;
   margin: auto auto;
 }
 @media (max-width: 450px) {
@@ -163,7 +163,6 @@ button {
   justify-content: space-between;
   width: 100%;
   padding: 2rem 0;
-  margin-top: 4rem;
   margin-bottom: -2rem;
 }
 @media (max-width: 450px) {
@@ -257,7 +256,7 @@ header .header-content {
   display: flex;
   flex-direction: column;
   flex: 1;
-  width: 50%;
+  width: 55%;
   align-items: flex-start;
   justify-content: space-evenly;
 }
@@ -273,22 +272,10 @@ header .header-content {
   }
 }
 header .header-content h1 {
-  font-size: 72px;
-  font-weight: 500;
-  margin-top: 150px;
-  line-height: 88px;
-}
-header .header-content p {
-  font-size: 24px;
-  font-weight: 500;
-  margin-top: 50px;
-  line-height: 37px;
-}
-header .header-content h1 {
-  font-size: 7.2rem;
+  font-size: 6.5rem;
   font-weight: 500;
   margin-top: 15rem;
-  line-height: 8.8rem;
+  line-height: 7rem;
 }
 @media (max-width: 900px) {
   header .header-content h1 {
@@ -299,7 +286,7 @@ header .header-content h1 {
   }
 }
 header .header-content p {
-  font-size: 2.4rem;
+  font-size: 2rem;
   font-weight: 500;
   margin-top: 5rem;
   line-height: 3.7rem;
@@ -445,8 +432,9 @@ main {
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 4.8rem;
+  font-size: 4.2rem;
   line-height: 3.7rem;
+  margin-bottom: 1.5rem;
 }
 .article1 section p,
 .article2 section p,
@@ -454,14 +442,14 @@ main {
   font-family: Montserrat;
   font-style: normal;
   font-weight: 500;
-  font-size: 2.8rem;
+  font-size: 2.4rem;
   line-height: 3.7rem;
 }
 .article4 {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin-bottom: 2rem;
+  margin-bottom: 10rem;
 }
 @media (max-width: 900px) {
   .article4 {
@@ -478,7 +466,7 @@ main {
   }
 }
 .article4 section {
-  margin: 1rem;
+  margin: 1rem 4rem;
 }
 @media (max-width: 900px) {
   .article4 section {
