@@ -614,6 +614,11 @@ footer .footer-container .footer1 button {
   background: #d21f3c;
   color: #e5e5e5;
 }
+footer .footer-container .footer1 button:hover {
+  background: #fef7f7;
+  border: 2px solid #d21f3c;
+  color: #d21f3c;
+}
 footer .footer-container hr {
   width: 98%;
   border-color: #e5e5e5;
