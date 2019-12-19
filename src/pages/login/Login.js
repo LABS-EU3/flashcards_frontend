@@ -6,14 +6,17 @@ import { connect } from 'react-redux';
 import * as yup from 'yup';
 import { userLogin } from '../../modules/user/userActions';
 
-import { H1, Text } from '../../styles/typography';
+import { H1, Text, H3 } from '../../styles/typography';
 import { Button } from '../../styles/buttons';
+import { FlexColumnSpaceBetween } from '../../styles/displayFlex';
 import {
   ParentBackground,
   SkewDiv,
   UnSkewDiv,
   BottomTriangle,
   TopTriangle,
+  FlexRowBackground,
+  DesktopImage,
 } from '../../styles/background';
 import { Form, Input, Label } from '../../styles/forms';
 
@@ -29,62 +32,66 @@ const LoginForm = props => {
     errors,
   } = props;
   return (
-    <div>
-      <div className="left">
+    <FlexRowBackground>
+      <DesktopImage>
         <img alt="online test" src={img} />
-      </div>
+      </DesktopImage>
       <ParentBackground>
         <TopTriangle />
         <SkewDiv>
           <UnSkewDiv>
-            <div>
-              {localStorage.getItem('token') && <Redirect to="/dashboard" />}
+            <FlexColumnSpaceBetween>
               <div>
-                <H1>Login</H1>
+                {localStorage.getItem('token') && <Redirect to="/dashboard" />}
+                <div>
+                  <H1>Login</H1>
+                </div>
+                <div>
+                  <Form onSubmit={handleSubmit}>
+                    <Label>
+                      <H3>Email</H3>
+                      {touched.email && errors.email && (
+                        <Text color="red">{errors.email}</Text>
+                      )}
+                      <Input
+                        name="email"
+                        value={values.email}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        placeholder="Email"
+                        border={
+                          touched.email && errors.email && '2px solid red'
+                        }
+                      />
+                    </Label>
+                    <Label>
+                      <H3>Password</H3>
+                      {touched.password && errors.password && (
+                        <Text color="red">{errors.password}</Text>
+                      )}
+                      <Input
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        value={values.password}
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        border={errors.password && '1px solid red'}
+                      />
+                    </Label>
+                    <Button type="submit">Login</Button>
+                    <br />
+                    {`Don't have an account?`}{' '}
+                    <NavLink to="/signup">Sign Up</NavLink>
+                  </Form>
+                </div>
               </div>
-              <div>
-                <Form onSubmit={handleSubmit}>
-                  <Label>
-                    Email
-                    {touched.email && errors.email && (
-                      <Text color="red">{errors.email}</Text>
-                    )}
-                    <Input
-                      name="email"
-                      value={values.email}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      placeholder="Email"
-                      border={touched.email && errors.email && '2px solid red'}
-                    />
-                  </Label>
-                  <Label>
-                    Password
-                    {touched.password && errors.password && (
-                      <Text color="red">{errors.password}</Text>
-                    )}
-                    <Input
-                      type="password"
-                      name="password"
-                      placeholder="Password"
-                      value={values.password}
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      border={errors.password && '1px solid red'}
-                    />
-                  </Label>
-                  <Button type="submit">Login</Button>
-                  <br />
-                  {`Don't have an account?`}{' '}
-                  <NavLink to="/signup">Sign Up</NavLink>
-                </Form>
-              </div>
-            </div>
+            </FlexColumnSpaceBetween>
           </UnSkewDiv>
         </SkewDiv>
         <BottomTriangle />
       </ParentBackground>
-    </div>
+    </FlexRowBackground>
   );
 };
 
