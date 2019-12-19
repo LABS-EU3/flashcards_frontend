@@ -1,7 +1,20 @@
 import React from 'react';
+import importAll from '../../../utils/importAll';
 
-export default ({ content }) => (
-  <div>
-    <p>{content}</p>
+const images = importAll(
+  require.context('../../../assets/appimages', false, /\.(png|jpe?g|svg)$/),
+);
+
+const divStyle = {
+  maxHeight: '20rem',
+  alignItems: 'center',
+  justifyContent: 'center',
+  color: 'white',
+  className: 'swiper-slide',
+};
+
+export default ({ image }) => (
+  <div style={divStyle}>
+    <img src={images[image]} alt="images of the app" />
   </div>
 );

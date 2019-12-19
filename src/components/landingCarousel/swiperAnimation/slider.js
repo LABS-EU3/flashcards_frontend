@@ -3,11 +3,11 @@ import Swiper from './swiper';
 import SlideItem from './slideItem';
 
 export default ({ items }) => {
-  // Swiper instance
   const [swiper, updateSwiper] = useState(null);
-  // Slides current index
+
+  // eslint-disable-next-line no-unused-vars
   const [currentIndex, updateCurrentIndex] = useState(0);
-  // Params definition
+
   const params = {
     initialSlide: 3,
     pagination: {
@@ -25,23 +25,8 @@ export default ({ items }) => {
     getSwiper: updateSwiper, // Get swiper instance callback
   };
 
-  // Manipulate swiper from outside
-  const goNext = () => {
-    if (swiper !== null) {
-      swiper.slideNext();
-    }
-  };
-
-  const goPrev = () => {
-    if (swiper !== null) {
-      swiper.slidePrev();
-    }
-  };
-
   const renderItem = useCallback(
-    ({ idx, color, content }) => (
-      <SlideItem color={color} content={content} key={`slide_${idx}`} />
-    ),
+    ({ idx, image }) => <SlideItem image={image} key={`slide_${idx}`} />,
     [],
   );
 
@@ -49,7 +34,6 @@ export default ({ items }) => {
     swiper,
   ]);
 
-  // Add eventlisteners for swiper after initializing
   useEffect(() => {
     if (swiper !== null) {
       swiper.on('slideChange', updateIndex);
@@ -62,20 +46,15 @@ export default ({ items }) => {
     };
   }, [swiper, updateIndex]);
 
+  const parentDiv = {
+    display: 'flex',
+    flexDirection: 'column',
+    margin: '1em 0em 1em 0em',
+  };
+
   return (
-    <div>
+    <div style={parentDiv}>
       <Swiper params={params}>{items.map(renderItem)}</Swiper>
-      <div my={5} justifyContent="center" alignItems="center">
-        <button type="button" onClick={goPrev} m={0} mr={4} bg="blue.4">
-          Prev
-        </button>
-        <button type="button" onClick={goNext} bg="red.4">
-          Next
-        </button>
-      </div>
-      <p>
-        Current slide index is <p>{currentIndex}</p>
-      </p>
     </div>
   );
 };
