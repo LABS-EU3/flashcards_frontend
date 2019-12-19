@@ -342,7 +342,8 @@ header .header-content .header-btn {
     margin: 2rem 0;
   }
 }
-header .header-content .header-btn button {
+header .header-content .header-btn button,
+header .header-content .header-btn a.btn2 {
   margin-right: 2rem;
   width: 23rem;
   height: 4.5rem;
@@ -352,7 +353,8 @@ header .header-content .header-btn button {
   line-height: 3.7rem;
 }
 @media (max-width: 450px) {
-  header .header-content .header-btn button {
+  header .header-content .header-btn button,
+  header .header-content .header-btn a.btn2 {
     margin: 0.5rem 0;
   }
 }
@@ -364,11 +366,16 @@ header .header-content .header-btn .btn1 {
   border-radius: 0.5rem;
   color: #ffffff;
 }
-header .header-content .header-btn .btn2 {
+header .header-content .header-btn .btn2,
+header .header-content .header-btn a.btn2 {
   background: #ffffff;
   border: 0.3rem solid #d21f3c;
   box-sizing: border-box;
   border-radius: 0.5rem;
+}
+header .header-content .header-btn a.btn2 {
+  text-align: center;
+  color: #000000;
 }
 main {
   background-image: url('../img/bannerImage.svg');
