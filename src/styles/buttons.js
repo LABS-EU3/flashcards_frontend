@@ -21,6 +21,9 @@ export const Button = styled.button`
     transform: scale(1.01);
     background: ${c.PRIMARY_POP_COLOR};
   }
+  &:not([disabled]) {
+    cursor: pointer;
+  }
 `;
 
 export const LineButton = styled.button`
@@ -42,6 +45,9 @@ export const LineButton = styled.button`
       color: ${c.WHITE};
     }
   }
+  &:not([disabled]) {
+    cursor: pointer;
+  }
 `;
 
 export const BackArrowButton = styled.div`
@@ -49,4 +55,14 @@ export const BackArrowButton = styled.div`
   flex-direction: column;
   position: absolute;
   margin: 2em;
+  &:not([disabled]) {
+    cursor: pointer;
+  }
+  &:hover {
+    transform: scale(1.01);
+  }
+  &:active {
+    transform: scale(1.01);
+    background: ${c.PRIMARY_POP_COLOR};
+  }
 `;

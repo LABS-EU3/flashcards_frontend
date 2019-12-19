@@ -47,6 +47,12 @@ export const ParentBackground = styled.div`
   min-height: 524px;
   max-width: 100%;
   max-height: 95.4vh;
+  @media (min-width: ${g.phoneMediaBreak}px) {
+    min-width: 320px;
+  }
+  @media (min-width: ${g.desktopMediaBreak}px) {
+    min-width: 500px;
+  }
 `;
 
 export const SkewDiv = styled.div`
@@ -59,7 +65,8 @@ export const SkewDiv = styled.div`
   -ms-transform: skewY(-16.27deg);
   -o-transform: skewY(-16.27deg);
   transform: skewY(-16.27deg);
-  height: 130vh;
+  padding: 2rem;
+  min-height: 70vh;
 `;
 
 export const UnSkewDiv = styled.div`
