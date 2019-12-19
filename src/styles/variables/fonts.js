@@ -18,7 +18,7 @@ export const P_FONT_SIZE = 12 / 10;
 export const BUTTON_FONT_SIZE = 18 / 10;
 
 // line-height: '${lineHeight}px'
-export const H1_LINE_HEIGHT = H1_FONT_SIZE * 1.5;
+export const H1_LINE_HEIGHT = H1_FONT_SIZE * 1.2;
 export const H2_LINE_HEIGHT = H2_FONT_SIZE * 1.5;
 export const H3_LINE_HEIGHT = H3_FONT_SIZE * 1.5;
 export const H4_LINE_HEIGHT = H4_FONT_SIZE * 1.5;
