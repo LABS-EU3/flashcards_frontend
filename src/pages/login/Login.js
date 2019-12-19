@@ -8,7 +8,6 @@ import { userLogin } from '../../modules/user/userActions';
 
 import { H1, Text, H3, P } from '../../styles/typography';
 import { Button } from '../../styles/buttons';
-import { FlexColumnSpaceBetween } from '../../styles/displayFlex';
 import {
   ParentBackground,
   SkewDiv,
@@ -55,7 +54,7 @@ const LoginForm = props => {
                   onBlur={handleBlur}
                   placeholder="Email"
                   border={touched.email && errors.email && '2px solid red'}
-                />{' '}
+                />
               </Label>
               <Label>
                 <H3>Password</H3>
@@ -71,7 +70,7 @@ const LoginForm = props => {
                   onChange={handleChange}
                   border={errors.password && '1px solid red'}
                 />
-              </Label>{' '}
+              </Label>
               <Button type="submit">
                 <H3 WHITE>Login</H3>
               </Button>
