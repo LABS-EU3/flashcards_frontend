@@ -110,14 +110,14 @@ export const ParentBackgroundSecondary = styled.div`
   justify-content: center;
   background: linear-gradient(81.25deg, #d21f3c -48.43%, #ffa987 169.92%);
   min-width: 320px;
-  min-height: 524px;
-  max-width: 100%;
-  max-height: 95.4vh;
+  height: 95.4vh;
+  max-width: 35%;
   @media (min-width: ${g.phoneMediaBreak}px) {
     min-width: 320px;
   }
   @media (min-width: ${g.desktopMediaBreak}px) {
     min-width: 500px;
+  }
 `;
 
 export const SkewDivSecondary = styled.div`
@@ -130,7 +130,7 @@ export const SkewDivSecondary = styled.div`
   -ms-transform: skewY(16.27deg);
   -o-transform: skewY(16.27deg);
   transform: skewY(16.27deg);
-  min-height: 75vh;
+  min-height: 92vh;
 `;
 
 export const UnSkewDivSecondary = styled.div`
@@ -143,7 +143,7 @@ export const UnSkewDivSecondary = styled.div`
   -ms-transform: skewY(-16.27deg);
   -o-transform: skewY(-16.27deg);
   transform: skewY(-16.27deg);
-  width: 60%;
+  width: 70%;
 `;
 
 // Global

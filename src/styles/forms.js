@@ -34,7 +34,7 @@ export const Input = styled.input`
   box-sizing: border-box;
   border-radius: 3px;
   width: 100%;
-  color: rgba(0, 0, 0, 0.3);
+  color: ${c.DARK_NEUTRAL_COLOR};
   font-family: ${f.APP_FONT};
   font-weight: ${f.REGULAR};
   font-size: ${f.H3_FONT_SIZE}em;

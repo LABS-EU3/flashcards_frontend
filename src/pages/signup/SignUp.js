@@ -2,25 +2,31 @@ import React from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
 import { withFormik } from 'formik';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router';
+import styled from 'styled-components';
 
 import * as yup from 'yup';
 import { userSignUp } from '../../modules/user/userActions';
 
-import { H1, Text, H3, P } from '../../styles/typography';
-import { Button } from '../../styles/buttons';
+import { H1, Text, H3, H5 } from '../../styles/typography';
+import { Button, BackArrowButton } from '../../styles/buttons';
 import {
   ParentBackgroundSecondary,
-  SkewDiv,
-  UnSkewDiv,
-  BottomTriangle,
-  TopTriangle,
+  SkewDivSecondary,
+  UnSkewDivSecondary,
   FlexRowBackground,
   DesktopImage,
 } from '../../styles/background';
 import { Form, Input, Label } from '../../styles/forms';
-import img from '../../assets/images/undraw_analysis.svg';
+import img from '../../assets/images/undraw_analysis_4jis.svg';
+import BackArrow from '../../assets/icons/Arrow 1.svg';
+
+const BackArrowButton2 = styled(BackArrowButton)`
+  margin-top: -30em;
+`;
 
 const SignUpForm = props => {
+  const history = useHistory();
   const {
     values,
     handleChange,
@@ -36,9 +42,16 @@ const SignUpForm = props => {
         <img src={img} alt="analysis" />
       </DesktopImage>
       <ParentBackgroundSecondary>
-        <TopTriangle />
-        <SkewDiv>
-          <UnSkewDiv>
+        <BackArrowButton2
+          onClick={() => {
+            history.goBack();
+          }}
+        >
+          <img src={`${BackArrow}`} alt="back arrow" />
+          <H5>Back</H5>
+        </BackArrowButton2>
+        <SkewDivSecondary>
+          <UnSkewDivSecondary>
             <H1>Create an Account</H1>
             <Form onSubmit={handleSubmit}>
               <Label>
@@ -110,13 +123,12 @@ const SignUpForm = props => {
                 <H3 WHITE>Sign Up</H3>
               </Button>
               <br />
-              <P LIGHTWEIGHT>
+              <H3 REGULAR>
                 Already a user? <NavLink to="/login">Login</NavLink>
-              </P>
+              </H3>
             </Form>
-          </UnSkewDiv>
-        </SkewDiv>
-        <BottomTriangle />
+          </UnSkewDivSecondary>
+        </SkewDivSecondary>
       </ParentBackgroundSecondary>
     </FlexRowBackground>
   );

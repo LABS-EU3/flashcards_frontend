@@ -20,7 +20,7 @@ import Login from './pages/login/Login';
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <TopBar />
       <Switch>
         <Route exact path="/" component={Landing} />

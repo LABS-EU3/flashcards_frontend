@@ -65,4 +65,5 @@ export const BackArrowButton = styled.div`
     transform: scale(1.01);
     background: ${c.PRIMARY_POP_COLOR};
   }
+  z-index: 1;
 `;
