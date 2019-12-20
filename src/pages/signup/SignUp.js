@@ -17,7 +17,7 @@ import {
   FlexRowBackground,
   DesktopImage,
 } from '../../styles/background';
-import { Form, Input, Label } from '../../styles/forms';
+import { Forms, Input, Label } from '../../styles/forms';
 import img from '../../assets/images/undraw_analysis_4jis.svg';
 import BackArrow from '../../assets/icons/Arrow 1.svg';
 
@@ -53,7 +53,7 @@ const SignUpForm = props => {
         <SkewDivSecondary>
           <UnSkewDivSecondary>
             <H1>Create an Account</H1>
-            <Form onSubmit={handleSubmit}>
+            <Forms onSubmit={handleSubmit}>
               <Label>
                 <H3>Name</H3>
                 {touched.fullName && errors.fullName && (
@@ -126,7 +126,7 @@ const SignUpForm = props => {
               <H3 REGULAR>
                 Already a user? <NavLink to="/login">Login</NavLink>
               </H3>
-            </Form>
+            </Forms>
           </UnSkewDivSecondary>
         </SkewDivSecondary>
       </ParentBackgroundSecondary>

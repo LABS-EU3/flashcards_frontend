@@ -19,7 +19,7 @@ import {
   FlexRowBackground,
   DesktopImage,
 } from '../../styles/background';
-import { Form, Input, Label } from '../../styles/forms';
+import { Forms, Input, Label } from '../../styles/forms';
 
 import img from '../../assets/images/undraw_online_test_gba7 (1).svg';
 import BackArrow from '../../assets/icons/Arrow 1.svg';
@@ -59,7 +59,7 @@ const LoginForm = props => {
         <SkewDiv>
           <UnSkewDiv>
             <H1>Login</H1>
-            <Form onSubmit={handleSubmit}>
+            <Forms onSubmit={handleSubmit}>
               <Label>
                 <H3>Email</H3>
                 {touched.email && errors.email && (
@@ -99,7 +99,7 @@ const LoginForm = props => {
               <H3 REGULAR>
                 Do not have an account? <NavLink to="/signup">Sign Up</NavLink>
               </H3>
-            </Form>
+            </Forms>
           </UnSkewDiv>
         </SkewDiv>
         <BottomTriangle />
