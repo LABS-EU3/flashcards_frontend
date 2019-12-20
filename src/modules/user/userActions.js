@@ -67,6 +67,7 @@ export const resetPassword = (passwordData, history) => dispatch => {
     })
     .then(res => {
       dispatch(resetSuccess(res.data));
+      history.push('/login');
     })
     .catch(errors => {
       dispatch({
@@ -74,5 +75,4 @@ export const resetPassword = (passwordData, history) => dispatch => {
         payload: errors,
       });
     });
-  history.push('/login');
 };

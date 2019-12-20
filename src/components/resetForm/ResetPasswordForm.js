@@ -10,12 +10,19 @@ import { H3 } from '../../styles/typography';
 import { Button } from '../../styles/buttons';
 import { Form, Input, Label } from '../../styles/forms';
 
-export default function ResetPasswordForm() {
+// Utils
+import { useDispatchThunk } from '../../utils/useDispatchThunk';
+
+// Actions
+import * as userAction from '../../modules/user/userActions';
+
+export default function ResetPasswordForm(props) {
+  const resetPassword = useDispatchThunk(userAction.resetPassword);
   return (
     <Formik
       initialValues={{
         password: '',
-        passwordconfirm: '',
+        confirmPassword: '',
       }}
       validationSchema={Yup.object({
         password: Yup.string()
@@ -26,7 +33,7 @@ export default function ResetPasswordForm() {
           .required('Please confirm your new password'),
       })}
       onSubmit={(values, { setSubmitting, resetForm }) => {
-        // Send Reset Password function
+        resetPassword(values, props.history);
         setSubmitting(false);
         resetForm();
       }}
@@ -40,7 +47,7 @@ export default function ResetPasswordForm() {
           <H3>Re-Enter Password</H3>
           <Input
             type="text"
-            name=" passwordconfirm"
+            name=" confirmPassword"
             placeholder="Re-Enter Password"
           />{' '}
         </Label>
