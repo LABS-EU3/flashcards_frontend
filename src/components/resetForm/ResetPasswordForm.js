@@ -57,7 +57,7 @@ const Form = props => {
         />
       </Label>
       <Button type="submit">
-        <H3 WHITE>Login</H3>
+        <H3 WHITE>Confrim</H3>
       </Button>
     </Forms>
   );
@@ -76,11 +76,11 @@ const validationSchema = yup.object().shape({
 
 const ResetPasswordForm = withFormik({
   mapPropsToValues: () => ({
-    email: '',
+    confirmPassword: '',
     password: '',
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
-    props.resetPassword(values.email, values.password, props.history);
+    props.resetPassword(values.confirmPassword, values.password, props.history);
     setSubmitting(false);
   },
   validationSchema,
