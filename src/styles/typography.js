@@ -58,6 +58,10 @@ export const H3 = styled.h3`
   ${props => (props.LIGHT ? `color:${c.LIGHT_NEUTRAL_COLOR}` : null)};
   ${props => (props.WHITE ? `color:#FFFFFF` : null)};
   ${props => (props.PRIMARY ? `color:${c.PRIMARY_POP_COLOR}` : null)};
+  a {
+    text-decoration: none;
+    color: dodgerblue;
+  }
 `;
 
 export const H4 = styled.h4`

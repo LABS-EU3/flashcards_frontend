@@ -2,12 +2,15 @@ import React from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
 import { withFormik } from 'formik';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router';
+import styled from 'styled-components';
 
 import * as yup from 'yup';
+import * as c from '../../styles/variables/colours';
 import { userLogin } from '../../modules/user/userActions';
 
-import { H1, Text, H3, P } from '../../styles/typography';
-import { Button } from '../../styles/buttons';
+import { H1, Text, H3, H5 } from '../../styles/typography';
+import { Button, BackArrowButton } from '../../styles/buttons';
 import {
   ParentBackground,
   SkewDiv,
@@ -17,11 +20,19 @@ import {
   FlexRowBackground,
   DesktopImage,
 } from '../../styles/background';
-import { Form, Input, Label } from '../../styles/forms';
+import { Forms, Input, Label } from '../../styles/forms';
 
-import img from '../../assets/images/undraw_online_test.svg';
+import img from '../../assets/images/undraw_online_test_gba7 (1).svg';
+import BackArrow from '../../assets/icons/Arrow 1.svg';
 
 const LoginForm = props => {
+  const ForgotText = styled(H3)`
+    align-self: flex-end;
+    line-height: 0;
+    margin-bottom: 1em;
+  `;
+
+  const history = useHistory();
   const {
     values,
     handleChange,
@@ -37,15 +48,23 @@ const LoginForm = props => {
         <img alt="online test" src={img} />
       </DesktopImage>
       <ParentBackground>
+        <BackArrowButton
+          onClick={() => {
+            history.goBack();
+          }}
+        >
+          <img src={`${BackArrow}`} alt="back arrow" />
+          <H5>Back</H5>
+        </BackArrowButton>
         <TopTriangle />
         <SkewDiv>
           <UnSkewDiv>
             <H1>Login</H1>
-            <Form onSubmit={handleSubmit}>
+            <Forms onSubmit={handleSubmit}>
               <Label>
                 <H3>Email</H3>
                 {touched.email && errors.email && (
-                  <Text color="red">{errors.email}</Text>
+                  <Text color={c.DANGER_COLOR}>{errors.email}</Text>
                 )}
                 <Input
                   name="email"
@@ -53,13 +72,17 @@ const LoginForm = props => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   placeholder="Email"
-                  border={touched.email && errors.email && '2px solid red'}
+                  border={
+                    touched.email &&
+                    errors.email &&
+                    `2px solid ${c.DANGER_COLOR}`
+                  }
                 />
               </Label>
               <Label>
                 <H3>Password</H3>
                 {touched.password && errors.password && (
-                  <Text color="red">{errors.password}</Text>
+                  <Text color={c.DANGER_COLOR}>{errors.password}</Text>
                 )}
                 <Input
                   type="password"
@@ -68,17 +91,20 @@ const LoginForm = props => {
                   value={values.password}
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  border={errors.password && '1px solid red'}
+                  border={errors.password && `2px solid ${c.DANGER_COLOR}`}
                 />
               </Label>
+              <ForgotText REGULAR>
+                <NavLink to="/forgot">Forgot Password?</NavLink>
+              </ForgotText>
               <Button type="submit">
                 <H3 WHITE>Login</H3>
               </Button>
               <br />
-              <P LIGHTWEIGHT>
+              <H3 REGULAR>
                 Do not have an account? <NavLink to="/signup">Sign Up</NavLink>
-              </P>
-            </Form>
+              </H3>
+            </Forms>
           </UnSkewDiv>
         </SkewDiv>
         <BottomTriangle />

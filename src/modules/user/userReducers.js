@@ -1,4 +1,11 @@
-import { LOGIN, LOADING, SET_ERRORS, LOGOUT } from './userTypes';
+import {
+  LOGIN,
+  LOADING,
+  SET_ERRORS,
+  LOGOUT,
+  RESET_PASSWORD,
+  FORGOT_PASSWORD,
+} from './userTypes';
 
 const initialState = {
   loading: false,
@@ -30,8 +37,14 @@ const userReducer = (state = initialState, action) => {
         loading: false,
       };
 
+    case RESET_PASSWORD:
+      return state;
+
     case LOGOUT:
       return initialState;
+
+    case FORGOT_PASSWORD:
+      return state;
 
     default:
       return state;

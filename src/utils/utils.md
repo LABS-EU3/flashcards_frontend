@@ -1,1 +1,0 @@
-src/utils have utilities like your API wrapper, date utils, string utils etc. private routes etc

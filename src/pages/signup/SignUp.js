@@ -2,25 +2,32 @@ import React from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
 import { withFormik } from 'formik';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router';
+import styled from 'styled-components';
 
 import * as yup from 'yup';
 import { userSignUp } from '../../modules/user/userActions';
 
-import { H1, Text, H3, P } from '../../styles/typography';
-import { Button } from '../../styles/buttons';
+import { H1, Text, H3, H5 } from '../../styles/typography';
+import { Button, BackArrowButton } from '../../styles/buttons';
 import {
   ParentBackgroundSecondary,
-  SkewDiv,
-  UnSkewDiv,
-  BottomTriangle,
-  TopTriangle,
+  SkewDivSecondary,
+  UnSkewDivSecondary,
   FlexRowBackground,
   DesktopImage,
 } from '../../styles/background';
-import { Form, Input, Label } from '../../styles/forms';
-import img from '../../assets/images/undraw_analysis.svg';
+import * as c from '../../styles/variables/colours';
+import { Forms, Input, Label } from '../../styles/forms';
+import img from '../../assets/images/undraw_analysis_4jis.svg';
+import BackArrow from '../../assets/icons/Arrow 1.svg';
+
+const BackArrowButton2 = styled(BackArrowButton)`
+  margin-top: -25em;
+`;
 
 const SignUpForm = props => {
+  const history = useHistory();
   const {
     values,
     handleChange,
@@ -36,15 +43,22 @@ const SignUpForm = props => {
         <img src={img} alt="analysis" />
       </DesktopImage>
       <ParentBackgroundSecondary>
-        <TopTriangle />
-        <SkewDiv>
-          <UnSkewDiv>
+        <BackArrowButton2
+          onClick={() => {
+            history.goBack();
+          }}
+        >
+          <img src={`${BackArrow}`} alt="back arrow" />
+          <H5>Back</H5>
+        </BackArrowButton2>
+        <SkewDivSecondary>
+          <UnSkewDivSecondary>
             <H1>Create an Account</H1>
-            <Form onSubmit={handleSubmit}>
+            <Forms onSubmit={handleSubmit}>
               <Label>
                 <H3>Name</H3>
                 {touched.fullName && errors.fullName && (
-                  <Text color="red">{errors.fullName}</Text>
+                  <Text color={c.DANGER_COLOR}>{errors.fullName}</Text>
                 )}
                 <Input
                   type="text"
@@ -54,14 +68,16 @@ const SignUpForm = props => {
                   onBlur={handleBlur}
                   placeholder="Full Name"
                   border={
-                    touched.fullName && errors.fullName && '2px solid red'
+                    touched.fullName &&
+                    errors.fullName &&
+                    `2px solid ${c.DANGER_COLOR}`
                   }
                 />
               </Label>
               <Label>
                 <H3>Email</H3>
                 {touched.email && errors.email && (
-                  <Text color="red">{errors.email}</Text>
+                  <Text color={c.DANGER_COLOR}>{errors.email}</Text>
                 )}
                 <Input
                   name="email"
@@ -69,13 +85,17 @@ const SignUpForm = props => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   placeholder="Email"
-                  border={touched.email && errors.email && '2px solid red'}
+                  border={
+                    touched.email &&
+                    errors.email &&
+                    `2px solid ${c.DANGER_COLOR}`
+                  }
                 />
               </Label>
               <Label>
                 <H3>Password</H3>
                 {touched.password && errors.password && (
-                  <Text color="red">{errors.password}</Text>
+                  <Text color={c.DANGER_COLOR}>{errors.password}</Text>
                 )}
                 <Input
                   type="password"
@@ -85,14 +105,16 @@ const SignUpForm = props => {
                   onBlur={handleBlur}
                   onChange={handleChange}
                   border={
-                    touched.password && errors.password && '2px solid red'
+                    touched.password &&
+                    errors.password &&
+                    `2px solid ${c.DANGER_COLOR}`
                   }
                 />
               </Label>
               <Label>
                 <H3>Confirm Password</H3>
                 {touched.password2 && errors.password2 && (
-                  <Text color="red">{errors.password2}</Text>
+                  <Text color={c.DANGER_COLOR}>{errors.password2}</Text>
                 )}
                 <Input
                   type="password"
@@ -102,7 +124,9 @@ const SignUpForm = props => {
                   onBlur={handleBlur}
                   onChange={handleChange}
                   border={
-                    touched.password2 && errors.password2 && '2px solid red'
+                    touched.password2 &&
+                    errors.password2 &&
+                    `2px solid ${c.DANGER_COLOR}`
                   }
                 />
               </Label>
@@ -110,13 +134,12 @@ const SignUpForm = props => {
                 <H3 WHITE>Sign Up</H3>
               </Button>
               <br />
-              <P LIGHTWEIGHT>
+              <H3 REGULAR>
                 Already a user? <NavLink to="/login">Login</NavLink>
-              </P>
-            </Form>
-          </UnSkewDiv>
-        </SkewDiv>
-        <BottomTriangle />
+              </H3>
+            </Forms>
+          </UnSkewDivSecondary>
+        </SkewDivSecondary>
       </ParentBackgroundSecondary>
     </FlexRowBackground>
   );
