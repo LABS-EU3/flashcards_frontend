@@ -27,60 +27,40 @@ const Form = props => {
   return (
     <Forms onSubmit={handleSubmit}>
       <Label>
-        <H3>Password</H3>
-        {touched.password && errors.password && (
-          <Text color={c.DANGER_COLOR}>{errors.password}</Text>
+        <H3>Email</H3>
+        {touched.email && errors.email && (
+          <Text color={c.DANGER_COLOR}>{errors.email}</Text>
         )}
         <Input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={values.password}
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={values.email}
           onBlur={handleBlur}
           onChange={handleChange}
-          border={errors.password && `2px solid ${c.DANGER_COLOR}`}
-        />
-      </Label>
-      <Label>
-        <H3>Re-Enter Password</H3>
-        {touched.confirmPassword && errors.confirmPassword && (
-          <Text color={c.DANGER_COLOR}>{errors.confirmPassword}</Text>
-        )}
-        <Input
-          type="password"
-          name="confirmPassword"
-          placeholder="Re-Enter Password"
-          value={values.confirmPassword}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          border={errors.confirmPassword && `2px solid ${c.DANGER_COLOR}`}
+          border={errors.email && `2px solid ${c.DANGER_COLOR}`}
         />
       </Label>
       <Button type="submit">
-        <H3 WHITE>Confirm</H3>
+        <H3 WHITE>Send Email</H3>
       </Button>
     </Forms>
   );
 };
 
 const validationSchema = yup.object().shape({
-  password: yup
+  email: yup
     .string()
-    .required('Please provide a password')
-    .min(8, 'Password too short'),
-  confirmPassword: yup
-    .string()
-    .required("Passwords don't match")
-    .oneOf([yup.ref('password'), null], 'Passwords must match'),
+    .email('Email is not valid')
+    .required('Please provide an email'),
 });
 
 const ResetPasswordForm = withFormik({
   mapPropsToValues: () => ({
     email: '',
-    password: '',
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
-    props.resetPassword(values.password, values.password, props.history);
+    props.resetPassword(values.email, props.history);
     setSubmitting(false);
   },
   validationSchema,
