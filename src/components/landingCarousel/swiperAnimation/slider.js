@@ -24,6 +24,7 @@ export default ({ items }) => {
     spaceBetween: 30,
     loop: true,
     autoplay: true,
+    preloadImages: true,
     getSwiper: updateSwiper,
   };
 

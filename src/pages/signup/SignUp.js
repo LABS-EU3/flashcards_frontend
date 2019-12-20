@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import * as yup from 'yup';
 import { userSignUp } from '../../modules/user/userActions';
 
-import { H1, Text, H3, H5, P } from '../../styles/typography';
+import { H1, Text, H3, H5 } from '../../styles/typography';
 import { Button, BackArrowButton } from '../../styles/buttons';
 import {
   ParentBackgroundSecondary,
@@ -123,9 +123,9 @@ const SignUpForm = props => {
                 <H3 WHITE>Sign Up</H3>
               </Button>
               <br />
-              <P LIGHTWEIGHT>
+              <H3 REGULAR>
                 Already a user? <NavLink to="/login">Login</NavLink>
-              </P>
+              </H3>
             </Form>
           </UnSkewDivSecondary>
         </SkewDivSecondary>

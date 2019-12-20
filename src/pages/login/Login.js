@@ -1,14 +1,14 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
 import { withFormik } from 'formik';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
+import styled from 'styled-components';
 
 import * as yup from 'yup';
 import { userLogin } from '../../modules/user/userActions';
 
-import { H1, Text, H3, P, H5 } from '../../styles/typography';
+import { H1, Text, H3, H5 } from '../../styles/typography';
 import { Button, BackArrowButton } from '../../styles/buttons';
 import {
   ParentBackground,
@@ -25,6 +25,12 @@ import img from '../../assets/images/undraw_online_test_gba7 (1).svg';
 import BackArrow from '../../assets/icons/Arrow 1.svg';
 
 const LoginForm = props => {
+  const ForgotText = styled(H3)`
+    align-self: flex-end;
+    line-height: 0;
+    margin-bottom: 1em;
+  `;
+
   const history = useHistory();
   const {
     values,
@@ -83,13 +89,16 @@ const LoginForm = props => {
                   border={errors.password && '1px solid red'}
                 />
               </Label>
+              <ForgotText REGULAR>
+                <NavLink to="/forgot">Forgot Password?</NavLink>
+              </ForgotText>
               <Button type="submit">
                 <H3 WHITE>Login</H3>
               </Button>
               <br />
-              <P LIGHTWEIGHT>
+              <H3 REGULAR>
                 Do not have an account? <NavLink to="/signup">Sign Up</NavLink>
-              </P>
+              </H3>
             </Form>
           </UnSkewDiv>
         </SkewDiv>

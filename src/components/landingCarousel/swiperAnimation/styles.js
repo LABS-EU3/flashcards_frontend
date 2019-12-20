@@ -20,7 +20,7 @@ export const Slider = styled.div`
 `;
 
 export const SliderContainer = styled.div`
-  width: 150%;
+  width: 120%;
   margin: 1em 0em 1em 0em;
   overflow: hidden;
 `;

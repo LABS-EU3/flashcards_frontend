@@ -130,7 +130,7 @@ export const SkewDivSecondary = styled.div`
   -ms-transform: skewY(16.27deg);
   -o-transform: skewY(16.27deg);
   transform: skewY(16.27deg);
-  min-height: 90vh;
+  min-height: 92vh;
 `;
 
 export const UnSkewDivSecondary = styled.div`
@@ -143,7 +143,7 @@ export const UnSkewDivSecondary = styled.div`
   -ms-transform: skewY(-16.27deg);
   -o-transform: skewY(-16.27deg);
   transform: skewY(-16.27deg);
-  width: 55%;
+  width: 70%;
 `;
 
 // Global
