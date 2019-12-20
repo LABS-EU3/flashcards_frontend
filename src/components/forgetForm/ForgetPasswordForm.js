@@ -1,42 +1,74 @@
 // Import
 
-// Library
+// Libraries
 import React from 'react';
-import { Formik } from 'formik';
-import * as Yup from 'yup';
+import { withFormik } from 'formik';
+import { connect } from 'react-redux';
+import * as yup from 'yup';
 
-// Styled
-import { H3 } from '../../styles/typography';
+// Actions
+import { resetPassword } from '../../modules/user/userActions';
+
+// Styles
+import { Text, H3 } from '../../styles/typography';
 import { Button } from '../../styles/buttons';
+import * as c from '../../styles/variables/colours';
 import { Forms, Input, Label } from '../../styles/forms';
 
-export default function ForgetPasswordForm() {
+const Form = props => {
+  const {
+    values,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    touched,
+    errors,
+  } = props;
   return (
-    <Formik
-      initialValues={{
-        email: '',
-      }}
-      validationSchema={Yup.object({
-        email: Yup.string()
-          .lowercase()
-          .email('Invalid email address')
-          .required('Email is required'),
-      })}
-      onSubmit={(values, { setSubmitting, resetForm }) => {
-        // Send Email Function
-        setSubmitting(false);
-        resetForm();
-      }}
-    >
-      <Forms>
-        <Label>
-          <H3>Email</H3>
-          <Input type="text" name="email" placeholder="Email" />{' '}
-        </Label>
-        <Button>
-          <H3 WHITE>Send Email</H3>
-        </Button>
-      </Forms>
-    </Formik>
+    <Forms onSubmit={handleSubmit}>
+      <Label>
+        <H3>Email</H3>
+        {touched.email && errors.email && (
+          <Text color={c.DANGER_COLOR}>{errors.email}</Text>
+        )}
+        <Input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={values.email}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          border={errors.email && `2px solid ${c.DANGER_COLOR}`}
+        />
+      </Label>
+      <Button type="submit">
+        <H3 WHITE>Send Email</H3>
+      </Button>
+    </Forms>
   );
-}
+};
+
+const validationSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email('Email is not valid')
+    .required('Please provide an email'),
+});
+
+const ForgetPasswordForm = withFormik({
+  mapPropsToValues: () => ({
+    email: '',
+  }),
+  handleSubmit: (values, { props, setSubmitting }) => {
+    props.resetPassword(values.email, props.history);
+    setSubmitting(false);
+  },
+  validationSchema,
+})(Form);
+
+const mapStateToProps = state => {
+  return {
+    user: state.user,
+  };
+};
+export default connect(mapStateToProps, { resetPassword })(ForgetPasswordForm);
