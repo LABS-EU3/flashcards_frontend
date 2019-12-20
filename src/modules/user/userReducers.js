@@ -4,6 +4,7 @@ import {
   SET_ERRORS,
   LOGOUT,
   RESET_PASSWORD,
+  FORGOT_PASSWORD,
 } from './userTypes';
 
 const initialState = {
@@ -41,6 +42,9 @@ const userReducer = (state = initialState, action) => {
 
     case LOGOUT:
       return initialState;
+
+    case FORGOT_PASSWORD:
+      return state;
 
     default:
       return state;

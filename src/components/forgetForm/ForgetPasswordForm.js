@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import * as yup from 'yup';
 
 // Actions
-import { resetPassword } from '../../modules/user/userActions';
+import { forgotPassword } from '../../modules/user/userActions';
 
 // Styles
 import { Text, H3 } from '../../styles/typography';
@@ -60,7 +60,7 @@ const ForgetPasswordForm = withFormik({
     email: '',
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
-    props.resetPassword(values.email, props.history);
+    props.forgotPassword(values.email, props.history);
     setSubmitting(false);
   },
   validationSchema,
@@ -71,4 +71,4 @@ const mapStateToProps = state => {
     user: state.user,
   };
 };
-export default connect(mapStateToProps, { resetPassword })(ForgetPasswordForm);
+export default connect(mapStateToProps, { forgotPassword })(ForgetPasswordForm);
