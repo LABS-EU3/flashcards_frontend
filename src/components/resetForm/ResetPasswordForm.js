@@ -57,7 +57,7 @@ const Form = props => {
         />
       </Label>
       <Button type="submit">
-        <H3 WHITE>Confrim</H3>
+        <H3 WHITE>Confirm</H3>
       </Button>
     </Forms>
   );
@@ -80,7 +80,7 @@ const ResetPasswordForm = withFormik({
     password: '',
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
-    props.resetPassword(props.match.params, values, props.history);
+    props.resetPassword(values.confirmPassword, values.password, props.history);
     setSubmitting(false);
   },
   validationSchema,

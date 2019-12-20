@@ -5,6 +5,7 @@ import {
   SET_ERRORS,
   LOGOUT,
   RESET_PASSWORD,
+  FORGOT_PASSWORD,
 } from './userTypes';
 import { baseUrl } from '../../config/index';
 import { axiosWithAuth } from '../../utils/auth';
@@ -53,13 +54,6 @@ export const logoutUser = history => dispatch => {
   history.push('/login');
 };
 
-const resetSuccess = res => {
-  return {
-    type: RESET_PASSWORD,
-    payload: res,
-  };
-};
-
 export const resetPassword = (token, passwordData, history) => dispatch => {
   axiosWithAuth()
     .post(`/auth/reset_password/${token}`, {
@@ -67,8 +61,24 @@ export const resetPassword = (token, passwordData, history) => dispatch => {
       confirmPassword: passwordData.confirmPassword,
     })
     .then(res => {
-      dispatch(resetSuccess(res.data));
+      dispatch({ type: RESET_PASSWORD, payload: res.data });
       history.push('/login');
+    })
+    .catch(errors => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: errors,
+      });
+    });
+};
+
+export const forgotPassword = emailData => dispatch => {
+  axiosWithAuth()
+    .post(`/auth/forgot_password`, {
+      email: emailData.email,
+    })
+    .then(res => {
+      dispatch({ type: FORGOT_PASSWORD, payload: res.data });
     })
     .catch(errors => {
       dispatch({
