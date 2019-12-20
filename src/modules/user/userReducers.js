@@ -14,7 +14,7 @@ const initialState = {
   loading: false,
   authenticated: false,
   credentials: {},
-  errors: {},
+  errors: null,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -25,12 +25,11 @@ const userReducer = (state = initialState, action) => {
         loading: false,
         authenticated: true,
       };
-
     case LOADING:
       return {
         ...state,
         loading: true,
-        errors: {},
+        errors: null,
       };
 
     case SET_ERRORS:
@@ -41,13 +40,21 @@ const userReducer = (state = initialState, action) => {
       };
 
     case RESET_PASSWORD:
-      return state;
+      return {
+        ...state,
+        loading: false,
+        authenticated: false,
+      };
 
     case LOGOUT:
       return initialState;
 
     case FORGOT_PASSWORD:
-      return state;
+      return {
+        ...state,
+        loading: false,
+        authenticated: false,
+      };
 
     default:
       return state;
