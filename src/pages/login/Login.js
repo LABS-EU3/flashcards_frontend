@@ -46,7 +46,7 @@ export default function Login() {
         <SkewDiv>
           <UnSkewDiv>
             <H1>Login</H1>
-            <LoginForm />
+            <LoginForm history={history} />
             <br />
             <H3 REGULAR>
               Do not have an account? <NavLink to="/signup">Sign Up</NavLink>

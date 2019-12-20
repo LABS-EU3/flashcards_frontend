@@ -80,7 +80,7 @@ const ResetPasswordForm = withFormik({
     password: '',
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
-    props.resetPassword(values.confirmPassword, values.password, props.history);
+    props.resetPassword(props.resetToken, values, props.history);
     setSubmitting(false);
   },
   validationSchema,

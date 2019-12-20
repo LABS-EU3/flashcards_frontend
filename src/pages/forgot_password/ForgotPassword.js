@@ -53,7 +53,7 @@ export default function ForgotPassword() {
                 to your email to reset your password{' '}
               </P>
               <br />
-              <ForgetPasswordForm />
+              <ForgetPasswordForm history={history} />
             </FlexColumnSpaceBetween>
           </UnSkewDiv>
         </SkewDiv>

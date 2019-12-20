@@ -91,7 +91,7 @@ const LoginForm = withFormik({
     password: '',
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
-    props.userLogin(values.email, values.password, props.history);
+    props.userLogin(values, props.history);
     setSubmitting(false);
   },
   validationSchema,

@@ -19,24 +19,18 @@ import { baseUrl } from '../../config/index';
 // Utils
 import { axiosWithAuth } from '../../utils/auth';
 
-export const userLogin = (email, password, history) => dispatch => {
+export const userLogin = (userData, history) => dispatch => {
   dispatch({ type: LOADING });
-  axios
-    .post(`${baseUrl}/auth/login`, {
-      email,
-      password,
-    })
-    .then(({ data }) => {
-      dispatch({
-        type: LOGIN,
-      });
-      localStorage.setItem('token', `${data.data.token}`);
-      history.push('/dashboard');
+  axios.post(`${baseUrl}/auth/login`, userData).then(({ data }) => {
+    dispatch({
+      type: LOGIN,
     });
+    localStorage.setItem('token', `${data.data.token}`);
+    history.push('/dashboard');
+  });
 };
 
 export const userSignUp = (userData, history) => dispatch => {
-  dispatch({ type: LOADING });
   axios
     .post(`${baseUrl}/auth/register`, userData)
     .then(({ data }) => {

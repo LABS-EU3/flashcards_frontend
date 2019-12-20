@@ -48,7 +48,7 @@ export default function SignUp() {
         <SkewDivSecondary>
           <UnSkewDivSecondary>
             <H1>Create an Account</H1>
-            <SignUpForm />
+            <SignUpForm history={history} />
             <br />
             <H3 REGULAR>
               Already a user? <NavLink to="/login">Login</NavLink>
