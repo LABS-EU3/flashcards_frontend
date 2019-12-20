@@ -4,7 +4,6 @@ import { LOADING, LOGIN, SET_ERRORS, LOGOUT } from './userTypes';
 const baseUrl = 'http://localhost:5000/api';
 
 export const userLogin = (email, password, history) => dispatch => {
-  console.log(email, password);
   dispatch({ type: LOADING });
   axios
     .post(`${baseUrl}/auth/login`, {
@@ -24,7 +23,7 @@ export const userSignUp = (userData, history) => dispatch => {
   dispatch({ type: LOADING });
   axios
     .post(`${baseUrl}/auth/register`, userData)
-    .then(({ data }) => {
+    .then(() => {
       dispatch(
         userLogin(
           userData.fullName,

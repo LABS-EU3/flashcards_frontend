@@ -7,6 +7,7 @@ export const FlexColumnSpaceBetween = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  align-items: center;
 `;
 
 export const FlexColumnCenterCenter = styled.div`
