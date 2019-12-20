@@ -53,21 +53,14 @@ export const logoutUser = history => dispatch => {
   history.push('/login');
 };
 
-const resetSuccess = res => {
-  return {
-    type: RESET_PASSWORD,
-    payload: res,
-  };
-};
-
-export const resetPassword = (passwordData, history) => dispatch => {
+export const resetPassword = (token, passwordData, history) => dispatch => {
   axiosWithAuth()
-    .post(`/auth/reset_password/:token`, {
+    .post(`/auth/reset_password/${token}`, {
       password: passwordData.password,
       confirmPassword: passwordData.confirmPassword,
     })
     .then(res => {
-      dispatch(resetSuccess(res.data));
+      dispatch({ type: RESET_PASSWORD, payload: res.data });
       history.push('/login');
     })
     .catch(errors => {
