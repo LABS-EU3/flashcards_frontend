@@ -6,7 +6,8 @@ import {
   LOGOUT,
   RESET_PASSWORD,
 } from './userTypes';
-import { baseUrl } from '../../../config/index';
+import { baseUrl } from '../../config/index';
+import { axiosWithAuth } from '../../utils/auth';
 
 export const userLogin = (email, password, history) => dispatch => {
   dispatch({ type: LOADING });
@@ -60,7 +61,7 @@ const resetSuccess = res => {
 };
 
 export const resetPassword = (passwordData, history) => dispatch => {
-  axios
+  axiosWithAuth()
     .post(`${baseUrl}/auth/reset_Password`, {
       password: passwordData.password,
       confirmPassword: passwordData.confirmPassword,
