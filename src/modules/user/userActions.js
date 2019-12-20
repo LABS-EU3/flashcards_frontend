@@ -60,9 +60,9 @@ const resetSuccess = res => {
   };
 };
 
-export const resetPassword = (passwordData, history) => dispatch => {
+export const resetPassword = (token, passwordData, history) => dispatch => {
   axiosWithAuth()
-    .post(`/auth/reset_password/:token`, {
+    .post(`/auth/reset_password/${token}`, {
       password: passwordData.password,
       confirmPassword: passwordData.confirmPassword,
     })
