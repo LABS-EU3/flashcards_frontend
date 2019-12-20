@@ -72,14 +72,13 @@ export const resetPassword = (token, passwordData, history) => dispatch => {
     });
 };
 
-export const forgotPassword = (emailData, history) => dispatch => {
+export const forgotPassword = emailData => dispatch => {
   axiosWithAuth()
     .post(`/auth/forgot_password`, {
       email: emailData.email,
     })
     .then(res => {
       dispatch({ type: FORGOT_PASSWORD, payload: res.data });
-      history.push('/');
     })
     .catch(errors => {
       dispatch({

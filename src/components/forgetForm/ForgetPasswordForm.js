@@ -1,7 +1,7 @@
 // Import
 
 // Libraries
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { withFormik } from 'formik';
 import { connect } from 'react-redux';
 import * as yup from 'yup';
@@ -23,9 +23,20 @@ const Form = props => {
     handleSubmit,
     touched,
     errors,
+    status,
   } = props;
+  const [isSent, setIsSent] = useState('');
+  useEffect(() => {
+    if (status) {
+      setIsSent(
+        <H3 REGULAR>Your email has been sent please check your inbox</H3>,
+      );
+    }
+  }, [status, setIsSent]);
+
   return (
     <Forms onSubmit={handleSubmit}>
+      {isSent}
       <Label>
         <H3>Email</H3>
         {touched.email && errors.email && (
@@ -59,8 +70,10 @@ const ForgetPasswordForm = withFormik({
   mapPropsToValues: () => ({
     email: '',
   }),
-  handleSubmit: (values, { props, setSubmitting }) => {
-    props.forgotPassword(values.email, props.history);
+  handleSubmit: (values, { props, setSubmitting, setStatus }) => {
+    props.forgotPassword(values).then(() => {
+      setStatus(values);
+    });
     setSubmitting(false);
   },
   validationSchema,
