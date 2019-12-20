@@ -1,10 +1,12 @@
+// Import
+
+// Libraries
 import { combineReducers, createStore, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
-// import reducers
+// Reducers
 import userReducer from '../modules/user/userReducers';
 
-// Add reducers here
 const rootReducer = combineReducers({
   user: userReducer,
 });

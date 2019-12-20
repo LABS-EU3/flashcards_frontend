@@ -71,9 +71,8 @@ const ForgetPasswordForm = withFormik({
     email: '',
   }),
   handleSubmit: (values, { props, setSubmitting, setStatus }) => {
-    props.forgotPassword(values).then(() => {
-      setStatus(values);
-    });
+    props.forgotPassword(values);
+    setStatus(values);
     setSubmitting(false);
   },
   validationSchema,

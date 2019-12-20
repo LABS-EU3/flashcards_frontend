@@ -1,3 +1,6 @@
+// Imports
+
+// Types
 import {
   LOGIN,
   LOADING,
