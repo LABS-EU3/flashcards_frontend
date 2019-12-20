@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 // Styled
 import { H3 } from '../../styles/typography';
 import { Button } from '../../styles/buttons';
-import { Form, Input, Label } from '../../styles/forms';
+import { Forms, Input, Label } from '../../styles/forms';
 
 export default function ForgetPasswordForm() {
   return (
@@ -28,7 +28,7 @@ export default function ForgetPasswordForm() {
         resetForm();
       }}
     >
-      <Form>
+      <Forms>
         <Label>
           <H3>Email</H3>
           <Input type="text" name="email" placeholder="Email" />{' '}
@@ -36,7 +36,7 @@ export default function ForgetPasswordForm() {
         <Button>
           <H3 WHITE>Send Email</H3>
         </Button>
-      </Form>
+      </Forms>
     </Formik>
   );
 }

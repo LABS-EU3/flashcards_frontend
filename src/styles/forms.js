@@ -9,7 +9,7 @@ import * as f from './variables/fonts';
 // Colours
 import * as c from './variables/colours';
 
-export const Form = styled.form`
+export const Forms = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;

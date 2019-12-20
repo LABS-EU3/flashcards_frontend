@@ -18,15 +18,18 @@ import ResetPassword from './pages/reset_password/ResetPassword';
 import SignUp from './pages/signup/SignUp';
 import Login from './pages/login/Login';
 
+// Utils
+import PrivateRoute from './utils/PrivateRoute';
+
 function App() {
   return (
     <div>
       <TopBar />
       <Switch>
         <Route exact path="/" component={Landing} />
-        <Route path="/dashboard" component={Dashboard} />
+        <PrivateRoute path="/dashboard" component={Dashboard} />
         <Route path="/forgot" component={ForgotPassword} />
-        <Route path="/reset" component={ResetPassword} />
+        <Route path="/reset/:token" component={ResetPassword} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
       </Switch>

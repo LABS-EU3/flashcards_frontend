@@ -6,6 +6,7 @@ import { useHistory } from 'react-router';
 import styled from 'styled-components';
 
 import * as yup from 'yup';
+import * as c from '../../styles/variables/colours';
 import { userLogin } from '../../modules/user/userActions';
 
 import { H1, Text, H3, H5 } from '../../styles/typography';
@@ -19,7 +20,7 @@ import {
   FlexRowBackground,
   DesktopImage,
 } from '../../styles/background';
-import { Form, Input, Label } from '../../styles/forms';
+import { Forms, Input, Label } from '../../styles/forms';
 
 import img from '../../assets/images/undraw_online_test_gba7 (1).svg';
 import BackArrow from '../../assets/icons/Arrow 1.svg';
@@ -59,11 +60,11 @@ const LoginForm = props => {
         <SkewDiv>
           <UnSkewDiv>
             <H1>Login</H1>
-            <Form onSubmit={handleSubmit}>
+            <Forms onSubmit={handleSubmit}>
               <Label>
                 <H3>Email</H3>
                 {touched.email && errors.email && (
-                  <Text color="red">{errors.email}</Text>
+                  <Text color={c.DANGER_COLOR}>{errors.email}</Text>
                 )}
                 <Input
                   name="email"
@@ -71,13 +72,17 @@ const LoginForm = props => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   placeholder="Email"
-                  border={touched.email && errors.email && '2px solid red'}
+                  border={
+                    touched.email &&
+                    errors.email &&
+                    `2px solid ${c.DANGER_COLOR}`
+                  }
                 />
               </Label>
               <Label>
                 <H3>Password</H3>
                 {touched.password && errors.password && (
-                  <Text color="red">{errors.password}</Text>
+                  <Text color={c.DANGER_COLOR}>{errors.password}</Text>
                 )}
                 <Input
                   type="password"
@@ -86,7 +91,7 @@ const LoginForm = props => {
                   value={values.password}
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  border={errors.password && '1px solid red'}
+                  border={errors.password && `2px solid ${c.DANGER_COLOR}`}
                 />
               </Label>
               <ForgotText REGULAR>
@@ -99,7 +104,7 @@ const LoginForm = props => {
               <H3 REGULAR>
                 Do not have an account? <NavLink to="/signup">Sign Up</NavLink>
               </H3>
-            </Form>
+            </Forms>
           </UnSkewDiv>
         </SkewDiv>
         <BottomTriangle />

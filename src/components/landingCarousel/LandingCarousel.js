@@ -4,7 +4,6 @@
 import React from 'react';
 
 // styles
-import 'react-id-swiper/lib/';
 import { SliderContainer } from './swiperAnimation/styles';
 
 // scripts

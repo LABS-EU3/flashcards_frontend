@@ -1,7 +1,13 @@
 import axios from 'axios';
-import { LOADING, LOGIN, SET_ERRORS, LOGOUT } from './userTypes';
-
-const baseUrl = 'http://localhost:5000/api';
+import {
+  LOADING,
+  LOGIN,
+  SET_ERRORS,
+  LOGOUT,
+  RESET_PASSWORD,
+} from './userTypes';
+import { baseUrl } from '../../config/index';
+import { axiosWithAuth } from '../../utils/auth';
 
 export const userLogin = (email, password, history) => dispatch => {
   dispatch({ type: LOADING });
@@ -45,4 +51,29 @@ export const logoutUser = history => dispatch => {
   localStorage.removeItem('token');
   dispatch({ type: LOGOUT });
   history.push('/login');
+};
+
+const resetSuccess = res => {
+  return {
+    type: RESET_PASSWORD,
+    payload: res,
+  };
+};
+
+export const resetPassword = (token, passwordData, history) => dispatch => {
+  axiosWithAuth()
+    .post(`/auth/reset_password/${token}`, {
+      password: passwordData.password,
+      confirmPassword: passwordData.confirmPassword,
+    })
+    .then(res => {
+      dispatch(resetSuccess(res.data));
+      history.push('/login');
+    })
+    .catch(errors => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: errors,
+      });
+    });
 };
