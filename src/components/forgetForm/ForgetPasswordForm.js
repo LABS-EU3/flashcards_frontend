@@ -29,15 +29,17 @@ const Form = props => {
 
   useEffect(() => {
     if (user.errors) {
-      if (user.errors === '') {
+      if (user.errors === false) {
         setResponse(
-          <H3>
+          <H3 color={c.SUCCESS_COLOR}>
             Successfully sent your reset link to your email. Please check your
             inbox!
           </H3>,
         );
       }
-      setResponse(<H3> Email address could not be found</H3>);
+      setResponse(
+        <H3 color={c.DANGER_COLOR}> Email address could not be found</H3>,
+      );
     } else {
       setResponse('');
     }

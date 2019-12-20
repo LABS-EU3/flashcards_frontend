@@ -24,6 +24,7 @@ const userReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         authenticated: true,
+        errors: false,
       };
     case LOADING:
       return {
@@ -44,6 +45,7 @@ const userReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         authenticated: false,
+        errors: false,
       };
 
     case LOGOUT:
@@ -54,6 +56,7 @@ const userReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         authenticated: false,
+        errors: false,
       };
 
     default:

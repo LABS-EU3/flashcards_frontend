@@ -29,10 +29,6 @@ export const userLogin = (userData, history) => dispatch => {
       });
       localStorage.setItem('token', `${data.data.token}`);
       history.push('/dashboard');
-      dispatch({
-        type: SET_ERRORS,
-        payload: '',
-      });
     })
     .catch(errors => {
       dispatch({
@@ -49,10 +45,6 @@ export const userSignUp = (userData, history) => dispatch => {
     .then(({ data }) => {
       localStorage.setItem('token', `${data.data.token}`);
       history.push('/dashboard');
-      dispatch({
-        type: SET_ERRORS,
-        payload: '',
-      });
     })
     .catch(errors => {
       dispatch({
@@ -79,10 +71,6 @@ export const resetPassword = (token, passwordData, history) => dispatch => {
     .then(res => {
       dispatch({ type: RESET_PASSWORD, payload: res.data });
       history.push('/login');
-      dispatch({
-        type: SET_ERRORS,
-        payload: '',
-      });
     })
     .catch(errors => {
       dispatch({
@@ -99,10 +87,6 @@ export const forgotPassword = emailData => dispatch => {
     })
     .then(res => {
       dispatch({ type: FORGOT_PASSWORD, payload: res.data });
-      dispatch({
-        type: SET_ERRORS,
-        payload: '',
-      });
     })
     .catch(errors => {
       dispatch({
