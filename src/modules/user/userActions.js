@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { LOADING, LOGIN, SET_ERRORS, LOGOUT } from './userTypes';
 
-const baseUrl = 'http://localhost:5000/api';
+const baseUrl = process.env.REACT_APP_BASE_URL;
 
 export const userLogin = (email, password, history) => dispatch => {
   dispatch({ type: LOADING });
