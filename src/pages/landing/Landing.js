@@ -16,6 +16,9 @@ export default function Landing() {
       <NavLink to="/reset">reset password</NavLink>
       <NavLink to="/signup">signup</NavLink>
       <NavLink to="/login">login</NavLink>
+
+      {/* remove this test line after testing */}
+      <NavLink to="/emailconfirmation">confirmation</NavLink>
     </div>
   );
 }
