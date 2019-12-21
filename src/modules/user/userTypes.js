@@ -6,3 +6,4 @@ export const LOADING = 'LOADING';
 export const GET_USER_DETAILS = 'GET_USER_DETAILS';
 export const RESET_PASSWORD = 'RESET_PASSWORD';
 export const FORGOT_PASSWORD = 'FORGOT_PASSWORD';
+export const CONFIRM = 'CONFIRM';
