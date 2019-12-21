@@ -6,6 +6,7 @@ import {
   LOGOUT,
   RESET_PASSWORD,
   FORGOT_PASSWORD,
+  CONFIRM,
 } from './userTypes';
 import { baseUrl } from '../../config/index';
 import { axiosWithAuth } from '../../utils/auth';
@@ -85,5 +86,20 @@ export const forgotPassword = emailData => dispatch => {
         type: SET_ERRORS,
         payload: errors,
       });
+    });
+};
+
+export const emailConfirmation = (token, history) => dispatch => {
+  dispatch({ type: LOADING });
+  axios
+    .post(`https://quickdecks-staging.herokuapp.com/api/auth/confirm`, {
+      token,
+    })
+    .then(({ data }) => {
+      dispatch({
+        type: CONFIRM,
+      });
+      localStorage.setItem('token', `${data.token}`);
+      history.push('/dashboard');
     });
 };
