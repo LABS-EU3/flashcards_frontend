@@ -18,7 +18,7 @@ export default function Dashboard() {
       <NavLink to="/login">login</NavLink>
 
       {/* remove this test line after testing */}
-      <NavLink to="/confirm">confirmation</NavLink>
+      {/* <NavLink to="/confirm">confirmation</NavLink> */}
     </div>
   );
 }
