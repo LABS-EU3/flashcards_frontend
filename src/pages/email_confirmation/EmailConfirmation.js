@@ -1,12 +1,12 @@
 // Import
 
 // Libraries
-import React from 'react';
+// import React from 'react';
 // import { useHistory, useParams } from 'react-router-dom';
 // import axios from 'axios';
 import { withFormik } from 'formik';
 import { connect } from 'react-redux';
-// import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import { emailConfirmation } from '../../modules/user/userActions';
 
@@ -49,6 +49,11 @@ function EmailConfirmation(props) {
   //     return err.response;
   //   });
 
+  const { handleSubmit } = props;
+  // console.log('....>>', props.match.params.token);
+  useEffect(() => {
+    handleSubmit();
+  }, []);
   return (
     <>
       {/* {handleSubmit()} */}
