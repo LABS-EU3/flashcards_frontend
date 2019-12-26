@@ -92,7 +92,7 @@ export const forgotPassword = emailData => dispatch => {
 export const emailConfirmation = (token, history) => dispatch => {
   dispatch({ type: LOADING });
   axios
-    .post(`https://quickdecks-staging.herokuapp.com/api/auth/confirm_email`, {
+    .post(`${baseUrl}/auth/confirm_email`, {
       token,
     })
     .then(({ data }) => {
