@@ -103,8 +103,6 @@ export const emailConfirmation = (token, history) => dispatch => {
       history.push('/dashboard');
     })
     .catch(err => {
-      console.log('error request', err.request);
-      console.log('error response', err.response);
       return err.response;
     });
 };
