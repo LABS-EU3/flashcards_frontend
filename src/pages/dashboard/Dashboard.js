@@ -17,9 +17,6 @@ export default function Dashboard() {
       <NavLink to="/reset">reset password</NavLink>
       <NavLink to="/signup">signup</NavLink>
       <NavLink to="/login">login</NavLink>
-
-      {/* remove this test line after testing */}
-      {/* <NavLink to="/confirm">confirmation</NavLink> */}
     </div>
   );
 }
