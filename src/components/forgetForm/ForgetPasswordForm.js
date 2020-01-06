@@ -25,10 +25,10 @@ const Form = props => {
     errors,
     user,
   } = props;
-  const [response, setResponse] = useState();
+  const [response, setResponse] = useState(null);
 
   useEffect(() => {
-    if (user.errors) {
+    if (user.errors !== null) {
       if (user.errors === false) {
         setResponse(
           <H3 color={c.SUCCESS_COLOR}>
@@ -36,14 +36,13 @@ const Form = props => {
             inbox!
           </H3>,
         );
+      } else {
+        setResponse(
+          <H3 color={c.DANGER_COLOR}> Email address could not be found</H3>,
+        );
       }
-      setResponse(
-        <H3 color={c.DANGER_COLOR}> Email address could not be found</H3>,
-      );
-    } else {
-      setResponse('');
     }
-  }, [setResponse, user]);
+  }, [setResponse, user.errors]);
 
   return (
     <Forms onSubmit={handleSubmit}>

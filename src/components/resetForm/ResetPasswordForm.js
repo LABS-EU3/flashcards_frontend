@@ -1,7 +1,7 @@
 // Import
 
 // Libraries
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { withFormik } from 'formik';
 import { connect } from 'react-redux';
 import * as yup from 'yup';
@@ -23,9 +23,30 @@ const Form = props => {
     handleSubmit,
     touched,
     errors,
+    user,
   } = props;
+  const [response, setResponse] = useState(null);
+
+  useEffect(() => {
+    if (user.errors !== null) {
+      if (user.errors === false) {
+        setResponse(
+          <H3 color={c.SUCCESS_COLOR}>
+            Successfully changed password, please wait to be redirected
+          </H3>,
+        );
+      } else {
+        setResponse(
+          <H3 color={c.DANGER_COLOR}>
+            Oops something went wrong, please contact customer service
+          </H3>,
+        );
+      }
+    }
+  }, [setResponse, user.errors]);
   return (
     <Forms onSubmit={handleSubmit}>
+      {response}
       <Label>
         <H3>Password</H3>
         {touched.password && errors.password && (
