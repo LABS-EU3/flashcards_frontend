@@ -35,11 +35,7 @@ const SignUpForm = props => {
           </H3>,
         );
       } else {
-        setResponse(
-          <H3 color={c.DANGER_COLOR}>
-            Oops something went wrong, please contact customer service
-          </H3>,
-        );
+        setResponse(<H3 color={c.DANGER_COLOR}>User already exists</H3>);
       }
     }
   }, [user.errors]);
