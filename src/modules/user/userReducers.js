@@ -26,6 +26,7 @@ const initialState = {
   authenticated: false,
   credentials: {},
   errors: '',
+  completed: false,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -40,6 +41,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        completed: true,
         authenticated: true,
       };
     case LOGIN_FAILURE:
@@ -57,6 +59,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        completed: true,
         authenticated: true,
       };
     case SIGNUP_FAILURE:
@@ -81,6 +84,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        completed: true,
       };
     case RESET_PASSWORD_FAILURE:
       return {
@@ -97,6 +101,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        completed: true,
       };
     case FORGOT_PASSWORD_FAILURE:
       return {
@@ -113,6 +118,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        completed: true,
       };
     case CONFIRM_EMAIL_FAILURE:
       return {
