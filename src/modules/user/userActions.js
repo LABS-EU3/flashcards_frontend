@@ -1,4 +1,9 @@
+// Import
+
+// Libraries
 import axios from 'axios';
+
+// Types
 import {
   LOADING,
   LOGIN,
@@ -7,22 +12,29 @@ import {
   RESET_PASSWORD,
   FORGOT_PASSWORD,
 } from './userTypes';
+
+// Configs
 import { baseUrl } from '../../config/index';
+
+// Utils
 import { axiosWithAuth } from '../../utils/auth';
 
-export const userLogin = (email, password, history) => dispatch => {
+export const userLogin = (userData, history) => dispatch => {
   dispatch({ type: LOADING });
   axios
-    .post(`${baseUrl}/auth/login`, {
-      email,
-      password,
-    })
+    .post(`${baseUrl}/auth/login`, userData)
     .then(({ data }) => {
       dispatch({
         type: LOGIN,
       });
-      localStorage.setItem('token', `${data.token}`);
+      localStorage.setItem('token', `${data.data.token}`);
       history.push('/dashboard');
+    })
+    .catch(errors => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: errors.response.data.message,
+      });
     });
 };
 
@@ -30,33 +42,29 @@ export const userSignUp = (userData, history) => dispatch => {
   dispatch({ type: LOADING });
   axios
     .post(`${baseUrl}/auth/register`, userData)
-    .then(() => {
-      dispatch(
-        userLogin(
-          userData.fullName,
-          userData.password,
-          userData.email,
-          history,
-        ),
-      );
+    .then(({ data }) => {
+      localStorage.setItem('token', `${data.data.token}`);
+      history.push('/dashboard');
     })
     .catch(errors => {
       dispatch({
         type: SET_ERRORS,
-        payload: errors,
+        payload: errors.response.data.message,
       });
     });
 };
 
 export const logoutUser = history => dispatch => {
+  dispatch({ type: LOADING });
   localStorage.removeItem('token');
   dispatch({ type: LOGOUT });
   history.push('/login');
 };
 
 export const resetPassword = (token, passwordData, history) => dispatch => {
-  axiosWithAuth()
-    .post(`/auth/reset_password/${token}`, {
+  dispatch({ type: LOADING });
+  axios
+    .post(`${baseUrl}/auth/reset_password/${token}`, {
       password: passwordData.password,
       confirmPassword: passwordData.confirmPassword,
     })
@@ -67,7 +75,7 @@ export const resetPassword = (token, passwordData, history) => dispatch => {
     .catch(errors => {
       dispatch({
         type: SET_ERRORS,
-        payload: errors,
+        payload: errors.response.data.message,
       });
     });
 };
@@ -83,7 +91,7 @@ export const forgotPassword = emailData => dispatch => {
     .catch(errors => {
       dispatch({
         type: SET_ERRORS,
-        payload: errors,
+        payload: errors.response.data.message,
       });
     });
 };

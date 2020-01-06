@@ -1,6 +1,13 @@
+// Import
+
+// Libraries
 import React, { useState, useEffect, useCallback } from 'react';
+
+// Scripts
 import Swiper from './swiper';
 import SlideItem from './slideItem';
+
+// Styles
 import { Slider } from './styles';
 
 export default ({ items }) => {

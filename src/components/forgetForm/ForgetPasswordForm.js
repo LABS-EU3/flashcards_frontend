@@ -23,20 +23,30 @@ const Form = props => {
     handleSubmit,
     touched,
     errors,
-    status,
+    user,
   } = props;
-  const [isSent, setIsSent] = useState('');
+  const [response, setResponse] = useState(null);
+
   useEffect(() => {
-    if (status) {
-      setIsSent(
-        <H3 REGULAR>Your email has been sent please check your inbox</H3>,
-      );
+    if (user.errors !== null) {
+      if (user.errors === false) {
+        setResponse(
+          <H3 color={c.SUCCESS_COLOR}>
+            Successfully sent your reset link to your email. Please check your
+            inbox!
+          </H3>,
+        );
+      } else {
+        setResponse(
+          <H3 color={c.DANGER_COLOR}> Email address could not be found</H3>,
+        );
+      }
     }
-  }, [status, setIsSent]);
+  }, [user.errors]);
 
   return (
     <Forms onSubmit={handleSubmit}>
-      {isSent}
+      {response}
       <Label>
         <H3>Email</H3>
         {touched.email && errors.email && (
@@ -70,10 +80,8 @@ const ForgetPasswordForm = withFormik({
   mapPropsToValues: () => ({
     email: '',
   }),
-  handleSubmit: (values, { props, setSubmitting, setStatus }) => {
-    props.forgotPassword(values).then(() => {
-      setStatus(values);
-    });
+  handleSubmit: (values, { props, setSubmitting }) => {
+    props.forgotPassword(values);
     setSubmitting(false);
   },
   validationSchema,
