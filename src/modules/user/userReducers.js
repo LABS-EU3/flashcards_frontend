@@ -19,14 +19,14 @@ import {
   CONFIRM_EMAIL_START,
   CONFIRM_EMAIL_SUCCESS,
   CONFIRM_EMAIL_FAILURE,
-  CLEAR_COMPLETED,
+  CLEAR_RESPONSES,
 } from './userTypes';
 
 const initialState = {
   loading: false,
   authenticated: false,
   credentials: {},
-  errors: '',
+  errors: null,
   completed: false,
 };
 
@@ -127,10 +127,11 @@ const userReducer = (state = initialState, action) => {
         loading: false,
         errors: action.payload,
       };
-    case CLEAR_COMPLETED:
+    case CLEAR_RESPONSES:
       return {
         ...state,
         completed: false,
+        errors: null,
       };
     default:
       return state;

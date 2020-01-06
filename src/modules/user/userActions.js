@@ -22,6 +22,7 @@ import {
   CONFIRM_EMAIL_START,
   CONFIRM_EMAIL_SUCCESS,
   CONFIRM_EMAIL_FAILURE,
+  CLEAR_RESPONSES,
 } from './userTypes';
 
 // Configs
@@ -39,12 +40,8 @@ export const userLogin = (userData, history) => dispatch => {
         type: LOGIN_SUCCESS,
       });
       localStorage.setItem('token', `${data.data.token}`);
-      history.push({
-        pathname: '/dashboard',
-        state: {
-          completed: false,
-        },
-      });
+      dispatch({ type: CLEAR_RESPONSES });
+      history.push('/dashboard');
     })
     .catch(errors => {
       dispatch({
@@ -61,12 +58,8 @@ export const userSignUp = (userData, history) => dispatch => {
     .then(({ data }) => {
       dispatch({ type: SIGNUP_SUCCESS });
       localStorage.setItem('token', `${data.data.token}`);
-      history.push({
-        pathname: '/dashboard',
-        state: {
-          completed: false,
-        },
-      });
+      dispatch({ type: CLEAR_RESPONSES });
+      history.push('/dashboard');
     })
     .catch(errors => {
       dispatch({
@@ -80,12 +73,8 @@ export const logoutUser = history => dispatch => {
   dispatch({ type: LOGOUT_START });
   localStorage.removeItem('token');
   dispatch({ type: LOGOUT_SUCCESS });
-  history.push({
-    pathname: '/login',
-    state: {
-      completed: false,
-    },
-  });
+  dispatch({ type: CLEAR_RESPONSES });
+  history.push('/login');
 };
 
 export const resetPassword = (token, passwordData, history) => dispatch => {
@@ -97,12 +86,8 @@ export const resetPassword = (token, passwordData, history) => dispatch => {
     })
     .then(res => {
       dispatch({ type: RESET_PASSWORD_SUCCESS, payload: res.data });
-      history.push({
-        pathname: '/login',
-        state: {
-          completed: false,
-        },
-      });
+      dispatch({ type: CLEAR_RESPONSES });
+      history.push('/login');
     })
     .catch(errors => {
       dispatch({
@@ -140,12 +125,8 @@ export const emailConfirmation = (token, history) => dispatch => {
         type: CONFIRM_EMAIL_SUCCESS,
       });
       localStorage.setItem('token', `${data.token}`);
-      history.push({
-        pathname: '/dashboard',
-        state: {
-          completed: false,
-        },
-      });
+      dispatch({ type: CLEAR_RESPONSES });
+      history.push('/dashboard');
     })
     .catch(errors => {
       dispatch({

@@ -26,7 +26,7 @@ import BackArrow from '../../assets/icons/Arrow 1.svg';
 import SignUpForm from '../../components/signupForm/SignupForm';
 
 // Types
-import { CLEAR_COMPLETED } from '../../modules/user/userTypes';
+import { CLEAR_RESPONSES } from '../../modules/user/userTypes';
 
 const BackArrowButton2 = styled(BackArrowButton)`
   margin-top: -25em;
@@ -44,7 +44,7 @@ export default function SignUp() {
       <ParentBackgroundSecondary>
         <BackArrowButton2
           onClick={() => {
-            dispatch({ type: CLEAR_COMPLETED });
+            dispatch({ type: CLEAR_RESPONSES });
             history.goBack();
           }}
         >

@@ -27,7 +27,7 @@ import BackArrow from '../../assets/icons/Arrow 1.svg';
 import LoginForm from '../../components/loginForm/LoginForm';
 
 // Types
-import { CLEAR_COMPLETED } from '../../modules/user/userTypes';
+import { CLEAR_RESPONSES } from '../../modules/user/userTypes';
 
 export default function Login() {
   const history = useHistory();
@@ -41,7 +41,7 @@ export default function Login() {
       <ParentBackground>
         <BackArrowButton
           onClick={() => {
-            dispatch({ type: CLEAR_COMPLETED });
+            dispatch({ type: CLEAR_RESPONSES });
             history.goBack();
           }}
         >

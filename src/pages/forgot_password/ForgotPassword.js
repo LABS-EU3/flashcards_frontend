@@ -28,7 +28,7 @@ import KnowledgeSVG from '../../assets/images/undraw_knowledge_g5gf.svg';
 import ForgetPasswordForm from '../../components/forgetForm/ForgetPasswordForm';
 
 // types
-import { CLEAR_COMPLETED } from '../../modules/user/userTypes';
+import { CLEAR_RESPONSES } from '../../modules/user/userTypes';
 
 export default function ForgotPassword() {
   const history = useHistory();
@@ -41,7 +41,7 @@ export default function ForgotPassword() {
       <ParentBackground>
         <BackArrowButton
           onClick={() => {
-            dispatch({ type: CLEAR_COMPLETED });
+            dispatch({ type: CLEAR_RESPONSES });
             history.goBack();
           }}
         >
