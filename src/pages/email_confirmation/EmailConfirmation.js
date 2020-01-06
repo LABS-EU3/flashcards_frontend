@@ -24,8 +24,6 @@ import {
 import KnowledgeSVG from '../../assets/images/undraw_knowledge_g5gf.svg';
 
 function EmailConfirmation(props) {
-  console.log('pppppp', props);
-
   const { handleSubmit } = props;
   useEffect(() => {
     handleSubmit();
