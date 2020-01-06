@@ -19,6 +19,7 @@ import {
   CONFIRM_EMAIL_START,
   CONFIRM_EMAIL_SUCCESS,
   CONFIRM_EMAIL_FAILURE,
+  CLEAR_COMPLETED,
 } from './userTypes';
 
 const initialState = {
@@ -125,6 +126,11 @@ const userReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         errors: action.payload,
+      };
+    case CLEAR_COMPLETED:
+      return {
+        ...state,
+        completed: false,
       };
     default:
       return state;

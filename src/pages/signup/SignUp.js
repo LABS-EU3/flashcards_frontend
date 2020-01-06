@@ -4,6 +4,7 @@
 import React from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
 import { useHistory } from 'react-router';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 // Styles
@@ -24,12 +25,16 @@ import BackArrow from '../../assets/icons/Arrow 1.svg';
 // Components
 import SignUpForm from '../../components/signupForm/SignupForm';
 
+// Types
+import { CLEAR_COMPLETED } from '../../modules/user/userTypes';
+
 const BackArrowButton2 = styled(BackArrowButton)`
   margin-top: -25em;
 `;
 
 export default function SignUp() {
   const history = useHistory();
+  const dispatch = useDispatch();
   return (
     <FlexRowBackground>
       {localStorage.getItem('token') && <Redirect to="/dashboard" />}
@@ -39,6 +44,7 @@ export default function SignUp() {
       <ParentBackgroundSecondary>
         <BackArrowButton2
           onClick={() => {
+            dispatch({ type: CLEAR_COMPLETED });
             history.goBack();
           }}
         >
