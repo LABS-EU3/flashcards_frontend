@@ -2,20 +2,27 @@
 
 // Libraries
 import React, { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import { withFormik } from 'formik';
 import { connect } from 'react-redux';
-import * as yup from 'yup';
-
-// Actions
-import { resetPassword } from '../../modules/user/userActions';
+import styled from 'styled-components';
 
 // Styles
+import * as yup from 'yup';
+import * as c from '../../styles/variables/colours';
 import { Text, H3 } from '../../styles/typography';
 import { Button } from '../../styles/buttons';
-import * as c from '../../styles/variables/colours';
 import { Forms, Input, Label } from '../../styles/forms';
 
+// Actions
+import { userLogin } from '../../modules/user/userActions';
+
 const Form = props => {
+  const ForgotText = styled(H3)`
+    align-self: flex-end;
+    line-height: 0;
+    margin-bottom: 1em;
+  `;
   const {
     values,
     handleChange,
@@ -32,13 +39,13 @@ const Form = props => {
       if (user.errors === false) {
         setResponse(
           <H3 color={c.SUCCESS_COLOR}>
-            Successfully changed password, please wait to be redirected
+            Successfully logged in, please wait to be redirected
           </H3>,
         );
       } else {
         setResponse(
           <H3 color={c.DANGER_COLOR}>
-            Oops something went wrong, please contact customer service
+            Email and password combination was not recognized
           </H3>,
         );
       }
@@ -47,6 +54,22 @@ const Form = props => {
   return (
     <Forms onSubmit={handleSubmit}>
       {response}
+      <Label>
+        <H3>Email</H3>
+        {touched.email && errors.email && (
+          <Text color={c.DANGER_COLOR}>{errors.email}</Text>
+        )}
+        <Input
+          name="email"
+          value={values.email}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          placeholder="Email"
+          border={
+            touched.email && errors.email && `2px solid ${c.DANGER_COLOR}`
+          }
+        />
+      </Label>
       <Label>
         <H3>Password</H3>
         {touched.password && errors.password && (
@@ -62,46 +85,34 @@ const Form = props => {
           border={errors.password && `2px solid ${c.DANGER_COLOR}`}
         />
       </Label>
-      <Label>
-        <H3>Re-Enter Password</H3>
-        {touched.confirmPassword && errors.confirmPassword && (
-          <Text color={c.DANGER_COLOR}>{errors.confirmPassword}</Text>
-        )}
-        <Input
-          type="password"
-          name="confirmPassword"
-          placeholder="Re-Enter Password"
-          value={values.confirmPassword}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          border={errors.confirmPassword && `2px solid ${c.DANGER_COLOR}`}
-        />
-      </Label>
+      <ForgotText REGULAR>
+        <NavLink to="/forgot">Forgot Password?</NavLink>
+      </ForgotText>
       <Button type="submit">
-        <H3 WHITE>Confirm</H3>
+        <H3 WHITE>Login</H3>
       </Button>
     </Forms>
   );
 };
 
 const validationSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email('Email is not valid')
+    .required('Please provide an email'),
   password: yup
     .string()
     .required('Please provide a password')
     .min(8, 'Password too short'),
-  confirmPassword: yup
-    .string()
-    .required("Passwords don't match")
-    .oneOf([yup.ref('password'), null], 'Passwords must match'),
 });
 
-const ResetPasswordForm = withFormik({
+const LoginForm = withFormik({
   mapPropsToValues: () => ({
-    confirmPassword: '',
+    email: '',
     password: '',
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
-    props.resetPassword(props.resetToken, values, props.history);
+    props.userLogin(values, props.history);
     setSubmitting(false);
   },
   validationSchema,
@@ -112,4 +123,4 @@ const mapStateToProps = state => {
     user: state.user,
   };
 };
-export default connect(mapStateToProps, { resetPassword })(ResetPasswordForm);
+export default connect(mapStateToProps, { userLogin })(LoginForm);

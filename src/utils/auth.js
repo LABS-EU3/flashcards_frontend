@@ -1,7 +1,11 @@
+// Import
+
 // Libraries
 import { Redirect } from 'react-router-dom';
 import React from 'react';
 import axios from 'axios';
+
+// Configs
 import { baseUrl } from '../config';
 
 export const axiosWithAuth = () => {

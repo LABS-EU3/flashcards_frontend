@@ -1,3 +1,6 @@
+// Import
+
+// Libraries
 import React, { memo } from 'react';
 import ReactIdswiper from 'react-id-swiper';
 

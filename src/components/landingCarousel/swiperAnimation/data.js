@@ -1,3 +1,6 @@
+// Import
+
+// Utils
 import importAll from '../../../utils/importAll';
 
 export default (content = 'Slide') => {
