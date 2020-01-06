@@ -2,14 +2,15 @@
 
 // Libraries
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { withFormik } from 'formik';
 
+// Actions
 import { emailConfirmation } from '../../modules/user/userActions';
+
+// Helpers
+import useAction from '../../utils/useAction';
 
 // Styled
 import { H1, H3 } from '../../styles/typography';
-
 import { FlexColumnSpaceBetween } from '../../styles/displayFlex';
 import {
   BottomTriangle,
@@ -21,18 +22,22 @@ import {
   DesktopImage,
 } from '../../styles/background';
 
-import KnowledgeSVG from '../../assets/images/undraw_knowledge_g5gf.svg';
+// Asset
+import LoadSVG from '../../assets/images/undraw_Load_more_2yd7.svg';
 
-function EmailConfirmation(props) {
-  const { handleSubmit } = props;
+export default function EmailConfirmation(props) {
+  const confirmEmail = useAction(emailConfirmation);
+
   useEffect(() => {
-    handleSubmit();
-  }, []);
+    if (props.match.params.token) {
+      confirmEmail(props.match.params.token, props.history);
+    }
+  }, [props, confirmEmail]);
 
   return (
     <FlexRowBackground>
       <DesktopImage>
-        <img src={`${KnowledgeSVG}`} alt="knowledagble person" />{' '}
+        <img src={`${LoadSVG}`} alt="knowledagble person" />{' '}
       </DesktopImage>
       <ParentBackground>
         <TopTriangle />
@@ -51,20 +56,3 @@ function EmailConfirmation(props) {
     </FlexRowBackground>
   );
 }
-
-const Confirm = withFormik({
-  mapPropsToValues: props => ({
-    token: props.match.params.token,
-  }),
-  handleSubmit: (values, { props, setSubmitting }) => {
-    props.emailConfirmation(values.token, props.history);
-    setSubmitting(true);
-  },
-})(EmailConfirmation);
-
-const mapStateToProps = state => {
-  return {
-    user: state.user,
-  };
-};
-export default connect(mapStateToProps, { emailConfirmation })(Confirm);
