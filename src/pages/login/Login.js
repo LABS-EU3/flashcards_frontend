@@ -55,7 +55,15 @@ export default function Login() {
             <LoginForm history={history} />
             <br />
             <H3 REGULAR>
-              Do not have an account? <NavLink to="/signup">Sign Up</NavLink>
+              Do not have an account?{' '}
+              <NavLink
+                to={{
+                  pathname: '/signup',
+                  state: { errors: null, completed: false },
+                }}
+              >
+                Sign Up
+              </NavLink>
             </H3>
           </UnSkewDiv>
         </SkewDiv>

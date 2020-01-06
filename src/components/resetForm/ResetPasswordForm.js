@@ -28,20 +28,19 @@ const Form = props => {
   const [response, setResponse] = useState(null);
 
   useEffect(() => {
-    if (user.errors !== null) {
-      if (user.errors === false) {
-        setResponse(
-          <H3 color={c.SUCCESS_COLOR}>
-            Successfully changed password, please wait to be redirected
-          </H3>,
-        );
-      } else {
-        setResponse(
-          <H3 color={c.DANGER_COLOR}>
-            Oops something went wrong, please contact customer service
-          </H3>,
-        );
-      }
+    if (user.completed) {
+      setResponse(
+        <H3 color={c.SUCCESS_COLOR}>
+          Successfully changed password, please wait to be redirected
+        </H3>,
+      );
+    }
+    if (user.errors) {
+      setResponse(
+        <H3 color={c.DANGER_COLOR}>
+          Oops something went wrong, please contact customer service
+        </H3>,
+      );
     }
   }, [user.errors]);
   return (

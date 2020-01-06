@@ -57,7 +57,15 @@ export default function SignUp() {
             <SignUpForm history={history} />
             <br />
             <H3 REGULAR>
-              Already a user? <NavLink to="/login">Login</NavLink>
+              Already a user?
+              <NavLink
+                to={{
+                  pathname: '/login',
+                  state: { errors: null, completed: false },
+                }}
+              >
+                Login
+              </NavLink>
             </H3>
           </UnSkewDivSecondary>
         </SkewDivSecondary>
