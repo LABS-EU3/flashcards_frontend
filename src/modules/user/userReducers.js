@@ -2,13 +2,24 @@
 
 // Types
 import {
-  LOGIN,
-  LOADING,
-  SET_ERRORS,
-  LOGOUT,
-  RESET_PASSWORD,
-  FORGOT_PASSWORD,
-  CONFIRM,
+  LOGIN_START,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  SIGNUP_START,
+  SIGNUP_SUCCESS,
+  SIGNUP_FAILURE,
+  LOGOUT_START,
+  LOGOUT_SUCCESS,
+  RESET_PASSWORD_START,
+  RESET_PASSWORD_SUCCESS,
+  RESET_PASSWORD_FAILURE,
+  FORGOT_PASSWORD_START,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_FAILURE,
+  CONFIRM_EMAIL_START,
+  CONFIRM_EMAIL_SUCCESS,
+  CONFIRM_EMAIL_FAILURE,
+  CLEAR_RESPONSES,
 } from './userTypes';
 
 const initialState = {
@@ -16,57 +27,112 @@ const initialState = {
   authenticated: false,
   credentials: {},
   errors: null,
+  completed: false,
 };
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN:
-      return {
-        ...state,
-        loading: false,
-        authenticated: true,
-        errors: false,
-      };
-    case LOADING:
+    case LOGIN_START:
       return {
         ...state,
         loading: true,
-        errors: null,
-      };
-
-    case SET_ERRORS:
-      return {
-        ...state,
-        errors: action.payload,
-        loading: false,
-      };
-
-    case RESET_PASSWORD:
-      return {
-        ...state,
-        loading: false,
         authenticated: false,
-        errors: false,
       };
-
-    case LOGOUT:
-      return initialState;
-
-    case FORGOT_PASSWORD:
+    case LOGIN_SUCCESS:
       return {
         ...state,
         loading: false,
-        authenticated: false,
-        errors: false,
-      };
-
-    case CONFIRM:
-      return {
-        ...state,
-        loading: false,
+        completed: true,
         authenticated: true,
       };
-
+    case LOGIN_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload,
+      };
+    case SIGNUP_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case SIGNUP_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        completed: true,
+        authenticated: true,
+      };
+    case SIGNUP_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload,
+      };
+    case LOGOUT_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case LOGOUT_SUCCESS:
+      return initialState;
+    case RESET_PASSWORD_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case RESET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        completed: true,
+      };
+    case RESET_PASSWORD_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload,
+      };
+    case FORGOT_PASSWORD_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case FORGOT_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        completed: true,
+      };
+    case FORGOT_PASSWORD_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload,
+      };
+    case CONFIRM_EMAIL_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case CONFIRM_EMAIL_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        completed: true,
+      };
+    case CONFIRM_EMAIL_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload,
+      };
+    case CLEAR_RESPONSES:
+      return {
+        ...state,
+        completed: false,
+        errors: null,
+      };
     default:
       return state;
   }

@@ -4,6 +4,7 @@
 import React from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
 import { useHistory } from 'react-router';
+import { useDispatch } from 'react-redux';
 
 // Styles
 import { H1, H3, H5 } from '../../styles/typography';
@@ -25,8 +26,12 @@ import BackArrow from '../../assets/icons/Arrow 1.svg';
 // Components
 import LoginForm from '../../components/loginForm/LoginForm';
 
+// Types
+import { CLEAR_RESPONSES } from '../../modules/user/userTypes';
+
 export default function Login() {
   const history = useHistory();
+  const dispatch = useDispatch();
   return (
     <FlexRowBackground>
       {localStorage.getItem('token') && <Redirect to="/dashboard" />}
@@ -36,6 +41,7 @@ export default function Login() {
       <ParentBackground>
         <BackArrowButton
           onClick={() => {
+            dispatch({ type: CLEAR_RESPONSES });
             history.goBack();
           }}
         >
@@ -49,7 +55,15 @@ export default function Login() {
             <LoginForm history={history} />
             <br />
             <H3 REGULAR>
-              Do not have an account? <NavLink to="/signup">Sign Up</NavLink>
+              Do not have an account?{' '}
+              <NavLink
+                to={{
+                  pathname: '/signup',
+                  state: { errors: null, completed: false },
+                }}
+              >
+                Sign Up
+              </NavLink>
             </H3>
           </UnSkewDiv>
         </SkewDiv>

@@ -1,14 +1,18 @@
 // Import
 
 // Libraries
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { SquareLoader } from 'react-spinners';
 
+// Actions
 import { emailConfirmation } from '../../modules/user/userActions';
+
+// Helpers
+import useAction from '../../utils/useAction';
 
 // Styled
 import { H1, H3 } from '../../styles/typography';
-
 import { FlexColumnSpaceBetween } from '../../styles/displayFlex';
 import {
   BottomTriangle,
@@ -20,19 +24,51 @@ import {
   DesktopImage,
 } from '../../styles/background';
 
-import KnowledgeSVG from '../../assets/images/undraw_knowledge_g5gf.svg';
+// Asset
+import LoadSVG from '../../assets/images/undraw_Load_more_2yd7.svg';
 
-function EmailConfirmation(props) {
-  const { match, history } = props;
+export default function EmailConfirmation(props) {
+  const { history, match } = props;
 
-  useEffect(() => {
-    props.emailConfirmation(match.params.token, history);
-  }, []);
+  const [confirm, setConfirm] = useState(false);
+  const [response, setResponse] = useState();
+
+  const confirmEmail = useAction(emailConfirmation);
+  const user = useSelector(state => state.user);
+
+  useEffect(
+    () => {
+      if (!confirm) {
+        confirmEmail(match.params.token, history);
+        setConfirm(true);
+      }
+      if (user.loading) {
+        setResponse(
+          <H3 LIGHTWEIGHT>Kindly wait while we confirm your account</H3>,
+        );
+      } else if (user.errors) {
+        setResponse(
+          <H3 LIGHTWEIGHT>
+            Oops something happened! <br />
+            Please contact customer service
+          </H3>,
+        );
+      } else {
+        setResponse(
+          <H3 LIGHTWEIGHT>
+            Confirmation successful! <br />
+            Please wait to be redirected!
+          </H3>,
+        );
+      }
+    }, // eslint-disable-next-line
+    [confirm, user.loading, user.errors],
+  );
 
   return (
     <FlexRowBackground>
       <DesktopImage>
-        <img src={`${KnowledgeSVG}`} alt="knowledagble person" />{' '}
+        <img src={`${LoadSVG}`} alt="knowledagble person" />{' '}
       </DesktopImage>
       <ParentBackground>
         <TopTriangle />
@@ -40,8 +76,13 @@ function EmailConfirmation(props) {
           <UnSkewDiv>
             <FlexColumnSpaceBetween>
               <H1 REGULAR>Welcome to QuickDeck</H1>
-              <H3 LIGHTWEIGHT>Your Email Confirmation was successful! </H3>
-              <H3 LIGHTWEIGHT>Kindly wait while we log you in</H3>
+              {response}
+              <SquareLoader
+                css={{ marginLeft: '20px' }}
+                size={15}
+                color="#FFA987"
+                loading={user.loading}
+              />
               <br />
             </FlexColumnSpaceBetween>
           </UnSkewDiv>
@@ -51,13 +92,3 @@ function EmailConfirmation(props) {
     </FlexRowBackground>
   );
 }
-
-const mapStateToProps = state => {
-  return {
-    user: state.user,
-  };
-};
-
-export default connect(mapStateToProps, { emailConfirmation })(
-  EmailConfirmation,
-);

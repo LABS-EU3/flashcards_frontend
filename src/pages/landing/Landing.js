@@ -17,6 +17,8 @@ import { Button, LineButton } from '../../styles/buttons';
 
 // Assets
 import BookSVG from '../../assets/images/undraw_book_lover_mkck.svg';
+
+// Components
 import LandingCarousel from '../../components/landingCarousel/LandingCarousel';
 
 export default function Landing() {

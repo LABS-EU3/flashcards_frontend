@@ -3,6 +3,7 @@
 // Libraries
 import React from 'react';
 import { useHistory } from 'react-router';
+import { useDispatch } from 'react-redux';
 
 // Styled
 import { H1, P, H5 } from '../../styles/typography';
@@ -26,8 +27,12 @@ import KnowledgeSVG from '../../assets/images/undraw_knowledge_g5gf.svg';
 // Components
 import ForgetPasswordForm from '../../components/forgetForm/ForgetPasswordForm';
 
+// types
+import { CLEAR_RESPONSES } from '../../modules/user/userTypes';
+
 export default function ForgotPassword() {
   const history = useHistory();
+  const dispatch = useDispatch();
   return (
     <FlexRowBackground>
       <DesktopImage>
@@ -36,6 +41,7 @@ export default function ForgotPassword() {
       <ParentBackground>
         <BackArrowButton
           onClick={() => {
+            dispatch({ type: CLEAR_RESPONSES });
             history.goBack();
           }}
         >
@@ -50,7 +56,7 @@ export default function ForgotPassword() {
               <H1>Forgot Password</H1>
               <P LIGHTWEIGHT>
                 Enter your email linked to your account. A message will be sent
-                to your email to reset your password{' '}
+                to your email to reset your password
               </P>
               <br />
               <ForgetPasswordForm history={history} />

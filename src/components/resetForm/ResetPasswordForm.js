@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { withFormik } from 'formik';
 import { connect } from 'react-redux';
 import * as yup from 'yup';
+import { SquareLoader } from 'react-spinners';
 
 // Actions
 import { resetPassword } from '../../modules/user/userActions';
@@ -28,22 +29,21 @@ const Form = props => {
   const [response, setResponse] = useState(null);
 
   useEffect(() => {
-    if (user.errors !== null) {
-      if (user.errors === false) {
-        setResponse(
-          <H3 color={c.SUCCESS_COLOR}>
-            Successfully changed password, please wait to be redirected
-          </H3>,
-        );
-      } else {
-        setResponse(
-          <H3 color={c.DANGER_COLOR}>
-            Oops something went wrong, please contact customer service
-          </H3>,
-        );
-      }
+    if (user.completed) {
+      setResponse(
+        <H3 color={c.SUCCESS_COLOR}>
+          Successfully changed password, please wait to be redirected
+        </H3>,
+      );
     }
-  }, [user.errors]);
+    if (user.errors) {
+      setResponse(
+        <H3 color={c.DANGER_COLOR}>
+          Oops something went wrong, please contact customer service
+        </H3>,
+      );
+    }
+  }, [user.errors, user.completed]);
   return (
     <Forms onSubmit={handleSubmit}>
       {response}
@@ -78,7 +78,15 @@ const Form = props => {
         />
       </Label>
       <Button type="submit">
-        <H3 WHITE>Confirm</H3>
+        <H3 WHITE>
+          Confirm
+          <SquareLoader
+            css={{ marginLeft: '20px' }}
+            size={15}
+            color="#FFA987"
+            loading={user.loading}
+          />
+        </H3>
       </Button>
     </Forms>
   );
