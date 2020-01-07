@@ -23,8 +23,6 @@ import {
 import KnowledgeSVG from '../../assets/images/undraw_knowledge_g5gf.svg';
 
 function EmailConfirmation(props) {
-  console.log('pppppp', props);
-
   const { match, history } = props;
 
   useEffect(() => {
@@ -32,28 +30,25 @@ function EmailConfirmation(props) {
   }, []);
 
   return (
-    console.log('[[[[[', props),
-    (
-      <FlexRowBackground>
-        <DesktopImage>
-          <img src={`${KnowledgeSVG}`} alt="knowledagble person" />{' '}
-        </DesktopImage>
-        <ParentBackground>
-          <TopTriangle />
-          <SkewDiv>
-            <UnSkewDiv>
-              <FlexColumnSpaceBetween>
-                <H1 REGULAR>Welcome to QuickDeck</H1>
-                <H3 LIGHTWEIGHT>Your Email Confirmation was successful! </H3>
-                <H3 LIGHTWEIGHT>Kindly wait while we log you in</H3>
-                <br />
-              </FlexColumnSpaceBetween>
-            </UnSkewDiv>
-          </SkewDiv>
-          <BottomTriangle />
-        </ParentBackground>
-      </FlexRowBackground>
-    )
+    <FlexRowBackground>
+      <DesktopImage>
+        <img src={`${KnowledgeSVG}`} alt="knowledagble person" />{' '}
+      </DesktopImage>
+      <ParentBackground>
+        <TopTriangle />
+        <SkewDiv>
+          <UnSkewDiv>
+            <FlexColumnSpaceBetween>
+              <H1 REGULAR>Welcome to QuickDeck</H1>
+              <H3 LIGHTWEIGHT>Your Email Confirmation was successful! </H3>
+              <H3 LIGHTWEIGHT>Kindly wait while we log you in</H3>
+              <br />
+            </FlexColumnSpaceBetween>
+          </UnSkewDiv>
+        </SkewDiv>
+        <BottomTriangle />
+      </ParentBackground>
+    </FlexRowBackground>
   );
 }
 
