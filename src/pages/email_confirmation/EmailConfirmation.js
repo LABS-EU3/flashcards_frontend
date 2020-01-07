@@ -29,10 +29,12 @@ import LoadSVG from '../../assets/images/undraw_Load_more_2yd7.svg';
 
 export default function EmailConfirmation(props) {
   const { history, match } = props;
-  const confirmEmail = useAction(emailConfirmation);
-  const user = useSelector(state => state.user);
+
   const [confirm, setConfirm] = useState(false);
   const [response, setResponse] = useState();
+
+  const confirmEmail = useAction(emailConfirmation);
+  const user = useSelector(state => state.user);
 
   useEffect(
     () => {
