@@ -1,0 +1,14 @@
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[build]
+  command = "npm run build"
+  publish= "build/"
+
+[context.deploy-preview.environment]
+  REACT_APP_API_HOST = "https://quickdecks-staging.herokuapp.com/api"
+
+[context.branch-deploy.environment]
+   REACT_APP_API_HOST = "https://quickdecks-staging.herokuapp.com/api"
