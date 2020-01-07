@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { withFormik } from 'formik';
 import { connect } from 'react-redux';
 import * as yup from 'yup';
+import { SquareLoader } from 'react-spinners';
 
 // Actions
 import { forgotPassword } from '../../modules/user/userActions';
@@ -41,7 +42,7 @@ const Form = props => {
         <H3 color={c.DANGER_COLOR}> Email address could not be found</H3>,
       );
     }
-  }, [user.errors]);
+  }, [user.errors, user.completed]);
 
   return (
     <Forms onSubmit={handleSubmit}>
@@ -55,14 +56,22 @@ const Form = props => {
           type="email"
           name="email"
           placeholder="Email"
-          value={values.email}
+          value={values.email.toLowerCase()}
           onBlur={handleBlur}
           onChange={handleChange}
           border={errors.email && `2px solid ${c.DANGER_COLOR}`}
         />
       </Label>
       <Button type="submit">
-        <H3 WHITE>Send Email</H3>
+        <H3 WHITE>
+          Send Email
+          <SquareLoader
+            css={{ marginLeft: '20px' }}
+            size={15}
+            color="#FFA987"
+            loading={user.loading}
+          />
+        </H3>
       </Button>
     </Forms>
   );

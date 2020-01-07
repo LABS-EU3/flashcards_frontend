@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { withFormik } from 'formik';
 import { connect } from 'react-redux';
 import * as yup from 'yup';
+import { SquareLoader } from 'react-spinners';
 
 // Styles
 import { Text, H3 } from '../../styles/typography';
@@ -37,7 +38,7 @@ const SignUpForm = props => {
     if (user.errors) {
       setResponse(<H3 color={c.DANGER_COLOR}>User already exists</H3>);
     }
-  }, [user.errors]);
+  }, [user.errors, user.completed]);
   return (
     <Forms onSubmit={handleSubmit}>
       {response}
@@ -65,7 +66,7 @@ const SignUpForm = props => {
         )}
         <Input
           name="email"
-          value={values.email}
+          value={values.email.toLowerCase()}
           onChange={handleChange}
           onBlur={handleBlur}
           placeholder="Email"
@@ -111,7 +112,15 @@ const SignUpForm = props => {
         />
       </Label>
       <Button type="submit">
-        <H3 WHITE>Sign Up</H3>
+        <H3 WHITE>
+          Sign Up
+          <SquareLoader
+            css={{ marginLeft: '20px' }}
+            size={15}
+            color="#FFA987"
+            loading={user.loading}
+          />
+        </H3>
       </Button>
     </Forms>
   );

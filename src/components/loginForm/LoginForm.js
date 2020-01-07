@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom';
 import { withFormik } from 'formik';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { SquareLoader } from 'react-spinners';
 
 // Styles
 import * as yup from 'yup';
@@ -49,7 +50,7 @@ const Form = props => {
         </H3>,
       );
     }
-  }, [user.errors]);
+  }, [user.errors, user.completed]);
   return (
     <Forms onSubmit={handleSubmit}>
       {response}
@@ -60,7 +61,7 @@ const Form = props => {
         )}
         <Input
           name="email"
-          value={values.email}
+          value={values.email.toLowerCase()}
           onChange={handleChange}
           onBlur={handleBlur}
           placeholder="Email"
@@ -88,7 +89,15 @@ const Form = props => {
         <NavLink to="/forgot">Forgot Password?</NavLink>
       </ForgotText>
       <Button type="submit">
-        <H3 WHITE>Login</H3>
+        <H3 WHITE>
+          Login
+          <SquareLoader
+            css={{ marginLeft: '20px' }}
+            size={15}
+            color="#FFA987"
+            loading={user.loading}
+          />
+        </H3>
       </Button>
     </Forms>
   );
