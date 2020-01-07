@@ -11,4 +11,4 @@
   REACT_APP_API_HOST = "https://quickdecks-staging.herokuapp.com/api"
 
 [context.branch-deploy.environment]
-  REACT_APP_API_HOST = "https://quickdecks-staging.herokuapp.com/api"
+   REACT_APP_API_HOST = "https://quickdecks-staging.herokuapp.com/api"
