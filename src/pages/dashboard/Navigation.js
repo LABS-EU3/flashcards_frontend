@@ -9,7 +9,7 @@ import Sidebar from 'react-sidebar';
 // Styled
 import * as c from '../../styles/variables/colours';
 
-export default function SideNav() {
+export default function SideNav({ mainContent }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   return (
@@ -24,9 +24,13 @@ export default function SideNav() {
           root: { top: '46px' },
         }}
       >
-        <HamburgerButton onClick={() => setSidebarOpen(true)}>
-          Open sidebar
-        </HamburgerButton>
+        <div>
+          <HamburgerButton onClick={() => setSidebarOpen(!sidebarOpen)}>
+            Open sidebar
+          </HamburgerButton>
+
+          {mainContent}
+        </div>
       </Sidebar>
     </NavSection>
   );
@@ -35,7 +39,11 @@ export default function SideNav() {
 const SideContent = () => {
   return (
     <SidebarBody>
-      <b>Some text, yall</b>
+      <img
+        // eslint-disable-next-line max-len
+        src="https://www.ibts.org/wp-content/uploads/2017/08/iStock-476085198-300x300.jpg"
+        alt="User's profile"
+      />
     </SidebarBody>
   );
 };
@@ -43,5 +51,5 @@ const SideContent = () => {
 const NavSection = styled.nav``;
 const SidebarBody = styled.div``;
 const HamburgerButton = styled.button`
-  display: none;
+  /* display: none; */
 `;
