@@ -17,6 +17,7 @@ import ForgotPassword from './pages/forgot_password/ForgotPassword';
 import ResetPassword from './pages/reset_password/ResetPassword';
 import SignUp from './pages/signup/SignUp';
 import Login from './pages/login/Login';
+import EmailConfirmation from './pages/email_confirmation/EmailConfirmation';
 
 // Utils
 import PrivateRoute from './utils/PrivateRoute';
@@ -32,6 +33,9 @@ function App() {
         <Route path="/reset/:token" component={ResetPassword} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
+
+        {/* remove this test line after testing */}
+        <Route path="/confirm/:token" component={EmailConfirmation} />
       </Switch>
     </div>
   );

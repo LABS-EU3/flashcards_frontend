@@ -11,6 +11,7 @@ import {
   LOGOUT,
   RESET_PASSWORD,
   FORGOT_PASSWORD,
+  CONFIRM,
 } from './userTypes';
 
 // Configs
@@ -93,5 +94,23 @@ export const forgotPassword = emailData => dispatch => {
         type: SET_ERRORS,
         payload: errors.response.data.message,
       });
+    });
+};
+
+export const emailConfirmation = (token, history) => dispatch => {
+  dispatch({ type: LOADING });
+  axios
+    .post(`${baseUrl}/auth/confirm_email`, {
+      token,
+    })
+    .then(({ data }) => {
+      dispatch({
+        type: CONFIRM,
+      });
+      localStorage.setItem('token', `${data.token}`);
+      history.push('/dashboard');
+    })
+    .catch(err => {
+      return err.response;
     });
 };

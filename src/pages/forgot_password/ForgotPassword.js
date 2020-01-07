@@ -49,7 +49,7 @@ export default function ForgotPassword() {
               <img src={`${QuestionMark}`} alt="question mark icon" />
               <H1>Forgot Password</H1>
               <P LIGHTWEIGHT>
-                Enter your email linked to your account. An message will be sent
+                Enter your email linked to your account. A message will be sent
                 to your email to reset your password{' '}
               </P>
               <br />

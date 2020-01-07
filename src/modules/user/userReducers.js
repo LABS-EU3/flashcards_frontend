@@ -8,6 +8,7 @@ import {
   LOGOUT,
   RESET_PASSWORD,
   FORGOT_PASSWORD,
+  CONFIRM,
 } from './userTypes';
 
 const initialState = {
@@ -57,6 +58,13 @@ const userReducer = (state = initialState, action) => {
         loading: false,
         authenticated: false,
         errors: false,
+      };
+
+    case CONFIRM:
+      return {
+        ...state,
+        loading: false,
+        authenticated: true,
       };
 
     default:
