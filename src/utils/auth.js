@@ -55,12 +55,12 @@ export const getToken = () => {
 
 export const decodeToken = () => {
   const token = getToken();
-  const info = token ? decode(token) : undefined;
+  const info = token ? decode(token) : null;
   return info;
 };
 
 export function WithAuthCheck(Component, props) {
-  if (decodeToken() !== undefined) {
+  if (decodeToken()) {
     return <Component {...props} />;
   }
   return <Redirect to="/login" />;
