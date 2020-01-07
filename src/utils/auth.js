@@ -1,8 +1,6 @@
 // Import
 
 // Libraries
-import { Redirect } from 'react-router-dom';
-import React from 'react';
 import axios from 'axios';
 import decode from 'jwt-decode';
 
@@ -58,10 +56,3 @@ export const decodeToken = () => {
   const info = token ? decode(token) : null;
   return info;
 };
-
-export function WithAuthCheck(Component, props) {
-  if (decodeToken()) {
-    return <Component {...props} />;
-  }
-  return <Redirect to="/login" />;
-}
