@@ -6,9 +6,10 @@ import { NavLink } from 'react-router-dom';
 
 // Styled
 import { H1, H3 } from '../../styles/typography';
+import Navigation from './Navigation';
 
 export default function Dashboard() {
-  return (
+  const mainContent = (
     <div>
       <H1>Dashboard Test</H1>
       <H3>Welcome! LogIn successful</H3>
@@ -19,4 +20,5 @@ export default function Dashboard() {
       <NavLink to="/login">login</NavLink>
     </div>
   );
+  return <Navigation mainContent={mainContent} />;
 }
