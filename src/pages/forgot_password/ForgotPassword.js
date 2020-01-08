@@ -2,9 +2,10 @@
 
 // Libraries
 import React from 'react';
-import { useHistory } from 'react-router';
+import { useHistory, Redirect } from 'react-router';
 import { useDispatch } from 'react-redux';
 
+import { getToken } from '../../utils/auth';
 // Styled
 import { H1, P, H5 } from '../../styles/typography';
 import { BackArrowButton } from '../../styles/buttons';
@@ -35,6 +36,7 @@ export default function ForgotPassword() {
   const dispatch = useDispatch();
   return (
     <FlexRowBackground>
+      {getToken() && <Redirect to="/dashboard" />}
       <DesktopImage>
         <img src={`${KnowledgeSVG}`} alt="knowledagble person" />
       </DesktopImage>
