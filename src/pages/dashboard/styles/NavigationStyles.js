@@ -29,6 +29,7 @@ export const MenuBox = styled.div`
 export const Item = styled(NavLink)`
   display: flex;
   padding: 15px 40px;
+  text-decoration: none;
   /* margin: 0 20px; */
   justify-content: start;
 
