@@ -13,7 +13,7 @@ export const fetchProfile = () => dispactch => {
   dispactch({ type: ON_BEGIN_PROFILE_FETCH });
 
   axiosWithAuth()
-    .get(`${baseUrl}/somen`)
+    .get(`${baseUrl}/view_profile`)
     .then(data => {
       console.log(data);
     })
