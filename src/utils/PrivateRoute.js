@@ -5,14 +5,14 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 // Utils
-import { decodeToken } from './auth';
+import { getToken } from './auth';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
       render={props =>
-        decodeToken() ? <Component {...props} /> : <Redirect to="/" />
+        getToken() ? <Component {...props} /> : <Redirect to="/" />
       }
     />
   );
