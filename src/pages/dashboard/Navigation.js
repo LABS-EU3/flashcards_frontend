@@ -6,11 +6,7 @@ import Sidebar from 'react-sidebar';
 import RoundedImage from 'react-rounded-image';
 
 // assets
-import AddDecksIcon from '../../assets/icons/add_deck_icon.svg';
-import DashboardIcon from '../../assets/icons/dashboard_icon_outlined.svg';
-import LibraryIcon from '../../assets/icons/library_icon_outlined.svg';
-import ProfileIcon from '../../assets/icons/profile_icon_outlined.svg';
-import SettingsIcon from '../../assets/icons/settings_24px_outlined.svg';
+import icons from '../../assets/icons';
 
 // Styled
 import * as c from '../../styles/variables/colours';
@@ -87,12 +83,12 @@ const SideContent = ({ name }) => {
       </ProfileImageDiv>
 
       <MenuBox>
-        <MenuItem img={DashboardIcon} text="Dashboard" />
-        <MenuItem img={ProfileIcon} text="Profile" />
-        <MenuItem img={AddDecksIcon} text="Add Decks" />
-        <MenuItem img={LibraryIcon} text="Deck Library" />
+        <MenuItem img={icons.DashboardIcon} text="Dashboard" />
+        <MenuItem img={icons.ProfileIcon} text="Profile" />
+        <MenuItem img={icons.AddDecksIcon} text="Add Decks" />
+        <MenuItem img={icons.LibraryIcon} text="Deck Library" />
         <GrowSpace />
-        <MenuItem img={SettingsIcon} text="Settings" />
+        <MenuItem img={icons.SettingsIcon} text="Settings" />
       </MenuBox>
     </SidebarBody>
   );
