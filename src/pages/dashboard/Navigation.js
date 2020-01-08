@@ -16,10 +16,22 @@ import SettingsIcon from '../../assets/icons/settings_24px_outlined.svg';
 
 // Styled
 import * as c from '../../styles/variables/colours';
+import * as g from '../../styles/variables/global';
 import { P, H1 } from '../../styles/typography';
 
 export default function SideNav({ mainContent }) {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const mql = window.matchMedia(`(min-width: ${g.desktopMediaBreak}px)`);
+
+  const [sideBarDocked, setSideBarDocked] = useState(mql.matches);
+
+  const mediaQueryChanged = () => {
+    setSideBarDocked(mql.matches);
+    setSidebarOpen(false);
+  };
+
+  mql.addListener(mediaQueryChanged);
 
   return (
     <NavSection>
@@ -27,14 +39,17 @@ export default function SideNav({ mainContent }) {
         sidebar={<SideContent name="Zuckerr" />}
         open={sidebarOpen}
         onSetOpen={setSidebarOpen}
-        docked
+        docked={sideBarDocked}
         styles={{
           sidebar: { background: c.DARK_NEUTRAL_COLOR, width: '20%' },
           root: { top: '46px' },
         }}
       >
         <div>
-          <HamburgerButton onClick={() => setSidebarOpen(!sidebarOpen)}>
+          <HamburgerButton
+            isDocked={sideBarDocked}
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+          >
             Open sidebar
           </HamburgerButton>
 
@@ -87,7 +102,7 @@ const ProfileImageDiv = styled.div`
   text-align: center;
 `;
 const HamburgerButton = styled.button`
-  /* display: none; */
+  display: ${props => (props.isDocked ? 'none' : 'inline')};
 `;
 
 const MenuBox = styled.div`
