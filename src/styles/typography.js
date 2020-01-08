@@ -115,3 +115,14 @@ export const Text = styled.p`
   font-family: ${f.APP_FONT};
   color: ${props => props.color || c.DARK_NEUTRAL_COLOR};
 `;
+
+// HR is for horizontal lines. To use, wrap it in a <div>
+export const HR = styled.hr`
+  height: 1px;
+  border: 0;
+  background: linear-gradient(
+    88.85deg,
+    rgba(210, 31, 60, 0.5) 38.43%,
+    rgba(255, 169, 135, 0.5) 136.86%
+  );
+`;
