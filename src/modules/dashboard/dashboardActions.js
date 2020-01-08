@@ -1,10 +1,8 @@
 import {
   ON_BEGIN_PROFILE_FETCH,
-  //   ON_PROFILE_FETCH_FAILED,
-  //   ON_PROFILE_FETCH_SUCCESS,
+  ON_PROFILE_FETCH_FAILED,
+  ON_PROFILE_FETCH_SUCCESS,
 } from './dashboardTypes';
-
-import { baseUrl } from '../../config/index';
 
 import { axiosWithAuth } from '../../utils/auth';
 
@@ -13,11 +11,17 @@ export const fetchProfile = () => dispactch => {
   dispactch({ type: ON_BEGIN_PROFILE_FETCH });
 
   axiosWithAuth()
-    .get(`${baseUrl}/view_profile`)
-    .then(data => {
-      console.log(data);
+    .get(`/auth/view_profile`)
+    .then(({ data }) => {
+      dispactch({
+        type: ON_PROFILE_FETCH_SUCCESS,
+        payload: data.user,
+      });
     })
     .catch(err => {
-      console.log(err);
+      dispactch({
+        type: ON_PROFILE_FETCH_FAILED,
+        payload: err,
+      });
     });
 };

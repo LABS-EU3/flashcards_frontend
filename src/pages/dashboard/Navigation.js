@@ -1,10 +1,12 @@
 // Import
 
 // Libraries
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from 'react-sidebar';
 import RoundedImage from 'react-rounded-image';
+// import { connect } from 'react-redux';
 
+// import { fetchProfile } from '../../modules/dashboard/dashboardActions';
 // assets
 import icons from '../../assets/icons';
 
@@ -24,7 +26,8 @@ import {
   sideBarRootStyle,
 } from './styles/NavigationStyles';
 
-export default function SideNav({ mainContent }) {
+export default function SideNav(props) {
+  const { mainContent, user } = props;
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const mql = window.matchMedia(`(min-width: ${g.desktopMediaBreak}px)`);
@@ -38,10 +41,14 @@ export default function SideNav({ mainContent }) {
 
   mql.addListener(mediaQueryChanged);
 
+  useEffect(() => {
+    // props.fetchProfile();
+  }, []);
+
   return (
     <NavSection>
       <Sidebar
-        sidebar={<SideContent name="Zuckerr" />}
+        sidebar={<SideContent name={user.completed || 'Sherlock Holmes'} />}
         open={sidebarOpen}
         onSetOpen={setSidebarOpen}
         docked={sideBarDocked}

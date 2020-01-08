@@ -1,14 +1,18 @@
 // Import
 
 // Libraries
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 // Styled
 import { H1, H3 } from '../../styles/typography';
 import Navigation from './Navigation';
 
-export default function Dashboard() {
+import { fetchProfile } from '../../modules/dashboard/dashboardActions';
+
+export const DashboardComponent = props => {
+  const { user } = props;
   const mainContent = (
     <div>
       <H1>Dashboard Test</H1>
@@ -20,5 +24,17 @@ export default function Dashboard() {
       <NavLink to="/login">login</NavLink>
     </div>
   );
-  return <Navigation mainContent={mainContent} />;
-}
+
+  useEffect(() => {
+    props.fetchProfile();
+  }, []);
+  return <Navigation user={user} mainContent={mainContent} />;
+};
+
+const mapStateToProps = state => {
+  return {
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps, { fetchProfile })(DashboardComponent);
