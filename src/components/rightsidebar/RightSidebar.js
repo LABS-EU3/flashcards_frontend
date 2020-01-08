@@ -111,7 +111,9 @@ const SideContent = () => {
           <H1 BOLD>
             {' '}
             Jump back into
-            <hr />
+            <div>
+              <HR />
+            </div>
           </H1>
         </StyledStart>
         {cards.map(card => {
@@ -171,17 +173,18 @@ const StyledStart = styled.div`
   text-align: left;
   justify-content: center;
   margin: 10px 20px 10px 20px;
-  hr {
-    height: 1px;
-    border: 0;
-    margin: 0;
-    transform: rotate(0.11 deg);
-    background: linear-gradient(
-      88.85deg,
-      rgba(210, 31, 60, 0.5) 38.43%,
-      rgba(255, 169, 135, 0.5) 136.86%
-    );
-  }
+`;
+
+const HR = styled.hr`
+  height: 1px;
+  border: 0;
+  margin: 0;
+  transform: rotate(0.11 deg);
+  background: linear-gradient(
+    88.85deg,
+    rgba(210, 31, 60, 0.5) 38.43%,
+    rgba(255, 169, 135, 0.5) 136.86%
+  );
 `;
 
 const mapStateToProps = state => {
