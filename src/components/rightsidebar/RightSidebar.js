@@ -4,6 +4,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Card from '../cards/Cards';
 
+// styles
+import { H1, H3 } from '../../styles/typography';
+
+import { FlexColumnCenterCenter } from '../../styles/displayFlex';
+
 const userObj = {
   name: 'Anna Winther',
   email: 'anski.anna@gmail.com',
@@ -31,7 +36,6 @@ const cards = [
     category: 'Computer Science',
   },
 ];
-console.log(cards);
 
 const RightSidebar = () => {
   // const {
@@ -48,17 +52,19 @@ const RightSidebar = () => {
 
   return (
     <div>
-      <h1> Welcome {userObj.name}! </h1>
-      <h2>Jump Back Into... </h2>
-      <div>
-        {cards.map(card => {
-          //   console.log('hello');
-          return (
-            <Card key={card.id} title={card.title} category={card.category} />
-          );
-        })}
-        ;
-      </div>
+      <FlexColumnCenterCenter>
+        <H1> Welcome {userObj.name}!</H1>
+        <H3> Jump Back Into... </H3>
+        <div>
+          {cards.map(card => {
+            return (
+              // < FlexCardRow>
+              <Card key={card.id} title={card.title} category={card.category} />
+              // </FlexCardRow>
+            );
+          })}
+        </div>
+      </FlexColumnCenterCenter>
     </div>
   );
 };
