@@ -29,7 +29,7 @@ import {
 import { baseUrl } from '../../config/index';
 
 // Utils
-import { axiosWithAuth } from '../../utils/auth';
+import { axiosWithAuth, setToken, clearLocalStorage } from '../../utils/auth';
 
 export const userLogin = (userData, history) => dispatch => {
   dispatch({ type: LOGIN_START });
@@ -39,7 +39,7 @@ export const userLogin = (userData, history) => dispatch => {
       dispatch({
         type: LOGIN_SUCCESS,
       });
-      localStorage.setItem('token', `${data.data.token}`);
+      setToken(data.data.token);
       dispatch({ type: CLEAR_RESPONSES });
       history.push('/dashboard');
     })
@@ -57,7 +57,7 @@ export const userSignUp = (userData, history) => dispatch => {
     .post(`${baseUrl}/auth/register`, userData)
     .then(({ data }) => {
       dispatch({ type: SIGNUP_SUCCESS });
-      localStorage.setItem('token', `${data.data.token}`);
+      setToken(data.data.token);
       dispatch({ type: CLEAR_RESPONSES });
       history.push('/dashboard');
     })
@@ -71,7 +71,7 @@ export const userSignUp = (userData, history) => dispatch => {
 
 export const logoutUser = history => dispatch => {
   dispatch({ type: LOGOUT_START });
-  localStorage.removeItem('token');
+  clearLocalStorage();
   dispatch({ type: LOGOUT_SUCCESS });
   dispatch({ type: CLEAR_RESPONSES });
   history.push('/login');
@@ -124,7 +124,7 @@ export const emailConfirmation = (token, history) => dispatch => {
       dispatch({
         type: CONFIRM_EMAIL_SUCCESS,
       });
-      localStorage.setItem('token', `${data.token}`);
+      setToken(data.token);
       dispatch({ type: CLEAR_RESPONSES });
       history.push('/dashboard');
     })
