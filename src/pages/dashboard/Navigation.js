@@ -83,6 +83,8 @@ const SideContent = ({ name }) => {
           alt="User's profile"
           imageHeight="150"
           imageWidth="150"
+          roundedSize="1"
+          roundedColor="#FFF"
         />
 
         <H1 REGULAR color={c.WHITE}>
