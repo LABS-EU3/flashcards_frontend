@@ -41,7 +41,11 @@ export default function SideNav({ mainContent }) {
         onSetOpen={setSidebarOpen}
         docked={sideBarDocked}
         styles={{
-          sidebar: { background: c.DARK_NEUTRAL_COLOR, width: '20%' },
+          sidebar: {
+            background: c.DARK_NEUTRAL_COLOR,
+            width: '20%',
+            minWidth: '240px',
+          },
           root: { top: '46px' },
         }}
       >
