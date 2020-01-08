@@ -20,7 +20,7 @@ import Login from './pages/login/Login';
 import EmailConfirmation from './pages/email_confirmation/EmailConfirmation';
 
 // Utils
-import PrivateRoute from './utils/PrivateRoute';
+// import PrivateRoute from './utils/PrivateRoute';
 
 function App() {
   return (
@@ -28,7 +28,7 @@ function App() {
       <TopBar />
       <Switch>
         <Route exact path="/" component={Landing} />
-        <PrivateRoute path="/dashboard" component={Dashboard} />
+        <Route path="/dashboard" component={Dashboard} />
         <Route path="/forgot" component={ForgotPassword} />
         <Route path="/reset/:token" component={ResetPassword} />
         <Route path="/signup" component={SignUp} />
