@@ -9,6 +9,7 @@ import RoundedImage from 'react-rounded-image';
 // import { fetchProfile } from '../../modules/dashboard/dashboardActions';
 // assets
 import icons from '../../assets/icons';
+import profileDefault from '../../assets/user_profile_default.jpg';
 
 // Styled
 import * as c from '../../styles/variables/colours';
@@ -78,7 +79,7 @@ const SideContent = ({ name }) => {
       <ProfileImageDiv>
         <RoundedImage
           // eslint-disable-next-line max-len
-          image="https://www.ibts.org/wp-content/uploads/2017/08/iStock-476085198-300x300.jpg"
+          image={profileDefault}
           alt="User's profile"
           imageHeight="150"
           imageWidth="150"
