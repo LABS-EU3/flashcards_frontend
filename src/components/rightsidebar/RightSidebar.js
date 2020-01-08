@@ -12,8 +12,9 @@ import { H1, H3 } from '../../styles/typography';
 
 // import { FlexColumnCenterCenter } from '../../styles/displayFlex';
 import * as c from '../../styles/variables/colours';
+import * as g from '../../styles/variables/global';
 
-import img from '../../assets/images/undraw_online_test_gba7 (1).svg';
+import img from '../../assets/images/rectangle_20.png';
 
 const userObj = {
   name: 'Anna Winther',
@@ -57,6 +58,17 @@ const RightSidebar = () => {
   //   const [user, setUser] = useState(userObj);
 
   const [sidebarOpen, setSidebarOpen] = useState(true);
+
+  const mql = window.matchMedia(`(min-width: ${g.desktopMediaBreak}px)`);
+
+  const [sideBarDocked, setSideBarDocked] = useState(mql.matches);
+
+  const mediaQueryChanged = () => {
+    setSideBarDocked(mql.matches);
+    setSidebarOpen(false);
+  };
+
+  mql.addListener(mediaQueryChanged);
   return (
     <div>
       <div>
@@ -71,7 +83,10 @@ const RightSidebar = () => {
             root: { top: '46px' },
           }}
         >
-          <HamburgerButton onClick={() => setSidebarOpen(true)}>
+          <HamburgerButton
+            isDocked={sideBarDocked}
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+          >
             Open sidebar
           </HamburgerButton>
         </Sidebar>
@@ -113,9 +128,12 @@ const HamburgerButton = styled.button`
 `;
 
 const Image = styled.div`
-  border: 1 px solid #000;
+  border: 1px solid black;
   background-image: url(${img});
-  height: 200px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 20%;
 `;
 
 const mapStateToProps = state => {
