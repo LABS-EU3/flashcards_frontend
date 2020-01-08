@@ -80,7 +80,11 @@ const RightSidebar = () => {
           docked
           pullRight
           styles={{
-            sidebar: { background: c.LIGHT_NEUTRAL_COLOR, width: '30%' },
+            sidebar: {
+              background: c.LIGHT_NEUTRAL_COLOR,
+              width: '20%',
+              minWidth: '240px',
+            },
             root: { top: '46px' },
           }}
         >
@@ -157,7 +161,8 @@ const CardsStyled = styled.div`
   // );
   width: 100%;
   justify-content: space-evently;
-  border-radius: 10px;
+  margin-top: -15px;
+  border-radius: 20px;
   height: 100%;
 `;
 
@@ -169,7 +174,6 @@ const StyledStart = styled.div`
   hr {
     height: 1px;
     border: 0;
-    // border-top: 1px solid ;
     margin: 0;
     transform: rotate(0.11 deg);
     background: linear-gradient(

@@ -20,6 +20,7 @@ export const CardsFlex = styled.div`
   flex-direction: column;
   align-items: left;
   margin: 10px 20px 10px 20px;
+  padding-left: 10px;
   border: 1px solid ${c.LIGHT_NEUTRAL_COLOR};
   box-sizing: border-box;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.02);
