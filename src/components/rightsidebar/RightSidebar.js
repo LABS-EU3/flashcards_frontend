@@ -83,7 +83,7 @@ const RightSidebar = () => {
             sidebar: {
               background: c.LIGHT_NEUTRAL_COLOR,
               width: '20%',
-              minWidth: '240px',
+              minWidth: '260px',
             },
             root: { top: '46px' },
           }}
@@ -147,7 +147,8 @@ const Image = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
-  height: 25%;
+  height: 50%;
+  margin-top: -10px;
 `;
 
 const CardsStyled = styled.div`
@@ -164,7 +165,7 @@ const CardsStyled = styled.div`
   width: 100%;
   justify-content: space-evently;
   margin-top: -30px;
-  border-radius: 20px;
+  border-radius: 20px 20px 0 0;
   height: 100%;
 `;
 
