@@ -2,12 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 
 // styled
-import { H1, P } from '../../styles/typography';
+import { P, H2 } from '../../styles/typography';
+import * as c from '../../styles/variables/colours';
+// import * as g from '../../styles/variables/global';
 
 export default function Cards({ title, category }) {
   return (
     <CardsFlex>
-      <H1>{title}</H1>
+      <H2 BOLD>{title}</H2>
       <P>{category}</P>
     </CardsFlex>
   );
@@ -15,26 +17,15 @@ export default function Cards({ title, category }) {
 
 export const CardsFlex = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  border: 1 px solid black;
+  flex-direction: column;
+  align-items: left;
+  margin: 10px 20px 10px 20px;
+  border: 1px solid ${c.LIGHT_NEUTRAL_COLOR};
   box-sizing: border-box;
-  box-shadow: 0 px 4 px 10 px rgba(0, 0, 0, 0.02);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.02);
+  //   background: linear-gradient(
+  //     88.85deg,
+  //     rgba(210, 31, 60, 0.5) 38.43%,
+  //     rgba(255, 169, 135, 0.5) 136.86%
+  //   );
 `;
-
-// export const FlexCardRow = styled.div `
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-between;
-//   max-height: 95.4vh;
-//   overflow: hidden;
-//   width: 100%;
-//   background-color: ${c.LIGHT_NEUTRAL_COLOR};
-//   @media (min-width: ${g.phoneMediaBreak}px) {
-//     justify-content: center;
-//     align-items: center;
-//   }
-//   @media (min-width: ${g.desktopMediaBreak}px) {
-//     justify-content: space-between;
-//   }
-// `;
