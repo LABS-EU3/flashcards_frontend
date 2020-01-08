@@ -9,17 +9,6 @@ import { baseUrl } from '../config';
 
 const KEY = 'cfa8ebf4';
 
-export const axiosWithAuth = () => {
-  const token = localStorage.getItem(KEY);
-  return axios.create({
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: token || null,
-    },
-    baseURL: baseUrl,
-  });
-};
-
 export const isTokenExpired = token => {
   try {
     const decoded = decode(token);
@@ -63,4 +52,15 @@ export const setToken = payload => {
   } catch (error) {
     return undefined;
   }
+};
+
+export const axiosWithAuth = () => {
+  const token = getToken();
+  return axios.create({
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: token || '',
+    },
+    baseURL: baseUrl,
+  });
 };
