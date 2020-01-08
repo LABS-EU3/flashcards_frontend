@@ -6,9 +6,11 @@ import thunk from 'redux-thunk';
 
 // Reducers
 import userReducer from '../modules/user/userReducers';
+import dashboardReducer from '../modules/dashboard/dashboardReducer';
 
 const rootReducer = combineReducers({
   user: userReducer,
+  dashboard: dashboardReducer,
 });
 
 const store = createStore(
