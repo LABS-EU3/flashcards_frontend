@@ -6,11 +6,11 @@ import React from 'react';
 import { useHistory } from 'react-router';
 
 // import Sidebar from 'react-sidebar';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 
 // Styled
 import { H1, H3 } from '../../styles/typography';
-// import { FlexRowCenterCenter } from '../../styles/displayFlex';
+import { FlexRowCenterCenter } from '../../styles/displayFlex';
 
 // components
 import RightSidebar from '../../components/rightsidebar/RightSidebar';
@@ -19,7 +19,7 @@ export default function Dashboard() {
   const history = useHistory();
 
   return (
-    <DashboardSection>
+    <FlexRowCenterCenter>
       <div>
         <H1>Dashboard Test</H1>
         <H3>Welcome! LogIn successful</H3>
@@ -29,11 +29,14 @@ export default function Dashboard() {
         <NavLink to="/signup">signup</NavLink>
         <NavLink to="/login">login</NavLink> */}
       </div>
-      <div>
-        <RightSidebar history={history} />
-      </div>
-    </DashboardSection>
+      {/* <SidebarSection> */}
+      <RightSidebar history={history} />
+      {/* </SidebarSection> */}
+    </FlexRowCenterCenter>
   );
 }
 
-const DashboardSection = styled.nav``;
+// const SidebarSection = styled.div`
+//   background: white;
+//   box-shadow: none;
+// `;

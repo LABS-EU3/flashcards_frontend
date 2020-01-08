@@ -8,11 +8,11 @@ import styled from 'styled-components';
 import Card from '../cards/Cards';
 
 // styles
-import { H1 } from '../../styles/typography';
+import { H1, HR } from '../../styles/typography';
 import { BRAND_FONT } from '../../styles/variables/fonts';
 
 // import { FlexColumnCenterCenter } from '../../styles/displayFlex';
-import * as c from '../../styles/variables/colours';
+// import * as c from '../../styles/variables/colours';
 import * as g from '../../styles/variables/global';
 
 import img from '../../assets/images/rectangle_20.png';
@@ -81,7 +81,7 @@ const RightSidebar = () => {
           pullRight
           styles={{
             sidebar: {
-              background: c.LIGHT_NEUTRAL_COLOR,
+              background: 'white',
               width: '20%',
               minWidth: '260px',
             },
@@ -156,15 +156,9 @@ const CardsStyled = styled.div`
   flex-direction: column;
   align-items: left;
   background: white;
-  // background: linear-gradient(88.85 deg, #d21f3c-6.57%, #ffa98791.86%);
-  // background: linear-gradient(
-  //   88.85 deg,
-  //   rgba(210, 31, 60, 0.5) 38.43 %,
-  //   rgba(255, 169, 135, 0.5) 136.86 %
-  // );
   width: 100%;
   justify-content: space-evently;
-  margin-top: -30px;
+  margin-top: -40px;
   border-radius: 20px 20px 0 0;
   height: 100%;
 `;
@@ -174,18 +168,6 @@ const StyledStart = styled.div`
   text-align: left;
   justify-content: center;
   margin: 10px 20px 10px 20px;
-`;
-
-const HR = styled.hr`
-  height: 1px;
-  border: 0;
-  margin: 0;
-  transform: rotate(0.11 deg);
-  background: linear-gradient(
-    88.85deg,
-    rgba(210, 31, 60, 0.5) 38.43%,
-    rgba(255, 169, 135, 0.5) 136.86%
-  );
 `;
 
 const mapStateToProps = state => {
