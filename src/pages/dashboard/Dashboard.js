@@ -4,18 +4,22 @@
 import React from 'react';
 // import { NavLink } from 'react-router-dom';
 import { useHistory } from 'react-router';
-// Styled
+
 // import Sidebar from 'react-sidebar';
+import styled from 'styled-components';
+
+// Styled
 import { H1, H3 } from '../../styles/typography';
-import { FlexRowCenterCenter } from '../../styles/displayFlex';
+// import { FlexRowCenterCenter } from '../../styles/displayFlex';
 
 // components
-import RightSidebar from '../../components/rightSidebar/RightSidebar';
+import RightSidebar from '../../components/rightsidebar/RightSidebar';
 
 export default function Dashboard() {
   const history = useHistory();
+
   return (
-    <FlexRowCenterCenter>
+    <DashboardSection>
       <div>
         <H1>Dashboard Test</H1>
         <H3>Welcome! LogIn successful</H3>
@@ -28,6 +32,8 @@ export default function Dashboard() {
       <div>
         <RightSidebar history={history} />
       </div>
-    </FlexRowCenterCenter>
+    </DashboardSection>
   );
 }
+
+const DashboardSection = styled.nav``;
