@@ -2,7 +2,9 @@
 
 // Libraries
 import React from 'react';
-import { useHistory } from 'react-router';
+import { useHistory, Redirect } from 'react-router';
+
+import { getToken } from '../../utils/auth';
 
 // Styled
 import { H1, P } from '../../styles/typography';
@@ -28,6 +30,7 @@ export default function ResetPassword({ match }) {
   const history = useHistory();
   return (
     <FlexRowBackground>
+      {getToken() && <Redirect to="/dashboard" />}
       <DesktopImage>
         <img src={`${StudyingSVG}`} alt="studying person" />
       </DesktopImage>
