@@ -8,7 +8,8 @@ import styled from 'styled-components';
 import Card from '../cards/Cards';
 
 // styles
-import { H1, H3 } from '../../styles/typography';
+import { H1 } from '../../styles/typography';
+import { BRAND_FONT } from '../../styles/variables/fonts';
 
 // import { FlexColumnCenterCenter } from '../../styles/displayFlex';
 import * as c from '../../styles/variables/colours';
@@ -100,9 +101,15 @@ const SideContent = () => {
       <Image>
         {/* <img alt="online test" src={img} /> */}
         <H1> Welcome {userObj.name}!</H1>
-        <H3> Jump Back Into... </H3>
       </Image>
-      <div>
+      <CardsStyled>
+        <StyledStart>
+          <H1 BOLD>
+            {' '}
+            Jump back into
+            <hr />
+          </H1>
+        </StyledStart>
         {cards.map(card => {
           return (
             // < FlexCardRow>
@@ -110,7 +117,7 @@ const SideContent = () => {
             // </FlexCardRow>
           );
         })}
-      </div>
+      </CardsStyled>
     </SidebarBody>
   );
 };
@@ -118,8 +125,6 @@ const SideContent = () => {
 const SidebarBody = styled.div`
   display: flex;
   flex-direction: column;
-  flex-direction: column;
-  align-items: center;
   align-items: center;
   height: 100%;
 `;
@@ -128,12 +133,51 @@ const HamburgerButton = styled.button`
 `;
 
 const Image = styled.div`
-  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background-image: url(${img});
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
-  height: 20%;
+  height: 25%;
+`;
+
+const CardsStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  background: white;
+  // background: linear-gradient(88.85 deg, #d21f3c-6.57%, #ffa98791.86%);
+  // background: linear-gradient(
+  //   88.85 deg,
+  //   rgba(210, 31, 60, 0.5) 38.43 %,
+  //   rgba(255, 169, 135, 0.5) 136.86 %
+  // );
+  width: 100%;
+  justify-content: space-evently;
+  border-radius: 10px;
+  height: 100%;
+`;
+
+const StyledStart = styled.div`
+  font: ${BRAND_FONT};
+  text-align: left;
+  justify-content: center;
+  margin: 10px 20px 10px 20px;
+  hr {
+    height: 1px;
+    border: 0;
+    // border-top: 1px solid ;
+    margin: 0;
+    transform: rotate(0.11 deg);
+    background: linear-gradient(
+      88.85deg,
+      rgba(210, 31, 60, 0.5) 38.43%,
+      rgba(255, 169, 135, 0.5) 136.86%
+    );
+  }
 `;
 
 const mapStateToProps = state => {
