@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import img from '../../../assets/images/rectangle_20.png';
+import img from '../assets/images/rectangle_20.png';
 
-import { BRAND_FONT } from '../../../styles/variables/fonts';
+import { BRAND_FONT } from './variables/fonts';
 
 export const SidebarBody = styled.div`
   display: flex;

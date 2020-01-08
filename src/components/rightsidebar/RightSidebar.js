@@ -16,7 +16,7 @@ import {
   Image,
   CardsStyled,
   StyledStart,
-} from './styles/sidebarStyles';
+} from '../../styles/sidebarStyles';
 
 const userObj = {
   name: 'Anna Winther',
