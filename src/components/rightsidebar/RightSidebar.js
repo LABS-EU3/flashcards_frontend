@@ -161,7 +161,7 @@ const CardsStyled = styled.div`
   // );
   width: 100%;
   justify-content: space-evently;
-  margin-top: -15px;
+  margin-top: -30px;
   border-radius: 20px;
   height: 100%;
 `;
