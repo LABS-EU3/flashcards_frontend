@@ -20,16 +20,16 @@ import Login from './pages/login/Login';
 import EmailConfirmation from './pages/email_confirmation/EmailConfirmation';
 import RightSidebar from './components/rightsidebar/RightSidebar';
 // Utils
-// import PrivateRoute from './utils/PrivateRoute';
+import PrivateRoute from './utils/PrivateRoute';
 
 function App() {
   return (
     <div>
       <TopBar />
-      <RightSidebar />
+      <PrivateRoute path="/" component={RightSidebar} />
       <Switch>
         <Route exact path="/" component={Landing} />
-        <Route path="/dashboard" component={Dashboard} />
+        <PrivateRoute path="/dashboard" component={Dashboard} />
         <Route path="/forgot" component={ForgotPassword} />
         <Route path="/reset/:token" component={ResetPassword} />
         <Route path="/signup" component={SignUp} />
