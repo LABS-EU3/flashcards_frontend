@@ -38,7 +38,9 @@ export const userLogin = (userData, history) => dispatch => {
     .then(({ data }) => {
       dispatch({
         type: LOGIN_SUCCESS,
+        payload: data.data.user,
       });
+      // console.log(data.data.user);
       setToken(data.data.token);
       dispatch({ type: CLEAR_RESPONSES });
       history.push('/dashboard');
@@ -56,7 +58,7 @@ export const userSignUp = (userData, history) => dispatch => {
   axios
     .post(`${baseUrl}/auth/register`, userData)
     .then(({ data }) => {
-      dispatch({ type: SIGNUP_SUCCESS });
+      dispatch({ type: SIGNUP_SUCCESS, payload: data.user });
       setToken(data.data.token);
       dispatch({ type: CLEAR_RESPONSES });
       history.push('/dashboard');

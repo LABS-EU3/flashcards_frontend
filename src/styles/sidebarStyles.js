@@ -32,6 +32,9 @@ export const Image = styled.div`
   width: 100%;
   height: 50%;
   margin-top: -10px;
+  h1 {
+    text-align: center;
+  }
 `;
 
 export const CardsStyled = styled.div`

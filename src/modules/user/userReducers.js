@@ -44,6 +44,7 @@ const userReducer = (state = initialState, action) => {
         loading: false,
         completed: true,
         authenticated: true,
+        credentials: action.payload,
       };
     case LOGIN_FAILURE:
       return {
@@ -62,6 +63,7 @@ const userReducer = (state = initialState, action) => {
         loading: false,
         completed: true,
         authenticated: true,
+        credentials: action.payload,
       };
     case SIGNUP_FAILURE:
       return {

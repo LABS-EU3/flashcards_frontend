@@ -1,6 +1,6 @@
 // Libraries
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 
 // components
 import Sidebar from 'react-sidebar';
@@ -17,11 +17,6 @@ import {
   StyledStart,
   SidebarStyled,
 } from '../../styles/sidebarStyles';
-
-const userObj = {
-  name: 'Anna Winther',
-  email: 'anski.anna@gmail.com',
-};
 
 const cards = [
   {
@@ -46,18 +41,8 @@ const cards = [
   },
 ];
 
-const RightSidebar = () => {
-  // const {
-  //     values,
-  //     handleChange,
-  //     handleBlur,
-  //     handleSubmit,
-  //     touched,
-  //     errors,
-  //     user,
-  // } = props;
-  //   console.log(props);
-  //   const [user, setUser] = useState(userObj);
+export default function RightSidebar(props) {
+  const { user } = props;
 
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
@@ -74,7 +59,7 @@ const RightSidebar = () => {
   return (
     <SidebarStyled>
       <Sidebar
-        sidebar={<SideContent />}
+        sidebar={<SideContent user={user} />}
         open={sidebarOpen}
         onSetOpen={setSidebarOpen}
         docked={sideBarDocked}
@@ -83,19 +68,18 @@ const RightSidebar = () => {
           sidebar: {
             background: 'white',
             width: '25%',
-            // minWidth: '300px',
+            minWidth: '250px',
           },
-          root: { top: '46px' },
         }}
       />
     </SidebarStyled>
   );
-};
-const SideContent = () => {
+}
+const SideContent = ({ user }) => {
   return (
     <SidebarBody>
       <Image>
-        <H1> Welcome {userObj.name}!</H1>
+        <H1> Welcome {user.credentials.full_name}!</H1>
       </Image>
       <CardsStyled>
         <StyledStart>
@@ -117,9 +101,9 @@ const SideContent = () => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    user: state.user,
-  };
-};
-export default connect(mapStateToProps)(RightSidebar);
+// const mapStateToProps = state => {
+//   return {
+//     user: state.user,
+//   };
+// };
+// export default connect(mapStateToProps)(RightSidebar);
