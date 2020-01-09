@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from 'react-sidebar';
 import RoundedImage from 'react-rounded-image';
 // import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 // import { fetchProfile } from '../../modules/dashboard/dashboardActions';
 // assets
@@ -27,8 +28,8 @@ import {
   sideBarRootStyle,
 } from './styles/NavigationStyles';
 
-export default function SideNav(props) {
-  const { mainContent, user } = props;
+function SideNav(props) {
+  const { mainContent, user, logoutUser, history } = props;
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const mql = window.matchMedia(`(min-width: ${g.desktopMediaBreak}px)`);
@@ -49,7 +50,13 @@ export default function SideNav(props) {
   return (
     <NavSection>
       <Sidebar
-        sidebar={<SideContent name={user.completed || 'Sherlock Holmes'} />}
+        sidebar={
+          <SideContent
+            name={user.completed || 'Sherlock Holmes'}
+            logoutUser={logoutUser}
+            history={history}
+          />
+        }
         open={sidebarOpen}
         onSetOpen={setSidebarOpen}
         docked={sideBarDocked}
@@ -73,7 +80,12 @@ export default function SideNav(props) {
   );
 }
 
-const SideContent = ({ name }) => {
+const SideContent = ({ name, logoutUser, history }) => {
+  const onLogout = e => {
+    e.preventDefault();
+    logoutUser(history);
+  };
+
   return (
     <SidebarBody>
       <ProfileImageDiv>
@@ -97,16 +109,17 @@ const SideContent = ({ name }) => {
         <MenuItem img={icons.ProfileIcon} text="Profile" />
         <MenuItem img={icons.AddDecksIcon} text="Add Decks" />
         <MenuItem img={icons.LibraryIcon} text="Deck Library" />
+        <MenuItem img={icons.SettingsIcon} text="Settings" route="/settings" />
         <GrowSpace />
-        <MenuItem img={icons.SettingsIcon} text="Settings" />
+        <MenuItem img={icons.LibraryIcon} onClick={onLogout} text="Log Out" />
       </MenuBox>
     </SidebarBody>
   );
 };
 
-const MenuItem = ({ img, text, route = '/' }) => {
+const MenuItem = ({ img, text, route = '/', onClick }) => {
   return (
-    <Item to={route}>
+    <Item onClick={onClick || null} to={route}>
       <img src={img} alt="" />
       <P BRAND color={c.WHITE}>
         {text}
@@ -114,3 +127,5 @@ const MenuItem = ({ img, text, route = '/' }) => {
     </Item>
   );
 };
+
+export default withRouter(SideNav);
