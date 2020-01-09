@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import img from '../assets/images/rectangle_20.png';
+import * as g from './variables/global';
 
 import { BRAND_FONT } from './variables/fonts';
 
@@ -9,8 +10,15 @@ export const SidebarBody = styled.div`
   align-items: center;
   height: 100%;
 `;
-export const HamburgerButton = styled.button`
-  display: none;
+
+export const SidebarStyled = styled.div`
+  @media (min-width: ${g.phoneMediaBreak}px) {
+    display: none;
+    @media (min-width: ${g.desktopMediaBreak}px) {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 `;
 
 export const Image = styled.div`

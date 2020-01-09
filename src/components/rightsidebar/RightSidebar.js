@@ -12,10 +12,10 @@ import * as g from '../../styles/variables/global';
 
 import {
   SidebarBody,
-  HamburgerButton,
   Image,
   CardsStyled,
   StyledStart,
+  SidebarStyled,
 } from '../../styles/sidebarStyles';
 
 const userObj = {
@@ -73,30 +73,23 @@ const RightSidebar = () => {
   mql.addListener(mediaQueryChanged);
   return (
     <div>
-      <div>
+      <SidebarStyled>
         <Sidebar
           sidebar={<SideContent />}
           open={sidebarOpen}
           onSetOpen={setSidebarOpen}
-          docked
+          docked={sideBarDocked}
           pullRight
           styles={{
             sidebar: {
               background: 'white',
-              width: '20%',
-              minWidth: '260px',
+              width: '30%',
+              minWidth: '0px',
             },
             root: { top: '46px' },
           }}
-        >
-          <HamburgerButton
-            isDocked={sideBarDocked}
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-          >
-            Open sidebar
-          </HamburgerButton>
-        </Sidebar>
-      </div>
+        />
+      </SidebarStyled>
     </div>
   );
 };
