@@ -2,8 +2,10 @@
 
 // Libraries
 import React from 'react';
-import { useHistory } from 'react-router';
+import { useHistory, Redirect } from 'react-router';
+import { useDispatch } from 'react-redux';
 
+import { getToken } from '../../utils/auth';
 // Styled
 import { H1, P, H5 } from '../../styles/typography';
 import { BackArrowButton } from '../../styles/buttons';
@@ -26,16 +28,22 @@ import KnowledgeSVG from '../../assets/images/undraw_knowledge_g5gf.svg';
 // Components
 import ForgetPasswordForm from '../../components/forgetForm/ForgetPasswordForm';
 
+// types
+import { CLEAR_RESPONSES } from '../../modules/user/userTypes';
+
 export default function ForgotPassword() {
   const history = useHistory();
+  const dispatch = useDispatch();
   return (
     <FlexRowBackground>
+      {getToken() && <Redirect to="/dashboard" />}
       <DesktopImage>
         <img src={`${KnowledgeSVG}`} alt="knowledagble person" />
       </DesktopImage>
       <ParentBackground>
         <BackArrowButton
           onClick={() => {
+            dispatch({ type: CLEAR_RESPONSES });
             history.goBack();
           }}
         >
@@ -49,11 +57,11 @@ export default function ForgotPassword() {
               <img src={`${QuestionMark}`} alt="question mark icon" />
               <H1>Forgot Password</H1>
               <P LIGHTWEIGHT>
-                Enter your email linked to your account. An message will be sent
-                to your email to reset your password{' '}
+                Enter your email linked to your account. A message will be sent
+                to your email to reset your password
               </P>
               <br />
-              <ForgetPasswordForm />
+              <ForgetPasswordForm history={history} />
             </FlexColumnSpaceBetween>
           </UnSkewDiv>
         </SkewDiv>

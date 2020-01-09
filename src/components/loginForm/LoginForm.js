@@ -2,21 +2,28 @@
 
 // Libraries
 import React, { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import { withFormik } from 'formik';
 import { connect } from 'react-redux';
-import * as yup from 'yup';
+import styled from 'styled-components';
 import { SquareLoader } from 'react-spinners';
 
-// Actions
-import { forgotPassword } from '../../modules/user/userActions';
-
 // Styles
+import * as yup from 'yup';
+import * as c from '../../styles/variables/colours';
 import { Text, H3 } from '../../styles/typography';
 import { Button } from '../../styles/buttons';
-import * as c from '../../styles/variables/colours';
 import { Forms, Input, Label } from '../../styles/forms';
 
+// Actions
+import { userLogin } from '../../modules/user/userActions';
+
 const Form = props => {
+  const ForgotText = styled(H3)`
+    align-self: flex-end;
+    line-height: 0;
+    margin-bottom: 1em;
+  `;
   const {
     values,
     handleChange,
@@ -32,18 +39,18 @@ const Form = props => {
     if (user.completed) {
       setResponse(
         <H3 color={c.SUCCESS_COLOR}>
-          Successfully sent your reset link to your email. Please check your
-          inbox!
+          Successfully logged in, please wait to be redirected
         </H3>,
       );
     }
     if (user.errors) {
       setResponse(
-        <H3 color={c.DANGER_COLOR}> Email address could not be found</H3>,
+        <H3 color={c.DANGER_COLOR}>
+          Email and password combination was not recognized
+        </H3>,
       );
     }
   }, [user.errors, user.completed]);
-
   return (
     <Forms onSubmit={handleSubmit}>
       {response}
@@ -53,18 +60,37 @@ const Form = props => {
           <Text color={c.DANGER_COLOR}>{errors.email}</Text>
         )}
         <Input
-          type="email"
           name="email"
-          placeholder="Email"
           value={values.email.toLowerCase()}
-          onBlur={handleBlur}
           onChange={handleChange}
-          border={errors.email && `2px solid ${c.DANGER_COLOR}`}
+          onBlur={handleBlur}
+          placeholder="Email"
+          border={
+            touched.email && errors.email && `2px solid ${c.DANGER_COLOR}`
+          }
         />
       </Label>
+      <Label>
+        <H3>Password</H3>
+        {touched.password && errors.password && (
+          <Text color={c.DANGER_COLOR}>{errors.password}</Text>
+        )}
+        <Input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={values.password}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          border={errors.password && `2px solid ${c.DANGER_COLOR}`}
+        />
+      </Label>
+      <ForgotText REGULAR>
+        <NavLink to="/forgot">Forgot Password?</NavLink>
+      </ForgotText>
       <Button type="submit">
         <H3 WHITE>
-          Send Email
+          Login
           <SquareLoader
             css={{ marginLeft: '20px' }}
             size={15}
@@ -82,14 +108,19 @@ const validationSchema = yup.object().shape({
     .string()
     .email('Email is not valid')
     .required('Please provide an email'),
+  password: yup
+    .string()
+    .required('Please provide a password')
+    .min(8, 'Password too short'),
 });
 
-const ForgetPasswordForm = withFormik({
+const LoginForm = withFormik({
   mapPropsToValues: () => ({
     email: '',
+    password: '',
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
-    props.forgotPassword(values);
+    props.userLogin(values, props.history);
     setSubmitting(false);
   },
   validationSchema,
@@ -100,4 +131,4 @@ const mapStateToProps = state => {
     user: state.user,
   };
 };
-export default connect(mapStateToProps, { forgotPassword })(ForgetPasswordForm);
+export default connect(mapStateToProps, { userLogin })(LoginForm);

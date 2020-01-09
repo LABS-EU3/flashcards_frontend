@@ -1,6 +1,12 @@
+// Import
+
+// Libraries
 import React from 'react';
+
+// Utils
 import importAll from '../../../utils/importAll';
 
+// Styles
 import { SlideItem } from './styles';
 
 const images = importAll(

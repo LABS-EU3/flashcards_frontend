@@ -1,12 +1,12 @@
-// import
+// Import
 
-// library
+// Libraries
 import React from 'react';
 
-// styles
+// Styles
 import { SliderContainer } from './swiperAnimation/styles';
 
-// scripts
+// Scripts
 import generateData from './swiperAnimation/data';
 import Slider from './swiperAnimation/slider';
 

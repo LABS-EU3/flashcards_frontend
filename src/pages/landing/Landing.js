@@ -2,7 +2,7 @@
 
 // Libraries
 import React from 'react';
-import { useHistory } from 'react-router';
+import { useHistory, Redirect } from 'react-router';
 
 // Styled
 import { H1, H2, H3 } from '../../styles/typography';
@@ -17,13 +17,17 @@ import { Button, LineButton } from '../../styles/buttons';
 
 // Assets
 import BookSVG from '../../assets/images/undraw_book_lover_mkck.svg';
+
+// Components
 import LandingCarousel from '../../components/landingCarousel/LandingCarousel';
+import { getToken } from '../../utils/auth';
 
 export default function Landing() {
   const history = useHistory();
 
   return (
     <div>
+      {getToken() && <Redirect to="/dashboard" />}
       <FlexRowBackground>
         <DesktopImage>
           <img src={BookSVG} alt="analysis" />
