@@ -18,7 +18,7 @@ import ResetPassword from './pages/reset_password/ResetPassword';
 import SignUp from './pages/signup/SignUp';
 import Login from './pages/login/Login';
 import EmailConfirmation from './pages/email_confirmation/EmailConfirmation';
-import RightSidebar from './components/rightsidebar/RightSidebar';
+// import RightSidebar from './components/rightsidebar/RightSidebar';
 // Utils
 import PrivateRoute from './utils/PrivateRoute';
 
@@ -26,7 +26,7 @@ function App() {
   return (
     <div>
       <TopBar />
-      <PrivateRoute path="/" component={RightSidebar} />
+      {/* <PrivateRoute path="/" component={RightSidebar} /> */}
       <Switch>
         <Route exact path="/" component={Landing} />
         <PrivateRoute path="/dashboard" component={Dashboard} />

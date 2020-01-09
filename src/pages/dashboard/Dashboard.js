@@ -15,8 +15,8 @@ export const DashboardComponent = props => {
   const mainContent = (
     <div>
       <H1>Dashboard Test</H1>
-      <H3>Welcome! LogIn successful</H3>
-      <RightSidebar />
+      <H3>Welcome! Login successful</H3>
+      <RightSidebar user={user} />
     </div>
   );
 
