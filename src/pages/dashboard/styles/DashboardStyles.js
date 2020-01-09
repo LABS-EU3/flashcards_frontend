@@ -3,7 +3,8 @@ import { NavLink } from 'react-router-dom';
 
 import * as c from '../../../styles/variables/colours';
 
-export const NavSection = styled.nav``;
+export const DashboardContainer = styled.div``;
+export const MainContent = styled.div``;
 export const SidebarBody = styled.div`
   display: flex;
   flex-direction: column;
