@@ -1,10 +1,43 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 
-const DeckLibrary = props => {
-  console.log(props);
-  return <div />;
+import icons from '../../../assets/icons';
+
+const DeckLibrary = () => {
+  return (
+    <div>
+      <TopComponents />
+    </div>
+  );
 };
+
+const TopComponents = () => {
+  return (
+    <TopComponent>
+      <IconLabel img={icons.AddDecksIcon} label="Add Deck" />
+      <IconLabel img={icons.LibraryIcon} label="Add Deck" />
+    </TopComponent>
+  );
+};
+
+const IconLabel = ({ img, label }) => {
+  return (
+    <IconWithText>
+      <img src={img} alt="" />
+      <p>{label}</p>
+    </IconWithText>
+  );
+};
+
+const IconWithText = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const TopComponent = styled.div`
+  display: flex;
+`;
 
 const mapStateToProps = state => {
   return {
