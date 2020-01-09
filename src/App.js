@@ -18,7 +18,7 @@ import ResetPassword from './pages/reset_password/ResetPassword';
 import SignUp from './pages/signup/SignUp';
 import Login from './pages/login/Login';
 import EmailConfirmation from './pages/email_confirmation/EmailConfirmation';
-
+import RightSidebar from './components/rightsidebar/RightSidebar';
 // Utils
 // import PrivateRoute from './utils/PrivateRoute';
 
@@ -26,6 +26,7 @@ function App() {
   return (
     <div>
       <TopBar />
+      <RightSidebar />
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route path="/dashboard" component={Dashboard} />
