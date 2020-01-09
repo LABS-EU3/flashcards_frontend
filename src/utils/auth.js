@@ -7,16 +7,7 @@ import decode from 'jwt-decode';
 // Configs
 import { baseUrl } from '../config';
 
-export const axiosWithAuth = () => {
-  const token = localStorage.getItem('token');
-  return axios.create({
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `${token}`,
-    },
-    baseURL: baseUrl,
-  });
-};
+const KEY = 'cfa8ebf4';
 
 export const isTokenExpired = token => {
   try {
@@ -31,12 +22,12 @@ export const isTokenExpired = token => {
 };
 
 export const clearLocalStorage = () => {
-  localStorage.removeItem('token');
+  localStorage.removeItem(KEY);
 };
 
 export const getToken = () => {
   try {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem(KEY);
     if (token === null) {
       return undefined;
     }
@@ -47,12 +38,29 @@ export const getToken = () => {
     }
     return JSON.parse(token);
   } catch (error) {
+    // if error decoding, clear what is in local storage with key
+    clearLocalStorage();
     return undefined;
   }
 };
 
-export const decodeToken = () => {
+export const setToken = payload => {
+  try {
+    const item = JSON.stringify(payload);
+    localStorage.setItem(KEY, item);
+    return true;
+  } catch (error) {
+    return undefined;
+  }
+};
+
+export const axiosWithAuth = () => {
   const token = getToken();
-  const info = token ? decode(token) : null;
-  return info;
+  return axios.create({
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: token || '',
+    },
+    baseURL: baseUrl,
+  });
 };

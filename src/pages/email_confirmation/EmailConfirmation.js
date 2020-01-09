@@ -3,7 +3,10 @@
 // Libraries
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router';
 import { SquareLoader } from 'react-spinners';
+
+import { getToken } from '../../utils/auth';
 
 // Actions
 import { emailConfirmation } from '../../modules/user/userActions';
@@ -67,6 +70,7 @@ export default function EmailConfirmation(props) {
 
   return (
     <FlexRowBackground>
+      {getToken() && <Redirect to="/dashboard" />}
       <DesktopImage>
         <img src={`${LoadSVG}`} alt="knowledagble person" />{' '}
       </DesktopImage>

@@ -7,6 +7,8 @@ import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
+import { getToken } from '../../utils/auth';
+
 // Styles
 import { H1, H3, H5 } from '../../styles/typography';
 import { BackArrowButton } from '../../styles/buttons';
@@ -37,7 +39,7 @@ export default function SignUp() {
   const dispatch = useDispatch();
   return (
     <FlexRowBackground>
-      {localStorage.getItem('token') && <Redirect to="/dashboard" />}
+      {getToken() && <Redirect to="/dashboard" />}
       <DesktopImage>
         <img src={img} alt="analysis" />
       </DesktopImage>

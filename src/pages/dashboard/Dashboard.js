@@ -1,42 +1,35 @@
 // Import
 
 // Libraries
-import React from 'react';
-// import { NavLink } from 'react-router-dom';
-import { useHistory } from 'react-router';
-
-// import Sidebar from 'react-sidebar';
-// import styled from 'styled-components';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 
 // Styled
 import { H1, H3 } from '../../styles/typography';
-import { FlexRowCenterCenter } from '../../styles/displayFlex';
-
-// components
+import Navigation from './Navigation';
 import RightSidebar from '../../components/rightsidebar/RightSidebar';
+import { fetchProfile } from '../../modules/dashboard/dashboardActions';
 
-export default function Dashboard() {
-  const history = useHistory();
-
-  return (
-    <FlexRowCenterCenter>
-      <div>
-        <H1>Dashboard Test</H1>
-        <H3>Welcome! LogIn successful</H3>
-        {/* <NavLink to="/dashboard">dashboard</NavLink>
-        <NavLink to="/forgot">forgot password</NavLink>
-        <NavLink to="/reset">reset password</NavLink>
-        <NavLink to="/signup">signup</NavLink>
-        <NavLink to="/login">login</NavLink> */}
-      </div>
-      {/* <SidebarSection> */}
-      <RightSidebar history={history} />
-      {/* </SidebarSection> */}
-    </FlexRowCenterCenter>
+export const DashboardComponent = props => {
+  const { user } = props;
+  const mainContent = (
+    <div>
+      <H1>Dashboard Test</H1>
+      <H3>Welcome! LogIn successful</H3>
+      <RightSidebar />
+    </div>
   );
-}
 
-// const SidebarSection = styled.div`
-//   background: white;
-//   box-shadow: none;
-// `;
+  useEffect(() => {
+    props.fetchProfile();
+  }, []);
+  return <Navigation user={user} mainContent={mainContent} />;
+};
+
+const mapStateToProps = state => {
+  return {
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps, { fetchProfile })(DashboardComponent);
