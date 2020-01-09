@@ -4,10 +4,8 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from 'react-sidebar';
 import RoundedImage from 'react-rounded-image';
-// import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-// import { fetchProfile } from '../../modules/dashboard/dashboardActions';
 // assets
 import icons from '../../assets/icons';
 import profileDefault from '../../assets/user_profile_default.jpg';
