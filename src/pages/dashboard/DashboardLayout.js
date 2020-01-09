@@ -19,16 +19,17 @@ import {
   GrowSpace,
   HamburgerButton,
   MenuBox,
-  NavSection,
+  DashboardContainer,
   ProfileImageDiv,
   Item,
   SidebarBody,
   sideBarStyle,
   sideBarRootStyle,
-} from './styles/NavigationStyles';
+  MainContent,
+} from './styles/DashboardStyles';
 
-export default function SideNav(props) {
-  const { mainContent, user } = props;
+export default function DashboardLayout(props) {
+  const { user, children } = props;
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const mql = window.matchMedia(`(min-width: ${g.desktopMediaBreak}px)`);
@@ -47,9 +48,9 @@ export default function SideNav(props) {
   }, []);
 
   return (
-    <NavSection>
+    <DashboardContainer>
       <Sidebar
-        sidebar={<SideContent name={user.completed || 'Sherlock Holmes'} />}
+        sidebar={<SideBarContent name={user.credentials.full_name} />}
         open={sidebarOpen}
         onSetOpen={setSidebarOpen}
         docked={sideBarDocked}
@@ -58,7 +59,7 @@ export default function SideNav(props) {
           root: sideBarRootStyle,
         }}
       >
-        <div>
+        <MainContent>
           <HamburgerButton
             isDocked={sideBarDocked}
             onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -66,14 +67,14 @@ export default function SideNav(props) {
             Open sidebar
           </HamburgerButton>
 
-          {mainContent}
-        </div>
+          {children}
+        </MainContent>
       </Sidebar>
-    </NavSection>
+    </DashboardContainer>
   );
 }
 
-const SideContent = ({ name }) => {
+const SideBarContent = ({ name }) => {
   return (
     <SidebarBody>
       <ProfileImageDiv>
