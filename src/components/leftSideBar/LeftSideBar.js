@@ -49,7 +49,7 @@ const LeftSideBar = ({ name, logoutUser, history }) => {
         <MenuItem img={icons.LibraryIcon} text="Deck Library" />
         <MenuItem img={icons.SettingsIcon} text="Settings" />
         <GrowSpace />
-        <MenuItem img={icons.LibraryIcon} onClick={onLogout} text="Log Out" />
+        <MenuItem img={icons.LogoutIcon} onClick={onLogout} text="Log Out" />
       </MenuBox>
     </SidebarBody>
   );
