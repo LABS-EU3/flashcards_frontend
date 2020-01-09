@@ -72,25 +72,23 @@ const RightSidebar = () => {
 
   mql.addListener(mediaQueryChanged);
   return (
-    <div>
-      <SidebarStyled>
-        <Sidebar
-          sidebar={<SideContent />}
-          open={sidebarOpen}
-          onSetOpen={setSidebarOpen}
-          docked={sideBarDocked}
-          pullRight
-          styles={{
-            sidebar: {
-              background: 'white',
-              width: '30%',
-              minWidth: '0px',
-            },
-            root: { top: '46px' },
-          }}
-        />
-      </SidebarStyled>
-    </div>
+    <SidebarStyled>
+      <Sidebar
+        sidebar={<SideContent />}
+        open={sidebarOpen}
+        onSetOpen={setSidebarOpen}
+        docked={sideBarDocked}
+        pullRight
+        styles={{
+          sidebar: {
+            background: 'white',
+            width: '25%',
+            // minWidth: '300px',
+          },
+          root: { top: '46px' },
+        }}
+      />
+    </SidebarStyled>
   );
 };
 const SideContent = () => {
