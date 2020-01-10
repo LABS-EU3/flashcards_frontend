@@ -2,9 +2,6 @@ import {
   ON_BEGIN_PROFILE_FETCH,
   ON_PROFILE_FETCH_FAILED,
   ON_PROFILE_FETCH_SUCCESS,
-  RECENT_CARDS_START,
-  RECENT_CARDS_SUCCESS,
-  RECENT_CARDS_FAILED,
 } from './dashboardTypes';
 
 import { axiosWithAuth } from '../../utils/auth';
@@ -24,26 +21,6 @@ export const fetchProfile = () => dispactch => {
     .catch(err => {
       dispactch({
         type: ON_PROFILE_FETCH_FAILED,
-        payload: err,
-      });
-    });
-};
-
-export const getRecentCards = userId => dispatch => {
-  dispatch({ type: RECENT_CARDS_START });
-
-  axiosWithAuth()
-    .get(`/api/cards/users/${userId}`)
-    .then(({ data }) => {
-      dispatch({
-        type: RECENT_CARDS_SUCCESS,
-        payload: data.user,
-      });
-      console.log(data.user);
-    })
-    .catch(err => {
-      dispatch({
-        type: RECENT_CARDS_FAILED,
         payload: err,
       });
     });
