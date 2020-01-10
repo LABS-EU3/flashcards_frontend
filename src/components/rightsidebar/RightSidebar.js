@@ -67,8 +67,13 @@ export default function RightSidebar(props) {
         styles={{
           sidebar: {
             background: 'white',
-            width: '25%',
+            width: '100%',
             minWidth: '250px',
+          },
+
+          root: {
+            width: '25%',
+            left: 'none',
           },
         }}
       />
