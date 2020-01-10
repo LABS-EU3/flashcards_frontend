@@ -6,14 +6,16 @@ import { Route, Redirect } from 'react-router-dom';
 
 // Utils
 import { getToken } from './auth';
-
+/* eslint-disable no-lone-blocks */
 const PrivateRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={props =>
-        getToken() ? <Component {...props} /> : <Redirect to="/" />
-      }
+      render={props => {
+        {
+          return getToken() ? <Component {...props} /> : <Redirect to="/" />;
+        }
+      }}
     />
   );
 };
