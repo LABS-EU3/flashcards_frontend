@@ -11,6 +11,7 @@ import DashboardLayout from './DashboardLayout';
 import RightSidebar from '../../components/rightsidebar/RightSidebar';
 import DeckLibrary from './routes/DeckLibrary';
 import { fetchProfile } from '../../modules/dashboard/dashboardActions';
+import { logoutUser } from '../../modules/user/userActions';
 
 export const DashboardComponent = props => {
   const { user } = props;
@@ -19,7 +20,8 @@ export const DashboardComponent = props => {
     props.fetchProfile();
   }, []);
   return (
-    <DashboardLayout user={user}>
+    // eslint-disable-next-line react/destructuring-assignment
+    <DashboardLayout user={user} logoutUser={props.logoutUser}>
       <RouteContainer>
         <Switch>
           <Route path="/dashboard/library" component={DeckLibrary} />
@@ -41,4 +43,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { fetchProfile })(DashboardComponent);
+export default connect(mapStateToProps, {
+  fetchProfile,
+  logoutUser,
+})(DashboardComponent);

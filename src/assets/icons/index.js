@@ -3,6 +3,7 @@ import DashboardIcon from './dashboard_icon_outlined.svg';
 import LibraryIcon from './library_icon_outlined.svg';
 import ProfileIcon from './profile_icon_outlined.svg';
 import SettingsIcon from './settings_24px_outlined.svg';
+import LogoutIcon from './logout.svg';
 
 export default {
   AddDecksIcon,
@@ -10,4 +11,5 @@ export default {
   LibraryIcon,
   ProfileIcon,
   SettingsIcon,
+  LogoutIcon,
 };
