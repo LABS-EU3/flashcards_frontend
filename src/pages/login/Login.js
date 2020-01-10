@@ -47,13 +47,13 @@ export default function Login() {
             history.goBack();
           }}
         >
-          <img src={`${BackArrow}`} alt="back arrow" />
+          <img src={`${BackArrow}`} alt="back arrow" id="bArrow2" />
           <H5>Back</H5>
         </BackArrowButton>
         <TopTriangle />
         <SkewDiv>
           <UnSkewDiv>
-            <H1>Login</H1>
+            <H1 id="login2">Login</H1>
             <LoginForm history={history} />
             <br />
             <H3 REGULAR>

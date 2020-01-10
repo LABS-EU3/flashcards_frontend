@@ -50,7 +50,7 @@ export default function SignUp() {
             history.goBack();
           }}
         >
-          <img src={`${BackArrow}`} alt="back arrow" />
+          <img src={`${BackArrow}`} alt="back arrow" id="bArrow1" />
           <H5>Back</H5>
         </BackArrowButton2>
         <SkewDivSecondary>

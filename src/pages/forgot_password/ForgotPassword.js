@@ -55,8 +55,8 @@ export default function ForgotPassword() {
           <UnSkewDiv>
             <FlexColumnSpaceBetween>
               <img src={`${QuestionMark}`} alt="question mark icon" />
-              <H1>Forgot Password</H1>
-              <P LIGHTWEIGHT>
+              <H1 id="forgotPasswordTitle">Forgot Password</H1>
+              <P LIGHTWEIGHT id="forgotPasswordText">
                 Enter your email linked to your account. A message will be sent
                 to your email to reset your password
               </P>

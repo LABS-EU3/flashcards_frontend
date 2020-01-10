@@ -19,11 +19,11 @@ export const Forms = styled.form`
 // Here you can use the border attribute dynamically
 /*
 
-  <Input 
-    border={errors.email && '1px solid ${c.DANGER_COLOR}'}; 
-    type="text" 
-    name="email" 
-    placeholder="Email" 
+  <Input
+    border={errors.email && '1px solid ${c.DANGER_COLOR}'};
+    type="text"
+    name="email"
+    placeholder="Email"
   />
 
 */

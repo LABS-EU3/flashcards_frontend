@@ -31,15 +31,19 @@ const Form = props => {
   useEffect(() => {
     if (user.completed) {
       setResponse(
-        <H3 color={c.SUCCESS_COLOR}>
+        <H3 id="found" color={c.SUCCESS_COLOR}>
           Successfully sent your reset link to your email. Please check your
           inbox!
         </H3>,
       );
     }
+
     if (user.errors) {
       setResponse(
-        <H3 color={c.DANGER_COLOR}> Email address could not be found</H3>,
+        <H3 id="notFound" color={c.DANGER_COLOR}>
+          {' '}
+          Email address could not be found
+        </H3>,
       );
     }
   }, [user.errors, user.completed]);
@@ -62,7 +66,7 @@ const Form = props => {
           border={errors.email && `2px solid ${c.DANGER_COLOR}`}
         />
       </Label>
-      <Button type="submit">
+      <Button id="sendEmail" type="submit">
         <H3 WHITE>
           Send Email
           <SquareLoader
@@ -85,9 +89,11 @@ const validationSchema = yup.object().shape({
 });
 
 const ForgetPasswordForm = withFormik({
-  mapPropsToValues: () => ({
-    email: '',
-  }),
+  mapPropsToValues: () => {
+    return {
+      email: '',
+    };
+  },
   handleSubmit: (values, { props, setSubmitting }) => {
     props.forgotPassword(values);
     setSubmitting(false);
@@ -100,4 +106,5 @@ const mapStateToProps = state => {
     user: state.user,
   };
 };
+
 export default connect(mapStateToProps, { forgotPassword })(ForgetPasswordForm);

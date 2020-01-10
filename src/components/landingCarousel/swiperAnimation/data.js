@@ -10,9 +10,11 @@ export default (content = 'Slide') => {
 
   const imagesName = Object.keys(images);
 
-  return imagesName.map((image, idx) => ({
-    idx: idx + 1,
-    content: `${content} #${idx + 1}`,
-    image,
-  }));
+  return imagesName.map((image, idx) => {
+    return {
+      idx: idx + 1,
+      content: `${content} #${idx + 1}`,
+      image,
+    };
+  });
 };

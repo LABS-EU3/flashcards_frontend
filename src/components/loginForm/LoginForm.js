@@ -43,6 +43,7 @@ const Form = props => {
         </H3>,
       );
     }
+
     if (user.errors) {
       setResponse(
         <H3 color={c.DANGER_COLOR}>
@@ -88,7 +89,7 @@ const Form = props => {
       <ForgotText REGULAR>
         <NavLink to="/forgot">Forgot Password?</NavLink>
       </ForgotText>
-      <Button type="submit">
+      <Button type="submit" id="login1">
         <H3 WHITE>
           Login
           <SquareLoader
@@ -115,10 +116,12 @@ const validationSchema = yup.object().shape({
 });
 
 const LoginForm = withFormik({
-  mapPropsToValues: () => ({
-    email: '',
-    password: '',
-  }),
+  mapPropsToValues: () => {
+    return {
+      email: '',
+      password: '',
+    };
+  },
   handleSubmit: (values, { props, setSubmitting }) => {
     props.userLogin(values, props.history);
     setSubmitting(false);
@@ -131,4 +134,5 @@ const mapStateToProps = state => {
     user: state.user,
   };
 };
+
 export default connect(mapStateToProps, { userLogin })(LoginForm);

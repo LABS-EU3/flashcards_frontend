@@ -15,6 +15,7 @@ export const isTokenExpired = token => {
     if (decoded.exp < Date.now() / 1000) {
       return true;
     }
+
     return false;
   } catch (error) {
     return false;
@@ -31,11 +32,13 @@ export const getToken = () => {
     if (token === null) {
       return undefined;
     }
+
     const isExpired = isTokenExpired(token);
     if (isExpired) {
       clearLocalStorage();
       return undefined;
     }
+
     return JSON.parse(token);
   } catch (error) {
     // if error decoding, clear what is in local storage with key

@@ -36,6 +36,7 @@ const Form = props => {
         </H3>,
       );
     }
+
     if (user.errors) {
       setResponse(
         <H3 color={c.DANGER_COLOR}>
@@ -104,10 +105,12 @@ const validationSchema = yup.object().shape({
 });
 
 const ResetPasswordForm = withFormik({
-  mapPropsToValues: () => ({
-    confirmPassword: '',
-    password: '',
-  }),
+  mapPropsToValues: () => {
+    return {
+      confirmPassword: '',
+      password: '',
+    };
+  },
   handleSubmit: (values, { props, setSubmitting }) => {
     props.resetPassword(props.resetToken, values, props.history);
     setSubmitting(false);
@@ -120,4 +123,5 @@ const mapStateToProps = state => {
     user: state.user,
   };
 };
+
 export default connect(mapStateToProps, { resetPassword })(ResetPasswordForm);

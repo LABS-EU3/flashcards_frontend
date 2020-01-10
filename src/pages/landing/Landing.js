@@ -35,8 +35,10 @@ export default function Landing() {
         <ParentBackgroundSecondary>
           <SkewDivSecondary>
             <UnSkewDivSecondary>
-              <H1>Welcome to Quick Decks</H1>
-              <H2 REGULAR>Here’s what you’ll be getting into</H2>
+              <H1 id="welcomeTitle">Welcome to Quick Decks</H1>
+              <H2 REGULAR id="welcomeText">
+                Here’s what you’ll be getting into
+              </H2>
               <LandingCarousel />
               <Button
                 onClick={() => {

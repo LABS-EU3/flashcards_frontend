@@ -27,6 +27,7 @@ const SignUpForm = props => {
     user,
   } = props;
   const [response, setResponse] = useState(null);
+
   useEffect(() => {
     if (user.completed) {
       setResponse(
@@ -35,6 +36,7 @@ const SignUpForm = props => {
         </H3>,
       );
     }
+
     if (user.errors) {
       setResponse(<H3 color={c.DANGER_COLOR}>User already exists</H3>);
     }
@@ -143,12 +145,14 @@ const validationSchema = yup.object().shape({
 });
 
 const RegisterForm = withFormik({
-  mapPropsToValues: () => ({
-    password: '',
-    password2: '',
-    email: '',
-    fullName: '',
-  }),
+  mapPropsToValues: () => {
+    return {
+      password: '',
+      password2: '',
+      email: '',
+      fullName: '',
+    };
+  },
   handleSubmit: (values, { props, setSubmitting }) => {
     props.userSignUp(
       {
@@ -168,4 +172,5 @@ const mapStateToProps = state => {
     user: state.user,
   };
 };
+
 export default connect(mapStateToProps, { userSignUp })(RegisterForm);

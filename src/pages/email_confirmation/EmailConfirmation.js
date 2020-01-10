@@ -45,6 +45,7 @@ export default function EmailConfirmation(props) {
         confirmEmail(match.params.token, history);
         setConfirm(true);
       }
+
       if (user.loading) {
         setResponse(
           <H3 LIGHTWEIGHT>Kindly wait while we confirm your account</H3>,

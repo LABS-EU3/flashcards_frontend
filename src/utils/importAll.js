@@ -12,5 +12,6 @@ export default function importAll(r) {
     // eslint-disable-next-line no-return-assign
     return (images[item.replace('./', '')] = r(item));
   });
+
   return images;
 }

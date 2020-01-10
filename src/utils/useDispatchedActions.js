@@ -11,12 +11,12 @@ import { useMemo } from 'react';
 // Example:
 /*
 const [
-  getUsers, 
-  setUserForm, 
+  getUsers,
+  setUserForm,
   deleteUser
 ] = useDispatchedActions([
-  actionCreators.getUsers, 
-  actionCreators.setUserForm, 
+  actionCreators.getUsers,
+  actionCreators.setUserForm,
   actionCreators.deleteUser])
 
 */
@@ -27,6 +27,7 @@ export default function useDispatchedActions(actions, deps) {
       if (Array.isArray(actions)) {
         return actions.map(a => bindActionCreators(a, dispatch));
       }
+
       return bindActionCreators(actions, dispatch);
     },
     deps ? [dispatch, ...deps] : [dispatch],
