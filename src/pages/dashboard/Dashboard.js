@@ -3,11 +3,12 @@
 // Libraries
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { Switch, Route } from 'react-router';
 
 // Styled
-import { H1, H3 } from '../../styles/typography';
 import DashboardLayout from './DashboardLayout';
 import RightSidebar from '../../components/rightsidebar/RightSidebar';
+import DeckLibrary from './routes/DeckLibrary';
 import { fetchProfile } from '../../modules/dashboard/dashboardActions';
 
 export const DashboardComponent = props => {
@@ -18,8 +19,9 @@ export const DashboardComponent = props => {
   }, []);
   return (
     <DashboardLayout user={user}>
-      <H1>Dashboard Test</H1>
-      <H3>Welcome! Login successful</H3>
+      <Switch>
+        <Route path="/dashboard/library" component={DeckLibrary} />
+      </Switch>
       <RightSidebar user={user} />
     </DashboardLayout>
   );

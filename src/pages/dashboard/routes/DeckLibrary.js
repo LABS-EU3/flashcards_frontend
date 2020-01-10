@@ -33,6 +33,13 @@ const IconLabel = ({ img, label }) => {
 const IconWithText = styled.div`
   display: flex;
   flex-direction: column;
+
+  img {
+    height: 24px;
+    width: 24px;
+
+    margin: 10px 0;
+  }
 `;
 
 const TopComponent = styled.div`

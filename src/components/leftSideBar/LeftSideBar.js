@@ -42,7 +42,11 @@ export default ({ name }) => {
         <MenuItem img={icons.DashboardIcon} text="Dashboard" />
         <MenuItem img={icons.ProfileIcon} text="Profile" />
         <MenuItem img={icons.AddDecksIcon} text="Add Decks" />
-        <MenuItem img={icons.LibraryIcon} text="Deck Library" />
+        <MenuItem
+          img={icons.LibraryIcon}
+          text="Deck Library"
+          route="dashboard/library"
+        />
         <GrowSpace />
         <MenuItem img={icons.SettingsIcon} text="Settings" />
       </MenuBox>
