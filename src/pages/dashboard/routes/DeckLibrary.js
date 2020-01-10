@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 
 import icons from '../../../assets/icons';
 import { H1, HR, H2, P } from '../../../styles/typography';
@@ -50,16 +51,65 @@ const cards = [
 ];
 
 const DeckLibrary = () => {
+  const FadingBackground = styled(BaseModalBackground)`
+    opacity: ${props => props.opacity};
+    transition: opacity ease 200ms;
+  `;
+  const [isOpen, setIsOpen] = useState(false);
+  const [opacity, setOpacity] = useState(0);
+
+  function toggleModal() {
+    setIsOpen(!isOpen);
+  }
+
+  function afterOpen() {
+    setTimeout(() => {
+      setOpacity(1);
+    }, 10);
+  }
   return (
     <div>
-      <TopComponents />
-      <Decks decks={cards} />
+      <ModalProvider backgroundComponent={FadingBackground}>
+        <TopComponents />
+        {/* <FancyModalButton /> */}
+        <button type="button" onClick={toggleModal}>
+          Open modal
+        </button>
+        <StyledModal
+          isOpen={isOpen}
+          afterOpen={afterOpen}
+          // beforeClose={beforeClose}
+          onBackgroundClick={toggleModal}
+          onEscapeKeydown={toggleModal}
+          opacity={opacity}
+          backgroundProps={{ opacity }}
+        >
+          <span>I am a modal!</span>
+          <button type="button" onClick={toggleModal}>
+            Close me
+          </button>
+        </StyledModal>
+        <Decks decks={cards} />
+      </ModalProvider>
     </div>
   );
 };
 
+const StyledModal = Modal.styled`
+  width: 50%;
+  height: 70%;
+  display: flex;
+  border-radius: 15px;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  opacity: ${props => props.opacity};
+  transition: opacity ease 500ms;
+`;
+
 const TopComponents = () => {
   return (
+    // <ModalProvider backgroundComponent={FadingBackground}>
     <TopComponent>
       <H1>Deck Library</H1>
       <LibraryActions>
@@ -67,6 +117,7 @@ const TopComponents = () => {
         <IconLabel img={icons.LibraryIcon} label="Edit Library" />
       </LibraryActions>
     </TopComponent>
+    // </ModalProvider>
   );
 };
 
