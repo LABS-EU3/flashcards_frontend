@@ -1,12 +1,23 @@
 {
   "env": {
     "browser": true,
-    "es6": true
+    "es6": true,
+    "cypress/globals": true
   },
-  "extends": ["airbnb", "prettier", "prettier/react"],
+
+  "extends": [
+    "airbnb",
+    "prettier",
+    "prettier/react",
+    "plugin:cypress/recommended"
+  ],
   "globals": {
     "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly"
+    "SharedArrayBuffer": "readonly",
+    "cy": true,
+    "Cypress": true,
+    "expect": true,
+    "assert": true
   },
   "parserOptions": {
     "ecmaFeatures": {
@@ -15,7 +26,7 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["react", "prettier"],
+  "plugins": ["react", "prettier", "cypress", "chai-friendly"],
   "rules": {
     "react/prop-types": 0,
     "react/jsx-props-no-spreading": 0,
@@ -26,6 +37,11 @@
       }
     ],
     "prettier/prettier": "error",
-    "max-len": ["error", 80]
+    "max-len": ["error", 115],
+    "cypress/no-assigning-return-values": "error",
+    "cypress/no-unnecessary-waiting": "error",
+    "cypress/assertion-before-screenshot": "warn",
+    "no-unused-expressions": 0,
+    "chai-friendly/no-unused-expressions": 2
   }
 }
