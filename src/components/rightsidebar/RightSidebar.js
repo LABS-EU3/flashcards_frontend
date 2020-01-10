@@ -71,7 +71,9 @@ export default function RightSidebar(props) {
             minWidth: '250px',
           },
         }}
-      />
+      >
+        <div />
+      </Sidebar>
     </SidebarStyled>
   );
 }
@@ -93,17 +95,14 @@ const SideContent = ({ user }) => {
         </StyledStart>
         {cards.map(card => {
           return (
-            <Card key={card.id} title={card.title} category={card.category} />
+            <Card
+              key={card.title}
+              title={card.title}
+              category={card.category}
+            />
           );
         })}
       </CardsStyled>
     </SidebarBody>
   );
 };
-
-// const mapStateToProps = state => {
-//   return {
-//     user: state.user,
-//   };
-// };
-// export default connect(mapStateToProps)(RightSidebar);

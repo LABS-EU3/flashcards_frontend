@@ -5,9 +5,9 @@ import RoundedImage from 'react-rounded-image';
 
 // import { fetchProfile } from '../../../modules/dashboard/dashboardActions';
 // assets
+import { withRouter } from 'react-router-dom';
 import icons from '../../assets/icons';
 import profileDefault from '../../assets/user_profile_default.jpg';
-
 // Styled
 import * as c from '../../styles/variables/colours';
 import { P, H1 } from '../../styles/typography';
@@ -19,7 +19,11 @@ import {
   SidebarBody,
 } from '../../pages/dashboard/styles/DashboardStyles';
 
-export default ({ name }) => {
+const LeftSideBar = ({ name, logoutUser, history }) => {
+  const onLogout = e => {
+    e.preventDefault();
+    logoutUser(history);
+  };
   return (
     <SidebarBody>
       <ProfileImageDiv>
@@ -43,16 +47,17 @@ export default ({ name }) => {
         <MenuItem img={icons.ProfileIcon} text="Profile" />
         <MenuItem img={icons.AddDecksIcon} text="Add Decks" />
         <MenuItem img={icons.LibraryIcon} text="Deck Library" />
-        <GrowSpace />
         <MenuItem img={icons.SettingsIcon} text="Settings" />
+        <GrowSpace />
+        <MenuItem img={icons.LogoutIcon} onClick={onLogout} text="Log Out" />
       </MenuBox>
     </SidebarBody>
   );
 };
 
-const MenuItem = ({ img, text, route = '/' }) => {
+const MenuItem = ({ img, text, onClick, route = '/' }) => {
   return (
-    <Item to={route}>
+    <Item onClick={onClick || null} to={route}>
       <img src={img} alt="" />
       <P BRAND color={c.WHITE}>
         {text}
@@ -60,3 +65,5 @@ const MenuItem = ({ img, text, route = '/' }) => {
     </Item>
   );
 };
+
+export default withRouter(LeftSideBar);

@@ -15,7 +15,7 @@ import {
 } from './styles/DashboardStyles';
 
 export default function DashboardLayout(props) {
-  const { user, children } = props;
+  const { user, children, logoutUser } = props;
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const mql = window.matchMedia(`(min-width: ${g.desktopMediaBreak}px)`);
@@ -36,7 +36,12 @@ export default function DashboardLayout(props) {
   return (
     <DashboardContainer>
       <Sidebar
-        sidebar={<LeftSideBar name={user.credentials.full_name} />}
+        sidebar={
+          <LeftSideBar
+            name={user.credentials.full_name}
+            logoutUser={logoutUser}
+          />
+        }
         open={sidebarOpen}
         onSetOpen={setSidebarOpen}
         docked={sideBarDocked}

@@ -41,6 +41,10 @@ export const Item = styled(NavLink)`
   p {
     margin-left: 14px;
   }
+  img {
+    height: 24px;
+    width: 24px;
+  }
 `;
 
 export const GrowSpace = styled.div`
