@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { Form, Formik, Field } from 'formik';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 
 import icons from '../../../assets/icons';
@@ -84,10 +85,9 @@ const DeckLibrary = () => {
           opacity={opacity}
           backgroundProps={{ opacity }}
         >
-          <span>I am a modal!</span>
-          <button type="button" onClick={toggleModal}>
-            Close me
-          </button>
+          <ModalInner>
+            <CreateDeckForm />
+          </ModalInner>
         </StyledModal>
         <Decks decks={cards} />
       </ModalProvider>
@@ -95,16 +95,83 @@ const DeckLibrary = () => {
   );
 };
 
+const ModalInner = styled.div`
+  height: 90%;
+  width: 100%;
+  background: white;
+  border-top-right-radius: 100px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  display: flex;
+  flex-direction: column;
+`;
+
 const StyledModal = Modal.styled`
   width: 50%;
-  height: 70%;
+  height: 85%;
   display: flex;
   border-radius: 15px;
   align-items: center;
   justify-content: center;
-  background-color: white;
+  background: linear-gradient(88.92deg, #D21F3C -6.57%, #FFA987 91.86%);
   opacity: ${props => props.opacity};
   transition: opacity ease 500ms;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+`;
+
+const initialValues = {
+  deckName: '',
+  tags: [],
+};
+
+const tags = [
+  'Accounting & Finance',
+  'Aeronautical & Manufacturing Engineering',
+  'Agriculture & Forestry',
+  'American Studies',
+  'Anatomy & Physiology',
+  'Anthropology',
+];
+
+const CreateDeckForm = () => {
+  return (
+    <DeckForm>
+      <H1>Deck Form</H1>
+      <Formik onSubmit={() => {}} initialValues={initialValues}>
+        {() => (
+          <Form>
+            <P>Deck Name</P>
+            <Field name="deckName" type="text" />
+
+            <P>Tags</P>
+            <Field name="tags" as="select">
+              {tags.map(t => (
+                <option value={t}>{t}</option>
+              ))}
+            </Field>
+          </Form>
+        )}
+      </Formik>
+    </DeckForm>
+  );
+};
+
+const DeckForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  input {
+    width: 80%;
+    height: 30px;
+  }
+
+  select {
+    width: 86%;
+    height: 30px;
+  }
 `;
 
 const TopComponents = () => {
