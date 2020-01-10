@@ -4,6 +4,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router';
+import styled from 'styled-components';
 
 // Styled
 import DashboardLayout from './DashboardLayout';
@@ -19,13 +20,19 @@ export const DashboardComponent = props => {
   }, []);
   return (
     <DashboardLayout user={user}>
-      <Switch>
-        <Route path="/dashboard/library" component={DeckLibrary} />
-      </Switch>
+      <RouteContainer>
+        <Switch>
+          <Route path="/dashboard/library" component={DeckLibrary} />
+        </Switch>
+      </RouteContainer>
       <RightSidebar user={user} />
     </DashboardLayout>
   );
 };
+
+const RouteContainer = styled.div`
+  margin-right: 25%;
+`;
 
 const mapStateToProps = state => {
   return {
