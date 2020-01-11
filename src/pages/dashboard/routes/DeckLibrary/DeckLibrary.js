@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 
 import AddDeckForm from '../../../../components/addDeckForm/AddDeckForm';
 import DecksSection from './components/DecksSection';
 import TopComponent from './components/TopComponent';
+import {
+  createDeck,
+  fetchTags,
+} from '../../../../modules/dashboard/dashboardActions';
+
+import {
+  ON_DECK_CREATION_CANCELLED,
+  ON_START_CREATING_DECK,
+} from '../../../../modules/dashboard/dashboardTypes';
 
 import FancyModal from '../../../../components/modals/CreateResourceModal';
 
@@ -60,12 +69,20 @@ const tags = [
   'Anthropology',
 ];
 
-const DeckLibrary = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const DeckLibrary = props => {
+  const { dashboard } = props;
+  const { creatingDeck } = dashboard;
+
   const [opacity, setOpacity] = useState(0);
 
+  const dispatch = useDispatch();
+
   function toggleModal() {
-    setIsOpen(!isOpen);
+    if (creatingDeck) {
+      dispatch({ type: ON_DECK_CREATION_CANCELLED });
+    } else {
+      dispatch({ type: ON_START_CREATING_DECK });
+    }
   }
 
   function afterOpen() {
@@ -80,7 +97,7 @@ const DeckLibrary = () => {
         Open modal
       </button>
       <FancyModal
-        isOpen={isOpen}
+        isOpen={creatingDeck}
         afterOpen={afterOpen}
         toggleModal={toggleModal}
         opacity={opacity}
@@ -99,4 +116,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {})(DeckLibrary);
+export default connect(mapStateToProps, {
+  createDeck,
+  fetchTags,
+})(DeckLibrary);
