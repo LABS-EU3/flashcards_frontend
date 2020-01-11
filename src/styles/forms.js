@@ -9,6 +9,15 @@ import * as f from './variables/fonts';
 // Colours
 import * as c from './variables/colours';
 
+export const FormContainer = styled.div`
+  text-align: center;
+  width: ${props => props.width || '55%'};
+  margin: 4% 0;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+`;
+
 export const Forms = styled.form`
   display: flex;
   flex-direction: column;

@@ -9,7 +9,7 @@ import styled from 'styled-components';
 // Styled
 import DashboardLayout from './DashboardLayout';
 import RightSidebar from '../../components/rightsidebar/RightSidebar';
-import DeckLibrary from './routes/DeckLibrary';
+import DeckLibrary from './routes/DeckLibrary/DeckLibrary';
 import { fetchProfile } from '../../modules/dashboard/dashboardActions';
 import { logoutUser } from '../../modules/user/userActions';
 
