@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { Form, Formik, Field } from 'formik';
+import { withFormik } from 'formik';
+import * as yup from 'yup';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 
 import icons from '../../../assets/icons';
-import { H1, HR, H2, P } from '../../../styles/typography';
+import { H1, HR, H2, P, Text } from '../../../styles/typography';
 import { CardsFlex } from '../../../components/cards/Cards';
+import { Forms, Input, Label, Select } from '../../../styles/forms';
+import * as c from '../../../styles/variables/colours';
+import { GrowSpace } from '../../../styles/displayFlex';
 
 const cards = [
   {
@@ -51,6 +55,16 @@ const cards = [
   },
 ];
 
+const tags = [
+  '',
+  'Accounting & Finance',
+  'Aeronautical & Manufacturing Engineering',
+  'Agriculture & Forestry',
+  'American Studies',
+  'Anatomy & Physiology',
+  'Anthropology',
+];
+
 const DeckLibrary = () => {
   const FadingBackground = styled(BaseModalBackground)`
     opacity: ${props => props.opacity};
@@ -72,21 +86,19 @@ const DeckLibrary = () => {
     <div>
       <ModalProvider backgroundComponent={FadingBackground}>
         <TopComponents />
-        {/* <FancyModalButton /> */}
         <button type="button" onClick={toggleModal}>
           Open modal
         </button>
         <StyledModal
           isOpen={isOpen}
           afterOpen={afterOpen}
-          // beforeClose={beforeClose}
           onBackgroundClick={toggleModal}
           onEscapeKeydown={toggleModal}
           opacity={opacity}
           backgroundProps={{ opacity }}
         >
           <ModalInner>
-            <CreateDeckForm />
+            <AddDeckForm />
           </ModalInner>
         </StyledModal>
         <Decks decks={cards} />
@@ -94,6 +106,90 @@ const DeckLibrary = () => {
     </div>
   );
 };
+
+const Form = props => {
+  const {
+    values,
+    touched,
+    errors,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+  } = props;
+  return (
+    <Forms onSubmit={handleSubmit} height="100%">
+      <FormContainer>
+        <H1>Create Deck</H1>
+        <Label>
+          <H2>Deck Name</H2>
+          {touched.deckName && errors.deckName && (
+            <Text color={c.DANGER_COLOR}>{errors.deckName}</Text>
+          )}
+          <Input
+            type="text"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.deckName}
+            name="deckName"
+            border={
+              touched.deckName &&
+              errors.deckName &&
+              `2px solid ${c.DANGER_COLOR}`
+            }
+          />
+        </Label>
+
+        <Label>
+          <H2>Tags</H2>
+          {touched.tag && errors.tag && (
+            <Text color={c.DANGER_COLOR}>{errors.deckName}</Text>
+          )}
+          <Select
+            placeholder="Add tags to your deck"
+            type="text"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.tag}
+            name="tag"
+            border={touched.tag && errors.tag && `2px solid ${c.DANGER_COLOR}`}
+          >
+            {tags.map(t => (
+              <option value={t}>{t}</option>
+            ))}
+          </Select>
+        </Label>
+
+        <GrowSpace flexGrow="2" />
+
+        <button type="submit">Submit</button>
+        <GrowSpace flexGrow="1" />
+      </FormContainer>
+    </Forms>
+  );
+};
+
+const FormContainer = styled.div`
+  text-align: center;
+  width: 55%;
+  margin: 4% 0;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+`;
+
+const validationSchema = yup.object().shape({
+  deckName: yup.string().required('Please provide a name for your deck'),
+  tag: yup.string(),
+});
+
+const AddDeckForm = withFormik({
+  mapPropsToValues: () => ({ deckName: '', tag: '' }),
+  validationSchema,
+  handleSubmit: (values, { /* props, */ setSubmitting }) => {
+    setSubmitting(false);
+  },
+  displayName: 'Create Deck',
+})(Form);
 
 const ModalInner = styled.div`
   height: 90%;
@@ -121,62 +217,8 @@ const StyledModal = Modal.styled`
   justify-content: flex-end;
 `;
 
-const initialValues = {
-  deckName: '',
-  tags: [],
-};
-
-const tags = [
-  'Accounting & Finance',
-  'Aeronautical & Manufacturing Engineering',
-  'Agriculture & Forestry',
-  'American Studies',
-  'Anatomy & Physiology',
-  'Anthropology',
-];
-
-const CreateDeckForm = () => {
-  return (
-    <DeckForm>
-      <H1>Deck Form</H1>
-      <Formik onSubmit={() => {}} initialValues={initialValues}>
-        {() => (
-          <Form>
-            <P>Deck Name</P>
-            <Field name="deckName" type="text" />
-
-            <P>Tags</P>
-            <Field name="tags" as="select">
-              {tags.map(t => (
-                <option value={t}>{t}</option>
-              ))}
-            </Field>
-          </Form>
-        )}
-      </Formik>
-    </DeckForm>
-  );
-};
-
-const DeckForm = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  input {
-    width: 80%;
-    height: 30px;
-  }
-
-  select {
-    width: 86%;
-    height: 30px;
-  }
-`;
-
 const TopComponents = () => {
   return (
-    // <ModalProvider backgroundComponent={FadingBackground}>
     <TopComponent>
       <H1>Deck Library</H1>
       <LibraryActions>
@@ -184,7 +226,6 @@ const TopComponents = () => {
         <IconLabel img={icons.LibraryIcon} label="Edit Library" />
       </LibraryActions>
     </TopComponent>
-    // </ModalProvider>
   );
 };
 
@@ -251,7 +292,6 @@ const IconWithText = styled.button`
   img {
     height: 24px;
     width: 24px;
-
     margin: 10px 0;
   }
 `;
