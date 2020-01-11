@@ -12,7 +12,6 @@ import {
 
 import { axiosWithAuth } from '../../utils/auth';
 
-// eslint-disable-next-line import/prefer-default-export
 export const fetchProfile = () => dispactch => {
   dispactch({ type: ON_BEGIN_PROFILE_FETCH });
 
