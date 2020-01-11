@@ -93,9 +93,6 @@ const DeckLibrary = props => {
   return (
     <div>
       <TopComponent />
-      <button type="button" onClick={toggleModal}>
-        Open modal
-      </button>
       <FancyModal
         isOpen={creatingDeck}
         afterOpen={afterOpen}
