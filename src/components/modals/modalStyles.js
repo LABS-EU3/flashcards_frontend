@@ -19,7 +19,7 @@ export const ModalInner = styled.div`
 `;
 
 export const StyledModal = Modal.styled`
-  width: 50%;
+  width: 40%;
   height: 85%;
   display: flex;
   border-radius: 15px;

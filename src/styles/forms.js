@@ -11,7 +11,7 @@ import * as c from './variables/colours';
 
 export const FormContainer = styled.div`
   text-align: center;
-  width: ${props => props.width || '55%'};
+  width: ${props => props.width || '45%'};
   margin: 4% 0;
   display: flex;
   height: 100%;
