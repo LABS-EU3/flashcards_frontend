@@ -3,7 +3,8 @@ import React from 'react';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 
-import { H1, H2, Text } from '../../styles/typography';
+import LightPopButton from '../buttons/LightPopButton';
+import { H1, H2, Text, H3 } from '../../styles/typography';
 import { Forms, Input, Label, Select, FormContainer } from '../../styles/forms';
 import * as c from '../../styles/variables/colours';
 import { GrowSpace } from '../../styles/displayFlex';
@@ -63,7 +64,11 @@ const Form = props => {
 
         <GrowSpace flexGrow="2" />
 
-        <button type="submit">Submit</button>
+        <LightPopButton>
+          <H3 BOLD WHITE>
+            Create
+          </H3>
+        </LightPopButton>
         <GrowSpace flexGrow="1" />
       </FormContainer>
     </Forms>
