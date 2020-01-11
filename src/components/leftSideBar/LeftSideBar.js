@@ -12,12 +12,13 @@ import profileDefault from '../../assets/user_profile_default.jpg';
 import * as c from '../../styles/variables/colours';
 import { P, H1 } from '../../styles/typography';
 import {
-  GrowSpace,
   MenuBox,
   ProfileImageDiv,
   Item,
   SidebarBody,
 } from '../../pages/dashboard/styles/DashboardStyles';
+
+import { GrowSpace } from '../../styles/displayFlex';
 
 const LeftSideBar = ({ name, logoutUser, history }) => {
   const onLogout = e => {
