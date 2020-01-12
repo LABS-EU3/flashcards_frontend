@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { withFormik } from 'formik';
 import * as yup from 'yup';
+
+import styled from 'styled-components';
 
 import LightPopButton from '../buttons/LightPopButton';
 import { H1, H2, Text, H3 } from '../../styles/typography';
@@ -10,6 +12,15 @@ import * as c from '../../styles/variables/colours';
 import { GrowSpace } from '../../styles/displayFlex';
 
 const Form = props => {
+  const [selectedTags, setSelectedTags] = useState([]);
+  const removeTag = tag => {
+    const remainingTags = selectedTags.filter(t => t !== tag);
+    setSelectedTags(remainingTags);
+  };
+
+  const addTag = tag => {
+    setSelectedTags([...selectedTags, tag]);
+  };
   const {
     values,
     touched,
@@ -50,7 +61,10 @@ const Form = props => {
           <Select
             placeholder="Add tags to your deck"
             type="text"
-            onChange={handleChange}
+            onChange={e => {
+              handleChange(e);
+              addTag(e.target.value);
+            }}
             onBlur={handleBlur}
             value={values.tag}
             name="tag"
@@ -61,7 +75,11 @@ const Form = props => {
             ))}
           </Select>
         </Label>
-
+        <SelectedTagsContainer>
+          {selectedTags.map(s => (
+            <Tag value={s} removeTag={removeTag} />
+          ))}
+        </SelectedTagsContainer>
         <GrowSpace flexGrow="2" />
 
         <LightPopButton>
@@ -74,6 +92,38 @@ const Form = props => {
     </Forms>
   );
 };
+
+const Tag = props => {
+  const { value, removeTag } = props;
+  return (
+    <TagContainer onClick={() => removeTag(value)}>
+      <H2
+        style={{
+          whiteSpace: 'nowrap',
+          textOverflow: 'ellipsis',
+          overflow: 'hidden',
+        }}
+      >
+        {value}
+      </H2>
+    </TagContainer>
+  );
+};
+
+const TagContainer = styled.div`
+  display: flex;
+  width: 40%;
+  /* border: 1px solid; */
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+`;
+
+const SelectedTagsContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+`;
 
 const validationSchema = yup.object().shape({
   deckName: yup.string().required('Please provide a name for your deck'),
