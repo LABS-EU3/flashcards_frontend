@@ -1,18 +1,24 @@
 import React from 'react';
-import { FaCheck } from 'react-icons/fa';
+import { FaCheck, FaTimes } from 'react-icons/fa';
 
 import './styles.css';
 
-const ProfileMainSection = () => {
+const moment = require('moment');
+
+const ProfileMainSection = ({ profileData }) => {
+  const { fullName, isConfirmed, email, createdOn } = profileData;
+  const registered = new Date(createdOn);
+  const timeSinceRegisteration = moment(registered).fromNow();
+
   return (
     <div className="profile-main-section">
       <div className="profile-info profile-card  col-2-3">
         <div className="">
-          <div className="name">Mark Zucker</div>
+          <div className="name">{fullName}</div>
           <div className="email">
             <span className="title">Email</span>
             <br />
-            <span className="address">zuckerr@gmail.com</span>
+            <span className="address">{email}</span>
           </div>
         </div>
 
@@ -27,10 +33,8 @@ const ProfileMainSection = () => {
       </div>
 
       <div className="profile-card account-info col-1-3">
-        <div>
-          Account Verified <FaCheck />
-        </div>
-        <div>Member since 2 months ago</div>
+        <div>Account Verified {isConfirmed ? <FaCheck /> : <FaTimes />}</div>
+        <div>Member from {timeSinceRegisteration}</div>
       </div>
     </div>
   );

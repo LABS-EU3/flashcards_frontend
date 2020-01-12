@@ -4,12 +4,13 @@ import ProfileBanner from './ProfileBanner';
 import ProfileImage from './ProfileImage';
 import ProfileMainSection from './ProfileMainSection';
 
-const ProfileMainPage = () => {
+const ProfileMainPage = ({ profileData }) => {
+  const { fullName } = profileData;
   return (
     <div className="profile-main-page">
-      <ProfileBanner />
-      <ProfileImage />
-      <ProfileMainSection />
+      <ProfileBanner name={fullName} />
+      <ProfileImage profileData={profileData} />
+      <ProfileMainSection profileData={profileData} />
     </div>
   );
 };

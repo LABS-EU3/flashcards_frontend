@@ -4,10 +4,10 @@ import MenuItems from './MenuItems';
 
 import './styles.css';
 
-const ProfileSidebar = () => {
+const ProfileSidebar = ({ profileData }) => {
   return (
     <div className="profile-sidebar">
-      <ProfileImage />
+      <ProfileImage profileData={profileData} />
       <MenuItems />
     </div>
   );

@@ -21,6 +21,7 @@
   color: #f6f1f0;
   padding-top: 8%;
   text-align: center;
+  white-space: nowrap;
 }
 
 .sidebar-profile-image >  img {
@@ -41,7 +42,8 @@
   padding-top: 5%;
   padding-bottom: 5%;
   padding-left: 10%;
-  cursor: pointer
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .menu-item img {
@@ -61,14 +63,14 @@
   bottom: 30px;
 }
 
-.profile-active {
+.selected {
   background: #fff;
 }
 
-.profile-active > p {
+.selected > p {
   color: #444140 !important;
 }
 
-.profile-active > img {
+.selected > img {
   background: #444140;
 }

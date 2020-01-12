@@ -51,6 +51,7 @@
   top: 45%;
   left: 120%;
   color: #f6f1f0;
+  white-space: nowrap;
 }
 
 /* profile main section */
