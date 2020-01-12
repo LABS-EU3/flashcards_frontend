@@ -100,7 +100,6 @@ const Tag = props => {
       <img src={MdClose} alt="" />
       <H2
         style={{
-          whiteSpace: 'nowrap',
           textOverflow: 'ellipsis',
           overflow: 'hidden',
         }}
@@ -118,6 +117,11 @@ const TagContainer = styled.div`
   overflow: hidden;
   white-space: nowrap;
   align-items: bottom;
+
+  &:hover {
+    cursor: pointer;
+    color: red !important;
+  }
 `;
 
 const SelectedTagsContainer = styled.div`
