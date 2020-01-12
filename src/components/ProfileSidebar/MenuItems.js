@@ -1,7 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
+import { logoutUser } from '../../modules/user/userActions';
 import icons from '../../assets/icons';
 
-const MenuItems = () => {
+const MenuItems = ({ logoutUser }) => {
+  const history = useHistory();
+
+  const handleClick = () => logoutUser(history);
+
   return (
     <div className="menu-items">
       <div className="menu-item">
@@ -29,7 +37,13 @@ const MenuItems = () => {
         <p>Settings</p>
       </div>
 
-      <div className="menu-item logout-menu">
+      <div
+        className="menu-item logout-menu"
+        onClick={handleClick}
+        onKeyDown={handleClick}
+        role="button"
+        tabIndex={0}
+      >
         <img src={icons.LogoutIcon} alt="icon logout" />
         <p>Logout</p>
       </div>
@@ -37,4 +51,4 @@ const MenuItems = () => {
   );
 };
 
-export default MenuItems;
+export default connect(null, { logoutUser })(MenuItems);
