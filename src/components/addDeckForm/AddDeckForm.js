@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 
-import styled from 'styled-components';
-import { MdClose } from 'react-icons/md';
 import LightPopButton from '../buttons/LightPopButton';
 import { H1, H2, Text, H3 } from '../../styles/typography';
 import { Forms, Input, Label, Select, FormContainer } from '../../styles/forms';
 import * as c from '../../styles/variables/colours';
 import { GrowSpace } from '../../styles/displayFlex';
+import { SelectedTagsContainer } from './deckTags/deckTagStyles';
+import Tag from './deckTags/DeckTag';
 
 const Form = props => {
   const [selectedTags, setSelectedTags] = useState([]);
@@ -92,43 +92,6 @@ const Form = props => {
     </Forms>
   );
 };
-
-const Tag = props => {
-  const { value, removeTag } = props;
-  return (
-    <TagContainer onClick={() => removeTag(value)}>
-      <img src={MdClose} alt="" />
-      <H2
-        style={{
-          textOverflow: 'ellipsis',
-          overflow: 'hidden',
-        }}
-      >
-        <MdClose style={{ verticalAlign: 'middle' }} /> {value}
-      </H2>
-    </TagContainer>
-  );
-};
-
-const TagContainer = styled.div`
-  display: flex;
-  width: 45%;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  align-items: bottom;
-
-  &:hover {
-    cursor: pointer;
-    color: red !important;
-  }
-`;
-
-const SelectedTagsContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-`;
 
 const validationSchema = yup.object().shape({
   deckName: yup.string().required('Please provide a name for your deck'),
