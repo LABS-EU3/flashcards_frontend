@@ -4,7 +4,7 @@ import { withFormik } from 'formik';
 import * as yup from 'yup';
 
 import styled from 'styled-components';
-
+import { MdClose } from 'react-icons/md';
 import LightPopButton from '../buttons/LightPopButton';
 import { H1, H2, Text, H3 } from '../../styles/typography';
 import { Forms, Input, Label, Select, FormContainer } from '../../styles/forms';
@@ -97,6 +97,7 @@ const Tag = props => {
   const { value, removeTag } = props;
   return (
     <TagContainer onClick={() => removeTag(value)}>
+      <img src={MdClose} alt="" />
       <H2
         style={{
           whiteSpace: 'nowrap',
@@ -104,7 +105,7 @@ const Tag = props => {
           overflow: 'hidden',
         }}
       >
-        {value}
+        <MdClose style={{ verticalAlign: 'middle' }} /> {value}
       </H2>
     </TagContainer>
   );
@@ -112,11 +113,11 @@ const Tag = props => {
 
 const TagContainer = styled.div`
   display: flex;
-  width: 40%;
-  /* border: 1px solid; */
+  width: 45%;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  align-items: bottom;
 `;
 
 const SelectedTagsContainer = styled.div`
