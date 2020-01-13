@@ -44,6 +44,7 @@ const RouteContainer = styled.div`
 
   @media (min-width: ${g.phoneMediaBreak}px) {
     width: 100%;
+    margin: -20px;
     @media (min-width: ${g.desktopMediaBreak}px) {
       display: flex;
       flex-direction: column;
