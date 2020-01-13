@@ -1,11 +1,3 @@
-.profile-main-page {
-  position: absolute;
-  left: 232px;
-  width: calc(100% - 232px);
-  height: 100%;
-  overflow: scroll;
-}
-
 .profile-banner {
   width: 100%;
   height: 280px;
