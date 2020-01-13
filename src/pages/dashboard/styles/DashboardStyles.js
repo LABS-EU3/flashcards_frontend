@@ -4,7 +4,9 @@ import { NavLink } from 'react-router-dom';
 import * as c from '../../../styles/variables/colours';
 
 export const DashboardContainer = styled.div``;
-export const MainContent = styled.div``;
+export const MainContent = styled.div`
+  height: 100%;
+`;
 export const SidebarBody = styled.div`
   display: flex;
   flex-direction: column;

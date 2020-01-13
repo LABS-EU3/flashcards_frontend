@@ -37,10 +37,9 @@ export const DashboardComponent = props => {
 };
 
 const RouteContainer = styled.div`
-  background: blue;
   margin-right: 25%;
   height: 100%;
-  // background: whitesmoke;
+  background: whitesmoke;
 `;
 
 const mapStateToProps = state => {
