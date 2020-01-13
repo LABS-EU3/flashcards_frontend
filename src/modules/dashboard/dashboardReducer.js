@@ -93,6 +93,19 @@ const dashboardReducer = (state = initialState, action) => {
         loading: false,
       };
 
+    case types.ON_START_FETCHING_DECKS:
+      return { ...state, loading: true };
+
+    case types.ON_GET_DECKS_CANCELLED:
+      return { ...state, loading: false };
+
+    case types.ON_GET_DECKS_COMPLETE:
+      return {
+        ...state,
+        userDecks: action.payload,
+        loading: false,
+      };
+
     default:
       return state;
   }

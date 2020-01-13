@@ -62,6 +62,10 @@ export const createDeck = (deck, onComplete, onFailed) => dispatch => {
     });
 };
 
+export const fetchUserDecks = () => dispatch => {
+  dispatch({ type: 'type' });
+};
+
 export const clearTags = () => dispatch => {
   dispatch({ type: types.CLEAR_SELECTED_TAGS });
 };
