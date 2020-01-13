@@ -9,10 +9,7 @@ import {
   fetchTags,
 } from '../../../../modules/dashboard/dashboardActions';
 
-import {
-  ON_DECK_CREATION_CANCELLED,
-  ON_START_CREATING_DECK,
-} from '../../../../modules/dashboard/dashboardTypes';
+import types from '../../../../modules/dashboard/dashboardTypes';
 
 import FancyModal from '../../../../components/modals/CreateResourceModal';
 
@@ -71,17 +68,25 @@ const tags = [
 
 const DeckLibrary = props => {
   const { dashboard } = props;
-  const { creatingDeck } = dashboard;
+  const { creatingDeck, creatingCard } = dashboard;
 
   const [opacity, setOpacity] = useState(0);
 
   const dispatch = useDispatch();
 
-  function toggleModal() {
+  function toggleDeckModal() {
     if (creatingDeck) {
-      dispatch({ type: ON_DECK_CREATION_CANCELLED });
+      dispatch({ type: types.ON_DECK_CREATION_CANCELLED });
     } else {
-      dispatch({ type: ON_START_CREATING_DECK });
+      dispatch({ type: types.ON_START_CREATING_DECK });
+    }
+  }
+
+  function toggleCardModal() {
+    if (creatingCard) {
+      dispatch({ type: types.ON_DECK_CREATION_CANCELLED });
+    } else {
+      dispatch({ type: types.ON_START_CREATING_DECK });
     }
   }
 
@@ -96,7 +101,17 @@ const DeckLibrary = props => {
       <FancyModal
         isOpen={creatingDeck}
         afterOpen={afterOpen}
-        toggleModal={toggleModal}
+        toggleModal={toggleDeckModal}
+        opacity={opacity}
+        backgroundProps={{ opacity }}
+      >
+        <AddDeckForm tags={tags} />
+      </FancyModal>
+
+      <FancyModal
+        isOpen={creatingCard}
+        afterOpen={afterOpen}
+        toggleModal={toggleCardModal}
         opacity={opacity}
         backgroundProps={{ opacity }}
       >

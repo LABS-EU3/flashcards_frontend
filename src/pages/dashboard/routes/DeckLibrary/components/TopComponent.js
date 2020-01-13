@@ -7,8 +7,7 @@ import {
   IconWithText,
 } from '../../../styles/DeckLibraryStyles';
 
-// eslint-disable-next-line max-len
-import { ON_START_CREATING_DECK } from '../../../../../modules/dashboard/dashboardTypes';
+import types from '../../../../../modules/dashboard/dashboardTypes';
 
 import icons from '../../../../../assets/icons';
 import { H1 } from '../../../../../styles/typography';
@@ -17,7 +16,7 @@ const TopComponent = () => {
   const dispatch = useDispatch();
 
   const createDeck = () => {
-    dispatch({ type: ON_START_CREATING_DECK });
+    dispatch({ type: types.ON_START_CREATING_DECK });
   };
   return (
     <TopComponentDiv>
