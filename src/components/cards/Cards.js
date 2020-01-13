@@ -30,6 +30,10 @@ export const CardsFlex = styled.div`
   margin-bottom: ${props => props.marginBottom || '10px'};
   margin-left: ${props => props.marginLeft || '20px'};
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.02);
+
+  a {
+    text-decoration: none;
+  }
   &:hover {
     cursor: pointer;
   }

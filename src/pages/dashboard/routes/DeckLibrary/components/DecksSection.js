@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 import { H1, HR, H2, P } from '../../../../../styles/typography';
 import { CardsFlex } from '../../../../../components/cards/Cards';
@@ -20,8 +21,10 @@ const Decks = ({ decks }) => {
         {decks.map(d => {
           return (
             <CardsFlex width="46%" marginLeft="0" marginRight="0">
-              <H2 BOLD>{d.name}</H2>
-              <P>{`isPublic: ${d.public}`}</P>
+              <NavLink id={d.id} to={`/dashboard/deck/${d.id}`}>
+                <H2 BOLD>{d.name}</H2>
+                <P>{`isPublic: ${d.public}`}</P>
+              </NavLink>
             </CardsFlex>
           );
         })}
