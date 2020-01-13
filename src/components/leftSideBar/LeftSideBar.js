@@ -12,12 +12,13 @@ import profileDefault from '../../assets/user_profile_default.jpg';
 import * as c from '../../styles/variables/colours';
 import { P, H1 } from '../../styles/typography';
 import {
-  GrowSpace,
   MenuBox,
   ProfileImageDiv,
   Item,
   SidebarBody,
 } from '../../pages/dashboard/styles/DashboardStyles';
+
+import { GrowSpace } from '../../styles/displayFlex';
 
 const LeftSideBar = ({ name, logoutUser, history }) => {
   const onLogout = e => {
@@ -46,7 +47,11 @@ const LeftSideBar = ({ name, logoutUser, history }) => {
         <MenuItem img={icons.DashboardIcon} text="Dashboard" />
         <MenuItem img={icons.ProfileIcon} text="Profile" />
         <MenuItem img={icons.AddDecksIcon} text="Add Decks" />
-        <MenuItem img={icons.LibraryIcon} text="Deck Library" />
+        <MenuItem
+          img={icons.LibraryIcon}
+          text="Deck Library"
+          route="/dashboard/library"
+        />
         <MenuItem img={icons.SettingsIcon} text="Settings" />
         <GrowSpace />
         <MenuItem img={icons.LogoutIcon} onClick={onLogout} text="Log Out" />

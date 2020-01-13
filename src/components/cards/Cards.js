@@ -19,11 +19,20 @@ export const CardsFlex = styled.div`
   display: flex;
   flex-direction: column;
   align-items: left;
-  margin: 10px 20px 10px 20px;
+  /* margin: 10px 20px 1 0px 20px; */
   padding-left: 10px;
   border: 1px solid ${c.LIGHT_NEUTRAL_COLOR};
   box-sizing: border-box;
+  background: white;
+  width: ${props => props.width || null};
+  margin-top: ${props => props.marginTop || '10px'};
+  margin-right: ${props => props.marginRight || '20px'};
+  margin-bottom: ${props => props.marginBottom || '10px'};
+  margin-left: ${props => props.marginLeft || '20px'};
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.02);
+  &:hover {
+    cursor: pointer;
+  }
   //   background: linear-gradient(
   //     88.85deg,
   //     rgba(210, 31, 60, 0.5) 38.43%,
