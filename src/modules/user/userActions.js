@@ -43,7 +43,7 @@ export const userLogin = (userData, history) => dispatch => {
       // console.log(data.data.user);
       setToken(data.data.token);
       dispatch({ type: CLEAR_RESPONSES });
-      history.push('/dashboard');
+      history.push('/dashboard/welcome');
     })
     .catch(errors => {
       dispatch({
