@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 
 import AddDeckForm from '../../../../components/addDeckForm/AddDeckForm';
+import AddCardForm from '../../../../components/addCardForm/AddCardForm';
 import DecksSection from './components/DecksSection';
 import TopComponent from './components/TopComponent';
 import {
@@ -115,7 +116,7 @@ const DeckLibrary = props => {
         opacity={opacity}
         backgroundProps={{ opacity }}
       >
-        <AddDeckForm tags={tags} />
+        <AddCardForm tags={tags} />
       </FancyModal>
       <DecksSection decks={cards} />
     </div>

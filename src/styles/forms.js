@@ -56,6 +56,25 @@ export const Input = styled.input`
   }
 `;
 
+export const TextArea = styled.textarea`
+  background: #fffefe;
+  border: ${props => props.border || '1px solid rgba(0, 0, 0, 0.3)'};
+  box-sizing: border-box;
+  border-radius: 3px;
+  width: 100%;
+  height: 7em;
+  color: ${c.DARK_NEUTRAL_COLOR};
+  font-family: ${f.APP_FONT};
+  font-weight: ${f.REGULAR};
+  font-size: ${f.H3_FONT_SIZE}em;
+  line-height: ${f.H3_LINE_HEIGHT}em;
+  padding: 0.5em;
+  margin: 0em 0em 1em 0em;
+  &:focus {
+    outline: 2px solid ${c.SECONDARY_POP_COLOR};
+  }
+`;
+
 export const Select = styled.select`
   background: #fffefe;
   border: ${props => props.border || '1px solid rgba(0, 0, 0, 0.3)'};
