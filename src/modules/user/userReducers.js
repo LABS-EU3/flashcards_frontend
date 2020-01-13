@@ -20,9 +20,6 @@ import {
   CONFIRM_EMAIL_SUCCESS,
   CONFIRM_EMAIL_FAILURE,
   CLEAR_RESPONSES,
-  FETCH_PROFILE_START,
-  FETCH_PROFILE_SUCCESS,
-  FETCH_PROFILE_FAILURE,
 } from './userTypes';
 
 const initialState = {
@@ -137,25 +134,6 @@ const userReducer = (state = initialState, action) => {
         ...state,
         completed: false,
         errors: null,
-      };
-
-    case FETCH_PROFILE_START:
-      return {
-        ...state,
-        loading: true,
-      };
-
-    case FETCH_PROFILE_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        credentials: action.payload,
-      };
-
-    case FETCH_PROFILE_FAILURE:
-      return {
-        ...state,
-        loading: false,
       };
 
     default:

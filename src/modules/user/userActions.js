@@ -23,9 +23,6 @@ import {
   CONFIRM_EMAIL_SUCCESS,
   CONFIRM_EMAIL_FAILURE,
   CLEAR_RESPONSES,
-  FETCH_PROFILE_START,
-  FETCH_PROFILE_SUCCESS,
-  FETCH_PROFILE_FAILURE,
 } from './userTypes';
 
 // Configs
@@ -141,20 +138,3 @@ export const emailConfirmation = (token, history) => dispatch => {
     });
 };
 
-export const fetchProfileData = () => dispatch => {
-  dispatch({ type: FETCH_PROFILE_START });
-  return axiosWithAuth()
-    .get(`${baseUrl}/auth/view_profile`)
-    .then(({ data }) => {
-      dispatch({
-        type: FETCH_PROFILE_SUCCESS,
-        payload: data,
-      });
-    })
-    .catch(errors => {
-      dispatch({
-        type: FETCH_PROFILE_FAILURE,
-        payload: errors.response.data.message,
-      });
-    });
-};

@@ -47,10 +47,6 @@ export const Item = styled(NavLink)`
   }
 `;
 
-export const GrowSpace = styled.div`
-  flex-grow: 1;
-`;
-
 export const sideBarStyle = {
   background: c.DARK_NEUTRAL_COLOR,
   width: '20%',

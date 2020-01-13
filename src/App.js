@@ -3,6 +3,7 @@
 // Libraries
 import React from 'react';
 import { Route, Switch } from 'react-router';
+import { ModalProvider } from 'styled-react-modal';
 
 // Styles
 import './App.css';
@@ -18,29 +19,30 @@ import ResetPassword from './pages/reset_password/ResetPassword';
 import SignUp from './pages/signup/SignUp';
 import Login from './pages/login/Login';
 import EmailConfirmation from './pages/email_confirmation/EmailConfirmation';
-import Profile from './pages/profile/Profile';
+import { FadingBackground as Overlay } from './components/modals/modalStyles';
 // import RightSidebar from './components/rightsidebar/RightSidebar';
 // Utils
 import PrivateRoute from './utils/PrivateRoute';
 
 function App() {
   return (
-    <div>
-      <TopBar />
-      {/* <PrivateRoute path="/" component={RightSidebar} /> */}
-      <Switch>
-        <Route exact path="/" component={Landing} />
-        <PrivateRoute exact path="/dashboard" component={Dashboard} />
-        <PrivateRoute exact path="/profile" component={Profile} />
-        <Route path="/forgot" component={ForgotPassword} />
-        <Route path="/reset/:token" component={ResetPassword} />
-        <Route path="/signup" component={SignUp} />
-        <Route path="/login" component={Login} />
+    <ModalProvider backgroundComponent={Overlay}>
+      <div>
+        <TopBar />
+        {/* <PrivateRoute path="/" component={RightSidebar} /> */}
+        <Switch>
+          <Route exact path="/" component={Landing} />
+          <PrivateRoute path="/dashboard" component={Dashboard} />
+          <Route path="/forgot" component={ForgotPassword} />
+          <Route path="/reset/:token" component={ResetPassword} />
+          <Route path="/signup" component={SignUp} />
+          <Route path="/login" component={Login} />
 
-        {/* remove this test line after testing */}
-        <Route path="/confirm/:token" component={EmailConfirmation} />
-      </Switch>
-    </div>
+          {/* remove this test line after testing */}
+          <Route path="/confirm/:token" component={EmailConfirmation} />
+        </Switch>
+      </div>
+    </ModalProvider>
   );
 }
 
