@@ -44,7 +44,7 @@ export const createDeck = deck => dispatch => {
   dispatch({ type: types.ON_START_CREATING_DECK });
 
   axiosWithAuth()
-    .post(`/decks/tags`, deck)
+    .post(`/decks`, deck)
     .then(({ data }) => {
       dispatch({
         type: types.ON_DECK_CREATION_COMPLETE,
@@ -57,4 +57,8 @@ export const createDeck = deck => dispatch => {
         payload: err.message,
       });
     });
+};
+
+export const clearTags = () => dispatch => {
+  dispatch({ type: types.CLEAR_SELECTED_TAGS });
 };

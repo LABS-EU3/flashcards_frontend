@@ -8,6 +8,7 @@ const initialState = {
   creatingCard: false,
   fetchingTags: false,
   userDecks: [],
+  selectedTags: [],
   tags: [],
 };
 
@@ -51,7 +52,12 @@ const dashboardReducer = (state = initialState, action) => {
       return { ...state, creatingDeck: true, loading: true };
 
     case types.ON_DECK_CREATION_CANCELLED:
-      return { ...state, creatingDeck: false, loading: false };
+      return {
+        ...state,
+        creatingDeck: false,
+        loading: false,
+        errors: action.payload || {},
+      };
 
     case types.ON_DECK_CREATION_COMPLETE:
       return {
@@ -59,6 +65,18 @@ const dashboardReducer = (state = initialState, action) => {
         userDecks: action.payload,
         creatingDeck: false,
         loading: false,
+      };
+
+    case types.SET_SELECTED_TAGS:
+      return {
+        ...state,
+        selectedTags: action.payload,
+      };
+
+    case types.CLEAR_SELECTED_TAGS:
+      return {
+        ...state,
+        selectedTags: [],
       };
 
     case types.ON_START_CREATING_CARD:

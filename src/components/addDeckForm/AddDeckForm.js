@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 
 import { withFormik } from 'formik';
 import * as yup from 'yup';
 
+import {
+  createDeck,
+  clearTags,
+} from '../../modules/dashboard/dashboardActions';
 import LightPopButton from '../buttons/LightPopButton';
 import { H1, H2, Text, H3 } from '../../styles/typography';
 import { Forms, Input, Label, Select, FormContainer } from '../../styles/forms';
@@ -13,14 +18,7 @@ import Tag from './deckTags/DeckTag';
 
 const Form = props => {
   const [selectedTags, setSelectedTags] = useState([]);
-  const removeTag = tag => {
-    const remainingTags = selectedTags.filter(t => t !== tag);
-    setSelectedTags(remainingTags);
-  };
 
-  const addTag = tag => {
-    setSelectedTags([...selectedTags, tag]);
-  };
   const {
     values,
     touched,
@@ -30,6 +28,19 @@ const Form = props => {
     handleSubmit,
     tags,
   } = props;
+
+  const removeTag = tag => {
+    const remainingTags = selectedTags.filter(t => t !== tag);
+    setSelectedTags(remainingTags);
+    values.selectedTags = remainingTags;
+  };
+
+  const addTag = tag => {
+    const newTagsList = [...selectedTags, tag];
+    setSelectedTags(newTagsList);
+    values.selectedTags = newTagsList;
+  };
+
   return (
     <Forms onSubmit={handleSubmit} height="100%">
       <FormContainer>
@@ -101,10 +112,23 @@ const validationSchema = yup.object().shape({
 const AddDeckForm = withFormik({
   mapPropsToValues: () => ({ deckName: '', tag: '' }),
   validationSchema,
-  handleSubmit: (values, { /* props, */ setSubmitting }) => {
+  handleSubmit: (values, { props, setSubmitting }) => {
+    const deck = {
+      name: values.deckName,
+      tagsArray: props.dashboard.selectedTags,
+    };
+
+    props.createDeck(deck);
+
     setSubmitting(false);
   },
   displayName: 'Create Deck',
 })(Form);
 
-export default AddDeckForm;
+const mapStateToProps = state => {
+  return {
+    dashboard: state.dashboard,
+  };
+};
+
+export default connect(mapStateToProps, { createDeck, clearTags })(AddDeckForm);
