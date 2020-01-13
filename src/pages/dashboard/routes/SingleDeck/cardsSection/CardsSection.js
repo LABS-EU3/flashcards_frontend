@@ -12,7 +12,7 @@ const Decks = ({ cards }) => {
   return (
     <Collection>
       <CollectionLabel>
-        <H1>Decks</H1>
+        <H1>Cards</H1>
         <HR />
       </CollectionLabel>
 
