@@ -5,16 +5,16 @@ import { CardsFlex } from '../../../../../components/cards/Cards';
 import {
   Collection,
   DecksContainer,
-  DecksLabel,
+  CollectionLabel,
 } from '../../../styles/DeckLibraryStyles';
 
 const Decks = ({ decks }) => {
   return (
     <Collection>
-      <DecksLabel>
+      <CollectionLabel>
         <H1>Decks</H1>
         <HR />
-      </DecksLabel>
+      </CollectionLabel>
 
       <DecksContainer>
         {decks.map(d => {

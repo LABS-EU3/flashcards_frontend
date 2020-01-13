@@ -13,9 +13,9 @@ import types from '../../../../modules/dashboard/dashboardTypes';
 
 import FancyModal from '../../../../components/modals/CreateResourceModal';
 
-const DeckLibrary = props => {
-  const { dashboard, cards } = props;
-  const { creatingCard } = dashboard;
+const SingleDeck = props => {
+  const { dashboard } = props;
+  const { creatingCard, singleDeckCards } = dashboard;
 
   const [opacity, setOpacity] = useState(0);
 
@@ -46,7 +46,7 @@ const DeckLibrary = props => {
       >
         <AddCardForm />
       </FancyModal>
-      <CardsSection cards={cards || []} />
+      <CardsSection cards={singleDeckCards} />
     </div>
   );
 };
@@ -60,4 +60,4 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   createDeck,
   fetchTags,
-})(DeckLibrary);
+})(SingleDeck);

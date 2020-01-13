@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const DecksLabel = styled.div`
+export const CollectionLabel = styled.div`
   width: 46%;
 `;
 
