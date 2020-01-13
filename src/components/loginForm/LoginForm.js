@@ -108,9 +108,7 @@ const validationSchema = yup.object().shape({
     .string()
     .email('Email is not valid')
     .required('Please provide an email'),
-  password: yup
-    .string()
-    .required('Please provide a password')
+  password: yup.string().required('Please provide a password'),
 });
 
 const LoginForm = withFormik({

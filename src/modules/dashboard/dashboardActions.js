@@ -63,7 +63,22 @@ export const createDeck = (deck, onComplete, onFailed) => dispatch => {
 };
 
 export const fetchUserDecks = () => dispatch => {
-  dispatch({ type: 'type' });
+  dispatch({ type: types.ON_START_FETCHING_DECKS });
+
+  axiosWithAuth()
+    .get('/decks')
+    .then(({ data }) => {
+      dispatch({
+        type: types.ON_GET_DECKS_COMPLETE,
+        payload: data.decks,
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: types.ON_GET_DECKS_CANCELLED,
+        payload: error.message,
+      });
+    });
 };
 
 export const clearTags = () => dispatch => {
