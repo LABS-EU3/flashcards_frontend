@@ -4,7 +4,7 @@ export const DecksLabel = styled.div`
   width: 46%;
 `;
 
-export const DeckCollection = styled.div`
+export const Collection = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 3%;

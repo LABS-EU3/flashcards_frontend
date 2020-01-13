@@ -8,7 +8,7 @@ import {
   DecksLabel,
 } from '../../../styles/DeckLibraryStyles';
 
-const Decks = ({ decks }) => {
+const Decks = ({ cards }) => {
   return (
     <Collection>
       <DecksLabel>
@@ -17,11 +17,11 @@ const Decks = ({ decks }) => {
       </DecksLabel>
 
       <DecksContainer>
-        {decks.map(d => {
+        {cards.map(c => {
           return (
             <CardsFlex width="46%" marginLeft="0" marginRight="0">
-              <H2 BOLD>{d.title}</H2>
-              <P>{d.category}</P>
+              <H2 BOLD>{c.title}</H2>
+              <P>{c.category}</P>
             </CardsFlex>
           );
         })}

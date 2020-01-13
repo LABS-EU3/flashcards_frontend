@@ -50,7 +50,7 @@ const LeftSideBar = ({ name, logoutUser, history }) => {
         <MenuItem
           img={icons.LibraryIcon}
           text="Deck Library"
-          route="dashboard/library"
+          route="/dashboard/library"
         />
         <MenuItem img={icons.SettingsIcon} text="Settings" />
         <GrowSpace />
