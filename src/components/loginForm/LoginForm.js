@@ -111,7 +111,6 @@ const validationSchema = yup.object().shape({
   password: yup
     .string()
     .required('Please provide a password')
-    .min(8, 'Password too short'),
 });
 
 const LoginForm = withFormik({
