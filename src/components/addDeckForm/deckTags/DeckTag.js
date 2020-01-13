@@ -8,7 +8,6 @@ const Tag = props => {
   const { value, removeTag } = props;
   return (
     <TagContainer onClick={() => removeTag(value)}>
-      <img src={MdClose} alt="" />
       <H2
         style={{
           textOverflow: 'ellipsis',
