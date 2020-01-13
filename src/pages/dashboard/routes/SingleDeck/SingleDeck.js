@@ -1,20 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 
 import AddCardForm from '../../../../components/addCardForm/AddCardForm';
 import TopComponent from './topComponent/TopComponent';
 import CardsSection from './cardsSection/CardsSection';
-import {
-  createDeck,
-  fetchTags,
-} from '../../../../modules/dashboard/dashboardActions';
+import { getSingleDeck } from '../../../../modules/dashboard/dashboardActions';
 
 import types from '../../../../modules/dashboard/dashboardTypes';
 
 import FancyModal from '../../../../components/modals/CreateResourceModal';
 
 const SingleDeck = props => {
-  const { dashboard } = props;
+  const { dashboard, match } = props;
   const { creatingCard, singleDeckCards } = dashboard;
 
   const [opacity, setOpacity] = useState(0);
@@ -34,6 +31,12 @@ const SingleDeck = props => {
       setOpacity(1);
     }, 10);
   }
+
+  useEffect(() => {
+    const { deckId } = match.params;
+    props.getSingleDeck(deckId);
+  }, []);
+
   return (
     <div>
       <TopComponent />
@@ -58,6 +61,5 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {
-  createDeck,
-  fetchTags,
+  getSingleDeck,
 })(SingleDeck);

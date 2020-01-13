@@ -66,7 +66,7 @@ export const clearTags = () => dispatch => {
   dispatch({ type: types.CLEAR_SELECTED_TAGS });
 };
 
-export const getDeckCards = deckId => dispatch => {
+export const getSingleDeck = deckId => dispatch => {
   dispatch({ type: types.ON_START_FETCHING_CARDS });
 
   axiosWithAuth()

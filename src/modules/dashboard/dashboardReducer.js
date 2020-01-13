@@ -10,6 +10,7 @@ const initialState = {
   userDecks: [],
   singleDeckCards: [],
   selectedTags: [],
+  selectedDeck: {},
   tags: [],
 };
 
@@ -108,6 +109,27 @@ const dashboardReducer = (state = initialState, action) => {
       return {
         ...state,
         singleDeckCards: action.payload,
+        loading: false,
+      };
+
+    case types.ON_SELECT_DECK:
+      return {
+        ...state,
+        loading: true,
+        selectedDeck: action.payload,
+      };
+
+    case types.ON_GET_SINGLE_DECK_FAILED:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload,
+      };
+
+    case types.ON_GET_SINGLE_DECK_SUCCESS:
+      return {
+        ...state,
+        selectedDeck: action.payload,
         loading: false,
       };
 
