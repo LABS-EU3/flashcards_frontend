@@ -25,14 +25,14 @@ export const getRecentCards = userId => dispatch => {
   dispatch({ type: types.RECENT_CARDS_START });
 
   return axiosWithAuth()
-    .get(`/api/cards/users/${userId}`)
+    .get(`/cards/users/${userId}`)
     .then(({ data }) => {
-      // console.log(data)
+      console.log(data);
       dispatch({
         type: types.RECENT_CARDS_SUCCESS,
         payload: data.data.user,
       });
-      // console.log('ert', data.data.user);
+      //   console.log('ert', data.data.user);
     })
     .catch(err => {
       dispatch({

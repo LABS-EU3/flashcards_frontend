@@ -46,7 +46,7 @@ const cards = [
 export default function RightSidebar(props) {
   const { user, getRecentCards } = props;
   // console.log(user);
-  console.log(getRecentCards(1));
+  console.log(getRecentCards(2));
 
   // const id = useSelector(props => props.user.credentials.id);
   // const [card, setCard] = useState(getRecentCards(id));
