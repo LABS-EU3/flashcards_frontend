@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Modal, { BaseModalBackground } from 'styled-react-modal';
+import * as g from '../../styles/variables/global';
 
 // eslint-disable-next-line import/prefer-default-export
 export const FadingBackground = styled(BaseModalBackground)`
@@ -31,4 +32,13 @@ export const StyledModal = Modal.styled`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+
+  @media (min-width: ${g.phoneMediaBreak}px) {
+    width: 90%;
+    @media (min-width: ${g.desktopMediaBreak}px) {
+      display: flex;
+      flex-direction: column;
+      width: 40% ;
+    }
+  }
 `;

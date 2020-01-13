@@ -9,6 +9,9 @@ import * as f from './variables/fonts';
 // Colours
 import * as c from './variables/colours';
 
+// Global
+import * as g from './variables/global';
+
 export const FormContainer = styled.div`
   text-align: center;
   width: ${props => props.width || '45%'};
@@ -16,6 +19,14 @@ export const FormContainer = styled.div`
   display: flex;
   height: 100%;
   flex-direction: column;
+
+  @media (min-width: ${g.phoneMediaBreak}px) {
+    width: 100%;
+    @media (min-width: ${g.desktopMediaBreak}px) {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 `;
 
 export const Forms = styled.form`
@@ -99,4 +110,13 @@ export const Label = styled.label`
   align-items: flex-start;
   width: 100%;
   align-items: flex-start;
+
+  @media (min-width: ${g.phoneMediaBreak}px) {
+    width: 90%;
+    padding: 15px;
+    @media (min-width: ${g.desktopMediaBreak}px) {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 `;
