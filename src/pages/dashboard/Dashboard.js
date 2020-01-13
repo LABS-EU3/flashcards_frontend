@@ -10,6 +10,7 @@ import styled from 'styled-components';
 import DashboardLayout from './DashboardLayout';
 import RightSidebar from '../../components/rightsidebar/RightSidebar';
 import DeckLibrary from './routes/DeckLibrary/DeckLibrary';
+import WelcomePage from './routes/WelcomePage/WelcomePage';
 import {
   fetchProfile,
   getRecentCards,
@@ -28,6 +29,7 @@ export const DashboardComponent = props => {
       <RouteContainer>
         <Switch>
           <Route path="/dashboard/library" component={DeckLibrary} />
+          <Route path="/dashboard/welcome" component={WelcomePage} />
         </Switch>
       </RouteContainer>
       {/* eslint-disable-next-line react/destructuring-assignment  */}
