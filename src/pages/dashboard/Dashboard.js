@@ -8,7 +8,10 @@ import { connect } from 'react-redux';
 import { H1, H3 } from '../../styles/typography';
 import DashboardLayout from './DashboardLayout';
 import RightSidebar from '../../components/rightsidebar/RightSidebar';
-import { fetchProfile } from '../../modules/dashboard/dashboardActions';
+import {
+  fetchProfile,
+  getRecentCards,
+} from '../../modules/dashboard/dashboardActions';
 import { logoutUser } from '../../modules/user/userActions';
 
 export const DashboardComponent = props => {
@@ -22,7 +25,8 @@ export const DashboardComponent = props => {
     <DashboardLayout user={user} logoutUser={props.logoutUser}>
       <H1>Dashboard Test</H1>
       <H3>Welcome! Login successful</H3>
-      <RightSidebar user={user} />
+      {/* eslint-disable-next-line react/destructuring-assignment */}
+      <RightSidebar user={user} getRecentCards={props.getRecentCards} />
     </DashboardLayout>
   );
 };
@@ -36,4 +40,5 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   fetchProfile,
   logoutUser,
+  getRecentCards,
 })(DashboardComponent);

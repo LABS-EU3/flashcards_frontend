@@ -1,9 +1,11 @@
 // Libraries
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import { connect } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
+import Sidebar from 'react-sidebar';
+import { getUserId } from '../../utils/auth';
 
 // components
-import Sidebar from 'react-sidebar';
 import Card from '../cards/Cards';
 
 // styles
@@ -42,8 +44,34 @@ const cards = [
 ];
 
 export default function RightSidebar(props) {
-  const { user } = props;
+  const { user, getRecentCards } = props;
+  // console.log(user);
+  console.log(getRecentCards(1));
 
+  // const id = useSelector(props => props.user.credentials.id);
+  // const [card, setCard] = useState(getRecentCards(id));
+  // const test = dispatch(getRecentCards());
+  // const [cards, setCards] = useState([]);
+
+  const getAll = () => {
+    const userObj = getUserId();
+    console.log(userObj);
+    const userId = userObj.subject;
+    console.log(userId);
+    // const url = `/api/cards/users/${userId}`;
+    // console.log(url);
+    // getRecentCards(userId).then(u => {
+    //   console.log('he', u);
+    //   setCards(u);
+    // });
+  };
+  useEffect(() => {
+    getAll();
+    // const userObj = getUserId();
+    //   console.log(userObj);
+    //   const userId = userObj.subject;
+    // getRecentCards(userId);
+  }, []);
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const mql = window.matchMedia(`(min-width: ${g.desktopMediaBreak}px)`);

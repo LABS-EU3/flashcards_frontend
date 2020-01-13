@@ -32,14 +32,15 @@ export const fetchProfile = () => dispatch => {
 export const getRecentCards = userId => dispatch => {
   dispatch({ type: RECENT_CARDS_START });
 
-  axiosWithAuth()
+  return axiosWithAuth()
     .get(`/api/cards/users/${userId}`)
     .then(({ data }) => {
+      // console.log(data)
       dispatch({
         type: RECENT_CARDS_SUCCESS,
-        payload: data.user,
+        payload: data.data.user,
       });
-      console.log(data.user);
+      console.log('ert', data.data.user);
     })
     .catch(err => {
       dispatch({
