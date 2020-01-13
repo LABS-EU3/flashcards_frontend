@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 
 import { withFormik } from 'formik';
 import * as yup from 'yup';
@@ -8,6 +8,8 @@ import {
   createDeck,
   clearTags,
 } from '../../modules/dashboard/dashboardActions';
+
+import types from '../../modules/dashboard/dashboardTypes';
 import LightPopButton from '../buttons/LightPopButton';
 import { H1, H2, Text, H3 } from '../../styles/typography';
 import { Forms, Input, Label, Select, FormContainer } from '../../styles/forms';
@@ -17,6 +19,7 @@ import { SelectedTagsContainer } from './deckTags/deckTagStyles';
 import Tag from './deckTags/DeckTag';
 
 const Form = props => {
+  const dispatch = useDispatch();
   const [selectedTags, setSelectedTags] = useState([]);
 
   const {
@@ -32,13 +35,13 @@ const Form = props => {
   const removeTag = tag => {
     const remainingTags = selectedTags.filter(t => t !== tag);
     setSelectedTags(remainingTags);
-    values.selectedTags = remainingTags;
+    dispatch({ type: types.SET_SELECTED_TAGS, payload: remainingTags });
   };
 
   const addTag = tag => {
     const newTagsList = [...selectedTags, tag];
     setSelectedTags(newTagsList);
-    values.selectedTags = newTagsList;
+    dispatch({ type: types.SET_SELECTED_TAGS, payload: newTagsList });
   };
 
   return (
@@ -118,9 +121,7 @@ const AddDeckForm = withFormik({
       tagsArray: props.dashboard.selectedTags,
     };
 
-    props.createDeck(deck);
-
-    setSubmitting(false);
+    props.createDeck(deck, setSubmitting(false));
   },
   displayName: 'Create Deck',
 })(Form);
