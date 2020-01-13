@@ -47,6 +47,10 @@ export const Item = styled(NavLink)`
     height: 24px;
     width: 24px;
   }
+
+  // &:active {
+  //   background: white;
+  // }
 `;
 
 export const sideBarStyle = {
