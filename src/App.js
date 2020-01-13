@@ -30,12 +30,12 @@ function App() {
       {/* <PrivateRoute path="/" component={RightSidebar} /> */}
       <Switch>
         <Route exact path="/" component={Landing} />
-        <PrivateRoute path="/dashboard" component={Dashboard} />
+        <PrivateRoute exact path="/dashboard" component={Dashboard} />
+        <PrivateRoute exact path="/profile" component={Profile} />
         <Route path="/forgot" component={ForgotPassword} />
         <Route path="/reset/:token" component={ResetPassword} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
-        <PrivateRoute path="/profile" component={Profile} />
 
         {/* remove this test line after testing */}
         <Route path="/confirm/:token" component={EmailConfirmation} />

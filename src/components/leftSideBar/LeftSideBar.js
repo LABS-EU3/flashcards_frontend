@@ -44,7 +44,7 @@ const LeftSideBar = ({ name, logoutUser, history }) => {
 
       <MenuBox>
         <MenuItem img={icons.DashboardIcon} text="Dashboard" />
-        <MenuItem img={icons.ProfileIcon} text="Profile" />
+        <MenuItem img={icons.ProfileIcon} text="Profile" route="/profile" />
         <MenuItem img={icons.AddDecksIcon} text="Add Decks" />
         <MenuItem img={icons.LibraryIcon} text="Deck Library" />
         <MenuItem img={icons.SettingsIcon} text="Settings" />
