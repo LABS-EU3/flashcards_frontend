@@ -20,8 +20,8 @@ const Decks = ({ decks }) => {
         {decks.map(d => {
           return (
             <CardsFlex width="46%" marginLeft="0" marginRight="0">
-              <H2 BOLD>{d.title}</H2>
-              <P>{d.category}</P>
+              <H2 BOLD>{d.name}</H2>
+              <P>{`isPublic: ${d.public}`}</P>
             </CardsFlex>
           );
         })}
