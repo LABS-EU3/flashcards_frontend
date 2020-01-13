@@ -12,6 +12,7 @@ import RightSidebar from '../../components/rightsidebar/RightSidebar';
 import DeckLibrary from './routes/DeckLibrary/DeckLibrary';
 import { fetchProfile } from '../../modules/dashboard/dashboardActions';
 import { logoutUser } from '../../modules/user/userActions';
+import Profile from './routes/Profile/Profile';
 
 export const DashboardComponent = props => {
   const { user } = props;
@@ -25,6 +26,7 @@ export const DashboardComponent = props => {
       <RouteContainer>
         <Switch>
           <Route path="/dashboard/library" component={DeckLibrary} />
+          <Route path="/dashboard/profile" component={Profile} />
         </Switch>
       </RouteContainer>
       <RightSidebar user={user} />
@@ -35,6 +37,9 @@ export const DashboardComponent = props => {
 const RouteContainer = styled.div`
   margin-right: 25%;
   background: whitesmoke;
+  @media (max-width: 768px) {
+    margin-right: auto;
+  }
 `;
 
 const mapStateToProps = state => {
