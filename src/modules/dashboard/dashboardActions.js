@@ -65,3 +65,22 @@ export const createDeck = (deck, onComplete, onFailed) => dispatch => {
 export const clearTags = () => dispatch => {
   dispatch({ type: types.CLEAR_SELECTED_TAGS });
 };
+
+export const getDeckCards = deckId => dispatch => {
+  dispatch({ type: types.ON_START_FETCHING_CARDS });
+
+  axiosWithAuth()
+    .get(`/deck/cards/${deckId}`)
+    .then(({ data }) => {
+      dispatch({
+        type: types.ON_DECK_CARDS_FETCH_SUCCESS,
+        payload: data,
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: types.ON_DECK_CARDS_FETCH_FAILED,
+        payload: error.message,
+      });
+    });
+};

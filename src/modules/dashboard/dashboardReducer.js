@@ -8,6 +8,7 @@ const initialState = {
   creatingCard: false,
   fetchingTags: false,
   userDecks: [],
+  singleDeckCards: [],
   selectedTags: [],
   tags: [],
 };
@@ -90,6 +91,23 @@ const dashboardReducer = (state = initialState, action) => {
         ...state,
         userCards: action.payload,
         creatingCard: false,
+        loading: false,
+      };
+
+    case types.ON_START_FETCHING_CARDS:
+      return { ...state, loading: true };
+
+    case types.ON_DECK_CARDS_FETCH_FAILED:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload,
+      };
+
+    case types.ON_DECK_CARDS_FETCH_SUCCESS:
+      return {
+        ...state,
+        singleDeckCards: action.payload,
         loading: false,
       };
 
