@@ -84,9 +84,9 @@ const DeckLibrary = props => {
 
   function toggleCardModal() {
     if (creatingCard) {
-      dispatch({ type: types.ON_DECK_CREATION_CANCELLED });
+      dispatch({ type: types.ON_CARD_CREATION_CANCELLED });
     } else {
-      dispatch({ type: types.ON_START_CREATING_DECK });
+      dispatch({ type: types.ON_START_CREATING_CARD });
     }
   }
 

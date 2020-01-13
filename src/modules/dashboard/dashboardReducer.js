@@ -61,6 +61,20 @@ const dashboardReducer = (state = initialState, action) => {
         loading: false,
       };
 
+    case types.ON_START_CREATING_CARD:
+      return { ...state, creatingCard: true, loading: true };
+
+    case types.ON_CARD_CREATION_CANCELLED:
+      return { ...state, creatingCard: false, loading: false };
+
+    case types.ON_CARD_CREATION_COMPLETE:
+      return {
+        ...state,
+        userCards: action.payload,
+        creatingCard: false,
+        loading: false,
+      };
+
     default:
       return state;
   }
