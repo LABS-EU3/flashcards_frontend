@@ -62,7 +62,7 @@ const dashboardReducer = (state = initialState, action) => {
     case types.ON_DECK_CREATION_COMPLETE:
       return {
         ...state,
-        userDecks: action.payload,
+        userDecks: [...state.userDecks, action.payload],
         creatingDeck: false,
         loading: false,
       };
