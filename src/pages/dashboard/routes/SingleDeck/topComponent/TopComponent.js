@@ -12,7 +12,7 @@ import types from '../../../../../modules/dashboard/dashboardTypes';
 
 import { H1, H2, Text } from '../../../../../styles/typography';
 
-const TopComponent = () => {
+const TopComponent = ({ deckName }) => {
   const dispatch = useDispatch();
 
   const createDeck = () => {
@@ -20,7 +20,7 @@ const TopComponent = () => {
   };
   return (
     <TopComponentDiv>
-      <H1>Deck Library</H1>
+      <H1>{deckName}</H1>
       <LibraryActions>
         <IconWithText onClick={createDeck}>
           <H2>
