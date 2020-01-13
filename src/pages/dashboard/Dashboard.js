@@ -15,6 +15,7 @@ import {
   getRecentCards,
 } from '../../modules/dashboard/dashboardActions';
 import { logoutUser } from '../../modules/user/userActions';
+import * as g from '../../styles/variables/global';
 
 export const DashboardComponent = props => {
   const { user } = props;
@@ -40,6 +41,14 @@ const RouteContainer = styled.div`
   margin-right: 25%;
   height: 100%;
   background: whitesmoke;
+
+  @media (min-width: ${g.phoneMediaBreak}px) {
+    width: 100%;
+    @media (min-width: ${g.desktopMediaBreak}px) {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 `;
 
 const mapStateToProps = state => {

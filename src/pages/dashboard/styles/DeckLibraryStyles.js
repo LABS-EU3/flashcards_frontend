@@ -2,18 +2,15 @@ import styled from 'styled-components';
 
 export const DecksLabel = styled.div`
   width: 46%;
-  height: 100%;
 `;
 
 export const DeckCollection = styled.div`
-  height: 100%;
   display: flex;
   flex-direction: column;
   margin: 0 3%;
 `;
 
 export const DecksContainer = styled.div`
-  height: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
