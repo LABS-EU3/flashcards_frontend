@@ -5,6 +5,8 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router';
 import styled from 'styled-components';
+import { ModalProvider } from 'styled-react-modal';
+import { FadingBackground } from '../../components/modals/modalStyles';
 
 // Styled
 import DashboardLayout from './DashboardLayout';
@@ -21,16 +23,18 @@ export const DashboardComponent = props => {
     props.fetchProfile();
   }, []);
   return (
-    // eslint-disable-next-line react/destructuring-assignment
-    <DashboardLayout user={user} logoutUser={props.logoutUser}>
-      <RouteContainer>
-        <Switch>
-          <Route path="/dashboard/library" component={DeckLibrary} />
-          <Route path="/dashboard/deck/:deckId" component={SingleDeck} />
-        </Switch>
-      </RouteContainer>
-      <RightSidebar user={user} />
-    </DashboardLayout>
+    <ModalProvider backgroundComponent={FadingBackground}>
+      {/* eslint-disable-next-line react/destructuring-assignment */}
+      <DashboardLayout user={user} logoutUser={props.logoutUser}>
+        <RouteContainer>
+          <Switch>
+            <Route path="/dashboard/library" component={DeckLibrary} />
+            <Route path="/dashboard/deck/:deckId" component={SingleDeck} />
+          </Switch>
+        </RouteContainer>
+        <RightSidebar user={user} />
+      </DashboardLayout>
+    </ModalProvider>
   );
 };
 
