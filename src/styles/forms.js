@@ -38,9 +38,6 @@ export const Forms = styled.form`
   height: ${props => props.height || null};
 
   @media (min-width: ${g.phoneMediaBreak}px) {
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: left;
     width: 100%;
     @media (min-width: ${g.desktopMediaBreak}px) {
       display: flex;
@@ -63,7 +60,6 @@ export const Forms = styled.form`
 */
 
 export const Input = styled.input`
-  // margin-top: 100px;
   background: #fffefe;
   border: ${props => props.border || '1px solid rgba(0, 0, 0, 0.3)'};
   box-sizing: border-box;

@@ -20,10 +20,8 @@ const PinkButton = styled.button`
 
   @media (min-width: ${g.phoneMediaBreak}px) {
     width: 160%;
-    // padding: 15px;
     margin-left: -30%;
     height: 40px;
-    // padding: 15 px;
     @media (min-width: ${g.desktopMediaBreak}px) {
       display: flex;
       flex-direction: column;
