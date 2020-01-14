@@ -17,6 +17,7 @@ const WelcomePage = () => {
       <FlipCardInner>
         <FlipCardFront>
           <img src="img_avatar.png" alt="Avatar" />
+          <H1>Welcome to Quick Decks</H1>
         </FlipCardFront>
 
         <FlipCardBack>
