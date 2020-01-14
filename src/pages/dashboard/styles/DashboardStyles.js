@@ -35,7 +35,6 @@ export const Item = styled(NavLink)`
   text-decoration: none;
   /* margin: 0 20px; */
   justify-content: start;
-  // vertical-align: middle;
   align-items: center;
 
   &:nth-child(6) {
@@ -44,9 +43,6 @@ export const Item = styled(NavLink)`
 
   p {
     margin-left: 14px;
-    // margin-top: 3px;
-    // vertical-align: middle;
-    // border: 1px solid blue;
   }
 
   h3 {
