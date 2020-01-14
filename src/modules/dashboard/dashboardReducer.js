@@ -5,7 +5,6 @@ const initialState = {
   errors: null,
   creatingDeck: false,
   creatingCard: false,
-  fetchingTags: false,
   userDecks: [],
   singleDeckCards: [],
   selectedTags: [],
@@ -16,18 +15,17 @@ const initialState = {
 const dashboardReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.ON_START_FETCHING_TAGS:
-      return { ...state, fetchingTags: true, loading: true };
+      return { ...state, loading: true };
 
     case types.ON_DECK_TAGS_FETCH_SUCCESS:
       return {
         ...state,
         tags: action.payload,
-        fetchingTags: false,
         loading: false,
       };
 
     case types.ON_DECK_TAGS_FETCH_FAILED:
-      return { ...state, fetchingTags: false, loading: false };
+      return { ...state, loading: false };
 
     case types.ON_START_CREATING_DECK:
       return { ...state, creatingDeck: true, loading: true };

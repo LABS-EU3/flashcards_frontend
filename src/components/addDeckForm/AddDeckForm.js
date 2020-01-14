@@ -118,7 +118,7 @@ const AddDeckForm = withFormik({
   handleSubmit: (values, { props, setSubmitting }) => {
     const deck = {
       name: values.deckName,
-      // tagsArray: props.dashboard.selectedTags,
+      tags: props.dashboard.selectedTags,
     };
 
     props.createDeck(deck, setSubmitting(false));
