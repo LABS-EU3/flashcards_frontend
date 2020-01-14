@@ -8,7 +8,7 @@ import {
   IconWithText,
 } from '../../../styles/DeckLibraryStyles';
 
-import types from '../../../../../modules/dashboard/dashboardTypes';
+import * as types from '../../../../../modules/dashboard/dashboardTypes';
 
 import { H1, H2, Text } from '../../../../../styles/typography';
 

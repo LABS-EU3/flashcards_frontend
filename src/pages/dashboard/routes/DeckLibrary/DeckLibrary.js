@@ -10,7 +10,7 @@ import {
   fetchUserDecks,
 } from '../../../../modules/dashboard/dashboardActions';
 
-import types from '../../../../modules/dashboard/dashboardTypes';
+import * as types from '../../../../modules/dashboard/dashboardTypes';
 
 import FancyModal from '../../../../components/modals/CreateResourceModal';
 

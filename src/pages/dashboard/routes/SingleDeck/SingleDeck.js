@@ -6,7 +6,7 @@ import TopComponent from './topComponent/TopComponent';
 import CardsSection from './cardsSection/CardsSection';
 import { getSingleDeck } from '../../../../modules/dashboard/dashboardActions';
 
-import types from '../../../../modules/dashboard/dashboardTypes';
+import * as types from '../../../../modules/dashboard/dashboardTypes';
 
 import FancyModal from '../../../../components/modals/CreateResourceModal';
 

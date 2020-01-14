@@ -9,7 +9,7 @@ import {
   DecksContainer,
   CollectionLabel,
 } from '../../../styles/DeckLibraryStyles';
-import types from '../../../../../modules/dashboard/dashboardTypes';
+import * as types from '../../../../../modules/dashboard/dashboardTypes';
 
 const Decks = ({ decks }) => {
   const dispatch = useDispatch();
@@ -27,13 +27,14 @@ const Decks = ({ decks }) => {
               onClick={() => {
                 dispatch({ type: types.ON_SELECT_DECK, payload: { ...d } });
               }}
+              key={d.deck_id}
               width="46%"
               marginLeft="0"
               marginRight="0"
             >
-              <NavLink id={d.id} to={`/dashboard/deck/${d.id}`}>
-                <H2 BOLD>{d.name}</H2>
-                <P>{`isPublic: ${d.public}`}</P>
+              <NavLink id={d.deck_id} to={`/dashboard/deck/${d.id}`}>
+                <H2 BOLD>{d.deck_name}</H2>
+                <P>{d.isPublic ? 'Public' : 'Private'}</P>
               </NavLink>
             </CardsFlex>
           );
