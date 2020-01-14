@@ -1,4 +1,5 @@
 import * as types from './dashboardTypes';
+import deckTags from '../../utils/deckTags';
 
 const initialState = {
   loading: false,
@@ -9,7 +10,7 @@ const initialState = {
   singleDeckCards: [],
   selectedTags: [],
   selectedDeck: {},
-  tags: [],
+  tags: deckTags,
 };
 
 const dashboardReducer = (state = initialState, action) => {

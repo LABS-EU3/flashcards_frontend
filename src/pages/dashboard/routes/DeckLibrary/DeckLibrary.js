@@ -14,21 +14,11 @@ import * as types from '../../../../modules/dashboard/dashboardTypes';
 
 import FancyModal from '../../../../components/modals/CreateResourceModal';
 
-const tags = [
-  '',
-  'Accounting & Finance',
-  'Aeronautical & Manufacturing Engineering',
-  'Agriculture & Forestry',
-  'American Studies',
-  'Anatomy & Physiology',
-  'Anthropology',
-];
-
 const DeckLibrary = props => {
   const { dashboard } = props;
   // eslint-disable-next-line react/destructuring-assignment
   const fetchDecks = props.fetchUserDecks;
-  const { creatingDeck, userDecks } = dashboard;
+  const { creatingDeck, userDecks, tags } = dashboard;
 
   const [opacity, setOpacity] = useState(0);
 
