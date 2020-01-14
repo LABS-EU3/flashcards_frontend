@@ -37,19 +37,19 @@ describe('flashCards', () => {
 
   describe('app sign up page', () => {
     it('page should go back to landing page when back arror is clicked', () => {
-      cy.visit('http://localhost:3000/signup');
+      cy.visit('https://site.quickdecksapp.com/signup');
       cy.get('#bArrow1')
         .should('have.attr', 'src')
-        .and('match', /[http://localhost:3000/]/);
+        .and('match', /[https://site.quickdecksapp.com/]/);
     });
 
     it('page should have title', () => {
-      cy.visit('http://localhost:3000/signup');
+      cy.visit('https://site.quickdecksapp.com/signup');
       cy.queryByText('Create an Account').should('exist');
     });
 
     it('app can sign up user', () => {
-      cy.visit('http://localhost:3000/signup');
+      cy.visit('https://site.quickdecksapp.com/signup');
       cy.get('input[name="fullName"]').type('Testing123');
       cy.get('input[name="email"]').type('testEmail@gmail.com');
       cy.get('input[name="password"]').type('123456789');
@@ -61,12 +61,12 @@ describe('flashCards', () => {
     });
 
     it('page should have text', () => {
-      cy.visit('http://localhost:3000/signup');
+      cy.visit('https://site.quickdecksapp.com/signup');
       cy.queryByText('Already a user?').should('exist');
     });
 
     it('app can visit login page by clicking on login link', () => {
-      cy.visit('http://localhost:3000/signup')
+      cy.visit('https://site.quickdecksapp.com/signup')
         .findByText('Login')
         .click()
         .location('pathname')
@@ -75,19 +75,19 @@ describe('flashCards', () => {
   });
   describe('app login up page', () => {
     it('page should go back to landing page when back arror is clicked', () => {
-      cy.visit('http://localhost:3000/login');
+      cy.visit('https://site.quickdecksapp.com/login');
       cy.get('#bArrow2')
         .should('have.attr', 'src')
-        .and('match', /[http://localhost:3000/]/);
+        .and('match', /[https://site.quickdecksapp.com/]/);
     });
 
     it('page should have title', () => {
-      cy.visit('http://localhost:3000/login');
+      cy.visit('https://site.quickdecksapp.com/login');
       cy.get('#login2').should('have.text', 'Login');
     });
 
     it('app can login user', () => {
-      cy.visit('http://localhost:3000/login');
+      cy.visit('https://site.quickdecksapp.com/login');
       cy.get('input[name="email"]').type('testEmail@gmail.com');
       cy.get('input[name="password"]').type('123456789');
       cy.get('#login1')
@@ -97,12 +97,12 @@ describe('flashCards', () => {
     });
 
     it('page should have text', () => {
-      cy.visit('http://localhost:3000/login');
+      cy.visit('https://site.quickdecksapp.com/login');
       cy.queryByText('Do not have an account?').should('exist');
     });
 
     it('app can visit sign up page by clicking on sign up link', () => {
-      cy.visit('http://localhost:3000/login')
+      cy.visit('https://site.quickdecksapp.com/login')
         .findByText('Sign Up')
         .click()
         .location('pathname')
@@ -110,7 +110,7 @@ describe('flashCards', () => {
     });
 
     it('app can visit forgot password page by clicking on forgot password link', () => {
-      cy.visit('http://localhost:3000/login')
+      cy.visit('https://site.quickdecksapp.com/login')
         .findByText('Forgot Password?')
         .click()
         .location('pathname')
@@ -119,12 +119,12 @@ describe('flashCards', () => {
   });
   describe('app forgot password up page', () => {
     it('page should have title', () => {
-      cy.visit('http://localhost:3000/forgot');
+      cy.visit('https://site.quickdecksapp.com/forgot');
       cy.get('#forgotPasswordTitle').should('have.text', 'Forgot Password');
     });
 
     it('page should have text', () => {
-      cy.visit('http://localhost:3000/forgot');
+      cy.visit('https://site.quickdecksapp.com/forgot');
       cy.get('#forgotPasswordText').should(
         'have.text',
         'Enter your email linked to your account. A message will be sent to your email to reset your password',
@@ -132,7 +132,7 @@ describe('flashCards', () => {
     });
 
     it('if user email found, send mail to user and show success message', () => {
-      cy.visit('http://localhost:3000/forgot');
+      cy.visit('https://site.quickdecksapp.com/forgot');
       cy.get('input[name="email"]').type('testEmail@gmail.com');
       cy.get('#sendEmail')
         .click()
@@ -140,7 +140,7 @@ describe('flashCards', () => {
         .should('match', /['Successfully sent your reset link to your email.]/);
     });
     it('if user email not found, error message', () => {
-      cy.visit('http://localhost:3000/forgot');
+      cy.visit('https://site.quickdecksapp.com/forgot');
       cy.get('input[name="email"]').type('notFound@gmail.com');
       cy.get('#sendEmail')
         .click()
