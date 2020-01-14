@@ -102,28 +102,21 @@ const LeftSideBar = ({ name, logoutUser, history }) => {
 };
 
 const MenuItem = ({ img, text, onClick, route = '/' }) => {
-  // const active = { backgroundColor: 'white', color: 'black' };
+  const active = { backgroundColor: 'white', color: 'black' };
   // console.log('tata', active);
   return (
     <Item
       onClick={onClick || null}
       to={route}
-      // activeStyle={active}
-      activeStyle={{
-        // fontWeight: 'bold',
-        color: 'red',
-        backgroundColor: 'whitesmoke',
-      }}
+      activeStyle={active}
+      // activeStyle={{
+      //   color: 'red',
+      //   backgroundColor: 'whitesmoke',
+      // }}
       // style={active === true ? activeStyle : {}}
     >
       <img src={img} alt="" />
-      <P
-        BRAND
-        color={c.WHITE}
-        // activeStyle={{
-        //   color: 'red',
-        // }}
-      >
+      <P BRAND color={c.WHITE}>
         {text}
       </P>
     </Item>
