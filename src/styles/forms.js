@@ -63,6 +63,7 @@ export const Forms = styled.form`
 */
 
 export const Input = styled.input`
+  // margin-top: 100px;
   background: #fffefe;
   border: ${props => props.border || '1px solid rgba(0, 0, 0, 0.3)'};
   box-sizing: border-box;
@@ -81,13 +82,15 @@ export const Input = styled.input`
 
   @media (min-width: ${g.phoneMediaBreak}px) {
     align-items: left;
-    // background-color: red;
     width: 100%;
-    // height: 80px;
+    padding: 15 px;
+    // margin-left: -35px;
+    // margin-top: 5px;
+    // background: green;
     @media (min-width: ${g.desktopMediaBreak}px) {
       display: flex;
       flex-direction: column;
-      background-color: white;
+      // background-color: white;
       width: 100%;
     }
   }
@@ -133,9 +136,11 @@ export const Select = styled.select`
   @media (min-width: ${g.phoneMediaBreak}px) {
     width: 100%;
     padding: 15px;
+    // background: red;
     @media (min-width: ${g.desktopMediaBreak}px) {
       display: flex;
       flex-direction: column;
+      align-items: left;
     }
   }
 `;
@@ -145,14 +150,18 @@ export const Label = styled.label`
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  align-items: flex-start;
+  padding-top: 35px;
 
   @media (min-width: ${g.phoneMediaBreak}px) {
-    width: 90%;
-    padding: 15px;
+    width: 150%;
+    // padding: 15px;
+    margin-left: -30%;
     @media (min-width: ${g.desktopMediaBreak}px) {
       display: flex;
       flex-direction: column;
+      width: 100%;
+      margin-left: 3%;
+      // align-items: center;
     }
   }
 `;
