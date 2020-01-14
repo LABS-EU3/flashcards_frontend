@@ -34,16 +34,28 @@ export const Item = styled(NavLink)`
   /* margin: 0 20px; */
   justify-content: start;
 
+  &:hover {
+    background-color: #fff;
+  }
+
   &:nth-child(6) {
     margin-bottom: 20px;
   }
 
   p {
     margin-left: 14px;
+
+    &:hover {
+      color: #000;
+    }
   }
   img {
     height: 24px;
     width: 24px;
+
+    &:hover {
+      background-color: #000;
+    }
   }
 `;
 
