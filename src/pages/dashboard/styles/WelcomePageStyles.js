@@ -1,13 +1,5 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  display: flex;
-  background-color: transparent;
-  width: 100%;
-  height: 600px;
-  perspective: 1000px;
-`;
-
 export const FlipCardInner = styled.div`
   position: relative;
   width: 100%;
@@ -16,6 +8,17 @@ export const FlipCardInner = styled.div`
   transition: transform 0.6s;
   transform-style: preserve-3d;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+`;
+
+export const Container = styled.div`
+  display: flex;
+  background-color: transparent;
+  width: 100%;
+  height: 600px;
+  perspective: 1000px;
+  &:hover ${FlipCardInner} {
+    transform: rotateY(180deg);
+  }
 `;
 
 export const FlipCardFront = styled.div`
