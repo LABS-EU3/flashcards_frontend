@@ -83,14 +83,10 @@ export const Input = styled.input`
   @media (min-width: ${g.phoneMediaBreak}px) {
     align-items: left;
     width: 100%;
-    padding: 15 px;
-    // margin-left: -35px;
-    // margin-top: 5px;
-    // background: green;
+    padding: 15px;
     @media (min-width: ${g.desktopMediaBreak}px) {
       display: flex;
       flex-direction: column;
-      // background-color: white;
       width: 100%;
     }
   }
@@ -136,7 +132,6 @@ export const Select = styled.select`
   @media (min-width: ${g.phoneMediaBreak}px) {
     width: 100%;
     padding: 15px;
-    // background: red;
     @media (min-width: ${g.desktopMediaBreak}px) {
       display: flex;
       flex-direction: column;
@@ -154,14 +149,12 @@ export const Label = styled.label`
 
   @media (min-width: ${g.phoneMediaBreak}px) {
     width: 150%;
-    // padding: 15px;
     margin-left: -30%;
     @media (min-width: ${g.desktopMediaBreak}px) {
       display: flex;
       flex-direction: column;
       width: 100%;
-      margin-left: 3%;
-      // align-items: center;
+      margin-left: 10px;
     }
   }
 `;
