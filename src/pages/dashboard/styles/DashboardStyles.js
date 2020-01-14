@@ -35,6 +35,8 @@ export const Item = styled(NavLink)`
   text-decoration: none;
   /* margin: 0 20px; */
   justify-content: start;
+  // vertical-align: middle;
+  align-items: center;
 
   &:nth-child(6) {
     margin-bottom: 20px;
@@ -42,8 +44,12 @@ export const Item = styled(NavLink)`
 
   p {
     margin-left: 14px;
+    // margin-top: 3px;
+    // vertical-align: middle;
+    // border: 1px solid blue;
   }
-  img {
+
+  h3 {
     height: 24px;
     width: 24px;
   }
