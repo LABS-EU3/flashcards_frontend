@@ -84,3 +84,22 @@ export const getSingleDeck = deckId => dispatch => {
       });
     });
 };
+
+export const createCard = card => dispatch => {
+  dispatch({ type: types.ON_START_CREATING_CARD });
+
+  axiosWithAuth()
+    .post(`/cards`, card)
+    .then(() => {
+      dispatch({
+        type: types.ON_CARD_CREATION_COMPLETE,
+        payload: card,
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: types.ON_CARD_CREATION_CANCELLED,
+        payload: error.message,
+      });
+    });
+};

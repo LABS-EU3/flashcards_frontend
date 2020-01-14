@@ -32,8 +32,8 @@ const SingleDeck = props => {
     }, 10);
   }
 
+  const { deckId } = match.params;
   useEffect(() => {
-    const { deckId } = match.params;
     props.getSingleDeck(deckId);
   }, []);
 
@@ -47,7 +47,7 @@ const SingleDeck = props => {
         opacity={opacity}
         backgroundProps={{ opacity }}
       >
-        <AddCardForm />
+        <AddCardForm deckId={deckId} />
       </FancyModal>
       <CardsSection cards={selectedDeck.flashcards} />
     </div>
