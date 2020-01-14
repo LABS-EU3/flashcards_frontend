@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import * as c from '../../styles/variables/colours';
+import * as g from '../../styles/variables/global';
 
 export const LightPop = props => {
   const { children } = props;
@@ -15,6 +16,16 @@ const PinkButton = styled.button`
 
   &:hover {
     cursor: pointer;
+  }
+
+  @media (min-width: ${g.phoneMediaBreak}px) {
+    width: 150%;
+    margin-left: -70px;
+    @media (min-width: ${g.desktopMediaBreak}px) {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
   }
 `;
 

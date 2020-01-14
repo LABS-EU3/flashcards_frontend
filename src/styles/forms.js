@@ -14,7 +14,7 @@ import * as g from './variables/global';
 
 export const FormContainer = styled.div`
   text-align: center;
-  width: ${props => props.width || '50%'};
+  width: ${props => props.width || '55%'};
   margin: 4% 0;
   display: flex;
   height: 100%;
@@ -22,7 +22,7 @@ export const FormContainer = styled.div`
   justify-content: center:
 
   @media (min-width: ${g.phoneMediaBreak}px) {
-     width: 100%;
+     width: 200%;
     @media (min-width: ${g.desktopMediaBreak}px) {
       display: flex;
       flex-direction: column;
@@ -36,6 +36,18 @@ export const Forms = styled.form`
   align-items: center;
   width: 100%;
   height: ${props => props.height || null};
+
+  @media (min-width: ${g.phoneMediaBreak}px) {
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: left;
+    width: 100%;
+    @media (min-width: ${g.desktopMediaBreak}px) {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+  }
 `;
 
 // Here you can use the border attribute dynamically
@@ -113,8 +125,18 @@ export const Select = styled.select`
   line-height: ${f.H3_LINE_HEIGHT}em;
   padding: 0.5em;
   margin: 0em 0em 1em 0em;
+  height: 40px;
   &:focus {
     outline: 2px solid ${c.SECONDARY_POP_COLOR};
+  }
+
+  @media (min-width: ${g.phoneMediaBreak}px) {
+    width: 100%;
+    padding: 15px;
+    @media (min-width: ${g.desktopMediaBreak}px) {
+      display: flex;
+      flex-direction: column;
+    }
   }
 `;
 

@@ -20,7 +20,7 @@ const Form = props => {
   } = props;
   return (
     <Forms onSubmit={handleSubmit} height="100%">
-      <FormContainer width="100%">
+      <FormContainer>
         <H1>Create Card</H1>
         <Label>
           <P BOLD>Front</P>
