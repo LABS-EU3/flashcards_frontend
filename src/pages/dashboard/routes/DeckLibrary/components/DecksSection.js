@@ -32,7 +32,7 @@ const Decks = ({ decks }) => {
               marginLeft="0"
               marginRight="0"
             >
-              <NavLink id={d.deck_id} to={`/dashboard/deck/${d.id}`}>
+              <NavLink to={`/dashboard/deck/${d.deck_id}`}>
                 <H2 BOLD>{d.deck_name}</H2>
                 <P>{d.isPublic ? 'Public' : 'Private'}</P>
               </NavLink>
