@@ -70,16 +70,16 @@ export const getSingleDeck = deckId => dispatch => {
   dispatch({ type: types.ON_START_FETCHING_CARDS });
 
   axiosWithAuth()
-    .get(`/deck/cards/${deckId}`)
+    .get(`/decks/${deckId}`)
     .then(({ data }) => {
       dispatch({
-        type: types.ON_DECK_CARDS_FETCH_SUCCESS,
+        type: types.ON_GET_SINGLE_DECK_SUCCESS,
         payload: data,
       });
     })
     .catch(error => {
       dispatch({
-        type: types.ON_DECK_CARDS_FETCH_FAILED,
+        type: types.ON_GET_SINGLE_DECK_FAILED,
         payload: error.message,
       });
     });

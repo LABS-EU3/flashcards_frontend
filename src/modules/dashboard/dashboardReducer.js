@@ -107,7 +107,7 @@ const dashboardReducer = (state = initialState, action) => {
     case types.ON_GET_SINGLE_DECK_SUCCESS:
       return {
         ...state,
-        selectedDeck: action.payload,
+        selectedDeck: action.payload.deck,
         loading: false,
       };
 

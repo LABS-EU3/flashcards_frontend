@@ -12,7 +12,7 @@ import FancyModal from '../../../../components/modals/CreateResourceModal';
 
 const SingleDeck = props => {
   const { dashboard, match } = props;
-  const { creatingCard, singleDeckCards } = dashboard;
+  const { creatingCard, selectedDeck } = dashboard;
 
   const [opacity, setOpacity] = useState(0);
 
@@ -49,7 +49,7 @@ const SingleDeck = props => {
       >
         <AddCardForm />
       </FancyModal>
-      <CardsSection cards={singleDeckCards} />
+      <CardsSection cards={selectedDeck.flashcards} />
     </div>
   );
 };
