@@ -14,14 +14,15 @@ import * as g from './variables/global';
 
 export const FormContainer = styled.div`
   text-align: center;
-  width: ${props => props.width || '45%'};
+  width: ${props => props.width || '50%'};
   margin: 4% 0;
   display: flex;
   height: 100%;
   flex-direction: column;
+  justify-content: center:
 
   @media (min-width: ${g.phoneMediaBreak}px) {
-    width: 100%;
+     width: 100%;
     @media (min-width: ${g.desktopMediaBreak}px) {
       display: flex;
       flex-direction: column;
@@ -64,6 +65,19 @@ export const Input = styled.input`
   margin: 0em 0em 1em 0em;
   &:focus {
     outline: 2px solid ${c.SECONDARY_POP_COLOR};
+  }
+
+  @media (min-width: ${g.phoneMediaBreak}px) {
+    align-items: left;
+    // background-color: red;
+    width: 100%;
+    // height: 80px;
+    @media (min-width: ${g.desktopMediaBreak}px) {
+      display: flex;
+      flex-direction: column;
+      background-color: white;
+      width: 100%;
+    }
   }
 `;
 
