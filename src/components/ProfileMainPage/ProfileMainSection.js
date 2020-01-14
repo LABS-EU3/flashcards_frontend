@@ -6,8 +6,8 @@ import './styles.css';
 const moment = require('moment');
 
 const ProfileMainSection = ({ profileData }) => {
-  const { fullName, isConfirmed, email, createdOn } = profileData;
-  const registered = new Date(createdOn);
+  const { fullName, isConfirmed, email, createdon } = profileData;
+  const registered = new Date(createdon);
   const timeSinceRegisteration = moment(registered).fromNow();
 
   return (
