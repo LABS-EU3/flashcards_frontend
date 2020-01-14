@@ -1,7 +1,7 @@
 // Import
 
 // Libraries
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Sidebar from 'react-sidebar';
 
 import * as g from '../../styles/variables/global';
@@ -28,10 +28,6 @@ export default function DashboardLayout(props) {
   };
 
   mql.addListener(mediaQueryChanged);
-
-  useEffect(() => {
-    // props.fetchProfile();
-  }, []);
 
   return (
     <DashboardContainer>
