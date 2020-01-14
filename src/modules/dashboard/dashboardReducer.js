@@ -1,4 +1,4 @@
-import types from './dashboardTypes';
+import * as types from './dashboardTypes';
 
 const initialState = {
   userProfile: {},

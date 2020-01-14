@@ -1,4 +1,4 @@
-import types from './dashboardTypes';
+import * as types from './dashboardTypes';
 
 import { axiosWithAuth } from '../../utils/auth';
 
