@@ -20,7 +20,7 @@ const Decks = ({ decks }) => {
         {decks.map(d => {
           return (
             <CardsFlex
-              key={d.deck_id}
+              key={d.deck_name}
               width="46%"
               marginLeft="0"
               marginRight="0"
