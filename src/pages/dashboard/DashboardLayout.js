@@ -1,7 +1,7 @@
 // Import
 
 // Libraries
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Sidebar from 'react-sidebar';
 // slcie data - render only 5 cards
 
@@ -29,10 +29,6 @@ export default function DashboardLayout(props) {
   };
 
   mql.addListener(mediaQueryChanged);
-
-  useEffect(() => {
-    // props.fetchProfile();
-  }, []);
 
   return (
     <DashboardContainer>

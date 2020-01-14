@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 
 import AddDeckForm from '../../../../components/addDeckForm/AddDeckForm';
@@ -8,54 +8,12 @@ import TopComponent from './components/TopComponent';
 import {
   createDeck,
   fetchTags,
+  fetchUserDecks,
 } from '../../../../modules/dashboard/dashboardActions';
 
-import types from '../../../../modules/dashboard/dashboardTypes';
+import * as types from '../../../../modules/dashboard/dashboardTypes';
 
 import FancyModal from '../../../../components/modals/CreateResourceModal';
-
-const cards = [
-  {
-    title: 'Organic Compounds',
-    category: 'Chemistry',
-  },
-  {
-    title: 'Quantum Mechanics',
-    category: 'Physics',
-  },
-  {
-    title: 'Data Structures',
-    category: 'Computer Science',
-  },
-  {
-    title: 'Advance Algorithms',
-    category: 'Computer Science',
-  },
-  {
-    title: 'OWASP Basics',
-    category: 'Computer Science',
-  },
-  {
-    title: 'Organic Compounds',
-    category: 'Chemistry',
-  },
-  {
-    title: 'Quantum Mechanics',
-    category: 'Physics',
-  },
-  {
-    title: 'Data Structures',
-    category: 'Computer Science',
-  },
-  {
-    title: 'Advance Algorithms',
-    category: 'Computer Science',
-  },
-  {
-    title: 'OWASP Basics',
-    category: 'Computer Science',
-  },
-];
 
 const tags = [
   '',
@@ -69,7 +27,9 @@ const tags = [
 
 const DeckLibrary = props => {
   const { dashboard } = props;
-  const { creatingDeck, creatingCard } = dashboard;
+  // eslint-disable-next-line react/destructuring-assignment
+  const fetchDecks = props.fetchUserDecks;
+  const { creatingDeck, creatingCard, userDecks } = dashboard;
 
   const [opacity, setOpacity] = useState(0);
 
@@ -96,6 +56,11 @@ const DeckLibrary = props => {
       setOpacity(1);
     }, 10);
   }
+
+  useEffect(() => {
+    fetchDecks();
+  }, []);
+
   return (
     <div>
       <TopComponent />
@@ -118,7 +83,7 @@ const DeckLibrary = props => {
       >
         <AddCardForm tags={tags} />
       </FancyModal>
-      <DecksSection decks={cards} />
+      <DecksSection decks={userDecks} />
     </div>
   );
 };
@@ -132,4 +97,5 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   createDeck,
   fetchTags,
+  fetchUserDecks,
 })(DeckLibrary);

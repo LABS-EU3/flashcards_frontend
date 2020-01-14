@@ -9,7 +9,7 @@ import {
   clearTags,
 } from '../../modules/dashboard/dashboardActions';
 
-import types from '../../modules/dashboard/dashboardTypes';
+import * as types from '../../modules/dashboard/dashboardTypes';
 import LightPopButton from '../buttons/LightPopButton';
 import { H1, H2, Text, H3 } from '../../styles/typography';
 import { Forms, Input, Label, Select, FormContainer } from '../../styles/forms';
@@ -118,7 +118,7 @@ const AddDeckForm = withFormik({
   handleSubmit: (values, { props, setSubmitting }) => {
     const deck = {
       name: values.deckName,
-      tagsArray: props.dashboard.selectedTags,
+      // tagsArray: props.dashboard.selectedTags,
     };
 
     props.createDeck(deck, setSubmitting(false));

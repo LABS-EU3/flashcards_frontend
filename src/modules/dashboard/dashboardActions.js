@@ -1,25 +1,6 @@
-import types from './dashboardTypes';
+import * as types from './dashboardTypes';
 
 import { axiosWithAuth } from '../../utils/auth';
-
-export const fetchProfile = () => dispactch => {
-  dispactch({ type: types.ON_BEGIN_PROFILE_FETCH });
-
-  axiosWithAuth()
-    .get(`/auth/view_profile`)
-    .then(({ data }) => {
-      dispactch({
-        type: types.ON_PROFILE_FETCH_SUCCESS,
-        payload: data.user,
-      });
-    })
-    .catch(err => {
-      dispactch({
-        type: types.ON_PROFILE_FETCH_FAILED,
-        payload: err,
-      });
-    });
-};
 
 export const getRecentCards = userId => dispatch => {
   dispatch({ type: types.RECENT_CARDS_START });
@@ -79,6 +60,25 @@ export const createDeck = (deck, onComplete, onFailed) => dispatch => {
       });
 
       if (onFailed) onFailed();
+    });
+};
+
+export const fetchUserDecks = () => dispatch => {
+  dispatch({ type: types.ON_START_FETCHING_DECKS });
+
+  axiosWithAuth()
+    .get('/decks')
+    .then(({ data }) => {
+      dispatch({
+        type: types.ON_GET_DECKS_COMPLETE,
+        payload: data.data,
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: types.ON_GET_DECKS_CANCELLED,
+        payload: error.message,
+      });
     });
 };
 
