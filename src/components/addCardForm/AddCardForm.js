@@ -4,7 +4,7 @@ import { withFormik } from 'formik';
 import * as yup from 'yup';
 
 import LightPopButton from '../buttons/LightPopButton';
-import { H1, Text, H3, P } from '../../styles/typography';
+import { H1, Text, H3 } from '../../styles/typography';
 import { Forms, TextArea, Label, FormContainer } from '../../styles/forms';
 import * as c from '../../styles/variables/colours';
 import { GrowSpace } from '../../styles/displayFlex';
@@ -23,7 +23,7 @@ const Form = props => {
       <FormContainer>
         <H1>Create Card</H1>
         <Label>
-          <P BOLD>Front</P>
+          <H3>Front</H3>
           {touched.front && errors.front && (
             <Text color={c.DANGER_COLOR}>{errors.front}</Text>
           )}
@@ -41,7 +41,7 @@ const Form = props => {
         <GrowSpace flexGrow="1" />
 
         <Label>
-          <P BOLD>Back</P>
+          <H3>Back</H3>
           {touched.back && errors.back && (
             <Text color={c.DANGER_COLOR}>{errors.back}</Text>
           )}

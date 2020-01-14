@@ -135,7 +135,6 @@ export const Select = styled.select`
     @media (min-width: ${g.desktopMediaBreak}px) {
       display: flex;
       flex-direction: column;
-      align-items: left;
     }
   }
 `;
