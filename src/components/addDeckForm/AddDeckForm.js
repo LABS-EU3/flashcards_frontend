@@ -12,7 +12,13 @@ import {
 import * as types from '../../modules/dashboard/dashboardTypes';
 import LightPopButton from '../buttons/LightPopButton';
 import { H1, H2, Text, H3 } from '../../styles/typography';
-import { Forms, Input, Label, Select, FormContainer } from '../../styles/forms';
+import {
+  Forms,
+  Input,
+  Select,
+  FormContainer,
+  CardLabel,
+} from '../../styles/forms';
 import * as c from '../../styles/variables/colours';
 import { GrowSpace } from '../../styles/displayFlex';
 import { SelectedTagsContainer } from './deckTags/deckTagStyles';
@@ -54,9 +60,9 @@ const Form = props => {
 
   return (
     <Forms onSubmit={handleSubmit} height="100%">
-      <FormContainer>
+      <FormContainer width="70%">
         <H1>Create Deck</H1>
-        <Label>
+        <CardLabel>
           <H2>Deck Name</H2>
           {touched.deckName && errors.deckName && (
             <Text color={c.DANGER_COLOR}>{errors.deckName}</Text>
@@ -73,9 +79,9 @@ const Form = props => {
               `2px solid ${c.DANGER_COLOR}`
             }
           />
-        </Label>
+        </CardLabel>
 
-        <Label>
+        <CardLabel>
           <H2>Tags</H2>
           {touched.tag && errors.tag && (
             <Text color={c.DANGER_COLOR}>{errors.deckName}</Text>
@@ -98,7 +104,7 @@ const Form = props => {
               </option>
             ))}
           </Select>
-        </Label>
+        </CardLabel>
         <SelectedTagsContainer>
           {selectedTags.map(s => {
             return <Tag key={s.id} value={s} removeTag={removeTag} />;

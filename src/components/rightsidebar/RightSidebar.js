@@ -1,9 +1,8 @@
 // Libraries
 import React, { useState } from 'react';
-// import { connect } from 'react-redux';
+import Sidebar from 'react-sidebar';
 
 // components
-import Sidebar from 'react-sidebar';
 import Card from '../cards/Cards';
 
 // styles
