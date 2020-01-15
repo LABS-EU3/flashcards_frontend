@@ -8,7 +8,7 @@ import {
   CollectionLabel,
 } from '../../../styles/DeckLibraryStyles';
 
-const Decks = ({ cards }) => {
+const Decks = ({ cards, showingAnswers }) => {
   return (
     <Collection>
       <CollectionLabel>
@@ -23,7 +23,7 @@ const Decks = ({ cards }) => {
               c && (
                 <CardsFlex width="46%" marginLeft="0" marginRight="0">
                   <H2 BOLD>{c.question}</H2>
-                  <P>{c.answer}</P>
+                  {showingAnswers ? <P>{c.answer}</P> : <P>####</P>}
                 </CardsFlex>
               )
             );
