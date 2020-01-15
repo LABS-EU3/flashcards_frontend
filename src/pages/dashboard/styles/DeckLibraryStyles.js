@@ -36,6 +36,17 @@ export const IconWithText = styled.button`
   }
 `;
 
+export const IconWithoutText = styled(IconWithText)`
+  justify-content: flex-end;
+  flex-grow: 1;
+  align-items: flex-end;
+
+  &: hover {
+    cursor: pointer;
+    background: none;
+  }
+`;
+
 export const TopComponentDiv = styled.div`
   display: flex;
   flex-direction: column;

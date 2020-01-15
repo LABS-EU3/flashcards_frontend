@@ -4,7 +4,10 @@ import { connect, useDispatch } from 'react-redux';
 import AddCardForm from '../../../../components/addCardForm/AddCardForm';
 import TopComponent from './topComponent/TopComponent';
 import CardsSection from './cardsSection/CardsSection';
-import { getSingleDeck } from '../../../../modules/dashboard/dashboardActions';
+import {
+  getSingleDeck,
+  deleteCard,
+} from '../../../../modules/dashboard/dashboardActions';
 
 import * as types from '../../../../modules/dashboard/dashboardTypes';
 
@@ -49,7 +52,11 @@ const SingleDeck = props => {
       >
         <AddCardForm deckId={deckId} />
       </FancyModal>
-      <CardsSection cards={selectedDeck.flashcards} />
+      <CardsSection
+        cards={selectedDeck.flashcards}
+        // eslint-disable-next-line react/destructuring-assignment
+        deleteCard={props.deleteCard}
+      />
     </div>
   );
 };
@@ -62,4 +69,5 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
   getSingleDeck,
+  deleteCard,
 })(SingleDeck);
