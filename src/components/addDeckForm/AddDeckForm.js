@@ -39,15 +39,23 @@ const Form = props => {
   } = props;
 
   const removeTag = tag => {
-    const remainingTags = selectedTags.filter(t => t !== tag);
+    const remainingTags = selectedTags.filter(t => t.id !== tag.id);
+
     setSelectedTags(remainingTags);
     dispatch({ type: types.SET_SELECTED_TAGS, payload: remainingTags });
   };
 
-  const addTag = tag => {
-    const newTagsList = [...selectedTags, tag];
+  const addTag = tagName => {
+    // Only tagName is passed in as we get it form e.target.value
+    // so we find the tag using that name.
+    const wholeTag = tags.find(t => t.name === tagName);
+
+    const newTagsList = [...selectedTags, wholeTag];
     setSelectedTags(newTagsList);
-    dispatch({ type: types.SET_SELECTED_TAGS, payload: newTagsList });
+    dispatch({
+      type: types.SET_SELECTED_TAGS,
+      payload: newTagsList,
+    });
   };
 
   return (
@@ -91,14 +99,16 @@ const Form = props => {
             border={touched.tag && errors.tag && `2px solid ${c.DANGER_COLOR}`}
           >
             {tags.map(t => (
-              <option value={t}>{t}</option>
+              <option key={t.id} value={t.name}>
+                {t.name}
+              </option>
             ))}
           </Select>
         </CardLabel>
         <SelectedTagsContainer>
-          {selectedTags.map(s => (
-            <Tag value={s} removeTag={removeTag} />
-          ))}
+          {selectedTags.map(s => {
+            return <Tag key={s.id} value={s} removeTag={removeTag} />;
+          })}
         </SelectedTagsContainer>
         <GrowSpace flexGrow="2" />
 
@@ -122,9 +132,10 @@ const AddDeckForm = withFormik({
   mapPropsToValues: () => ({ deckName: '', tag: '' }),
   validationSchema,
   handleSubmit: (values, { props, setSubmitting }) => {
+    const selectedTagIds = props.dashboard.selectedTags.map(t => t.id);
     const deck = {
       name: values.deckName,
-      // tagsArray: props.dashboard.selectedTags,
+      tags: selectedTagIds,
     };
 
     props.createDeck(deck, setSubmitting(false));

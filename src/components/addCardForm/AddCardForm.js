@@ -2,12 +2,14 @@ import React from 'react';
 
 import { withFormik } from 'formik';
 import * as yup from 'yup';
-
+import { connect } from 'react-redux';
 import LightPopButton from '../buttons/LightPopButton';
 import { H1, Text, H3 } from '../../styles/typography';
 import { Forms, TextArea, FormContainer, CardLabel } from '../../styles/forms';
 import * as c from '../../styles/variables/colours';
 import { GrowSpace } from '../../styles/displayFlex';
+
+import { createCard } from '../../modules/dashboard/dashboardActions';
 
 const Form = props => {
   const {
@@ -32,7 +34,7 @@ const Form = props => {
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.front}
-            name="cardFront"
+            name="front"
             border={
               touched.front && errors.front && `2px solid ${c.DANGER_COLOR}`
             }
@@ -50,7 +52,7 @@ const Form = props => {
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.back}
-            name="cardBack"
+            name="back"
             border={
               touched.back && errors.back && `2px solid ${c.DANGER_COLOR}`
             }
@@ -76,10 +78,22 @@ const validationSchema = yup.object().shape({
 const AddCardForm = withFormik({
   mapPropsToValues: () => ({ front: '', back: '' }),
   validationSchema,
-  handleSubmit: (values, { /* props, */ setSubmitting }) => {
+  handleSubmit: (values, { props, setSubmitting }) => {
+    const card = {
+      questionText: values.front,
+      answerText: values.back,
+      deckId: props.deckId,
+    };
+    props.createCard(card);
     setSubmitting(false);
   },
   displayName: 'Create Card',
 })(Form);
 
-export default AddCardForm;
+const mapStateToProps = state => {
+  return {
+    dashboard: state.dashboard,
+  };
+};
+
+export default connect(mapStateToProps, { createCard })(AddCardForm);

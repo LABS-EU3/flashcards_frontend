@@ -28,7 +28,7 @@ const TopComponent = () => {
           label="Add Deck"
         />
         <IconLabel
-          onClick={() => dispatch({ type: types.ON_START_CREATING_CARD })}
+          onClick={null}
           img={icons.LibraryIcon}
           label="Edit Library"
         />

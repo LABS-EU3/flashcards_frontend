@@ -85,3 +85,41 @@ export const fetchUserDecks = () => dispatch => {
 export const clearTags = () => dispatch => {
   dispatch({ type: types.CLEAR_SELECTED_TAGS });
 };
+
+export const getSingleDeck = deckId => dispatch => {
+  dispatch({ type: types.ON_START_FETCHING_CARDS });
+
+  axiosWithAuth()
+    .get(`/decks/${deckId}`)
+    .then(({ data }) => {
+      dispatch({
+        type: types.ON_GET_SINGLE_DECK_SUCCESS,
+        payload: data,
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: types.ON_GET_SINGLE_DECK_FAILED,
+        payload: error.message,
+      });
+    });
+};
+
+export const createCard = card => dispatch => {
+  dispatch({ type: types.ON_START_CREATING_CARD });
+
+  axiosWithAuth()
+    .post(`/cards`, card)
+    .then(() => {
+      dispatch({
+        type: types.ON_CARD_CREATION_COMPLETE,
+        payload: card,
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: types.ON_CARD_CREATION_CANCELLED,
+        payload: error.message,
+      });
+    });
+};
