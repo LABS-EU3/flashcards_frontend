@@ -1,4 +1,4 @@
-import types from './dashboardTypes';
+import * as types from './dashboardTypes';
 
 const initialState = {
   userProfile: {},
@@ -14,26 +14,6 @@ const initialState = {
 
 const dashboardReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.ON_BEGIN_PROFILE_FETCH:
-      return {
-        ...state,
-        loading: true,
-      };
-
-    case types.ON_PROFILE_FETCH_FAILED:
-      return {
-        ...state,
-        loading: false,
-        errors: action.payload,
-      };
-
-    case types.ON_PROFILE_FETCH_SUCCESS:
-      return {
-        ...state,
-        loading: true,
-        userProfile: action.payload,
-      };
-
     case types.ON_START_FETCHING_TAGS:
       return { ...state, fetchingTags: true, loading: true };
 

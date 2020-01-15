@@ -1,7 +1,7 @@
 // Import
 
 // Libraries
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router';
 import styled from 'styled-components';
@@ -10,16 +10,12 @@ import styled from 'styled-components';
 import DashboardLayout from './DashboardLayout';
 import RightSidebar from '../../components/rightsidebar/RightSidebar';
 import DeckLibrary from './routes/DeckLibrary/DeckLibrary';
-import { fetchProfile } from '../../modules/dashboard/dashboardActions';
 import { logoutUser } from '../../modules/user/userActions';
 import Profile from './routes/Profile/Profile';
 
 export const DashboardComponent = props => {
   const { user } = props;
 
-  useEffect(() => {
-    props.fetchProfile();
-  }, []);
   return (
     // eslint-disable-next-line react/destructuring-assignment
     <DashboardLayout user={user} logoutUser={props.logoutUser}>
@@ -49,6 +45,5 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {
-  fetchProfile,
   logoutUser,
 })(DashboardComponent);
