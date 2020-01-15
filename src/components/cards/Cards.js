@@ -4,7 +4,7 @@ import styled from 'styled-components';
 // styled
 import { P, H2 } from '../../styles/typography';
 import * as c from '../../styles/variables/colours';
-// import * as g from '../../styles/variables/global';
+import * as g from '../../styles/variables/global';
 
 export default function Cards({ title, category }) {
   return (
@@ -31,6 +31,11 @@ export const CardsFlex = styled.div`
   margin-bottom: ${props => props.marginBottom || '10px'};
   margin-left: ${props => props.marginLeft || '20px'};
   box-shadow: 0px 4px 10px lightgray;
+  border-radius: 5px;
+
+  @media (min-width: ${g.phoneMediaBreak}px) {
+    width: 85% !important;
+  }
 
   a {
     text-decoration: none;

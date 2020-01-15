@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import * as g from '../../../styles/variables/global';
 
 export const CollectionLabel = styled.div`
   width: 46%;
@@ -14,6 +15,10 @@ export const DecksContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+
+  @media (min-width: ${g.phoneMediaBreak}px) {
+    justify-content: center;
+  }
 `;
 
 export const IconWithText = styled.button`
