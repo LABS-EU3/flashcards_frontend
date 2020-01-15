@@ -22,7 +22,13 @@ const Decks = ({ cards, showingAllAnswers }) => {
         {cards &&
           cards.map(c => {
             return (
-              c && <DeckCard card={c} showingAllAnswers={showingAllAnswers} />
+              c && (
+                <DeckCard
+                  key={c.id}
+                  card={c}
+                  showingAllAnswers={showingAllAnswers}
+                />
+              )
             );
           })}
       </DecksContainer>
