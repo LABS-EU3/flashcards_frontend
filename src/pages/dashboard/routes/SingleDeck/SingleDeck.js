@@ -51,7 +51,7 @@ const SingleDeck = props => {
       </FancyModal>
       <CardsSection
         cards={selectedDeck.flashcards}
-        showingAnswers={showingAnswers}
+        showingAllAnswers={showingAnswers}
       />
     </div>
   );

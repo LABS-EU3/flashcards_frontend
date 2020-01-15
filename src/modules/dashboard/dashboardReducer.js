@@ -128,7 +128,8 @@ const dashboardReducer = (state = initialState, action) => {
     case types.TOGGLE_ANSWERS:
       return {
         ...state,
-        showingAnswers: action.payload || !state.showingAnswers,
+        showingAnswers:
+          action.payload != null ? action.payload : !state.showingAnswers,
       };
 
     default:
