@@ -24,6 +24,7 @@ export const CardsFlex = styled.div`
   border: 1px solid ${c.LIGHT_NEUTRAL_COLOR};
   box-sizing: border-box;
   background: white;
+  justify-content: space-between;
   width: ${props => props.width || null};
   margin-top: ${props => props.marginTop || '10px'};
   margin-right: ${props => props.marginRight || '20px'};

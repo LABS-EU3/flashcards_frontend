@@ -20,10 +20,12 @@ const Decks = ({ cards }) => {
         {cards &&
           cards.map(c => {
             return (
-              <CardsFlex width="46%" marginLeft="0" marginRight="0">
-                <H2 BOLD>{c.question}</H2>
-                <P>{c.answer}</P>
-              </CardsFlex>
+              c && (
+                <CardsFlex width="46%" marginLeft="0" marginRight="0">
+                  <H2 BOLD>{c.question}</H2>
+                  <P>{c.answer}</P>
+                </CardsFlex>
+              )
             );
           })}
       </DecksContainer>

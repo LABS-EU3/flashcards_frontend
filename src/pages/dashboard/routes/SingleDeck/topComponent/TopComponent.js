@@ -1,6 +1,11 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { MdDelete, MdAddToPhotos, MdEdit } from 'react-icons/md';
+import {
+  MdDelete,
+  MdAddToPhotos,
+  MdEdit,
+  MdRemoveRedEye,
+} from 'react-icons/md';
 
 import {
   TopComponentDiv,
@@ -39,6 +44,12 @@ const TopComponent = ({ deckName }) => {
             <MdDelete />
           </H2>
           <Text>Delete Deck</Text>
+        </IconWithText>
+        <IconWithText onClick={null}>
+          <H2>
+            <MdRemoveRedEye />
+          </H2>
+          <Text>Show Answers</Text>
         </IconWithText>
       </LibraryActions>
     </TopComponentDiv>
