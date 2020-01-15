@@ -2,15 +2,23 @@ import React from 'react';
 
 // import { connect } from 'react-redux';
 import RoundedImage from 'react-rounded-image';
-
-// import { fetchProfile } from '../../../modules/dashboard/dashboardActions';
+// Styled
+import '../../App.css';
+import {
+  MdDashboard,
+  MdAddToPhotos,
+  MdSettings,
+  MdExitToApp,
+  MdPerson,
+  MdContentCopy,
+} from 'react-icons/md';
 // assets
 import { withRouter } from 'react-router-dom';
-import icons from '../../assets/icons';
 import profileDefault from '../../assets/user_profile_default.jpg';
+
 // Styled
 import * as c from '../../styles/variables/colours';
-import { P, H1 } from '../../styles/typography';
+import { P, H1, H3 } from '../../styles/typography';
 import {
   MenuBox,
   ProfileImageDiv,
@@ -44,17 +52,38 @@ const LeftSideBar = ({ name, logoutUser, history }) => {
       </ProfileImageDiv>
 
       <MenuBox>
-        <MenuItem img={icons.DashboardIcon} text="Dashboard" />
-        <MenuItem img={icons.ProfileIcon} text="Profile" />
-        <MenuItem img={icons.AddDecksIcon} text="Add Decks" />
         <MenuItem
-          img={icons.LibraryIcon}
+          img={<MdDashboard size="1.5em" />}
+          text="Dashboard"
+          route="/dashboard/dashboard"
+        />
+        <MenuItem
+          img={<MdPerson size="1.5em" />}
+          text="Profile"
+          route="/dashboard/profile"
+        />
+        <MenuItem
+          img={<MdAddToPhotos size="1.5em" />}
+          text="Add Decks"
+          route="/dashboard/add_decks"
+        />
+        <MenuItem
+          img={<MdContentCopy size="1.5em" />}
           text="Deck Library"
           route="/dashboard/library"
         />
-        <MenuItem img={icons.SettingsIcon} text="Settings" />
+        <MenuItem
+          img={<MdSettings size="1.5em" />}
+          text="Settings"
+          route="/dashboard/settings"
+        />
         <GrowSpace />
-        <MenuItem img={icons.LogoutIcon} onClick={onLogout} text="Log Out" />
+        <MenuItem
+          img={<MdExitToApp size="1.5em" />}
+          onClick={onLogout}
+          text="Log Out"
+          route="/login"
+        />
       </MenuBox>
     </SidebarBody>
   );
@@ -62,9 +91,9 @@ const LeftSideBar = ({ name, logoutUser, history }) => {
 
 const MenuItem = ({ img, text, onClick, route = '/' }) => {
   return (
-    <Item onClick={onClick || null} to={route}>
-      <img src={img} alt="" />
-      <P BRAND color={c.WHITE}>
+    <Item onClick={onClick || null} to={route} activeClassName="active">
+      <H3 WHITE>{img}</H3>
+      <P BRAND color={c.WHITE} activeClassName="active">
         {text}
       </P>
     </Item>

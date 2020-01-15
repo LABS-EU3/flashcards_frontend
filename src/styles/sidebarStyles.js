@@ -42,6 +42,7 @@ export const CardsStyled = styled.div`
   flex-direction: column;
   align-items: left;
   background: white;
+  // background: whitesmoke;
   width: 100%;
   justify-content: space-evently;
   margin-top: -40px;

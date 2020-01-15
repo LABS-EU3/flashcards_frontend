@@ -9,13 +9,17 @@ import * as f from './variables/fonts';
 // Colours
 import * as c from './variables/colours';
 
+// Global
+import * as g from './variables/global';
+
 export const FormContainer = styled.div`
   text-align: center;
-  width: ${props => props.width || '45%'};
+  width: ${props => props.width || '55%'};
   margin: 4% 0;
   display: flex;
   height: 100%;
   flex-direction: column;
+  justify-content: center:
 `;
 
 export const Forms = styled.form`
@@ -88,6 +92,7 @@ export const Select = styled.select`
   line-height: ${f.H3_LINE_HEIGHT}em;
   padding: 0.5em;
   margin: 0em 0em 1em 0em;
+  height: 40px;
   &:focus {
     outline: 2px solid ${c.SECONDARY_POP_COLOR};
   }
@@ -98,5 +103,19 @@ export const Label = styled.label`
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  align-items: flex-start;
+`;
+
+export const CardLabel = styled(Label)`
+  padding-top: 35px;
+
+  @media (min-width: ${g.phoneMediaBreak}px) {
+    width: 120%;
+    margin-left: -10%;
+  }
+  @media (min-width: ${g.desktopMediaBreak}px) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 1%;
+  }
 `;

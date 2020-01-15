@@ -4,8 +4,8 @@ import { withFormik } from 'formik';
 import * as yup from 'yup';
 import { connect } from 'react-redux';
 import LightPopButton from '../buttons/LightPopButton';
-import { H1, Text, H3, P } from '../../styles/typography';
-import { Forms, TextArea, Label, FormContainer } from '../../styles/forms';
+import { H1, Text, H3 } from '../../styles/typography';
+import { Forms, TextArea, FormContainer, CardLabel } from '../../styles/forms';
 import * as c from '../../styles/variables/colours';
 import { GrowSpace } from '../../styles/displayFlex';
 
@@ -22,10 +22,10 @@ const Form = props => {
   } = props;
   return (
     <Forms onSubmit={handleSubmit} height="100%">
-      <FormContainer>
+      <FormContainer width="70%">
         <H1>Create Card</H1>
-        <Label>
-          <P BOLD>Front</P>
+        <CardLabel>
+          <H3>Front</H3>
           {touched.front && errors.front && (
             <Text color={c.DANGER_COLOR}>{errors.front}</Text>
           )}
@@ -39,11 +39,11 @@ const Form = props => {
               touched.front && errors.front && `2px solid ${c.DANGER_COLOR}`
             }
           />
-        </Label>
+        </CardLabel>
         <GrowSpace flexGrow="1" />
 
-        <Label>
-          <P BOLD>Back</P>
+        <CardLabel>
+          <H3>Back</H3>
           {touched.back && errors.back && (
             <Text color={c.DANGER_COLOR}>{errors.back}</Text>
           )}
@@ -57,7 +57,7 @@ const Form = props => {
               touched.back && errors.back && `2px solid ${c.DANGER_COLOR}`
             }
           />
-        </Label>
+        </CardLabel>
         <GrowSpace flexGrow="2" />
         <LightPopButton type="submit">
           <H3 BOLD WHITE>
