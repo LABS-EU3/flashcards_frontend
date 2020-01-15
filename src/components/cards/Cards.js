@@ -33,7 +33,7 @@ export const CardsFlex = styled.div`
   box-shadow: 0px 4px 10px lightgray;
   border-radius: 5px;
 
-  @media (min-width: ${g.phoneMediaBreak}px) {
+  @media (max-width: ${g.phoneMediaBreak}px) {
     width: 85% !important;
   }
 

@@ -16,7 +16,7 @@ export const DecksContainer = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
 
-  @media (min-width: ${g.phoneMediaBreak}px) {
+  @media (max-width: ${g.phoneMediaBreak}px) {
     justify-content: center;
   }
 `;
