@@ -19,16 +19,16 @@ const PinkButton = styled.button`
   align-content: center;
 
   @media (min-width: ${g.phoneMediaBreak}px) {
-    width: 160%;
-    margin-left: -30%;
+    width: 120%;
+    margin-left: -10%;
     height: 40px;
-    @media (min-width: ${g.desktopMediaBreak}px) {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      margin-left: 3%;
-      align-items: center;
-    }
+  }
+  @media (min-width: ${g.desktopMediaBreak}px) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 1%;
+    align-items: center;
   }
 `;
 

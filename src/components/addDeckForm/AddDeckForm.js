@@ -46,7 +46,7 @@ const Form = props => {
 
   return (
     <Forms onSubmit={handleSubmit} height="100%">
-      <FormContainer>
+      <FormContainer width="70%">
         <H1>Create Deck</H1>
         <Label>
           <H2>Deck Name</H2>

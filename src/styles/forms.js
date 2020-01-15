@@ -20,14 +20,6 @@ export const FormContainer = styled.div`
   height: 100%;
   flex-direction: column;
   justify-content: center:
-
-  @media (min-width: ${g.phoneMediaBreak}px) {
-     width: 200%;
-    @media (min-width: ${g.desktopMediaBreak}px) {
-      display: flex;
-      flex-direction: column;
-    }
-  }
 `;
 
 export const Forms = styled.form`
@@ -36,15 +28,6 @@ export const Forms = styled.form`
   align-items: center;
   width: 100%;
   height: ${props => props.height || null};
-
-  @media (min-width: ${g.phoneMediaBreak}px) {
-    width: 100%;
-    @media (min-width: ${g.desktopMediaBreak}px) {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-    }
-  }
 `;
 
 // Here you can use the border attribute dynamically
@@ -74,17 +57,6 @@ export const Input = styled.input`
   margin: 0em 0em 1em 0em;
   &:focus {
     outline: 2px solid ${c.SECONDARY_POP_COLOR};
-  }
-
-  @media (min-width: ${g.phoneMediaBreak}px) {
-    align-items: left;
-    width: 100%;
-    padding: 15px;
-    @media (min-width: ${g.desktopMediaBreak}px) {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-    }
   }
 `;
 
@@ -124,15 +96,6 @@ export const Select = styled.select`
   &:focus {
     outline: 2px solid ${c.SECONDARY_POP_COLOR};
   }
-
-  @media (min-width: ${g.phoneMediaBreak}px) {
-    width: 100%;
-    padding: 15px;
-    @media (min-width: ${g.desktopMediaBreak}px) {
-      display: flex;
-      flex-direction: column;
-    }
-  }
 `;
 
 export const Label = styled.label`
@@ -143,13 +106,13 @@ export const Label = styled.label`
   padding-top: 35px;
 
   @media (min-width: ${g.phoneMediaBreak}px) {
-    width: 150%;
-    margin-left: -30%;
-    @media (min-width: ${g.desktopMediaBreak}px) {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      margin-left: 10px;
-    }
+    width: 120%;
+    margin-left: -10%;
+  }
+  @media (min-width: ${g.desktopMediaBreak}px) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 1%;
   }
 `;
