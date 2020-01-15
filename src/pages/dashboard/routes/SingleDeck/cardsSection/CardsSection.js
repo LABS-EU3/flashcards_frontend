@@ -8,7 +8,13 @@ import {
   CollectionLabel,
 } from '../../../styles/DeckLibraryStyles';
 
-const Decks = ({ cards }) => {
+const Decks = ({ cards, deleteCard }) => {
+  // console.log(cards);
+
+  const handleDelete = card => {
+    deleteCard(card);
+  };
+
   return (
     <Collection>
       <CollectionLabel>
@@ -18,11 +24,19 @@ const Decks = ({ cards }) => {
 
       <DecksContainer>
         {cards &&
-          cards.map(c => {
+          cards.map(card => {
             return (
               <CardsFlex width="46%" marginLeft="0" marginRight="0">
-                <H2 BOLD>{c.question}</H2>
-                <P>{c.answer}</P>
+                <H2 BOLD>{card.question}</H2>
+                <P>{card.answer}</P>
+                <button
+                  onClick={() => {
+                    handleDelete(card);
+                  }}
+                  type="button"
+                >
+                  Delete
+                </button>
               </CardsFlex>
             );
           })}
