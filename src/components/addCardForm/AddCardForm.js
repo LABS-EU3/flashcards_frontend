@@ -5,7 +5,7 @@ import * as yup from 'yup';
 
 import LightPopButton from '../buttons/LightPopButton';
 import { H1, Text, H3 } from '../../styles/typography';
-import { Forms, TextArea, Label, FormContainer } from '../../styles/forms';
+import { Forms, TextArea, FormContainer, CardLabel } from '../../styles/forms';
 import * as c from '../../styles/variables/colours';
 import { GrowSpace } from '../../styles/displayFlex';
 
@@ -22,7 +22,7 @@ const Form = props => {
     <Forms onSubmit={handleSubmit} height="100%">
       <FormContainer width="70%">
         <H1>Create Card</H1>
-        <Label>
+        <CardLabel>
           <H3>Front</H3>
           {touched.front && errors.front && (
             <Text color={c.DANGER_COLOR}>{errors.front}</Text>
@@ -37,10 +37,10 @@ const Form = props => {
               touched.front && errors.front && `2px solid ${c.DANGER_COLOR}`
             }
           />
-        </Label>
+        </CardLabel>
         <GrowSpace flexGrow="1" />
 
-        <Label>
+        <CardLabel>
           <H3>Back</H3>
           {touched.back && errors.back && (
             <Text color={c.DANGER_COLOR}>{errors.back}</Text>
@@ -55,7 +55,7 @@ const Form = props => {
               touched.back && errors.back && `2px solid ${c.DANGER_COLOR}`
             }
           />
-        </Label>
+        </CardLabel>
         <GrowSpace flexGrow="2" />
         <LightPopButton type="submit">
           <H3 BOLD WHITE>

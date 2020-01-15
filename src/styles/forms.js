@@ -103,6 +103,10 @@ export const Label = styled.label`
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
+`;
+
+export const CardLabel = styled(Label)`
+  padding-top: 35px;
 
   @media (min-width: ${g.phoneMediaBreak}px) {
     width: 120%;
