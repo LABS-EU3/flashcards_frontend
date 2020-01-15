@@ -16,7 +16,7 @@ import FancyModal from '../../../../components/modals/CreateResourceModal';
 const SingleDeck = props => {
   const { dashboard, match } = props;
   const { creatingCard, selectedDeck } = dashboard;
-  console.log('heir', dashboard);
+
   const [opacity, setOpacity] = useState(0);
 
   const dispatch = useDispatch();
@@ -56,7 +56,6 @@ const SingleDeck = props => {
         cards={selectedDeck.flashcards}
         // eslint-disable-next-line react/destructuring-assignment
         deleteCard={props.deleteCard}
-        match={match}
       />
     </div>
   );
