@@ -16,7 +16,7 @@ export const DecksContainer = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
 
-  @media (max-width: ${g.phoneMediaBreak}px) {
+  @media (max-width: ${g.desktopMediaBreak}px) {
     justify-content: center;
   }
 `;
@@ -39,6 +39,12 @@ export const IconWithText = styled.button`
     width: 24px;
     margin: 10px 0;
   }
+
+  @media (max-width: ${g.desktopMediaBreak}px) {
+    h2 {
+      line-height: 1.3em;
+    }
+  }
 `;
 
 export const TopComponentDiv = styled.div`
@@ -55,4 +61,8 @@ export const LibraryActions = styled.div`
   background: white;
   border-radius: 8px;
   margin: 16px 0;
+
+  @media (max-width: ${g.desktopMediaBreak}px) {
+    width: 90%;
+  }
 `;
