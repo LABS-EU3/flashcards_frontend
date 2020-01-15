@@ -10,7 +10,9 @@ import styled from 'styled-components';
 import DashboardLayout from './DashboardLayout';
 import RightSidebar from '../../components/rightsidebar/RightSidebar';
 import DeckLibrary from './routes/DeckLibrary/DeckLibrary';
+import { getRecentCards } from '../../modules/dashboard/dashboardActions';
 import { logoutUser } from '../../modules/user/userActions';
+import * as g from '../../styles/variables/global';
 
 export const DashboardComponent = props => {
   const { user } = props;
@@ -23,14 +25,24 @@ export const DashboardComponent = props => {
           <Route path="/dashboard/library" component={DeckLibrary} />
         </Switch>
       </RouteContainer>
-      <RightSidebar user={user} />
+      {/* eslint-disable-next-line react/destructuring-assignment  */}
+      <RightSidebar user={user} getRecentCards={props.getRecentCards} />
     </DashboardLayout>
   );
 };
 
 const RouteContainer = styled.div`
   margin-right: 25%;
+  height: 100%;
   background: whitesmoke;
+
+  @media (min-width: ${g.phoneMediaBreak}px) {
+    width: 100%;
+    @media (min-width: ${g.desktopMediaBreak}px) {
+      width: 75%
+      background: whitesmoke;
+    }
+  }
 `;
 
 const mapStateToProps = state => {
@@ -41,4 +53,5 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
   logoutUser,
+  getRecentCards,
 })(DashboardComponent);

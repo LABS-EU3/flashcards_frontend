@@ -4,3 +4,15 @@
   height: 100vh;
 
 }
+
+.active {
+  background-color: white;
+}
+
+.active>p {
+  color: black;
+}
+
+.active>h3 {
+  color: black;
+}

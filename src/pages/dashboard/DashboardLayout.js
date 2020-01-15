@@ -3,6 +3,7 @@
 // Libraries
 import React, { useState } from 'react';
 import Sidebar from 'react-sidebar';
+// slcie data - render only 5 cards
 
 import * as g from '../../styles/variables/global';
 import LeftSideBar from '../../components/leftSideBar/LeftSideBar';
