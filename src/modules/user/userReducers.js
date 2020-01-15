@@ -116,7 +116,6 @@ const userReducer = (state = initialState, action) => {
         completed: false,
         errors: null,
       };
-
     case types.ON_BEGIN_PROFILE_FETCH:
       return {
         ...state,

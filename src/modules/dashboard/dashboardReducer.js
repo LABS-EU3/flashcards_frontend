@@ -1,7 +1,6 @@
 import * as types from './dashboardTypes';
 
 const initialState = {
-  userProfile: {},
   loading: false,
   errors: null,
   creatingDeck: false,

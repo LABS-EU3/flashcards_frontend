@@ -1,4 +1,4 @@
-import * as  types from './dashboardTypes';
+import * as types from './dashboardTypes';
 
 import { axiosWithAuth } from '../../utils/auth';
 
@@ -51,7 +51,7 @@ export const fetchUserDecks = () => dispatch => {
     .then(({ data }) => {
       dispatch({
         type: types.ON_GET_DECKS_COMPLETE,
-        payload: data.decks,
+        payload: data.data,
       });
     })
     .catch(error => {
