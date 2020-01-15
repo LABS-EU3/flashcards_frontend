@@ -1,16 +1,17 @@
 import React from 'react';
 
+import { MdDelete } from 'react-icons/md';
 import { H1, HR, H2, P } from '../../../../../styles/typography';
 import { CardsFlex } from '../../../../../components/cards/Cards';
+
 import {
   Collection,
   DecksContainer,
   CollectionLabel,
+  IconWithoutText,
 } from '../../../styles/DeckLibraryStyles';
 
 const Decks = ({ cards, deleteCard }) => {
-  // console.log(cards);
-
   const handleDelete = card => {
     deleteCard(card);
   };
@@ -29,14 +30,15 @@ const Decks = ({ cards, deleteCard }) => {
               <CardsFlex width="46%" marginLeft="0" marginRight="0">
                 <H2 BOLD>{card.question}</H2>
                 <P>{card.answer}</P>
-                <button
+                <IconWithoutText
                   onClick={() => {
                     handleDelete(card);
                   }}
-                  type="button"
                 >
-                  Delete
-                </button>
+                  <H2>
+                    <MdDelete />
+                  </H2>
+                </IconWithoutText>
               </CardsFlex>
             );
           })}
