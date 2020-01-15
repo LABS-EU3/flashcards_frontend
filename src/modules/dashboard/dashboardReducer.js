@@ -11,6 +11,7 @@ const initialState = {
   selectedTags: [],
   selectedDeck: {},
   tags: deckTags,
+  showingAnswers: false,
 };
 
 const dashboardReducer = (state = initialState, action) => {
@@ -122,6 +123,12 @@ const dashboardReducer = (state = initialState, action) => {
         ...state,
         userDecks: action.payload,
         loading: false,
+      };
+
+    case types.TOGGLE_ANSWERS:
+      return {
+        ...state,
+        showingAnswers: action.payload || !state.showingAnswers,
       };
 
     default:
