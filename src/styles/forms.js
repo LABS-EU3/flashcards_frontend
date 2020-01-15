@@ -103,7 +103,6 @@ export const Label = styled.label`
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  padding-top: 35px;
 
   @media (min-width: ${g.phoneMediaBreak}px) {
     width: 120%;
