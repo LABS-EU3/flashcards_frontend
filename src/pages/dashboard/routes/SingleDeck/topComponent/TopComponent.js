@@ -23,6 +23,11 @@ const TopComponent = ({ deckName }) => {
   const createDeck = () => {
     dispatch({ type: types.ON_START_CREATING_CARD });
   };
+
+  const showAllAnswers = () => {
+    dispatch({ type: types.TOGGLE_ANSWERS });
+  };
+
   return (
     <TopComponentDiv>
       <H1>{deckName}</H1>
@@ -45,7 +50,7 @@ const TopComponent = ({ deckName }) => {
           </H2>
           <Text>Delete Deck</Text>
         </IconWithText>
-        <IconWithText onClick={null}>
+        <IconWithText onClick={showAllAnswers}>
           <H2>
             <MdRemoveRedEye />
           </H2>
