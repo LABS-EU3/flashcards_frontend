@@ -15,7 +15,7 @@ import FancyModal from '../../../../components/modals/CreateResourceModal';
 
 const SingleDeck = props => {
   const { dashboard, match } = props;
-  const { creatingCard, selectedDeck } = dashboard;
+  const { creatingCard, selectedDeck, showingAnswers } = dashboard;
 
   const [opacity, setOpacity] = useState(0);
 
@@ -54,8 +54,7 @@ const SingleDeck = props => {
       </FancyModal>
       <CardsSection
         cards={selectedDeck.flashcards}
-        // eslint-disable-next-line react/destructuring-assignment
-        deleteCard={props.deleteCard}
+        showingAllAnswers={showingAnswers}
       />
     </div>
   );
@@ -69,5 +68,5 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
   getSingleDeck,
-  deleteCard,
+  // deleteCard,
 })(SingleDeck);
