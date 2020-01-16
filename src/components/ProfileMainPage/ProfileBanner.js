@@ -1,14 +1,16 @@
 import React from 'react';
 import banner from '../../assets/images/rectangle.png';
 
+import { Banner, WelcomeMessage } from './styles.js';
+
 const ProfileBanner = ({ name }) => {
   return (
-    <div className="profile-banner">
+    <Banner>
       <img src={banner} alt="profile banner" />
-      <div className="profile-welcome-message">
+      <WelcomeMessage>
         <h2>Welcome {name}!</h2>
-      </div>
-    </div>
+      </WelcomeMessage>
+    </Banner>
   );
 };
 

@@ -125,7 +125,7 @@ export const fetchProfile = () => dispatch => {
     .then(({ data }) => {
       dispatch({
         type: types.ON_PROFILE_FETCH_SUCCESS,
-        payload: data.user,
+        payload: data,
       });
     })
     .catch(err => {

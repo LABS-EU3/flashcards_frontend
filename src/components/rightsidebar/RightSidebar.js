@@ -86,7 +86,7 @@ const SideContent = ({ user }) => {
   return (
     <SidebarBody>
       <Image>
-        <H1> Welcome {user.credentials.full_name}!</H1>
+        <H1> Welcome {user.credentials.fullName}!</H1>
       </Image>
       <CardsStyled>
         <StyledStart>
