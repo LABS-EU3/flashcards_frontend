@@ -8,10 +8,12 @@ const initialState = {
   creatingDeck: false,
   creatingCard: false,
   deleteingCard: false,
+  isUpdatingCard: false,
   userDecks: [],
   singleDeckCards: [],
   selectedTags: [],
   selectedDeck: {},
+  selectedCard: {},
   tags: deckTags,
   showingAnswers: false,
   showMenu: false,
@@ -87,7 +89,13 @@ const dashboardReducer = (state = initialState, action) => {
       return { ...state, creatingCard: true, loading: true };
 
     case types.ON_CARD_CREATION_CANCELLED:
-      return { ...state, creatingCard: false, loading: false };
+      return {
+        ...state,
+        creatingCard: false,
+        loading: false,
+        selectedCard: {},
+        isUpdatingCard: false,
+      };
 
     case types.ON_CARD_CREATION_COMPLETE:
       return {
@@ -95,6 +103,8 @@ const dashboardReducer = (state = initialState, action) => {
         userCards: action.payload,
         creatingCard: false,
         loading: false,
+        selectedCard: {},
+        isUpdatingCard: false,
       };
 
     case types.ON_START_FETCHING_CARDS:
@@ -147,11 +157,20 @@ const dashboardReducer = (state = initialState, action) => {
         userDecks: action.payload,
         loading: false,
       };
-    // case types.ON_DELETE_CARD_SUCCESS:
-    //   return {
-    //     ...state,
-    //     deleteingCard: true,
-    //   };
+
+    case types.ON_DELETE_CARD_SUCCESS:
+      return {
+        ...state,
+        deleteingCard: true,
+      };
+
+    case types.ON_UPDATE_CARD_START:
+      return {
+        ...state,
+        isUpdatingCard: true,
+        loading: true,
+        selectedCard: action.payload,
+      };
 
     case types.TOGGLE_ANSWERS:
       return {

@@ -1,21 +1,29 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { MdDelete } from 'react-icons/md';
+import { MdDelete, MdEdit } from 'react-icons/md';
 import { H1, HR, H2, P } from '../../../../../styles/typography';
 import { CardsFlex } from '../../../../../components/cards/Cards';
-
 import {
   Collection,
   DecksContainer,
   CollectionLabel,
   IconWithoutText,
+  CardsActions,
 } from '../../../styles/DeckLibraryStyles';
 import * as types from '../../../../../modules/dashboard/dashboardTypes';
 
 const Decks = ({ cards, deleteCard, showingAllAnswers }) => {
+  const dispatch = useDispatch();
+
   const handleDelete = card => {
     deleteCard(card);
+  };
+
+  const handleUpdate = card => {
+    dispatch({ type: types.ON_START_CREATING_CARD });
+    dispatch({ type: types.ON_UPDATE_CARD_START, payload: card });
+    // updateCard(card);
   };
 
   return (
@@ -27,14 +35,15 @@ const Decks = ({ cards, deleteCard, showingAllAnswers }) => {
 
       <DecksContainer>
         {cards &&
-          cards.map(c => {
+          cards.map(card => {
             return (
-              c && (
+              card && (
                 <DeckCard
-                  key={c.id}
-                  card={c}
+                  key={card.id}
+                  card={card}
                   showingAllAnswers={showingAllAnswers}
                   handleDelete={handleDelete}
+                  handleUpdate={handleUpdate}
                 />
               )
             );
@@ -44,7 +53,7 @@ const Decks = ({ cards, deleteCard, showingAllAnswers }) => {
   );
 };
 
-const DeckCard = ({ card, showingAllAnswers, handleDelete }) => {
+const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
   const [isShowingSingleAnswer, setIsShowingSingleAnswer] = useState(false);
   const dispatch = useDispatch();
   const toggleSingleAnswer = () => {
@@ -66,15 +75,26 @@ const DeckCard = ({ card, showingAllAnswers, handleDelete }) => {
       ) : (
         <P>####</P>
       )}
-      <IconWithoutText
-        onClick={() => {
-          handleDelete(card);
-        }}
-      >
-        <H2>
-          <MdDelete />
-        </H2>
-      </IconWithoutText>
+      <CardsActions>
+        <IconWithoutText
+          onClick={() => {
+            handleDelete(card);
+          }}
+        >
+          <H2>
+            <MdDelete />
+          </H2>
+        </IconWithoutText>
+        <IconWithoutText
+          onClick={() => {
+            handleUpdate(card);
+          }}
+        >
+          <H2>
+            <MdEdit />
+          </H2>
+        </IconWithoutText>
+      </CardsActions>
     </CardsFlex>
   );
 };
