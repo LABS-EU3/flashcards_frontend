@@ -26,7 +26,6 @@ import Tag from './deckTags/DeckTag';
 
 const Form = props => {
   const dispatch = useDispatch();
-  const [selectedTags, setSelectedTags] = useState([]);
 
   const {
     values,
@@ -38,11 +37,23 @@ const Form = props => {
     tags,
   } = props;
 
+  // eslint-disable-next-line react/destructuring-assignment
+  const { selectedDeck, isEditingDeck } = props.dashboard;
+
+  const preSelectedTags = isEditingDeck ? selectedDeck.tags : [];
+
+  values.deckName = isEditingDeck ? selectedDeck.deck_name : '';
+
+  const [selectedTags, setSelectedTags] = useState(preSelectedTags);
+
   const removeTag = tag => {
     const remainingTags = selectedTags.filter(t => t.id !== tag.id);
 
     setSelectedTags(remainingTags);
-    dispatch({ type: types.SET_SELECTED_TAGS, payload: remainingTags });
+    dispatch({
+      type: types.SET_SELECTED_TAGS,
+      payload: remainingTags,
+    });
   };
 
   const addTag = tagName => {
@@ -128,6 +139,12 @@ const validationSchema = yup.object().shape({
   tag: yup.string(),
 });
 
+const mapStateToProps = state => {
+  return {
+    dashboard: state.dashboard,
+  };
+};
+
 const AddDeckForm = withFormik({
   mapPropsToValues: () => ({ deckName: '', tag: '' }),
   validationSchema,
@@ -141,12 +158,6 @@ const AddDeckForm = withFormik({
     props.createDeck(deck, setSubmitting(false));
   },
   displayName: 'Create Deck',
-})(Form);
-
-const mapStateToProps = state => {
-  return {
-    dashboard: state.dashboard,
-  };
-};
+})(connect(mapStateToProps, {})(Form));
 
 export default connect(mapStateToProps, { createDeck, clearTags })(AddDeckForm);

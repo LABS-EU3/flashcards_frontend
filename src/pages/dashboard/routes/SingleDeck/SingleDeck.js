@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 
 import AddCardForm from '../../../../components/addCardForm/AddCardForm';
+import AddDeckForm from '../../../../components/addDeckForm/AddDeckForm';
 import TopComponent from './topComponent/TopComponent';
 import CardsSection from './cardsSection/CardsSection';
 import {
@@ -16,6 +17,7 @@ import FancyModal from '../../../../components/modals/CreateResourceModal';
 const SingleDeck = props => {
   const { dashboard, match } = props;
   const { creatingCard, selectedDeck, showingAnswers } = dashboard;
+  const { creatingDeck, tags } = dashboard;
 
   const [opacity, setOpacity] = useState(0);
 
@@ -26,6 +28,14 @@ const SingleDeck = props => {
       dispatch({ type: types.ON_CARD_CREATION_CANCELLED });
     } else {
       dispatch({ type: types.ON_START_CREATING_CARD });
+    }
+  }
+
+  function toggleDeckModal() {
+    if (creatingDeck) {
+      dispatch({ type: types.ON_DECK_CREATION_CANCELLED });
+    } else {
+      dispatch({ type: types.ON_START_CREATING_DECK });
     }
   }
 
@@ -42,7 +52,7 @@ const SingleDeck = props => {
 
   return (
     <div>
-      <TopComponent deckName={dashboard.selectedDeck.name} />
+      <TopComponent deckName={dashboard.selectedDeck.deck_name} />
       <FancyModal
         isOpen={creatingCard}
         afterOpen={afterOpen}
@@ -51,6 +61,16 @@ const SingleDeck = props => {
         backgroundProps={{ opacity }}
       >
         <AddCardForm deckId={deckId} />
+      </FancyModal>
+
+      <FancyModal
+        isOpen={creatingDeck}
+        afterOpen={afterOpen}
+        toggleModal={toggleDeckModal}
+        opacity={opacity}
+        backgroundProps={{ opacity }}
+      >
+        <AddDeckForm tags={tags} />
       </FancyModal>
       <CardsSection
         cards={selectedDeck.flashcards}

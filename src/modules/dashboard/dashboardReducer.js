@@ -8,6 +8,7 @@ const initialState = {
   creatingDeck: false,
   creatingCard: false,
   deleteingCard: false,
+  isEditingDeck: false,
   userDecks: [],
   singleDeckCards: [],
   selectedTags: [],
@@ -54,11 +55,18 @@ const dashboardReducer = (state = initialState, action) => {
     case types.ON_START_CREATING_DECK:
       return { ...state, creatingDeck: true, loading: true };
 
+    case types.ON_START_EDITING_DECK:
+      return {
+        ...state,
+        isEditingDeck: true,
+      };
+
     case types.ON_DECK_CREATION_CANCELLED:
       return {
         ...state,
         creatingDeck: false,
         loading: false,
+        isEditingDeck: false,
         errors: action.payload || {},
       };
 
@@ -67,6 +75,7 @@ const dashboardReducer = (state = initialState, action) => {
         ...state,
         userDecks: [...state.userDecks, action.payload],
         creatingDeck: false,
+        isEditingDeck: false,
         loading: false,
       };
 
