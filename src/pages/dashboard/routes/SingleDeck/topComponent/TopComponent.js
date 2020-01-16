@@ -51,9 +51,9 @@ const TopComponent = ({ deckName, deckId }) => {
           <Text>Edit Deck</Text>
         </IconWithText>
         <IconWithText
-          onClick={() => {
-            deleteDeck(deckId);
-            history.push('/dashboard/library');
+          onClick={async () => {
+            await deleteDeck(deckId);
+            await history.push('/dashboard/library');
           }}
         >
           <H2>
