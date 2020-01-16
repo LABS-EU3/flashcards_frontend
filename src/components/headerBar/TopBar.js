@@ -1,13 +1,14 @@
 // Import
-
+// import { clicked } from '../../modules/dashboard/dashboardActions';
 // Styled
 
 // Libraries
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { MdReorder } from 'react-icons/md';
-import { useDispatch } from 'react-redux';
+import { HAMBURGER_CLICKED } from '../../modules/dashboard/dashboardTypes';
 // Assets
 import logo from '../../assets/logo.svg';
 
@@ -35,10 +36,10 @@ export default function TopBar() {
       <HambuggerWrapper>
         <MdReorder
           onClick={() => {
-            dispatch({ type: 'HAMBURGER_CLICKED' });
+            dispatch({ type: HAMBURGER_CLICKED });
           }}
           size="2.8em"
-          color="#f44336"
+          color="#D21F3C"
         />
       </HambuggerWrapper>
       <HambuggerWrapper>
