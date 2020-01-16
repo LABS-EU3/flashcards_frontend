@@ -9,7 +9,7 @@ import {
   DecksContainer,
   CollectionLabel,
   IconWithoutText,
-  LibraryActions,
+  CardsActions,
 } from '../../../styles/DeckLibraryStyles';
 import * as types from '../../../../../modules/dashboard/dashboardTypes';
 
@@ -66,7 +66,7 @@ const DeckCard = ({ card, showingAllAnswers, handleDelete }) => {
       ) : (
         <P>####</P>
       )}
-      <LibraryActions>
+      <CardsActions>
         <IconWithoutText
           onClick={() => {
             handleDelete(card);
@@ -81,7 +81,7 @@ const DeckCard = ({ card, showingAllAnswers, handleDelete }) => {
             <MdEdit />
           </H2>
         </IconWithoutText>
-      </LibraryActions>
+      </CardsActions>
     </CardsFlex>
   );
 };
