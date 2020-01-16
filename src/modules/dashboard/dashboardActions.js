@@ -135,3 +135,7 @@ export const deleteCard = ({ id: cardId, deck_id: deckId }) => dispatch => {
       });
     });
 };
+
+export const clicked = () => dispatch => {
+  dispatch({ type: types.HAMBURGER_CLICKED });
+};
