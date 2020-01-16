@@ -17,24 +17,10 @@ import {
 } from './styles/DashboardStyles';
 
 export default function DashboardLayout(props) {
-  // export function DashboardLayout(props) {
-  const {
-    // user,
-    children,
-    // logoutUser
-  } = props;
-  const joba1 = useSelector(state => state.dashboard);
+  const { user, children, logoutUser } = props;
+  const clickeRes = useSelector(state => state.dashboard);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  // const handleClose = reason => {
-  //   if (sidebarOpen === joba1.showMenu) {
-  //     return;
-  //     // return 'hurayyyyyy';
-  //   } else return setSidebarOpen(!sidebarOpen);
-  //   // return 'oh nooooo';
-  // };
-
-  // console.log('dddd', props);
   const mql = window.matchMedia(`(min-width: ${g.desktopMediaBreak}px)`);
 
   const [sideBarDocked, setSideBarDocked] = useState(mql.matches);
@@ -46,31 +32,17 @@ export default function DashboardLayout(props) {
 
   mql.addListener(mediaQueryChanged);
 
-  // const dispatch = useDispatch();
-  // const newFun = () => dispatch(setSidebarOpen(!sidebarOpen));
-
-  // function sayHello() {
-  //   return 'Hello';
-  // }
-  // const sendSomething = () =>
-  //   dispatch({ type: 'SAYHELLO', payload: 'yyyyyyyy' });
-  // setSidebarOpen(() => joba1.showMenu);
-
   useEffect(() => {
-    // console.log('render');
     setSidebarOpen(!sidebarOpen);
-  }, [joba1.showMenu]);
+  }, [clickeRes.showMenu]);
 
   return (
     <DashboardContainer>
-      {/* {console.log('///ooottt', joba1.showMenu)} */}
-      {/* {console.log('%%%%%%', handleClose())} */}
-
       <Sidebar
         sidebar={
           <LeftSideBar
-          // name={user.credentials.full_name}
-          // logoutUser={logoutUser}
+            name={user.credentials.full_name}
+            logoutUser={logoutUser}
           />
         }
         open={sidebarOpen}
@@ -82,12 +54,6 @@ export default function DashboardLayout(props) {
         }}
       >
         <MainContent>
-          {/* <HamburgerButton
-            isDocked={sideBarDocked}
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-          >
-            Open sidebar
-          </HamburgerButton> */}
           {sideBarDocked}
           {children}
         </MainContent>
@@ -95,12 +61,3 @@ export default function DashboardLayout(props) {
     </DashboardContainer>
   );
 }
-
-// const mapStateToProps = state => {
-//   return {
-//     jjjj: state.dashboard,
-//     tttt: sayHello,
-//   };
-// };
-
-// export default connect(mapStateToProps, { sayHello })(DashboardLayout);
