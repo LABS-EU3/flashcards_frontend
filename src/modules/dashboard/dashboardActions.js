@@ -159,3 +159,7 @@ export const updateDeck = (
       if (onFailed) onFailed();
     });
 };
+
+export const clicked = () => dispatch => {
+  dispatch({ type: types.HAMBURGER_CLICKED });
+};

@@ -15,6 +15,7 @@ const initialState = {
   selectedDeck: {},
   tags: deckTags,
   showingAnswers: false,
+  showMenu: false,
 };
 
 const dashboardReducer = (state = initialState, action) => {
@@ -155,17 +156,22 @@ const dashboardReducer = (state = initialState, action) => {
         userDecks: action.payload,
         loading: false,
       };
-    case types.ON_DELETE_CARD_SUCCESS:
-      return {
-        ...state,
-        deleteingCard: true,
-      };
+    // case types.ON_DELETE_CARD_SUCCESS:
+    //   return {
+    //     ...state,
+    //     deleteingCard: true,
+    //   };
 
     case types.TOGGLE_ANSWERS:
       return {
         ...state,
         showingAnswers:
           action.payload != null ? action.payload : !state.showingAnswers,
+      };
+    case types.HAMBURGER_CLICKED:
+      return {
+        ...state,
+        showMenu: !state.showMenu,
       };
 
     default:
