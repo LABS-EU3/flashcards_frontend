@@ -143,11 +143,9 @@ export const updateDeck = (
 ) => dispatch => {
   axiosWithAuth()
     .put(`/decks/${deckId}`, deck)
-    .then(({ data }) => {
-      dispatch({
-        type: types.ON_DECK_CREATION_COMPLETE,
-        payload: data.deck,
-      });
+    .then(() => {
+      dispatch({ type: types.ON_DECK_CREATION_COMPLETE });
+      dispatch(getSingleDeck(deckId));
       if (onComplete) onComplete();
     })
     .catch(err => {
