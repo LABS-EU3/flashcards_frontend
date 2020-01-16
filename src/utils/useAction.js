@@ -4,9 +4,9 @@ import { bindActionCreators } from 'redux';
 
 // Same as useDispatch but its for a singular action
 
-const useDispatchThunk = actions => {
+const useAction = actions => {
   const dispatch = useDispatch();
   return bindActionCreators(actions, dispatch);
 };
 
-export default useDispatchThunk;
+export default useAction;

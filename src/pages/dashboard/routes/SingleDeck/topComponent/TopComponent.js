@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import {
   MdDelete,
   MdAddToPhotos,
@@ -17,9 +18,13 @@ import * as types from '../../../../../modules/dashboard/dashboardTypes';
 
 import { H1, H2, Text } from '../../../../../styles/typography';
 
-const TopComponent = ({ deckName }) => {
-  const dispatch = useDispatch();
+import useAction from '../../../../../utils/useAction';
 
+import * as action from '../../../../../modules/dashboard/dashboardActions';
+
+const TopComponent = ({ deckName, deckId }) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const createDeck = () => {
     dispatch({ type: types.ON_START_CREATING_CARD });
   };
@@ -27,10 +32,7 @@ const TopComponent = ({ deckName }) => {
   const showAllAnswers = () => {
     dispatch({ type: types.TOGGLE_ANSWERS });
   };
-
-  const deleteDeck = () => {
-    dispatch({ type: types.ON_START_DELETE_DECK });
-  };
+  const deleteDeck = useAction(action.deleteDeck);
 
   return (
     <TopComponentDiv>
@@ -48,7 +50,12 @@ const TopComponent = ({ deckName }) => {
           </H2>
           <Text>Edit Deck</Text>
         </IconWithText>
-        <IconWithText onClick={deleteDeck}>
+        <IconWithText
+          onClick={() => {
+            deleteDeck(deckId);
+            history.push('/dashboard/library');
+          }}
+        >
           <H2>
             <MdDelete />
           </H2>
