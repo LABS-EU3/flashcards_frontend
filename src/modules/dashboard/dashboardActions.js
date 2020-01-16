@@ -39,28 +39,6 @@ export const fetchTags = () => dispatch => {
     });
 };
 
-export const createDeck = (deck, onComplete, onFailed) => dispatch => {
-  dispatch({ type: types.ON_START_CREATING_DECK });
-
-  axiosWithAuth()
-    .post(`/decks`, deck)
-    .then(({ data }) => {
-      dispatch({
-        type: types.ON_DECK_CREATION_COMPLETE,
-        payload: data.deck,
-      });
-      if (onComplete) onComplete();
-    })
-    .catch(err => {
-      dispatch({
-        type: types.ON_DECK_CREATION_CANCELLED,
-        payload: err.message,
-      });
-
-      if (onFailed) onFailed();
-    });
-};
-
 export const fetchUserDecks = () => dispatch => {
   dispatch({ type: types.ON_START_FETCHING_DECKS });
 
@@ -77,6 +55,29 @@ export const fetchUserDecks = () => dispatch => {
         type: types.ON_GET_DECKS_CANCELLED,
         payload: error.message,
       });
+    });
+};
+
+export const createDeck = (deck, onComplete, onFailed) => dispatch => {
+  dispatch({ type: types.ON_START_CREATING_DECK });
+
+  axiosWithAuth()
+    .post(`/decks`, deck)
+    .then(({ data }) => {
+      dispatch({
+        type: types.ON_DECK_CREATION_COMPLETE,
+        payload: data.deck,
+      });
+      dispatch(fetchUserDecks());
+      if (onComplete) onComplete();
+    })
+    .catch(err => {
+      dispatch({
+        type: types.ON_DECK_CREATION_CANCELLED,
+        payload: err.message,
+      });
+
+      if (onFailed) onFailed();
     });
 };
 
