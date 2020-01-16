@@ -11,6 +11,7 @@ import { FadingBackground } from '../../components/modals/modalStyles';
 // Styled
 import DashboardLayout from './DashboardLayout';
 import RightSidebar from '../../components/rightsidebar/RightSidebar';
+import WelcomePage from './routes/WelcomePage/WelcomePage';
 import DeckLibrary from './routes/DeckLibrary/DeckLibrary';
 import SingleDeck from './routes/SingleDeck/SingleDeck';
 import { getRecentCards } from '../../modules/dashboard/dashboardActions';
@@ -26,6 +27,7 @@ export const DashboardComponent = props => {
         <RouteContainer>
           <Switch>
             <Route path="/dashboard/library" component={DeckLibrary} />
+            <Route path="/dashboard/welcome" component={WelcomePage} />
             <Route path="/dashboard/deck/:deckId" component={SingleDeck} />
           </Switch>
         </RouteContainer>
