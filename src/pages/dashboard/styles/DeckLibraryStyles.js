@@ -77,3 +77,14 @@ export const LibraryActions = styled.div`
     width: 90%;
   }
 `;
+
+export const CardsActions = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  width: 20%;
+  justify-content: flex-end;
+  flex-grow: 1;
+  margin-top: 20px;
+  align-self: flex-end;
+`;

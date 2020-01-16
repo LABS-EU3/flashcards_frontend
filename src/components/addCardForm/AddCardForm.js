@@ -9,7 +9,10 @@ import { Forms, TextArea, FormContainer, CardLabel } from '../../styles/forms';
 import * as c from '../../styles/variables/colours';
 import { GrowSpace } from '../../styles/displayFlex';
 
-import { createCard } from '../../modules/dashboard/dashboardActions';
+import {
+  createCard,
+  updateCard,
+} from '../../modules/dashboard/dashboardActions';
 
 const Form = props => {
   const {
@@ -19,11 +22,13 @@ const Form = props => {
     handleChange,
     handleBlur,
     handleSubmit,
+    dashboard,
   } = props;
+  const { isUpdatingCard } = dashboard;
   return (
     <Forms onSubmit={handleSubmit} height="100%">
       <FormContainer width="70%">
-        <H1>Create Card</H1>
+        {isUpdatingCard ? <H1>Update Card</H1> : <H1>Create Card</H1>}
         <CardLabel>
           <H3>Front</H3>
           {touched.front && errors.front && (
@@ -60,9 +65,15 @@ const Form = props => {
         </CardLabel>
         <GrowSpace flexGrow="2" />
         <LightPopButton type="submit">
-          <H3 BOLD WHITE>
-            Create
-          </H3>
+          {isUpdatingCard ? (
+            <H3 BOLD WHITE>
+              Save
+            </H3>
+          ) : (
+            <H3 BOLD WHITE>
+              Create
+            </H3>
+          )}
         </LightPopButton>
         <GrowSpace flexGrow="1" />
       </FormContainer>
@@ -75,25 +86,37 @@ const validationSchema = yup.object().shape({
   back: yup.string().required('Please provide an answer for your card'),
 });
 
-const AddCardForm = withFormik({
-  mapPropsToValues: () => ({ front: '', back: '' }),
-  validationSchema,
-  handleSubmit: (values, { props, setSubmitting }) => {
-    const card = {
-      questionText: values.front,
-      answerText: values.back,
-      deckId: props.deckId,
-    };
-    props.createCard(card);
-    setSubmitting(false);
-  },
-  displayName: 'Create Card',
-})(Form);
-
 const mapStateToProps = state => {
   return {
     dashboard: state.dashboard,
   };
 };
+const AddCardForm = withFormik({
+  mapPropsToValues: props => {
+    const { isUpdatingCard, selectedCard } = props.dashboard;
+    return isUpdatingCard
+      ? { front: selectedCard.question, back: selectedCard.answer }
+      : { front: '', back: '' };
+  },
+  validationSchema,
+  handleSubmit: (values, { props, setSubmitting }) => {
+    const { isUpdatingCard, selectedCard } = props.dashboard;
+    const card = {
+      questionText: values.front,
+      answerText: values.back,
+      deckId: props.deckId,
+    };
+    const cardId = selectedCard.id;
+    if (isUpdatingCard) {
+      props.updateCard(card, cardId);
+    } else {
+      props.createCard(card);
+    }
+    setSubmitting(false);
+  },
+  displayName: 'Create Card',
+})(connect(mapStateToProps, {})(Form));
 
-export default connect(mapStateToProps, { createCard })(AddCardForm);
+export default connect(mapStateToProps, { createCard, updateCard })(
+  AddCardForm,
+);

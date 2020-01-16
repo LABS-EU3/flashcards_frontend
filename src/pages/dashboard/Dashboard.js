@@ -44,7 +44,7 @@ const RouteContainer = styled.div`
   @media (min-width: ${g.phoneMediaBreak}px) {
     width: 100%;
     @media (min-width: ${g.desktopMediaBreak}px) {
-      width: 75%
+      width: 75%;
       background: whitesmoke;
     }
   }
