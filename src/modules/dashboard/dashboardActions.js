@@ -135,3 +135,20 @@ export const deleteCard = ({ id: cardId, deck_id: deckId }) => dispatch => {
       });
     });
 };
+
+export const updateCard = card => dispatch => {
+  dispatch({ type: types.ON_UPDATE_CARD_START });
+
+  axiosWithAuth()
+    .put(`/cards/${card.id}`, card)
+    .then(() => {
+      dispatch({ type: types.ON_CARD_UPDATE_SUCCESS });
+      dispatch(getSingleDeck(card.deckId));
+    })
+    .catch(error => {
+      dispatch({
+        type: types.ON_CARD_UPDATE_CANCELLED,
+        payload: error.message,
+      });
+    });
+};

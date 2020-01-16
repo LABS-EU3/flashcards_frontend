@@ -14,6 +14,7 @@ const initialState = {
   selectedDeck: {},
   tags: deckTags,
   showingAnswers: false,
+  updatingCard: false,
 };
 
 const dashboardReducer = (state = initialState, action) => {
@@ -146,10 +147,33 @@ const dashboardReducer = (state = initialState, action) => {
         userDecks: action.payload,
         loading: false,
       };
+
     case types.ON_DELETE_CARD_SUCCESS:
       return {
         ...state,
         deleteingCard: true,
+      };
+
+    case types.ON_UPDATE_CARD_START:
+      return {
+        ...state,
+        updatingCard: true,
+        loading: true,
+      };
+
+    case types.ON_CARD_UPDATE_CANCELLED:
+      return {
+        ...state,
+        updatingCard: false,
+        loading: false,
+      };
+
+    case types.ON_CARD_UPDATE_SUCCESS:
+      return {
+        ...state,
+        userCards: action.payload,
+        updatingCard: false,
+        loading: false,
       };
 
     case types.TOGGLE_ANSWERS:
