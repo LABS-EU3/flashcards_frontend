@@ -71,7 +71,7 @@ const Form = props => {
   return (
     <Forms onSubmit={handleSubmit} height="100%">
       <FormContainer width="70%">
-        <H1>Create Deck</H1>
+        <H1>{isEditingDeck ? 'Update Deck' : 'Create Deck'}</H1>
         <CardLabel>
           <H2>Deck Name</H2>
           {touched.deckName && errors.deckName && (
@@ -124,7 +124,7 @@ const Form = props => {
 
         <LightPopButton>
           <H3 BOLD WHITE>
-            Create
+            {isEditingDeck ? 'Save' : 'Create'}
           </H3>
         </LightPopButton>
         <GrowSpace flexGrow="1" />
