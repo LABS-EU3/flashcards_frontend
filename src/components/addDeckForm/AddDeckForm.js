@@ -7,6 +7,7 @@ import * as yup from 'yup';
 import {
   createDeck,
   clearTags,
+  updateDeck,
 } from '../../modules/dashboard/dashboardActions';
 
 import * as types from '../../modules/dashboard/dashboardTypes';
@@ -42,7 +43,7 @@ const Form = props => {
 
   const preSelectedTags = isEditingDeck ? selectedDeck.tags : [];
 
-  values.deckName = isEditingDeck ? selectedDeck.deck_name : '';
+  // values.deckName = '';
 
   const [selectedTags, setSelectedTags] = useState(preSelectedTags);
 
@@ -146,18 +147,36 @@ const mapStateToProps = state => {
 };
 
 const AddDeckForm = withFormik({
-  mapPropsToValues: () => ({ deckName: '', tag: '' }),
+  mapPropsToValues: props => {
+    const { isEditingDeck, selectedDeck } = props.dashboard;
+
+    // Initial values of the input elements.
+    // If we're currently editing a deck, we get it's name from state
+    //  if not, we use an empty string.
+    return { deckName: isEditingDeck ? selectedDeck.deck_name : '', tag: '' };
+  },
   validationSchema,
   handleSubmit: (values, { props, setSubmitting }) => {
-    const selectedTagIds = props.dashboard.selectedTags.map(t => t.id);
+    const { selectedTags, isEditingDeck, selectedDeck } = props.dashboard;
+    const selectedTagIds = selectedTags.map(t => t.id);
     const deck = {
       name: values.deckName,
       tags: selectedTagIds,
     };
 
-    props.createDeck(deck, setSubmitting(false));
+    if (isEditingDeck) {
+      // deck.id = selectedDeck.deck_id;
+      props.updateDeck(
+        { deck, deckId: selectedDeck.deck_id },
+        setSubmitting(false),
+      );
+    } else props.createDeck(deck, setSubmitting(false));
   },
   displayName: 'Create Deck',
 })(connect(mapStateToProps, {})(Form));
 
-export default connect(mapStateToProps, { createDeck, clearTags })(AddDeckForm);
+export default connect(mapStateToProps, {
+  createDeck,
+  clearTags,
+  updateDeck,
+})(AddDeckForm);
