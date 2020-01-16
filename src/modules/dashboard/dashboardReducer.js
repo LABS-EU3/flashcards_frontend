@@ -165,6 +165,23 @@ const dashboardReducer = (state = initialState, action) => {
         showMenu: !state.showMenu,
       };
 
+    case types.ON_START_DELETE_DECK:
+      return { ...state, loading: true };
+
+    case types.ON_DELETE_DECK_SUCCESS:
+      return {
+        ...state,
+        userDecks: state.userDecks.filter(deck => deck !== state.selectedDeck),
+        loading: false,
+      };
+
+    case types.ON_DELETE_DECK_FAILED:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload,
+      };
+
     default:
       return state;
   }
