@@ -14,8 +14,16 @@ import {
 import * as types from '../../../../../modules/dashboard/dashboardTypes';
 
 const Decks = ({ cards, deleteCard, showingAllAnswers }) => {
+  const dispatch = useDispatch();
+
   const handleDelete = card => {
     deleteCard(card);
+  };
+
+  const handleUpdate = card => {
+    dispatch({ type: types.ON_START_CREATING_CARD });
+    dispatch({ type: types.ON_UPDATE_CARD_START, payload: card });
+    // updateCard(card);
   };
 
   return (
@@ -35,6 +43,7 @@ const Decks = ({ cards, deleteCard, showingAllAnswers }) => {
                   card={card}
                   showingAllAnswers={showingAllAnswers}
                   handleDelete={handleDelete}
+                  handleUpdate={handleUpdate}
                 />
               )
             );
@@ -44,7 +53,7 @@ const Decks = ({ cards, deleteCard, showingAllAnswers }) => {
   );
 };
 
-const DeckCard = ({ card, showingAllAnswers, handleDelete }) => {
+const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
   const [isShowingSingleAnswer, setIsShowingSingleAnswer] = useState(false);
   const dispatch = useDispatch();
   const toggleSingleAnswer = () => {
@@ -76,7 +85,11 @@ const DeckCard = ({ card, showingAllAnswers, handleDelete }) => {
             <MdDelete />
           </H2>
         </IconWithoutText>
-        <IconWithoutText>
+        <IconWithoutText
+          onClick={() => {
+            handleUpdate(card);
+          }}
+        >
           <H2>
             <MdEdit />
           </H2>
