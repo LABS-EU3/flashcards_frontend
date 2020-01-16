@@ -34,7 +34,7 @@ export default function DashboardLayout(props) {
       <Sidebar
         sidebar={
           <LeftSideBar
-            name={user.credentials && user.credentials.fullName}
+            name={user.credentials.full_name}
             logoutUser={logoutUser}
           />
         }

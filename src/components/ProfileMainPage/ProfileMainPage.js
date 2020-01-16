@@ -4,7 +4,7 @@ import ProfileBanner from './ProfileBanner';
 import ProfileImage from './ProfileImage';
 import ProfileMainSection from './ProfileMainSection';
 
-import { MainPage} from './styles';
+import { MainPage } from './styles';
 
 const ProfileMainPage = ({ profileData }) => {
   const { fullName } = profileData;
