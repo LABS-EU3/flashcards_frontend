@@ -81,7 +81,7 @@ export const Content = styled.div`
   font-size: 12px;
   h1 {
     font-weight: bold;
-    font-size: 24px;
+    font-size: 2.5em;
     font-family: 'Lato';
     line-height: 29px;
     color: #444140;
@@ -93,7 +93,7 @@ export const Content = styled.div`
   span {
     text-align: center;
     margin-top: 0.7em;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     display: block;
   }
 `;
@@ -110,6 +110,7 @@ export const Tags = styled.div`
   padding-left: 0.5em;
   padding-right: 0.5em
   display: flex;
+  font-size: 1.2em;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-content: space-around;
@@ -117,7 +118,7 @@ export const Tags = styled.div`
 
 export const Card = styled.div`
   display: flex;
-  font-size: 16px;
+  font-size: 1.5em;
   flex-direction: column;
   align-items: left;
   padding-left: 10px;

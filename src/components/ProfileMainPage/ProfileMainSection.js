@@ -4,7 +4,20 @@ import Card from '../cards/Cards';
 
 import { MainSection, Content, Tag, Tags } from './styles';
 
-const moment = require('moment');
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
 
 const decks = [
   {
@@ -39,16 +52,20 @@ const tags = [
 
 const ProfileMainSection = ({ profileData }) => {
   const { fullName, createdon } = profileData;
-  const registered = new Date(createdon);
-  let period = moment(registered).fromNow();
-  period = period === 'Invalid date' ? null : period;
+  let period = null;
+  if (createdon) {
+    const registered = new Date(createdon);
+    period = `${
+      months[Number(registered.getMonth())]
+    } ${registered.getFullYear()}`;
+  }
 
   return (
     <MainSection>
       <Content>
         <h1>About</h1>
         <span>
-          {fullName} has been a user from {period || `unspecified`}
+          {fullName} has been a user since {period || `unspecified`}
         </span>
       </Content>
 
