@@ -139,3 +139,22 @@ export const deleteCard = ({ id: cardId, deck_id: deckId }) => dispatch => {
 export const clicked = () => dispatch => {
   dispatch({ type: types.HAMBURGER_CLICKED });
 };
+
+export const deleteDeck = deckId => dispatch => {
+  dispatch({ type: types.ON_START_DELETE_DECK });
+
+  axiosWithAuth()
+    .delete(`/decks/${deckId}`)
+    .then(({ data }) => {
+      dispatch({
+        type: types.ON_DELETE_DECK_SUCCESS,
+        payload: data,
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: types.ON_DELETE_DECK_FAILED,
+        payload: error.message,
+      });
+    });
+};
