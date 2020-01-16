@@ -6,7 +6,7 @@ import TopComponent from './topComponent/TopComponent';
 import CardsSection from './cardsSection/CardsSection';
 import {
   getSingleDeck,
-  // deleteCard,
+  deleteCard,
 } from '../../../../modules/dashboard/dashboardActions';
 
 import * as types from '../../../../modules/dashboard/dashboardTypes';
@@ -55,6 +55,8 @@ const SingleDeck = props => {
       <CardsSection
         cards={selectedDeck.flashcards}
         showingAllAnswers={showingAnswers}
+        // eslint-disable-next-line react/destructuring-assignment
+        deleteCard={props.deleteCard}
       />
     </div>
   );
@@ -68,5 +70,5 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
   getSingleDeck,
-  // deleteCard,
+  deleteCard,
 })(SingleDeck);

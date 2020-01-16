@@ -120,21 +120,21 @@ export const createCard = card => dispatch => {
     });
 };
 
-// export const deleteCard = ({ id: cardId, deck_id: deckId }) => dispatch => {
-//   dispatch({ type: types.ON_DELETE_CARD_SUCCESS });
+export const deleteCard = ({ id: cardId, deck_id: deckId }) => dispatch => {
+  dispatch({ type: types.ON_DELETE_CARD_SUCCESS });
 
-//   axiosWithAuth()
-//     .delete(`/cards/${cardId}`)
-//     .then(() => {
-//       dispatch(getSingleDeck(deckId));
-//     })
-//     .catch(error => {
-//       dispatch({
-//         type: types.ON_DELETE_CARD_FAILED,
-//         pasyload: error.message,
-//       });
-//     });
-// };
+  axiosWithAuth()
+    .delete(`/cards/${cardId}`)
+    .then(() => {
+      dispatch(getSingleDeck(deckId));
+    })
+    .catch(error => {
+      dispatch({
+        type: types.ON_DELETE_CARD_FAILED,
+        pasyload: error.message,
+      });
+    });
+};
 
 export const clicked = () => dispatch => {
   dispatch({ type: types.HAMBURGER_CLICKED });

@@ -52,7 +52,7 @@ export const IconWithoutText = styled(IconWithText)`
   flex-grow: 1;
   align-items: flex-end;
 
-  &: hover {
+  &:hover {
     cursor: pointer;
     background: none;
   }
