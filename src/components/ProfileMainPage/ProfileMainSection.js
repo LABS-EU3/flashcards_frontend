@@ -47,9 +47,9 @@ const ProfileMainSection = ({ profileData }) => {
     <MainSection>
       <Content>
         <h1>About</h1>
-        <p>
+        <span>
           {fullName} has been a user from {period || `unspecified`}
-        </p>
+        </span>
       </Content>
 
       <Content>

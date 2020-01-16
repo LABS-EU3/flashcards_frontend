@@ -90,10 +90,11 @@ export const Content = styled.div`
     margin-bottom: 0.5em;
   }
 
-  p {
+  span {
     text-align: center;
     margin-top: 0.7em;
     font-size: 1.6rem;
+    display: block;
   }
 `;
 
