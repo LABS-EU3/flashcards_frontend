@@ -19,7 +19,6 @@ import * as g from '../../styles/variables/global';
 
 export const DashboardComponent = props => {
   const { user } = props;
-
   return (
     <ModalProvider backgroundComponent={FadingBackground}>
       {/* eslint-disable-next-line react/destructuring-assignment */}
