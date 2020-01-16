@@ -152,3 +152,7 @@ export const updateCard = card => dispatch => {
       });
     });
 };
+
+export const clicked = () => dispatch => {
+  dispatch({ type: types.HAMBURGER_CLICKED });
+};

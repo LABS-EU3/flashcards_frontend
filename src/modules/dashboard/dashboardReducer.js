@@ -15,6 +15,7 @@ const initialState = {
   tags: deckTags,
   showingAnswers: false,
   updatingCard: false,
+  showMenu: false,
 };
 
 const dashboardReducer = (state = initialState, action) => {
@@ -181,6 +182,11 @@ const dashboardReducer = (state = initialState, action) => {
         ...state,
         showingAnswers:
           action.payload != null ? action.payload : !state.showingAnswers,
+      };
+    case types.HAMBURGER_CLICKED:
+      return {
+        ...state,
+        showMenu: !state.showMenu,
       };
 
     default:
