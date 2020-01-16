@@ -43,8 +43,6 @@ const Form = props => {
 
   const preSelectedTags = isEditingDeck ? selectedDeck.tags : [];
 
-  // values.deckName = '';
-
   const [selectedTags, setSelectedTags] = useState(preSelectedTags);
 
   const removeTag = tag => {
