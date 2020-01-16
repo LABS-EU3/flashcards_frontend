@@ -8,12 +8,10 @@ export const getRecentCards = userId => dispatch => {
   return axiosWithAuth()
     .get(`/api/cards/users/${userId}`)
     .then(({ data }) => {
-      // console.log(data)
       dispatch({
         type: types.RECENT_CARDS_SUCCESS,
         payload: data.data.user,
       });
-      // console.log('ert', data.data.user);
     })
     .catch(err => {
       dispatch({
@@ -111,15 +109,29 @@ export const createCard = card => dispatch => {
   axiosWithAuth()
     .post(`/cards`, card)
     .then(() => {
-      dispatch({
-        type: types.ON_CARD_CREATION_COMPLETE,
-        payload: card,
-      });
+      dispatch({ type: types.ON_CARD_CREATION_COMPLETE });
+      dispatch(getSingleDeck(card.deckId));
     })
     .catch(error => {
       dispatch({
         type: types.ON_CARD_CREATION_CANCELLED,
         payload: error.message,
+      });
+    });
+};
+
+export const deleteCard = ({ id: cardId, deck_id: deckId }) => dispatch => {
+  dispatch({ type: types.ON_DELETE_CARD_SUCCESS });
+
+  axiosWithAuth()
+    .delete(`/cards/${cardId}`)
+    .then(() => {
+      dispatch(getSingleDeck(deckId));
+    })
+    .catch(error => {
+      dispatch({
+        type: types.ON_DELETE_CARD_FAILED,
+        pasyload: error.message,
       });
     });
 };

@@ -1,16 +1,23 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { MdDelete } from 'react-icons/md';
 import { H1, HR, H2, P } from '../../../../../styles/typography';
 import { CardsFlex } from '../../../../../components/cards/Cards';
+
 import {
   Collection,
   DecksContainer,
   CollectionLabel,
+  IconWithoutText,
 } from '../../../styles/DeckLibraryStyles';
 import * as types from '../../../../../modules/dashboard/dashboardTypes';
 
-const Decks = ({ cards, showingAllAnswers }) => {
+const Decks = ({ cards, deleteCard, showingAllAnswers }) => {
+  const handleDelete = card => {
+    deleteCard(card);
+  };
+
   return (
     <Collection>
       <CollectionLabel>
@@ -27,6 +34,7 @@ const Decks = ({ cards, showingAllAnswers }) => {
                   key={c.id}
                   card={c}
                   showingAllAnswers={showingAllAnswers}
+                  handleDelete={handleDelete}
                 />
               )
             );
@@ -36,7 +44,7 @@ const Decks = ({ cards, showingAllAnswers }) => {
   );
 };
 
-const DeckCard = ({ card, showingAllAnswers }) => {
+const DeckCard = ({ card, showingAllAnswers, handleDelete }) => {
   const [isShowingSingleAnswer, setIsShowingSingleAnswer] = useState(false);
   const dispatch = useDispatch();
   const toggleSingleAnswer = () => {
@@ -58,6 +66,15 @@ const DeckCard = ({ card, showingAllAnswers }) => {
       ) : (
         <P>####</P>
       )}
+      <IconWithoutText
+        onClick={() => {
+          handleDelete(card);
+        }}
+      >
+        <H2>
+          <MdDelete />
+        </H2>
+      </IconWithoutText>
     </CardsFlex>
   );
 };

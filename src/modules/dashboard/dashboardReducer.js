@@ -7,6 +7,7 @@ const initialState = {
   recentCards: {},
   creatingDeck: false,
   creatingCard: false,
+  deleteingCard: false,
   userDecks: [],
   singleDeckCards: [],
   selectedTags: [],
@@ -144,6 +145,11 @@ const dashboardReducer = (state = initialState, action) => {
         ...state,
         userDecks: action.payload,
         loading: false,
+      };
+    case types.ON_DELETE_CARD_SUCCESS:
+      return {
+        ...state,
+        deleteingCard: true,
       };
 
     case types.TOGGLE_ANSWERS:
