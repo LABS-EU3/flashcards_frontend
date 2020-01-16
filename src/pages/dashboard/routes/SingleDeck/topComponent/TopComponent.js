@@ -1,6 +1,11 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { MdDelete, MdAddToPhotos, MdEdit } from 'react-icons/md';
+import {
+  MdDelete,
+  MdAddToPhotos,
+  MdEdit,
+  MdRemoveRedEye,
+} from 'react-icons/md';
 
 import {
   TopComponentDiv,
@@ -18,6 +23,11 @@ const TopComponent = ({ deckName }) => {
   const createDeck = () => {
     dispatch({ type: types.ON_START_CREATING_CARD });
   };
+
+  const showAllAnswers = () => {
+    dispatch({ type: types.TOGGLE_ANSWERS });
+  };
+
   return (
     <TopComponentDiv>
       <H1>{deckName}</H1>
@@ -39,6 +49,12 @@ const TopComponent = ({ deckName }) => {
             <MdDelete />
           </H2>
           <Text>Delete Deck</Text>
+        </IconWithText>
+        <IconWithText onClick={showAllAnswers}>
+          <H2>
+            <MdRemoveRedEye />
+          </H2>
+          <Text>Show Answers</Text>
         </IconWithText>
       </LibraryActions>
     </TopComponentDiv>

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 // styled
 import { P, H2 } from '../../styles/typography';
 import * as c from '../../styles/variables/colours';
-// import * as g from '../../styles/variables/global';
+import * as g from '../../styles/variables/global';
 
 export default function Cards({ title, category }) {
   return (
@@ -24,12 +24,18 @@ export const CardsFlex = styled.div`
   border: 1px solid ${c.LIGHT_NEUTRAL_COLOR};
   box-sizing: border-box;
   background: white;
+  justify-content: space-between;
   width: ${props => props.width || null};
   margin-top: ${props => props.marginTop || '10px'};
   margin-right: ${props => props.marginRight || '20px'};
   margin-bottom: ${props => props.marginBottom || '10px'};
   margin-left: ${props => props.marginLeft || '20px'};
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.02);
+  box-shadow: 0px 4px 10px lightgray;
+  border-radius: 5px;
+
+  @media (max-width: ${g.desktopMediaBreak}px) {
+    width: 85% !important;
+  }
 
   a {
     text-decoration: none;
