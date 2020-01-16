@@ -4,7 +4,7 @@
 
 // Libraries
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { MdReorder } from 'react-icons/md';
@@ -40,18 +40,22 @@ const LogoWrapper = styled.div`
 
 export default function TopBar() {
   const dispatch = useDispatch();
+  const { credentials } = useSelector(state => state.user);
 
   return (
     <TopBarContainer>
-      <HambuggerWrapper>
-        <MdReorder
-          onClick={() => {
-            dispatch({ type: HAMBURGER_CLICKED });
-          }}
-          size="2.8em"
-          color="#D21F3C"
-        />
-      </HambuggerWrapper>
+      {credentials.id ? (
+        <HambuggerWrapper>
+          <MdReorder
+            onClick={() => {
+              dispatch({ type: HAMBURGER_CLICKED });
+            }}
+            size="2.8em"
+            color="#D21F3C"
+          />
+        </HambuggerWrapper>
+      ) : null}
+
       <LogoWrapper>
         <NavLink to="/">
           <img src={`${logo}`} alt="quickdecks logo" />
