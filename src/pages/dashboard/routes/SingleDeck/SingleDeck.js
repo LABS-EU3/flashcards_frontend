@@ -6,7 +6,7 @@ import TopComponent from './topComponent/TopComponent';
 import CardsSection from './cardsSection/CardsSection';
 import {
   getSingleDeck,
-  deleteCard,
+  // deleteCard,
 } from '../../../../modules/dashboard/dashboardActions';
 
 import * as types from '../../../../modules/dashboard/dashboardTypes';
