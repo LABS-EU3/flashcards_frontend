@@ -36,7 +36,6 @@ const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
   margin-right: 2em;
-  }
 `;
 
 export default function TopBar() {
