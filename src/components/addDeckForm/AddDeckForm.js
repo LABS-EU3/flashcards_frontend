@@ -165,7 +165,6 @@ const AddDeckForm = withFormik({
     };
 
     if (isEditingDeck) {
-      // deck.id = selectedDeck.deck_id;
       props.updateDeck(
         { deck, deckId: selectedDeck.deck_id },
         setSubmitting(false),
