@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import * as g from '../../../styles/variables/global';
 
 export const CollectionLabel = styled.div`
   width: 46%;
@@ -14,6 +15,10 @@ export const DecksContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+
+  @media (max-width: ${g.desktopMediaBreak}px) {
+    justify-content: center;
+  }
 `;
 
 export const IconWithText = styled.button`
@@ -34,6 +39,12 @@ export const IconWithText = styled.button`
     width: 24px;
     margin: 10px 0;
   }
+
+  @media (max-width: ${g.desktopMediaBreak}px) {
+    h2 {
+      line-height: 1.3em;
+    }
+  }
 `;
 
 export const IconWithoutText = styled(IconWithText)`
@@ -41,7 +52,7 @@ export const IconWithoutText = styled(IconWithText)`
   flex-grow: 1;
   align-items: flex-end;
 
-  &: hover {
+  &:hover {
     cursor: pointer;
     background: none;
   }
@@ -61,4 +72,8 @@ export const LibraryActions = styled.div`
   background: white;
   border-radius: 8px;
   margin: 16px 0;
+
+  @media (max-width: ${g.desktopMediaBreak}px) {
+    width: 90%;
+  }
 `;
