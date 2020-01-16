@@ -136,18 +136,16 @@ export const deleteCard = ({ id: cardId, deck_id: deckId }) => dispatch => {
     });
 };
 
-export const updateCard = card => dispatch => {
-  dispatch({ type: types.ON_UPDATE_CARD_START });
-
+export const updateCard = (newCard, cardId) => dispatch => {
   axiosWithAuth()
-    .put(`/cards/${card.id}`, card)
+    .put(`/cards/${cardId}`, newCard)
     .then(() => {
-      dispatch({ type: types.ON_CARD_UPDATE_SUCCESS });
-      dispatch(getSingleDeck(card.deckId));
+      dispatch({ type: types.ON_CARD_CREATION_COMPLETE });
+      dispatch(getSingleDeck(newCard.deckId));
     })
     .catch(error => {
       dispatch({
-        type: types.ON_CARD_UPDATE_CANCELLED,
+        type: types.ON_CARD_CREATION_CANCELLED,
         payload: error.message,
       });
     });
