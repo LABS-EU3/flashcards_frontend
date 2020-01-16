@@ -1,10 +1,7 @@
 // Import
-// import icons from '../../assets/icons';
-// import profileDefault from '../../assets/user_profile_default.jpg';
 
 // Styled
-// import * as c from '../../styles/variables/colours';
-// import * as g from '../../styles/variables/global';
+
 // Libraries
 import React from 'react';
 import styled from 'styled-components';
@@ -30,10 +27,7 @@ const HambuggerWrapper = styled.div`
   margin-right: 2em;
 `;
 
-export default function TopBar(props) {
-  console.log('dddd11111', props);
-  // const joba2 = useSelector(state => state.dashboard);
-
+export default function TopBar() {
   const dispatch = useDispatch();
 
   return (
