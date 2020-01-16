@@ -156,8 +156,9 @@ export const updateDeck = (
       });
 
       if (onFailed) onFailed();
+    });
 };
-           
+
 export const updateCard = (newCard, cardId) => dispatch => {
   axiosWithAuth()
     .put(`/cards/${cardId}`, newCard)
@@ -171,6 +172,7 @@ export const updateCard = (newCard, cardId) => dispatch => {
         payload: error.message,
       });
     });
+};
 
 export const clicked = () => dispatch => {
   dispatch({ type: types.HAMBURGER_CLICKED });
