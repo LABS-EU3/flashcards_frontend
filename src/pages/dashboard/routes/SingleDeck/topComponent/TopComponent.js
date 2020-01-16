@@ -28,6 +28,10 @@ const TopComponent = ({ deckName }) => {
     dispatch({ type: types.TOGGLE_ANSWERS });
   };
 
+  const deleteDeck = () => {
+    dispatch({ type: types.ON_START_DELETE_DECK });
+  };
+
   return (
     <TopComponentDiv>
       <H1>{deckName}</H1>
@@ -44,7 +48,7 @@ const TopComponent = ({ deckName }) => {
           </H2>
           <Text>Edit Deck</Text>
         </IconWithText>
-        <IconWithText onClick={null}>
+        <IconWithText onClick={deleteDeck}>
           <H2>
             <MdDelete />
           </H2>
