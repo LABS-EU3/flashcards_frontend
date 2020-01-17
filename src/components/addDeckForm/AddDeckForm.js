@@ -148,20 +148,42 @@ const AddDeckForm = withFormik({
   mapPropsToValues: props => {
     const { isEditingDeck, selectedDeck } = props.dashboard;
 
+    // Initial values of the input elements.
+    // If we're currently editing a deck, we get it's name from state
+    //  if not, we use an empty string.
     return { deckName: isEditingDeck ? selectedDeck.deck_name : '', tag: '' };
   },
   validationSchema,
   handleSubmit: (values, { props, setSubmitting }) => {
     const { selectedTags, isEditingDeck, selectedDeck } = props.dashboard;
 
+    // Obtain an array of only ids for all currently selected tags.
     const selectedTagIds = selectedTags.map(t => t && t.id);
 
+    /**
+     * Obtain an array of previously selected tagIds for the deck we're editing.
+     * Null check too, never trust the backend.
+     */
     const oldTagIds = selectedDeck.tags.map(oldTag => oldTag && oldTag.id);
 
+    /**
+     * addTags is the array of new tags to be added, as required by endpoint.
+     * Obtain that by filtering out tagIds that are currently included in
+     * state as selected, but are not in our array of oldTagIds
+     * (i.e. were not selected before deck editing)
+     */
     const addTags = selectedTagIds.filter(t => !oldTagIds.includes(t));
 
+    /**
+     * removeTags is the array of tags to be removed. Obtained by filtering
+     * out tagIds that were previously selected, but no longer are.
+     */
     const removeTags = oldTagIds.filter(t => !selectedTagIds.includes(t));
 
+    /**
+     * Create deck object to be sent to server based on whether we're
+     * currently editing a deck or not.
+     */
     const deck = isEditingDeck
       ? {
           name: values.deckName,
