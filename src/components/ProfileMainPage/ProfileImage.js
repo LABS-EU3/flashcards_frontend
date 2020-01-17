@@ -1,15 +1,14 @@
 import React from 'react';
 
-import { Image } from './styles.js';
+import { Image } from './styles';
 
 import profileImg from '../../assets/user_profile_default.jpg';
 
-const ProfileImage = ({ profileData }) => {
-  const { fullName, imageUrl } = profileData;
+const ProfileImage = ({ user }) => {
   return (
     <Image>
-      <img src={imageUrl || profileImg} alt="profile" />
-      <h2>{fullName}</h2>
+      <img src={user.imageUrl || profileImg} alt="profile" />
+      <h2>{user.full_name}</h2>
     </Image>
   );
 };

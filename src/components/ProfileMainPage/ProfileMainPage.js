@@ -6,13 +6,12 @@ import ProfileMainSection from './ProfileMainSection';
 
 import { MainPage } from './styles';
 
-const ProfileMainPage = ({ profileData }) => {
-  const { fullName } = profileData;
+const ProfileMainPage = ({ user }) => {
   return (
     <MainPage>
-      <ProfileBanner name={fullName} />
-      <ProfileImage profileData={profileData} />
-      <ProfileMainSection profileData={profileData} />
+      <ProfileBanner name={user.credentials.full_name} />
+      <ProfileImage user={user.credentials} />
+      <ProfileMainSection user={user.credentials} />
     </MainPage>
   );
 };

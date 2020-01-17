@@ -50,8 +50,8 @@ const tags = [
   { id: 6, name: 'Anthropology' },
 ];
 
-const ProfileMainSection = ({ profileData }) => {
-  const { fullName, createdon } = profileData;
+const ProfileMainSection = ({ user }) => {
+  const { full_name, createdon } = user;
   let period = null;
   if (createdon) {
     const registered = new Date(createdon);
@@ -65,7 +65,7 @@ const ProfileMainSection = ({ profileData }) => {
       <Content>
         <h1>About</h1>
         <span>
-          {fullName} has been a user since {period || `unspecified`}
+          {full_name} has been a user since {period || `unspecified`}
         </span>
       </Content>
 

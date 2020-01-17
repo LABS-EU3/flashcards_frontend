@@ -1,7 +1,7 @@
 import React from 'react';
 import banner from '../../assets/images/rectangle.png';
 
-import { Banner, WelcomeMessage } from './styles.js';
+import { Banner, WelcomeMessage } from './styles';
 
 const ProfileBanner = ({ name }) => {
   return (

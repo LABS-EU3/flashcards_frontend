@@ -22,7 +22,9 @@ export const DashboardComponent = props => {
       <RouteContainer>
         <Switch>
           <Route path="/dashboard/library" component={DeckLibrary} />
-          <Route path="/dashboard/profile" component={Profile} />
+          <Route path="/dashboard/profile">
+            <Profile user={user} />
+          </Route>
         </Switch>
       </RouteContainer>
       <RightSidebar user={user} />
