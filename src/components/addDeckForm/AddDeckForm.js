@@ -160,42 +160,40 @@ const AddDeckForm = withFormik({
     // Obtain an array of only ids for all currently selected tags.
     const selectedTagIds = selectedTags.map(t => t && t.id);
 
-    /**
-     * Obtain an array of previously selected tagIds for the deck we're editing.
-     * Null check too, never trust the backend.
-     */
-    const oldTagIds = selectedDeck.tags.map(oldTag => oldTag && oldTag.id);
-
-    /**
-     * addTags is the array of new tags to be added, as required by endpoint.
-     * Obtain that by filtering out tagIds that are currently included in
-     * state as selected, but are not in our array of oldTagIds
-     * (i.e. were not selected before deck editing)
-     */
-    const addTags = selectedTagIds.filter(t => !oldTagIds.includes(t));
-
-    /**
-     * removeTags is the array of tags to be removed. Obtained by filtering
-     * out tagIds that were previously selected, but no longer are.
-     */
-    const removeTags = oldTagIds.filter(t => !selectedTagIds.includes(t));
-
-    /**
-     * Create deck object to be sent to server based on whether we're
-     * currently editing a deck or not.
-     */
-    const deck = isEditingDeck
-      ? {
-          name: values.deckName,
-          addTags,
-          removeTags,
-        }
-      : {
-          name: values.deckName,
-          tags: selectedTagIds,
-        };
-
     if (isEditingDeck) {
+      /**
+       * Obtain an array of previously selected tagIds for
+       * the deck we're editing.
+       *
+       * Null check too, never trust the backend.
+       */
+
+      const oldTagIds = selectedDeck.tags.map(oldTag => oldTag && oldTag.id);
+
+      /**
+       * addTags is the array of new tags to be added, as required by endpoint.
+       * Obtain that by filtering out tagIds that are currently included in
+       * state as selected, but are not in our array of oldTagIds
+       * (i.e. were not selected before deck editing)
+       */
+      const addTags = selectedTagIds.filter(t => !oldTagIds.includes(t));
+
+      /**
+       * removeTags is the array of tags to be removed. Obtained by filtering
+       * out tagIds that were previously selected, but no longer are.
+       */
+      const removeTags = oldTagIds.filter(t => !selectedTagIds.includes(t));
+
+      /**
+       * Create deck object to be sent to server based on from all of
+       * the data computed above.
+       */
+      const deck = {
+        name: values.deckName,
+        addTags,
+        removeTags,
+      };
+
       props.updateDeck(
         {
           deck,
@@ -203,7 +201,18 @@ const AddDeckForm = withFormik({
         },
         setSubmitting(false),
       );
-    } else props.createDeck(deck, setSubmitting(false));
+    } else {
+      /**
+       * We're not editing a deck, so we simply get form values and
+       * send to the server.
+       */
+      const deck = {
+        name: values.deckName,
+        tags: selectedTagIds,
+      };
+
+      props.createDeck(deck, setSubmitting(false));
+    }
   },
   displayName: 'Create Deck',
 })(connect(mapStateToProps, {})(Form));
