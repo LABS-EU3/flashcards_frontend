@@ -51,6 +51,7 @@ const tags = [
 ];
 
 const ProfileMainSection = ({ user }) => {
+  // eslint-disable-next-line camelcase
   const { full_name, createdon } = user;
   let period = null;
   if (createdon) {
@@ -65,6 +66,7 @@ const ProfileMainSection = ({ user }) => {
       <Content>
         <h1>About</h1>
         <span>
+          {/* eslint-disable-next-line camelcase */}
           {full_name} has been a user since {period || `unspecified`}
         </span>
       </Content>

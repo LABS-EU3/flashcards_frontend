@@ -16,7 +16,7 @@ import DeckLibrary from './routes/DeckLibrary/DeckLibrary';
 import SingleDeck from './routes/SingleDeck/SingleDeck';
 import { getRecentCards } from '../../modules/dashboard/dashboardActions';
 import { logoutUser } from '../../modules/user/userActions';
-import Profile from './routes/Profile/Profile'
+import Profile from './routes/Profile/Profile';
 import * as g from '../../styles/variables/global';
 
 export const DashboardComponent = props => {
