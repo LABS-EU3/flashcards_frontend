@@ -12,15 +12,11 @@ export const FlipCardInner = styled.div`
 `;
 
 export const Container = styled.div`
-  display: flex;
   background-color: transparent;
   background: whitesmoke;
   width: 100%;
-  height: 700px;
+  height: 600px;
   perspective: 1000px;
-  /* &:hover ${FlipCardInner} {
-    transform: rotateY(180deg);
-  } */
 `;
 
 export const FlipCardFront = styled.div`
@@ -32,16 +28,17 @@ export const FlipCardFront = styled.div`
   color: black;
   transform: rotateY(180deg);
 `;
+
+export const HRDiv = styled.div`
+  margin: 40px 0 0 0;
+`;
+
 export const FlipCardBack = styled.div`
-  /* position: absolute; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+  margin: 30px auto 0 auto;
+  text-align: -webkit-center;
+  width: 90%;
   height: 100%;
   font-size: ${16}px;
-  backface-visibility: hidden;
   color: black;
   @media (min-width: ${g.phoneMediaBreak}px) {
     font-size: ${13}px;
@@ -86,7 +83,7 @@ export const Card = styled.div`
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   width: 60%;
   height: 120px;
-  margin-top: 10%;
+  margin-top: 5%;
   background-color: white;
   border-radius: 5px;
 `;
