@@ -159,6 +159,21 @@ export const updateDeck = (
     });
 };
 
+export const updateCard = (newCard, cardId) => dispatch => {
+  axiosWithAuth()
+    .put(`/cards/${cardId}`, newCard)
+    .then(() => {
+      dispatch({ type: types.ON_CARD_CREATION_COMPLETE });
+      dispatch(getSingleDeck(newCard.deckId));
+    })
+    .catch(error => {
+      dispatch({
+        type: types.ON_CARD_CREATION_CANCELLED,
+        payload: error.message,
+      });
+    });
+};
+
 export const clicked = () => dispatch => {
   dispatch({ type: types.HAMBURGER_CLICKED });
 };
