@@ -29,6 +29,11 @@ const TopComponent = ({ deckName, deckId }) => {
     dispatch({ type: types.ON_START_CREATING_CARD });
   };
 
+  const editDeck = () => {
+    dispatch({ type: types.ON_START_EDITING_DECK });
+    dispatch({ type: types.ON_START_CREATING_DECK });
+  };
+
   const showAllAnswers = () => {
     dispatch({ type: types.TOGGLE_ANSWERS });
   };
@@ -44,7 +49,7 @@ const TopComponent = ({ deckName, deckId }) => {
           </H2>
           <Text>Add Card</Text>
         </IconWithText>
-        <IconWithText onClick={null}>
+        <IconWithText onClick={editDeck}>
           <H2>
             <MdEdit />
           </H2>

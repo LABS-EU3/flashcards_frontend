@@ -7,6 +7,7 @@ import * as yup from 'yup';
 import {
   createDeck,
   clearTags,
+  updateDeck,
 } from '../../modules/dashboard/dashboardActions';
 
 import * as types from '../../modules/dashboard/dashboardTypes';
@@ -26,7 +27,6 @@ import Tag from './deckTags/DeckTag';
 
 const Form = props => {
   const dispatch = useDispatch();
-  const [selectedTags, setSelectedTags] = useState([]);
 
   const {
     values,
@@ -38,11 +38,21 @@ const Form = props => {
     tags,
   } = props;
 
+  // eslint-disable-next-line react/destructuring-assignment
+  const { selectedDeck, isEditingDeck } = props.dashboard;
+
+  const preSelectedTags = isEditingDeck ? selectedDeck.tags : [];
+
+  const [selectedTags, setSelectedTags] = useState(preSelectedTags);
+
   const removeTag = tag => {
     const remainingTags = selectedTags.filter(t => t.id !== tag.id);
 
     setSelectedTags(remainingTags);
-    dispatch({ type: types.SET_SELECTED_TAGS, payload: remainingTags });
+    dispatch({
+      type: types.SET_SELECTED_TAGS,
+      payload: remainingTags,
+    });
   };
 
   const addTag = tagName => {
@@ -61,7 +71,7 @@ const Form = props => {
   return (
     <Forms onSubmit={handleSubmit} height="100%">
       <FormContainer width="70%">
-        <H1>Create Deck</H1>
+        <H1>{isEditingDeck ? 'Update Deck' : 'Create Deck'}</H1>
         <CardLabel>
           <H2>Deck Name</H2>
           {touched.deckName && errors.deckName && (
@@ -106,15 +116,15 @@ const Form = props => {
           </Select>
         </CardLabel>
         <SelectedTagsContainer>
-          {selectedTags.map(s => {
-            return <Tag key={s.id} value={s} removeTag={removeTag} />;
-          })}
+          {selectedTags.map(
+            s => s && <Tag key={s.id} value={s} removeTag={removeTag} />,
+          )}
         </SelectedTagsContainer>
         <GrowSpace flexGrow="2" />
 
         <LightPopButton>
           <H3 BOLD WHITE>
-            Create
+            {isEditingDeck ? 'Save' : 'Create'}
           </H3>
         </LightPopButton>
         <GrowSpace flexGrow="1" />
@@ -128,25 +138,78 @@ const validationSchema = yup.object().shape({
   tag: yup.string(),
 });
 
-const AddDeckForm = withFormik({
-  mapPropsToValues: () => ({ deckName: '', tag: '' }),
-  validationSchema,
-  handleSubmit: (values, { props, setSubmitting }) => {
-    const selectedTagIds = props.dashboard.selectedTags.map(t => t.id);
-    const deck = {
-      name: values.deckName,
-      tags: selectedTagIds,
-    };
-
-    props.createDeck(deck, setSubmitting(false));
-  },
-  displayName: 'Create Deck',
-})(Form);
-
 const mapStateToProps = state => {
   return {
     dashboard: state.dashboard,
   };
 };
 
-export default connect(mapStateToProps, { createDeck, clearTags })(AddDeckForm);
+const AddDeckForm = withFormik({
+  mapPropsToValues: props => {
+    const { isEditingDeck, selectedDeck } = props.dashboard;
+
+    // Initial values of the input elements.
+    // If we're currently editing a deck, we get it's name from state
+    //  if not, we use an empty string.
+    return { deckName: isEditingDeck ? selectedDeck.deck_name : '', tag: '' };
+  },
+  validationSchema,
+  handleSubmit: (values, { props, setSubmitting }) => {
+    const { selectedTags, isEditingDeck, selectedDeck } = props.dashboard;
+
+    // Obtain an array of only ids for all currently selected tags.
+    const selectedTagIds = selectedTags.map(t => t && t.id);
+
+    /**
+     * Obtain an array of previously selected tagIds for the deck we're editing.
+     * Null check too, never trust the backend.
+     */
+    const oldTagIds = selectedDeck.tags.map(oldTag => oldTag && oldTag.id);
+
+    /**
+     * addTags is the array of new tags to be added, as required by endpoint.
+     * Obtain that by filtering out tagIds that are currently included in
+     * state as selected, but are not in our array of oldTagIds
+     * (i.e. were not selected before deck editing)
+     */
+    const addTags = selectedTagIds.filter(t => !oldTagIds.includes(t));
+
+    /**
+     * removeTags is the array of tags to be removed. Obtained by filtering
+     * out tagIds that were previously selected, but no longer are.
+     */
+    const removeTags = oldTagIds.filter(t => !selectedTagIds.includes(t));
+
+    /**
+     * Create deck object to be sent to server based on whether we're
+     * currently editing a deck or not.
+     */
+    const deck = isEditingDeck
+      ? {
+          name: values.deckName,
+          addTags,
+          removeTags,
+        }
+      : {
+          name: values.deckName,
+          tags: selectedTagIds,
+        };
+
+    if (isEditingDeck) {
+      props.updateDeck(
+        {
+          deck,
+          deckId: selectedDeck.deck_id,
+        },
+        setSubmitting(false),
+      );
+    } else props.createDeck(deck, setSubmitting(false));
+  },
+  displayName: 'Create Deck',
+})(connect(mapStateToProps, {})(Form));
+
+export default connect(mapStateToProps, {
+  createDeck,
+  clearTags,
+  updateDeck,
+})(AddDeckForm);
