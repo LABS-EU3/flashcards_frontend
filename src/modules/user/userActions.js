@@ -118,10 +118,8 @@ export const emailConfirmation = (token, history) => dispatch => {
       });
     });
 };
-
 export const fetchProfile = () => dispatch => {
   dispatch({ type: types.ON_BEGIN_PROFILE_FETCH });
-
   axiosWithAuth()
     .get(`/auth/view_profile`)
     .then(({ data }) => {
