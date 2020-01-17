@@ -11,10 +11,12 @@ import { FadingBackground } from '../../components/modals/modalStyles';
 // Styled
 import DashboardLayout from './DashboardLayout';
 import RightSidebar from '../../components/rightsidebar/RightSidebar';
+import WelcomePage from './routes/WelcomePage/WelcomePage';
 import DeckLibrary from './routes/DeckLibrary/DeckLibrary';
 import SingleDeck from './routes/SingleDeck/SingleDeck';
 import { getRecentCards } from '../../modules/dashboard/dashboardActions';
 import { logoutUser } from '../../modules/user/userActions';
+import Profile from './routes/Profile/Profile';
 import * as g from '../../styles/variables/global';
 
 export const DashboardComponent = props => {
@@ -26,7 +28,11 @@ export const DashboardComponent = props => {
         <RouteContainer>
           <Switch>
             <Route path="/dashboard/library" component={DeckLibrary} />
+            <Route path="/dashboard/welcome" component={WelcomePage} />
             <Route path="/dashboard/deck/:deckId" component={SingleDeck} />
+            <Route path="/dashboard/profile">
+              <Profile user={user} />
+            </Route>
           </Switch>
         </RouteContainer>
         {/* eslint-disable-next-line react/destructuring-assignment  */}

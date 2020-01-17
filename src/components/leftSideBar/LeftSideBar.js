@@ -55,7 +55,7 @@ const LeftSideBar = ({ name, logoutUser, history }) => {
         <MenuItem
           img={<MdDashboard size="1.5em" />}
           text="Dashboard"
-          route="/dashboard/dashboard"
+          route="/dashboard/welcome"
         />
         <MenuItem
           img={<MdPerson size="1.5em" />}

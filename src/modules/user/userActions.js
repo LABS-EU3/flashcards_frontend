@@ -24,7 +24,7 @@ export const userLogin = (userData, history) => dispatch => {
       // console.log(data.data.user);
       setToken(data.data.token);
       dispatch({ type: types.CLEAR_RESPONSES });
-      history.push('/dashboard');
+      history.push('/dashboard/welcome');
     })
     .catch(errors => {
       dispatch({
@@ -41,7 +41,7 @@ export const userSignUp = (userData, history) => dispatch => {
     .then(res => {
       dispatch({ type: types.SIGNUP_SUCCESS, payload: res.data.data.user });
       setToken(res.data.data.token);
-      history.push('/dashboard');
+      history.push('/dashboard/welcome');
       dispatch({ type: types.CLEAR_RESPONSES });
     })
     .catch(errors => {
@@ -118,10 +118,8 @@ export const emailConfirmation = (token, history) => dispatch => {
       });
     });
 };
-
 export const fetchProfile = () => dispatch => {
   dispatch({ type: types.ON_BEGIN_PROFILE_FETCH });
-
   axiosWithAuth()
     .get(`/auth/view_profile`)
     .then(({ data }) => {
