@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-
 import { MdDelete, MdEdit } from 'react-icons/md';
 import { H1, HR, H2, P } from '../../../../../styles/typography';
 import { CardsFlex } from '../../../../../components/cards/Cards';
@@ -23,7 +22,6 @@ const Decks = ({ cards, deleteCard, showingAllAnswers }) => {
   const handleUpdate = card => {
     dispatch({ type: types.ON_START_CREATING_CARD });
     dispatch({ type: types.ON_UPDATE_CARD_START, payload: card });
-    // updateCard(card);
   };
 
   return (
@@ -75,6 +73,7 @@ const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
       ) : (
         <P>####</P>
       )}
+
       <CardsActions>
         <IconWithoutText
           onClick={() => {

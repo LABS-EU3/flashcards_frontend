@@ -48,7 +48,7 @@ export const IconWithText = styled.button`
 `;
 
 export const IconWithoutText = styled(IconWithText)`
-  justify-content: flex-end;
+  justify-content: center;
   flex-grow: 1;
   align-items: flex-end;
 
@@ -81,10 +81,9 @@ export const LibraryActions = styled.div`
 export const CardsActions = styled.div`
   display: flex;
   flex-wrap: wrap;
-  align-content: center;
+  align-content: flex-end;
   width: 20%;
-  justify-content: flex-end;
+  justify-content: space-evenly;
   flex-grow: 1;
-  margin-top: 20px;
-  align-self: flex-end;
+  align-self: center;
 `;

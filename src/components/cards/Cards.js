@@ -30,6 +30,7 @@ export const CardsFlex = styled.div`
   margin-right: ${props => props.marginRight || '20px'};
   margin-bottom: ${props => props.marginBottom || '10px'};
   margin-left: ${props => props.marginLeft || '20px'};
+  height: ${props => props.height || null};
   box-shadow: 0px 4px 10px lightgray;
   border-radius: 5px;
 
@@ -48,4 +49,8 @@ export const CardsFlex = styled.div`
   //     rgba(210, 31, 60, 0.5) 38.43%,
   //     rgba(255, 169, 135, 0.5) 136.86%
   //   );
+`;
+
+export const CardsFlex2 = styled(CardsFlex)`
+  backgrond: red;
 `;
