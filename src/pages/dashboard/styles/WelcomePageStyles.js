@@ -2,13 +2,14 @@ import styled from 'styled-components';
 import * as g from '../../../styles/variables/global';
 
 export const FlipCardInner = styled.div`
-  position: relative;
+  /* position: relative; */
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   text-align: center;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin-top: -30px;
+  /* transition: transform 0.6s; */
+  /* transform-style: preserve-3d; */
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
 `;
 
 export const Container = styled.div`
