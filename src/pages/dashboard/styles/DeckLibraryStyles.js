@@ -48,8 +48,6 @@ export const IconWithText = styled.button`
 `;
 
 export const IconWithoutText = styled(IconWithText)`
-  justify-content: flex-end;
-  flex-grow: 1;
   align-items: flex-end;
 
   &:hover {
@@ -80,11 +78,8 @@ export const LibraryActions = styled.div`
 
 export const CardsActions = styled.div`
   display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
   flex-wrap: wrap;
-  align-content: center;
-  width: 20%;
-  justify-content: flex-end;
   flex-grow: 1;
-  margin-top: 20px;
-  align-self: flex-end;
 `;
