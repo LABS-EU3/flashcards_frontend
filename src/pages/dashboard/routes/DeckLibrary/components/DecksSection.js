@@ -27,7 +27,7 @@ const Decks = ({ decks }) => {
               onClick={() => {
                 dispatch({ type: types.ON_SELECT_DECK, payload: { ...d } });
               }}
-              key={d.deck_name}
+              key={d.deck_id}
               width="46%"
               marginLeft="0"
               marginRight="0"
