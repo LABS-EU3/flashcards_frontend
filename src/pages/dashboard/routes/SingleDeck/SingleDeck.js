@@ -52,7 +52,10 @@ const SingleDeck = props => {
 
   return (
     <div>
-      <TopComponent deckId={deckId} deckName={dashboard.selectedDeck.name} />
+      <TopComponent
+        deckId={deckId}
+        deckName={dashboard.selectedDeck.deck_name}
+      />
       <FancyModal
         isOpen={creatingCard}
         afterOpen={afterOpen}
