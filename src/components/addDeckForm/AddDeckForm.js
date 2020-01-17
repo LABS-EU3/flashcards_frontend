@@ -116,9 +116,9 @@ const Form = props => {
           </Select>
         </CardLabel>
         <SelectedTagsContainer>
-          {selectedTags.map(s => {
-            return <Tag key={s.id} value={s} removeTag={removeTag} />;
-          })}
+          {selectedTags.map(
+            s => s && <Tag key={s.id} value={s} removeTag={removeTag} />,
+          )}
         </SelectedTagsContainer>
         <GrowSpace flexGrow="2" />
 
