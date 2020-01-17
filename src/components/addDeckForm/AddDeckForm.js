@@ -148,23 +148,37 @@ const AddDeckForm = withFormik({
   mapPropsToValues: props => {
     const { isEditingDeck, selectedDeck } = props.dashboard;
 
-    // Initial values of the input elements.
-    // If we're currently editing a deck, we get it's name from state
-    //  if not, we use an empty string.
     return { deckName: isEditingDeck ? selectedDeck.deck_name : '', tag: '' };
   },
   validationSchema,
   handleSubmit: (values, { props, setSubmitting }) => {
     const { selectedTags, isEditingDeck, selectedDeck } = props.dashboard;
-    const selectedTagIds = selectedTags.map(t => t.id);
-    const deck = {
-      name: values.deckName,
-      tags: selectedTagIds,
-    };
+
+    const selectedTagIds = selectedTags.map(t => t && t.id);
+
+    const oldTagIds = selectedDeck.tags.map(oldTag => oldTag && oldTag.id);
+
+    const addTags = selectedTagIds.filter(t => !oldTagIds.includes(t));
+
+    const removeTags = oldTagIds.filter(t => !selectedTagIds.includes(t));
+
+    const deck = isEditingDeck
+      ? {
+          name: values.deckName,
+          addTags,
+          removeTags,
+        }
+      : {
+          name: values.deckName,
+          tags: selectedTagIds,
+        };
 
     if (isEditingDeck) {
       props.updateDeck(
-        { deck, deckId: selectedDeck.deck_id },
+        {
+          deck,
+          deckId: selectedDeck.deck_id,
+        },
         setSubmitting(false),
       );
     } else props.createDeck(deck, setSubmitting(false));
