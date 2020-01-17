@@ -1,13 +1,15 @@
 // Import
 
 // Libraries
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from 'react-sidebar';
+// slcie data - render only 5 cards
+import { useSelector } from 'react-redux';
 
 import * as g from '../../styles/variables/global';
 import LeftSideBar from '../../components/leftSideBar/LeftSideBar';
 import {
-  HamburgerButton,
+  // HamburgerButton,
   DashboardContainer,
   sideBarStyle,
   sideBarRootStyle,
@@ -16,6 +18,7 @@ import {
 
 export default function DashboardLayout(props) {
   const { user, children, logoutUser } = props;
+  const clickeRes = useSelector(state => state.dashboard);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const mql = window.matchMedia(`(min-width: ${g.desktopMediaBreak}px)`);
@@ -28,6 +31,10 @@ export default function DashboardLayout(props) {
   };
 
   mql.addListener(mediaQueryChanged);
+
+  useEffect(() => {
+    setSidebarOpen(!sidebarOpen);
+  }, [clickeRes.showMenu]);
 
   return (
     <DashboardContainer>
@@ -47,13 +54,7 @@ export default function DashboardLayout(props) {
         }}
       >
         <MainContent>
-          <HamburgerButton
-            isDocked={sideBarDocked}
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-          >
-            Open sidebar
-          </HamburgerButton>
-
+          {sideBarDocked}
           {children}
         </MainContent>
       </Sidebar>

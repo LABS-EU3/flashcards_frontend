@@ -4,7 +4,9 @@ import { NavLink } from 'react-router-dom';
 import * as c from '../../../styles/variables/colours';
 
 export const DashboardContainer = styled.div``;
-export const MainContent = styled.div``;
+export const MainContent = styled.div`
+  height: 100%;
+`;
 export const SidebarBody = styled.div`
   display: flex;
   flex-direction: column;
@@ -33,6 +35,7 @@ export const Item = styled(NavLink)`
   text-decoration: none;
   /* margin: 0 20px; */
   justify-content: start;
+  align-items: center;
 
   &:nth-child(6) {
     margin-bottom: 20px;
@@ -41,7 +44,8 @@ export const Item = styled(NavLink)`
   p {
     margin-left: 14px;
   }
-  img {
+
+  h3 {
     height: 24px;
     width: 24px;
   }

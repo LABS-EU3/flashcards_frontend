@@ -4,7 +4,6 @@
 import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router';
 import { connect } from 'react-redux';
-import { ModalProvider } from 'styled-react-modal';
 
 // Styles
 import './App.css';
@@ -20,7 +19,6 @@ import ResetPassword from './pages/reset_password/ResetPassword';
 import SignUp from './pages/signup/SignUp';
 import Login from './pages/login/Login';
 import EmailConfirmation from './pages/email_confirmation/EmailConfirmation';
-import { FadingBackground as Overlay } from './components/modals/modalStyles';
 import { fetchProfile } from './modules/user/userActions';
 
 // Utils
@@ -36,20 +34,20 @@ function App(props) {
   }, []);
 
   return (
-    <ModalProvider backgroundComponent={Overlay}>
-      <div>
-        <TopBar />
-        <Switch>
-          <Route exact path="/" component={Landing} />
-          <PrivateRoute path="/dashboard" component={Dashboard} />
-          <Route path="/forgot" component={ForgotPassword} />
-          <Route path="/reset/:token" component={ResetPassword} />
-          <Route path="/signup" component={SignUp} />
-          <Route path="/login" component={Login} />
-          <Route path="/confirm/:token" component={EmailConfirmation} />
-        </Switch>
-      </div>
-    </ModalProvider>
+    <div>
+      <TopBar />
+      {/* <PrivateRoute path="/" component={RightSidebar} /> */}
+      <Switch>
+        <Route exact path="/" component={Landing} />
+        <PrivateRoute path="/dashboard" component={Dashboard} />
+        <Route path="/forgot" component={ForgotPassword} />
+        <Route path="/reset/:token" component={ResetPassword} />
+        <Route path="/signup" component={SignUp} />
+        <Route path="/login" component={Login} />
+
+        <Route path="/confirm/:token" component={EmailConfirmation} />
+      </Switch>
+    </div>
   );
 }
 

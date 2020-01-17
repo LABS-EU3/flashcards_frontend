@@ -14,7 +14,7 @@ const Tag = props => {
           overflow: 'hidden',
         }}
       >
-        <MdClose style={{ verticalAlign: 'middle' }} /> {value}
+        <MdClose style={{ verticalAlign: 'middle' }} /> {value.name}
       </H2>
     </TagContainer>
   );

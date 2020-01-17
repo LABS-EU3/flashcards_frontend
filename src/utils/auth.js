@@ -64,3 +64,9 @@ export const axiosWithAuth = () => {
     baseURL: baseUrl,
   });
 };
+
+export const getUserId = () => {
+  const token = localStorage.getItem('cfa8ebf4');
+  const decoded = decode(token);
+  return decoded;
+};

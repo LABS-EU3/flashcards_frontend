@@ -1,10 +1,11 @@
 import styled from 'styled-components';
+import * as g from '../../../styles/variables/global';
 
-export const DecksLabel = styled.div`
+export const CollectionLabel = styled.div`
   width: 46%;
 `;
 
-export const DeckCollection = styled.div`
+export const Collection = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 3%;
@@ -14,6 +15,10 @@ export const DecksContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+
+  @media (max-width: ${g.desktopMediaBreak}px) {
+    justify-content: center;
+  }
 `;
 
 export const IconWithText = styled.button`
@@ -34,6 +39,23 @@ export const IconWithText = styled.button`
     width: 24px;
     margin: 10px 0;
   }
+
+  @media (max-width: ${g.desktopMediaBreak}px) {
+    h2 {
+      line-height: 1.3em;
+    }
+  }
+`;
+
+export const IconWithoutText = styled(IconWithText)`
+  justify-content: flex-end;
+  flex-grow: 1;
+  align-items: flex-end;
+
+  &:hover {
+    cursor: pointer;
+    background: none;
+  }
 `;
 
 export const TopComponentDiv = styled.div`
@@ -50,4 +72,19 @@ export const LibraryActions = styled.div`
   background: white;
   border-radius: 8px;
   margin: 16px 0;
+
+  @media (max-width: ${g.desktopMediaBreak}px) {
+    width: 90%;
+  }
+`;
+
+export const CardsActions = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  width: 20%;
+  justify-content: flex-end;
+  flex-grow: 1;
+  margin-top: 20px;
+  align-self: flex-end;
 `;
