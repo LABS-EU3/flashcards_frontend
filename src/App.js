@@ -1,8 +1,9 @@
 // import
 
 // Libraries
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router';
+import { connect } from 'react-redux';
 
 // Styles
 import './App.css';
@@ -18,14 +19,24 @@ import ResetPassword from './pages/reset_password/ResetPassword';
 import SignUp from './pages/signup/SignUp';
 import Login from './pages/login/Login';
 import EmailConfirmation from './pages/email_confirmation/EmailConfirmation';
+import { fetchProfile } from './modules/user/userActions';
 
 // Utils
 import PrivateRoute from './utils/PrivateRoute';
+import { getToken } from './utils/auth';
 
-function App() {
+function App(props) {
+  useEffect(() => {
+    const token = getToken();
+    if (token) {
+      props.fetchProfile();
+    }
+  }, []);
+
   return (
     <div>
       <TopBar />
+      {/* <PrivateRoute path="/" component={RightSidebar} /> */}
       <Switch>
         <Route exact path="/" component={Landing} />
         <PrivateRoute path="/dashboard" component={Dashboard} />
@@ -34,11 +45,10 @@ function App() {
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
 
-        {/* remove this test line after testing */}
         <Route path="/confirm/:token" component={EmailConfirmation} />
       </Switch>
     </div>
   );
 }
 
-export default App;
+export default connect(null, { fetchProfile })(App);
