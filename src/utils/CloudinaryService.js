@@ -1,5 +1,19 @@
 import { Util } from 'cloudinary-core';
 
+/**
+ *
+ * @param {string[]} imageTags - an array of all tags for this image
+ * @param {function} onUploadFailedCallback - function invoked when upload fails
+ * @param {function} onUploadSuccessCallback -function invoked when  succeess
+ *
+ * @example
+ *
+ *      openUploadWidget(
+ *          ['an', 'array'],
+ *          error => { // do stuff with error message },
+ *          image_url => { // do stuff with image_url })
+ */
+
 // eslint-disable-next-line import/prefer-default-export
 export const openUploadWidget = (
   imageTags,
