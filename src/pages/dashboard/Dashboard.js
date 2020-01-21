@@ -18,6 +18,11 @@ import { getRecentCards } from '../../modules/dashboard/dashboardActions';
 import { logoutUser } from '../../modules/user/userActions';
 import Profile from './routes/Profile/Profile';
 import * as g from '../../styles/variables/global';
+import StudyMode from './routes/StudyMode/StudyMode';
+import LeaderBoard from './routes/LeaderBoard/LeaderBoard';
+import StudySession from './routes/StudySession/StudySession';
+import Settings from './routes/Settings/Settings';
+import Search from './routes/Search/Search';
 
 export const DashboardComponent = props => {
   const { user } = props;
@@ -33,6 +38,14 @@ export const DashboardComponent = props => {
             <Route path="/dashboard/profile">
               <Profile user={user} />
             </Route>
+            <Route path="/dashboard/study" component={StudyMode} />
+            <Route path="/dashboard/leaderboard" component={LeaderBoard} />
+            <Route
+              path="/dashboard/studysession/:sessionId"
+              component={StudySession}
+            />
+            <Route path="/dashboard/settings" component={Settings} />
+            <Route path="/dashboard/search" component={Search} />
           </Switch>
         </RouteContainer>
         {/* eslint-disable-next-line react/destructuring-assignment  */}

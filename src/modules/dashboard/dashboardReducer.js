@@ -104,7 +104,6 @@ const dashboardReducer = (state = initialState, action) => {
         selectedCard: {},
         isUpdatingCard: false,
       };
-
     case types.ON_CARD_CREATION_COMPLETE:
       return {
         ...state,

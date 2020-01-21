@@ -8,9 +8,10 @@ import {
   MdDashboard,
   MdAddToPhotos,
   MdSettings,
-  MdExitToApp,
   MdPerson,
   MdContentCopy,
+  MdCollectionsBookmark,
+  MdPoll,
 } from 'react-icons/md';
 // assets
 import { withRouter } from 'react-router-dom';
@@ -28,11 +29,7 @@ import {
 
 import { GrowSpace } from '../../styles/displayFlex';
 
-const LeftSideBar = ({ name, logoutUser, history }) => {
-  const onLogout = e => {
-    e.preventDefault();
-    logoutUser(history);
-  };
+const LeftSideBar = ({ name }) => {
   return (
     <SidebarBody>
       <ProfileImageDiv>
@@ -40,8 +37,8 @@ const LeftSideBar = ({ name, logoutUser, history }) => {
           // eslint-disable-next-line max-len
           image={profileDefault}
           alt="User's profile"
-          imageHeight="150"
-          imageWidth="150"
+          imageHeight="100"
+          imageWidth="100"
           roundedSize="1"
           roundedColor="#FFF"
         />
@@ -73,16 +70,21 @@ const LeftSideBar = ({ name, logoutUser, history }) => {
           route="/dashboard/library"
         />
         <MenuItem
+          img={<MdCollectionsBookmark size="1.5em" />}
+          text="Study Mode"
+          route="/dashboard/study"
+        />
+        <MenuItem
+          img={<MdPoll size="1.5em" />}
+          text="Leaderboard"
+          route="/dashboard/leaderboard"
+        />
+
+        <GrowSpace />
+        <MenuItem
           img={<MdSettings size="1.5em" />}
           text="Settings"
           route="/dashboard/settings"
-        />
-        <GrowSpace />
-        <MenuItem
-          img={<MdExitToApp size="1.5em" />}
-          onClick={onLogout}
-          text="Log Out"
-          route="/login"
         />
       </MenuBox>
     </SidebarBody>

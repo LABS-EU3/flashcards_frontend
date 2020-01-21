@@ -15,6 +15,9 @@ export const SidebarBody = styled.div`
   /* margin: 10px 0; */
 `;
 export const ProfileImageDiv = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   margin-top: 35px;
   text-align: center;
 `;
