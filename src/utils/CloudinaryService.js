@@ -28,7 +28,13 @@ const generateSignature = async (callback, params) => {
 
 /**
  *
+ * Opens the interactive Cloudinary upload widget. Applies the array
+ * of tags passed in to the image and uses the imageId as
+ * the unique identifier for the image
+ * making it possible to replace the image at a later time.
+ *
  * @param {string[]} imageTags - an array of all tags for this image
+ * @param {string} imageId - a unique identifier for this image
  * @param {function} onUploadFailedCallback - function invoked when upload fails
  * @param {function} onUploadSuccessCallback -function invoked when  succeess
  *
@@ -43,15 +49,21 @@ const generateSignature = async (callback, params) => {
 // eslint-disable-next-line import/prefer-default-export
 export const openUploadWidget = (
   imageTags,
+  imageId,
   onUploadFailedCallback,
   onUploadSuccessCallback,
 ) => {
   const tags = imageTags.length > 0 ? imageTags : [];
+  if (!imageId) {
+    onUploadFailedCallback('Please choose a unique identifier for this image');
+    return;
+  }
   const options = {
     tags,
     cloudName: process.env.REACT_APP_CLOUD_NAME,
-    signature: generateSignature,
+    uploadSignature: generateSignature,
     apiKey: process.env.REACT_APP_CLOUDINARY_API_KEY,
+    publicId: imageId,
   };
   const scOptions = Util.withSnakeCaseKeys(options);
   window.cloudinary.openUploadWidget(scOptions, (error, photos) => {
