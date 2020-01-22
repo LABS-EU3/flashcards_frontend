@@ -2,8 +2,10 @@
 // Import
 
 // Libraries
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, Redirect } from 'react-router';
+import { useSelector } from 'react-redux';
+import { PropagateLoader } from 'react-spinners';
 
 // Styled
 import { H1, H2, H3 } from '../../styles/typography';
@@ -28,6 +30,8 @@ import useAction from '../../utils/useAction';
 export default function Landing(props) {
   const { match } = props;
   const history = useHistory();
+  const user = useSelector(state => state.user);
+  const [loader, setLoader] = useState();
 
   const authorizedGoogle = useAction(googleAuthorized);
 
@@ -35,11 +39,19 @@ export default function Landing(props) {
     if (match.params.hasOwnProperty('token')) {
       authorizedGoogle(match.params.token, history);
     }
-  }, []);
+    if (user.loading) {
+      setLoader(
+        <div className="overcast">
+          <PropagateLoader size={30} color="#FFA987" loading={user.loading} />
+        </div>,
+      );
+    }
+  }, [user.loading]);
 
   return (
     <div>
       {getToken() && <Redirect to="/dashboard" />}
+      {loader}
       <FlexRowBackground>
         <DesktopImage>
           <img src={BookSVG} alt="analysis" />
