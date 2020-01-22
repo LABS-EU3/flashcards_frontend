@@ -42,6 +42,7 @@ const generateSignature = async (callback, params) => {
  *
  *      openUploadWidget(
  *          ['an', 'array'],
+ *          'flashcard34'
  *          error => { // do stuff with error message },
  *          image_url => { // do stuff with image_url })
  */
