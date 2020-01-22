@@ -13,7 +13,7 @@ import sha1 from 'sha1';
  * @param {function} callback Callback that accepts generate signature
  * @param {Object} params Object of all attributes to be signed
  */
-export const generateSignature = async (callback, params) => {
+const generateSignature = async (callback, params) => {
   let signature = '';
   const keys = Array.sort(Object.keys(params));
 
@@ -48,9 +48,10 @@ export const openUploadWidget = (
 ) => {
   const tags = imageTags.length > 0 ? imageTags : [];
   const options = {
-    cloudName: 'quick-decks',
-    uploadPreset: 'upload',
     tags,
+    cloudName: process.env.REACT_APP_CLOUD_NAME,
+    signature: generateSignature,
+    apiKey: process.env.REACT_APP_CLOUDINARY_API_KEY,
   };
   const scOptions = Util.withSnakeCaseKeys(options);
   window.cloudinary.openUploadWidget(scOptions, (error, photos) => {
