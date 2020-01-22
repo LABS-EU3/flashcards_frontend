@@ -30,7 +30,6 @@ export const CardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   background: #ffffff;
   border: 1px solid #f6f1f0;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.02);
@@ -47,6 +46,9 @@ export const Card = styled.div`
   border: 1px solid #f6f1f0;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.02);
   text-align: center;
+  &:first-child {
+    background: rgba(255, 169, 135, 0.5);
+  }
 `;
 
 export default function LeaderBoard() {
