@@ -1,4 +1,30 @@
 import { Util } from 'cloudinary-core';
+import sha1 from 'sha1';
+
+/**
+ * a signature generation util for signed uploads to Cloudinary,
+ * necessary for overwriting images.
+ *
+ * Callback accepts the generated signature which is used by the
+ * upload widget of Cloudinary. Params are just the image attributes
+ * to be signed. They have to be sorted alphabetically before signature
+ * is generated.
+ *
+ * @param {function} callback Callback that accepts generate signature
+ * @param {Object} params Object of all attributes to be signed
+ */
+export const generateSignature = async (callback, params) => {
+  let signature = '';
+  const keys = Array.sort(Object.keys(params));
+
+  keys.forEach((key, index) => {
+    signature = signature.concat(`${key}=${params[key]}`);
+
+    signature = index === keys.length - 1 ? signature : signature.concat('&');
+  });
+  signature = signature.concat(process.env.REACT_APP_CLOUDINARY_SECRET);
+  callback(sha1(signature));
+};
 
 /**
  *
