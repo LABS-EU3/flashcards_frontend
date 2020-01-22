@@ -19,7 +19,7 @@ export const FormContainer = styled.div`
   display: flex;
   height: 100%;
   flex-direction: column;
-  justify-content: center:
+  justify-content: center;
 `;
 
 export const Forms = styled.form`
@@ -28,6 +28,9 @@ export const Forms = styled.form`
   align-items: center;
   width: 100%;
   height: ${props => props.height || null};
+  a {
+    width: 100%;
+  }
 `;
 
 // Here you can use the border attribute dynamically

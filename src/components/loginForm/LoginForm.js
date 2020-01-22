@@ -12,11 +12,14 @@ import { SquareLoader } from 'react-spinners';
 import * as yup from 'yup';
 import * as c from '../../styles/variables/colours';
 import { Text, H3 } from '../../styles/typography';
-import { Button } from '../../styles/buttons';
+import { Button, GoogleButton } from '../../styles/buttons';
 import { Forms, Input, Label } from '../../styles/forms';
 
 // Actions
 import { userLogin } from '../../modules/user/userActions';
+import { baseUrl } from '../../config';
+
+import GoogleIcon from '../../assets/icons/GooglePlus-logos-01.png';
 
 const Form = props => {
   const ForgotText = styled(H3)`
@@ -99,6 +102,12 @@ const Form = props => {
           />
         </H3>
       </Button>
+      <a href={`${baseUrl}/auth/google`}>
+        <GoogleButton type="button">
+          <img src={GoogleIcon} alt="google-icon" />
+          <H3 BRAND>Login With Google+</H3>
+        </GoogleButton>
+      </a>
     </Forms>
   );
 };

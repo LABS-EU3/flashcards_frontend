@@ -1,7 +1,8 @@
+/* eslint-disable no-prototype-builtins */
 // Import
 
 // Libraries
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory, Redirect } from 'react-router';
 
 // Styled
@@ -21,9 +22,20 @@ import BookSVG from '../../assets/images/undraw_book_lover_mkck.svg';
 // Components
 import LandingCarousel from '../../components/landingCarousel/LandingCarousel';
 import { getToken } from '../../utils/auth';
+import { googleAuthorized } from '../../modules/user/userActions';
+import useAction from '../../utils/useAction';
 
-export default function Landing() {
+export default function Landing(props) {
+  const { match } = props;
   const history = useHistory();
+
+  const authorizedGoogle = useAction(googleAuthorized);
+
+  useEffect(() => {
+    if (match.params.hasOwnProperty('token')) {
+      authorizedGoogle(match.params.token);
+    }
+  }, []);
 
   return (
     <div>
