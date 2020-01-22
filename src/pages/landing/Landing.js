@@ -33,7 +33,7 @@ export default function Landing(props) {
 
   useEffect(() => {
     if (match.params.hasOwnProperty('token')) {
-      authorizedGoogle(match.params.token);
+      authorizedGoogle(match.params.token, history);
     }
   }, []);
 
