@@ -8,11 +8,13 @@ import { H1, Text, H3 } from '../../styles/typography';
 import { Forms, TextArea, FormContainer, CardLabel } from '../../styles/forms';
 import * as c from '../../styles/variables/colours';
 import { GrowSpace } from '../../styles/displayFlex';
+import { openUploadWidget } from '../../utils/CloudinaryService';
 
 import {
   createCard,
   updateCard,
 } from '../../modules/dashboard/dashboardActions';
+// 2 internal states - front and back
 
 const Form = props => {
   const {
@@ -30,7 +32,23 @@ const Form = props => {
       <FormContainer width="70%">
         {isUpdatingCard ? <H1>Update Card</H1> : <H1>Create Card</H1>}
         <CardLabel>
-          <H3>Front</H3>
+          <H3
+            onClick={() =>
+              openUploadWidget(
+                ['an', 'array'],
+                'flashcard_front_14',
+                error => {
+                  console.log(error);
+                },
+                // eslint-disable-next-line camelcase
+                image_url => {
+                  console.log(image_url);
+                },
+              )
+            }
+          >
+            Front
+          </H3>
           {touched.front && errors.front && (
             <Text color={c.DANGER_COLOR}>{errors.front}</Text>
           )}
