@@ -40,7 +40,7 @@ export const CardContainer = styled.div`
   border: 1px solid #f6f1f0;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.02);
 
-  @media (max-width: 768px) {
+  @media (max-width: 840px) {
     width: 80%;
   }
 `;
