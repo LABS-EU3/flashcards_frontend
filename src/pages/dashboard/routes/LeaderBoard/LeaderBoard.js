@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styled from 'styled-components';
-import { H1, H2, P, HR } from '../../../../styles/typography';
+import { H1, H2, P } from '../../../../styles/typography';
 
 const ranking = [
   { id: 1, name: 'Happiness', score: 10 },
@@ -19,20 +19,45 @@ export const Container = styled.div`
   background-color: transparent;
   background: white;
   width: 100%;
+  height: 100%;
 `;
 
 export const TopCompDiv = styled.div`
   text-align: center;
   margin: 30px auto;
 `;
+
 export const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 65%;
+  margin: 2.5% auto;
+  padding-top: 1%;
+  padding-bottom: 5%;
   background: #ffffff;
   border: 1px solid #f6f1f0;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.02);
+
+  @media (max-width: 768px) {
+    width: 80%;
+  }
+`;
+
+export const MyHR = styled.hr`
+  height: 1px;
+  border: 0;
+  background: linear-gradient(
+    88.85deg,
+    rgba(210, 31, 60, 0.5) 38.43%,
+    rgba(255, 169, 135, 0.5) 136.86%
+  );
+  width: 35%;
+
+  @media (max-width: 500px) {
+    width: 80%;
+  }
 `;
 
 export const Card = styled.div`
@@ -46,6 +71,7 @@ export const Card = styled.div`
   border: 1px solid #f6f1f0;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.02);
   text-align: center;
+
   &:first-child {
     background: rgba(255, 169, 135, 0.5);
   }
@@ -55,8 +81,8 @@ export default function LeaderBoard() {
   return (
     <Container>
       <TopCompDiv>
-        <H1 lineHeight="1em">Rankings</H1>
-        <HR width="65%" />
+        <H1 lineHeight="1.5em">Rankings</H1>
+        <MyHR />
       </TopCompDiv>
 
       <CardContainer>
