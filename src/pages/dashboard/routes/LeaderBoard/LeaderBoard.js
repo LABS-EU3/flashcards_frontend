@@ -35,6 +35,7 @@ export const CardContainer = styled.div`
   border: 1px solid #f6f1f0;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.02);
 `;
+
 export const Card = styled.div`
   display: flex;
   align-items: center;
@@ -45,6 +46,7 @@ export const Card = styled.div`
   background: #ffffff;
   border: 1px solid #f6f1f0;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.02);
+  text-align: center;
 `;
 
 export default function LeaderBoard() {
@@ -56,12 +58,14 @@ export default function LeaderBoard() {
       </TopCompDiv>
 
       <CardContainer>
-        {ranking.map((anObjectMapped, index) => {
+        {ranking.map((data, index) => {
           return (
-            <Card key={`${anObjectMapped.id}`}>
+            <Card key={`${data.id}`}>
               <H2>{index + 1}</H2>
-              <H2>{anObjectMapped.name}</H2>
-              <P>{anObjectMapped.score} points</P>
+              <H2>{data.name}</H2>
+              <P>
+                {data.score} <br /> Points
+              </P>
             </Card>
           );
         })}
