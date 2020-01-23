@@ -9,6 +9,14 @@ export const Search = styled.div`
   border: 1px solid #f6f1f0;
   padding: 0.4em 0.8em;
 
+  @media (max-width: 768px) {
+    border: none;
+
+    input {
+      display: none;
+    }
+  }
+
   button {
     border-radius: 0 3px 3px 0;
     background: transparent;
