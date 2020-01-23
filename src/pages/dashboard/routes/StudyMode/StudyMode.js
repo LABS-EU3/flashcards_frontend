@@ -73,7 +73,7 @@ export const MLower = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 90%;
-  margin-top: -7%;
+  margin-top: -4%;
 `;
 
 export const SessionContainer = styled.div`
