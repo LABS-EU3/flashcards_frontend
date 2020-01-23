@@ -32,7 +32,7 @@ export const CardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 65%;
+  width: 70%;
   margin: 2.5% auto;
   padding-top: 1%;
   padding-bottom: 5%;
@@ -46,6 +46,7 @@ export const CardContainer = styled.div`
 `;
 
 export const MyHR = styled.hr`
+  width: 400px;
   height: 1px;
   border: 0;
   background: linear-gradient(
@@ -53,10 +54,12 @@ export const MyHR = styled.hr`
     rgba(210, 31, 60, 0.5) 38.43%,
     rgba(255, 169, 135, 0.5) 136.86%
   );
-  width: 35%;
 
-  @media (max-width: 500px) {
-    width: 80%;
+  @media (min-width: 2000px) {
+    width: 500px;
+  }
+  @media (max-width: 1050px) {
+    width: 278px;
   }
 `;
 
@@ -64,7 +67,7 @@ export const Card = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 278px;
+  width: 400px;
   height: 53px;
   margin-top: 2%;
   background: #ffffff;
@@ -74,6 +77,12 @@ export const Card = styled.div`
 
   &:first-child {
     background: rgba(255, 169, 135, 0.5);
+  }
+  @media (min-width: 2000px) {
+    width: 600px;
+  }
+  @media (max-width: 1050px) {
+    width: 278px;
   }
 `;
 
