@@ -10,6 +10,9 @@ import { NavLink } from 'react-router-dom';
 import { MdReorder, MdSearch } from 'react-icons/md';
 import { HAMBURGER_CLICKED } from '../../modules/dashboard/dashboardTypes';
 
+// components
+import SearchBox from '../SearchBox/SearchBox';
+
 // Assets
 import logo from '../../assets/logo.svg';
 
@@ -64,6 +67,7 @@ export default function TopBar() {
       <NavLink to="/dashboard/search">
         <MdSearch size="2.8em" />
       </NavLink>
+      <SearchBox />
     </TopBarContainer>
   );
 }
