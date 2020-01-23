@@ -2,7 +2,7 @@
 
 // Libraries
 import styled from 'styled-components';
-
+import { Form, Field } from 'formik';
 // Fonts
 import * as f from './variables/fonts';
 
@@ -22,7 +22,7 @@ export const FormContainer = styled.div`
   justify-content: center:
 `;
 
-export const Forms = styled.form`
+export const Forms = styled(Form)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -60,9 +60,14 @@ export const Input = styled.input`
   }
 `;
 
-export const TextArea = styled.textarea`
-  background: #fffefe;
-  border: ${props => props.border || '1px solid rgba(0, 0, 0, 0.3)'};
+export const TextArea = styled(Field)`
+  // background: #fffefe;
+  background: red;
+  justify-content: center;
+  border: ${props =>
+    props.inputError
+      ? `2px solid ${c.DANGER_COLOR}`
+      : '1px solid rgba(0, 0, 0, 0.3)'};
   box-sizing: border-box;
   border-radius: 3px;
   width: 100%;
@@ -106,7 +111,7 @@ export const Label = styled.label`
 `;
 
 export const CardLabel = styled(Label)`
-  padding-top: 35px;
+  // padding-top: 35px;
 
   @media (min-width: ${g.phoneMediaBreak}px) {
     width: 120%;
