@@ -6,7 +6,7 @@ import './studymode.css';
 import ReactSearchBox from 'react-search-box';
 
 import { MdCollectionsBookmark } from 'react-icons/md';
-// import { Line } from 'rc-progress';
+import { Line } from 'rc-progress';
 import { H1, H2, H3, P } from '../../../../styles/typography';
 
 export const Wrapper = styled.div`
@@ -55,6 +55,27 @@ export const Card = styled.div`
   } */
 `;
 
+export const SLowerCardSection = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* margin-left: -7%; */
+`;
+export const SLower = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 40%;
+  /* margin-left: -7%; */
+`;
+export const MLower = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  margin-top: -7%;
+`;
+
 export const SessionContainer = styled.div`
   align-self: flex-start;
   margin: 10px;
@@ -90,7 +111,7 @@ const StyledLink = styled(NavLink)`
 `;
 
 // dummy data
-const data = [
+const dummyData = [
   {
     key: 'john',
     value: 'John Doe',
@@ -118,6 +139,12 @@ const sessions = [
   { deckId: 4, mode: 'Regular', cardTitle: 'Quantum Mechanics', totalCard: 39 },
 ];
 
+const mastery = [
+  { id: 1, cardTitle: 'Oragnic Compounds', percent: 40 },
+  { id: 4, cardTitle: 'Quantum Mechanics', percent: 60 },
+  { id: 7, cardTitle: 'Geography', percent: 100 },
+];
+
 export default function StudyMode() {
   return (
     <Wrapper>
@@ -125,13 +152,13 @@ export default function StudyMode() {
         <H3>Deck</H3>
         <ReactSearchBox
           placeholder="Type the deck name you want to use"
-          data={data}
+          data={dummyData}
           callback={record => console.log(record)}
         />
         <br />
 
         <H3>Game Mode</H3>
-        <ReactSearchBox placeholder="Regular" data={data} />
+        <ReactSearchBox placeholder="Regular" data={dummyData} />
         <br />
         <br />
         <br />
@@ -149,15 +176,18 @@ export default function StudyMode() {
           <MyHR />
 
           <CardContainer>
-            {sessions.map(sdata => {
+            {sessions.map((data, index) => {
               return (
-                <Card key={sdata.data}>
-                  <H2>{sdata.cardTitle}</H2>
-
-                  <P>{sdata.mode} mode</P>
-
-                  <P color="grey">{sdata.totalCard} Cards left</P>
-                  <MdCollectionsBookmark size="2em" color="grey" />
+                /* eslint-disable-next-line react/no-array-index-key */
+                <Card key={index}>
+                  <H2>{data.cardTitle}</H2>
+                  <SLowerCardSection>
+                    <P>{data.mode} mode</P>
+                    <SLower>
+                      <P color="grey">{data.totalCard} Cards left</P>
+                      <MdCollectionsBookmark size="2em" color="grey" />
+                    </SLower>
+                  </SLowerCardSection>
                 </Card>
               );
             })}
@@ -169,8 +199,25 @@ export default function StudyMode() {
           <MyHR />
 
           <CardContainer>
-            {sessions.map(mdata => {
-              return <Card key={mdata.data}>{mdata} </Card>;
+            {mastery.map((data, index) => {
+              return (
+                /* eslint-disable-next-line react/no-array-index-key */
+                <Card key={index}>
+                  <H2>{data.cardTitle}</H2>
+                  <MLower>
+                    <Line
+                      percent={data.percent}
+                      strokeLineColor="red"
+                      strokeWidth="4"
+                      trailWidth="4"
+                      trailColor="#fafafa"
+                      strokeColor="#8D99AE"
+                      className="pBar"
+                    />
+                    <H2>{data.percent} %</H2>
+                  </MLower>
+                </Card>
+              );
             })}
           </CardContainer>
         </MasteryContainer>
