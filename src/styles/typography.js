@@ -21,6 +21,8 @@ export const H1 = styled.h1`
   line-height: ${f.H1_LINE_HEIGHT}em;
   color: ${props => props.color || c.DARK_NEUTRAL_COLOR};
 
+  line-height: ${props => props.lineHeight || `${f.H1_LINE_HEIGHT}em`};
+
   ${props => (props.BRAND ? `font-family:${f.BRAND_FONT}` : null)};
   ${props => (props.REGULAR ? `font-weight:${f.REGULAR}` : null)};
 
