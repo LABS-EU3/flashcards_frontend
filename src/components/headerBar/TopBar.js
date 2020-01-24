@@ -7,7 +7,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import { MdReorder, MdSearch } from 'react-icons/md';
+import { MdReorder } from 'react-icons/md';
 import { HAMBURGER_CLICKED } from '../../modules/dashboard/dashboardTypes';
 
 // components
@@ -15,6 +15,8 @@ import SearchBox from '../SearchBox/SearchBox';
 
 // Assets
 import logo from '../../assets/logo.svg';
+
+import { getToken } from '../../utils/auth';
 
 const TopBarContainer = styled.div`
   display: flex;
@@ -64,10 +66,7 @@ export default function TopBar() {
           <img src={`${logo}`} alt="quickdecks logo" />
         </NavLink>
       </LogoWrapper>
-      <NavLink to="/dashboard/search">
-        <MdSearch size="2.8em" />
-      </NavLink>
-      <SearchBox />
+      {getToken() ? <SearchBox /> : null}
     </TopBarContainer>
   );
 }
