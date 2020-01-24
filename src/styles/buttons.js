@@ -26,6 +26,17 @@ export const Button = styled.button`
   }
 `;
 
+export const GoogleButton = styled(Button)`
+  background: #ffffff;
+  border: 1px solid ${c.LIGHT_NEUTRAL_COLOR};
+  align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+  img {
+    height: 2.5em;
+  }
+`;
+
 export const LineButton = styled.button`
   text-align: center;
   background: #ffffff;

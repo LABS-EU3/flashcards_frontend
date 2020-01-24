@@ -39,6 +39,7 @@ function App(props) {
       {/* <PrivateRoute path="/" component={RightSidebar} /> */}
       <Switch>
         <Route exact path="/" component={Landing} />
+        <Route exact path="/auth/:token" component={Landing} />
         <PrivateRoute path="/dashboard" component={Dashboard} />
         <Route path="/forgot" component={ForgotPassword} />
         <Route path="/reset/:token" component={ResetPassword} />

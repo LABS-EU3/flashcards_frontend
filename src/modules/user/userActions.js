@@ -134,3 +134,24 @@ export const fetchProfile = () => dispatch => {
       });
     });
 };
+
+export const googleAuthorized = (token, history) => dispatch => {
+  dispatch({ type: types.GOOGLE_AUTH_START });
+  axios
+    .post(`${baseUrl}/auth/google/${token}`)
+    .then(({ data }) => {
+      dispatch({
+        type: types.GOOGLE_AUTH_SUCCESS,
+        payload: data.data.user,
+      });
+      setToken(token);
+      dispatch({ type: types.CLEAR_RESPONSES });
+      history.push('/dashboard');
+    })
+    .catch(errors => {
+      dispatch({
+        type: types.GOOGLE_AUTH_FAILURE,
+        payload: errors.response.data.message,
+      });
+    });
+};
