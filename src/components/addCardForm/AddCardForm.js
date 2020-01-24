@@ -18,10 +18,20 @@ import {
 const InputField = ({ title, btnName, setCallback, ...props }) => {
   const [field, meta] = useField(props);
 
+  const handleChange = event => {
+    setCallback({ ...props.card, [props.name]: event.target.value });
+  };
+
   return (
     <CardLabel>
       <H3>{title}</H3>
-      <TextArea {...field} {...props} />
+      <TextArea
+        {...field}
+        {...props}
+        // eslint-disable-next-line react/destructuring-assignment
+        value={props.card[`${props.name}`]}
+        onChange={handleChange}
+      />
 
       {meta.touched && meta.error ? (
         <Text color={c.DANGER_COLOR}>{meta.error}</Text>
@@ -113,6 +123,7 @@ const Form = props => {
             title="Card Question"
             btnName="imageQuestion"
             name="question"
+            card={card}
             setCallback={setCard}
           />
           <GrowSpace flexGrow="1" />
@@ -120,6 +131,7 @@ const Form = props => {
             title="Card Answer"
             btnName="imageAnswer"
             name="answer"
+            card={card}
             setCallback={setCard}
           />
           <GrowSpace flexGrow="2" />
