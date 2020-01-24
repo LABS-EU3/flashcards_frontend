@@ -135,6 +135,26 @@ const userReducer = (state = initialState, action) => {
         loading: false,
         credentials: action.payload,
       };
+    case types.GOOGLE_AUTH_START:
+      return {
+        ...state,
+        loading: true,
+        authenticated: false,
+      };
+    case types.GOOGLE_AUTH_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        completed: true,
+        authenticated: true,
+        credentials: action.payload,
+      };
+    case types.GOOGLE_AUTH_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload,
+      };
 
     default:
       return state;
