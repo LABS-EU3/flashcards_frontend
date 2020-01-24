@@ -2,7 +2,7 @@
 
 // Libraries
 import styled from 'styled-components';
-import { Form, Field } from 'formik';
+import { Form } from 'formik';
 // Fonts
 import * as f from './variables/fonts';
 
@@ -60,10 +60,8 @@ export const Input = styled.input`
   }
 `;
 
-export const TextArea = styled(Field)`
-  // background: #fffefe;
-  background: red;
-  justify-content: center;
+export const TextArea = styled.textarea`
+  background: #fffefe;
   border: ${props =>
     props.inputError
       ? `2px solid ${c.DANGER_COLOR}`
