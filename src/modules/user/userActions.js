@@ -147,7 +147,7 @@ export const googleAuthorized = (token, history) => dispatch => {
       });
       setToken(token);
       dispatch({ type: types.CLEAR_RESPONSES });
-      history.push('/dashboard');
+      history.push('/dashboard/welcome');
     })
     .catch(errors => {
       dispatch({
