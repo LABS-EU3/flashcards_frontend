@@ -21,7 +21,6 @@ export const userLogin = (userData, history) => dispatch => {
         type: types.LOGIN_SUCCESS,
         payload: data.data.user,
       });
-      // console.log(data.data.user);
       setToken(data.data.token);
       dispatch({ type: types.CLEAR_RESPONSES });
       history.push('/dashboard/welcome');
