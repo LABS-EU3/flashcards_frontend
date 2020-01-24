@@ -15,7 +15,8 @@ import sha1 from 'sha1';
  */
 const generateSignature = async (callback, params) => {
   let signature = '';
-  const keys = Array.sort(Object.keys(params));
+  const keys = Object.keys(params);
+  keys.sort();
 
   keys.forEach((key, index) => {
     signature = signature.concat(`${key}=${params[key]}`);
