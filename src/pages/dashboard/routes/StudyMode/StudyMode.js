@@ -134,6 +134,14 @@ export const MyHR = styled.hr`
   );
 `;
 
+const IconButtonWrapper = styled.div`
+  float: right;
+  transform: rotate(0deg);
+  overflow: hidden;
+  transition: all 0.3s ease-out;
+  transform: ${props => (props.rotate ? `rotate(180deg)` : '')};
+`;
+
 const StyledLink = styled(NavLink)`
   text-decoration: none;
 `;
@@ -177,6 +185,7 @@ export default function StudyMode() {
   const container = React.createRef();
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
+  const [open3, setOpen3] = useState(false);
 
   // const handleClickOutside = event => {
   //   if (container.current && !container.current.contains(event.target)) {
@@ -189,6 +198,9 @@ export default function StudyMode() {
   };
   const handleButtonClick2 = () => {
     setOpen2(!open2);
+  };
+  const handleButtonClick3 = () => {
+    setOpen3(!open3);
   };
   // document.addEventListener('mousedown', handleClickOutside);
   // document.removeEventListener('mousedown', handleClickOutside);
@@ -236,12 +248,14 @@ export default function StudyMode() {
         <RecentlyViewContainer>
           <UpperCardSection>
             <H1 lineHeight="1em">Jump back into</H1>
-            <MdKeyboardArrowDown
-              size="4em"
-              color="grey"
-              // onClick={handleButtonClick1}
-              className="material-icons"
-            />
+            <IconButtonWrapper rotate={open3} onClick={handleButtonClick3}>
+              <MdKeyboardArrowDown
+                size="4em"
+                color="grey"
+                onClick={handleButtonClick3}
+                className="material-icons"
+              />
+            </IconButtonWrapper>
           </UpperCardSection>
           <MyHR />
         </RecentlyViewContainer>
@@ -249,12 +263,14 @@ export default function StudyMode() {
         <SessionContainer>
           <UpperCardSection>
             <H1 lineHeight="1em">Session</H1>
-            <MdKeyboardArrowDown
-              size="4em"
-              color="grey"
-              onClick={handleButtonClick1}
-              className="material-icons"
-            />
+            <IconButtonWrapper rotate={open1} onClick={handleButtonClick1}>
+              <MdKeyboardArrowDown
+                size="4em"
+                color="grey"
+                onClick={handleButtonClick1}
+                className="material-icons"
+              />
+            </IconButtonWrapper>
           </UpperCardSection>
           <MyHR />
 
@@ -283,12 +299,14 @@ export default function StudyMode() {
         <MasteryContainer>
           <UpperCardSection>
             <H1 lineHeight="1em">Mastery</H1>
-            <MdKeyboardArrowDown
-              size="4em"
-              color="grey"
-              onClick={handleButtonClick2}
-              className="material-icons"
-            />
+            <IconButtonWrapper rotate={open2} onClick={handleButtonClick2}>
+              <MdKeyboardArrowDown
+                size="4em"
+                color="grey"
+                onClick={handleButtonClick2}
+                className="material-icons"
+              />
+            </IconButtonWrapper>
           </UpperCardSection>
           <MyHR />
 
