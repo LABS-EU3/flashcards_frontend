@@ -70,8 +70,7 @@ export const RightBottomContainer = styled.div`
   width: 100%;
 `;
 export const InnerContainer = styled.div`
-  /* margin: 10px 10px 10px 20px; */
-  /* width: 95%; */
+  margin: 30px auto;
 `;
 
 const IconButtonWrapper = styled.div`
@@ -190,7 +189,7 @@ export default function Settings() {
               </IconButtonWrapper>
             </UpperCardSection>
             <MyHR />
-            <ProfileManagementForm />
+            {open1 && <ProfileManagementForm />}
           </InnerContainer>
           <InnerContainer>
             <UpperCardSection>
@@ -207,7 +206,7 @@ export default function Settings() {
               </IconButtonWrapper>
             </UpperCardSection>
             <MyHR />
-            <AccountManagementForm />
+            {open2 && <AccountManagementForm />}
           </InnerContainer>
           <InnerContainer>
             <H2 fontSize="3em" color="red">
@@ -244,7 +243,7 @@ export default function Settings() {
               </IconButtonWrapper>
             </UpperCardSection>
             <MyHR />
-            <PasswordManagementForm />
+            {open3 && <PasswordManagementForm />}
           </InnerContainer>
           <InnerContainer>
             <UpperCardSection>
