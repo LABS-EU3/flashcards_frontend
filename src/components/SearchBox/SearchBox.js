@@ -8,7 +8,7 @@ const SearchBox = () => {
       <NavSearch>
         <Input type="text" name="q" placeholder="Find a deck" />
       </NavSearch>
-      <button>
+      <button type="button">
         <FaSearch size={15} />
       </button>
     </Search>
