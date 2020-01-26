@@ -1,0 +1,136 @@
+// Import
+
+// Libraries
+import React, { useState, useEffect } from 'react';
+import { withFormik } from 'formik';
+import { connect } from 'react-redux';
+import * as yup from 'yup';
+// import { SquareLoader } from 'react-spinners';
+
+// Styles
+import { Text, H3 } from '../../../../styles/typography';
+import { Button2 } from '../../../../styles/buttons';
+import * as c from '../../../../styles/variables/colours';
+import { Forms, Input, Label } from '../../../../styles/forms';
+
+// Actions
+import { userSignUp } from '../../../../modules/user/userActions';
+
+const ProfileManagementForm = props => {
+  const {
+    values,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    touched,
+    errors,
+    user,
+  } = props;
+  const [response, setResponse] = useState(null);
+  useEffect(() => {
+    if (user.completed) {
+      setResponse(
+        <H3 color={c.SUCCESS_COLOR}>
+          Successfully created an account, please wait to be redirected
+        </H3>,
+      );
+    }
+    if (user.errors) {
+      setResponse(<H3 color={c.DANGER_COLOR}>User already exists</H3>);
+    }
+  }, [user.errors, user.completed]);
+  return (
+    <Forms onSubmit={handleSubmit}>
+      {response}
+      <Label>
+        <H3>Name</H3>
+        {touched.fullName && errors.fullName && (
+          <Text color={c.DANGER_COLOR}>{errors.fullName}</Text>
+        )}
+        <Input
+          type="text"
+          name="fullName"
+          value={values.fullName}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          placeholder="Full Name"
+          border={
+            touched.fullName && errors.fullName && `2px solid ${c.DANGER_COLOR}`
+          }
+        />
+      </Label>
+      <Label>
+        <H3>Email</H3>
+        {touched.email && errors.email && (
+          <Text color={c.DANGER_COLOR}>{errors.email}</Text>
+        )}
+        <Input
+          type="email"
+          name="email"
+          value={values.email.toLowerCase()}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          placeholder="Email"
+          border={
+            touched.email && errors.email && `2px solid ${c.DANGER_COLOR}`
+          }
+        />
+      </Label>
+      <Button2 type="">
+        <H3 color={c.DARK_GRAY}>
+          Submit
+          {/* <SquareLoader
+            css={{ marginLeft: '20px' }}
+            size={15}
+            color="#FFA987"
+            loading={user.loading}
+          /> */}
+        </H3>
+      </Button2>
+    </Forms>
+  );
+};
+
+const validationSchema = yup.object().shape({
+  fullName: yup.string().required('Please provide a full name'),
+  email: yup
+    .string()
+    .email('Email is not valid')
+    .required('Please provide an email'),
+  // password: yup
+  //   .string()
+  //   .required('Please provide a password')
+  //   .min(8, 'Password too short'),
+  // password2: yup
+  //   .string()
+  //   .required("Passwords don't match")
+  //   .oneOf([yup.ref('password'), null], 'Passwords must match'),
+});
+
+const RegisterForm = withFormik({
+  mapPropsToValues: () => ({
+    // password: '',
+    // password2: '',
+    email: '',
+    fullName: '',
+  }),
+  handleSubmit: (values, { props, setSubmitting }) => {
+    props.userSignUp(
+      {
+        email: values.email,
+        // password: values.password,
+        fullName: values.fullName,
+      },
+      props.history,
+    );
+    setSubmitting(false);
+  },
+  validationSchema,
+})(ProfileManagementForm);
+
+const mapStateToProps = state => {
+  return {
+    user: state.user,
+  };
+};
+export default connect(mapStateToProps, { userSignUp })(RegisterForm);
