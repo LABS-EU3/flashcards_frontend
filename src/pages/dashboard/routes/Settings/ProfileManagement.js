@@ -1,7 +1,7 @@
 // Import
 
 // Libraries
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { withFormik } from 'formik';
 import { connect } from 'react-redux';
 import * as yup from 'yup';
@@ -14,7 +14,7 @@ import * as c from '../../../../styles/variables/colours';
 import { Forms, Input, Label } from '../../../../styles/forms';
 
 // Actions
-import { userSignUp } from '../../../../modules/user/userActions';
+import { manageProfile } from '../../../../modules/user/userActions';
 
 const ProfileManagementForm = props => {
   const {
@@ -24,24 +24,29 @@ const ProfileManagementForm = props => {
     handleSubmit,
     touched,
     errors,
-    user,
   } = props;
-  const [response, setResponse] = useState(null);
-  useEffect(() => {
-    if (user.completed) {
-      setResponse(
-        <H3 color={c.SUCCESS_COLOR}>
-          Successfully created an account, please wait to be redirected
-        </H3>,
-      );
-    }
-    if (user.errors) {
-      setResponse(<H3 color={c.DANGER_COLOR}>User already exists</H3>);
-    }
-  }, [user.errors, user.completed]);
+
+  // const [response, setResponse] = useState(null);
+
+  // useEffect(() => {
+  //   if () {
+  //     setResponse(
+  //       <H3 color={c.SUCCESS_COLOR}>
+  //         Profile update successfully
+  //       </H3>,
+  //     );
+  //   }
+  //   if (user.errors) {
+  //     setResponse(
+  //   <H3 color={c.DANGER_COLOR}>
+  //     Error while upadting profile
+  //   </H3>
+  // );
+  //   }
+  // }, []);
   return (
     <Forms onSubmit={handleSubmit}>
-      {response}
+      {/* {response} */}
       <Label>
         <H3>Name</H3>
         {touched.fullName && errors.fullName && (
@@ -76,7 +81,7 @@ const ProfileManagementForm = props => {
           }
         />
       </Label>
-      <Button2 type="">
+      <Button2 type="submit">
         <H3 color={c.DARK_GRAY}>
           Submit
           {/* <SquareLoader
@@ -92,34 +97,23 @@ const ProfileManagementForm = props => {
 };
 
 const validationSchema = yup.object().shape({
-  fullName: yup.string().required('Please provide a full name'),
+  fullName: yup.string().required('Please provide your full name'),
   email: yup
     .string()
     .email('Email is not valid')
-    .required('Please provide an email'),
-  // password: yup
-  //   .string()
-  //   .required('Please provide a password')
-  //   .min(8, 'Password too short'),
-  // password2: yup
-  //   .string()
-  //   .required("Passwords don't match")
-  //   .oneOf([yup.ref('password'), null], 'Passwords must match'),
+    .required('Please provide your email'),
 });
 
-const RegisterForm = withFormik({
+const PMForm = withFormik({
   mapPropsToValues: () => ({
-    // password: '',
-    // password2: '',
-    email: '',
     fullName: '',
+    email: '',
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
-    props.userSignUp(
+    props.manageProfile(
       {
-        email: values.email,
-        // password: values.password,
         fullName: values.fullName,
+        email: values.email,
       },
       props.history,
     );
@@ -133,4 +127,5 @@ const mapStateToProps = state => {
     user: state.user,
   };
 };
-export default connect(mapStateToProps, { userSignUp })(RegisterForm);
+
+export default connect(mapStateToProps, { manageProfile })(PMForm);
