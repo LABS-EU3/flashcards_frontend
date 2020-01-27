@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import Lightbox from 'react-image-lightbox';
 import { H1, HR, H2, P } from '../../../../../styles/typography';
 import { CardsFlex } from '../../../../../components/cards/Cards';
-// import * as g from '../../../../../styles/variables/global';
 import 'react-image-lightbox/style.css';
 
 import {
@@ -58,32 +57,36 @@ const Decks = ({ cards, deleteCard, showingAllAnswers }) => {
 
 const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
   const [isShowingSingleAnswer, setIsShowingSingleAnswer] = useState(false);
-  // const [image, setImage] = useState('');
-  const [open, setOpen] = useState(false);
-  const [imagePop, setImagePop] = useState('');
-  // const [answerImage, setAnswerImage] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+  const [questionImage, setQuestionImage] = useState('');
+  const [answerImage, setAnswerImage] = useState('');
   const dispatch = useDispatch();
+
   const toggleSingleAnswer = () => {
     if (showingAllAnswers) {
       dispatch({ type: types.TOGGLE_ANSWERS, payload: false });
       setIsShowingSingleAnswer(false);
     } else setIsShowingSingleAnswer(!isShowingSingleAnswer);
   };
-  const toggleImage = () => {
-    setOpen(true);
-    if (card.image_url_question) {
-      setImagePop(card.image_url_question);
-    } else {
-      setImagePop(card.image_url_answer);
-    }
+
+  const toggleImageQuestion = () => {
+    setIsOpen(true);
+    setQuestionImage(card.image_url_question);
+    setAnswerImage('');
   };
 
-  const toggleClose = () => {
-    setOpen(false);
+  const toggleImageAnswer = () => {
+    setIsOpen(true);
+    setQuestionImage('');
+    setAnswerImage(card.image_url_answer);
   };
-  // const handleShowingImage = () => {
-  //   setImage(card.image_url_question);
-  // };
+
+  const toggleDone = () => {
+    setIsOpen(false);
+    setQuestionImage('');
+    setAnswerImage('');
+  };
+
   return (
     <CardsFlex
       onClick={toggleSingleAnswer}
@@ -95,38 +98,36 @@ const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
       <DisplayCardFlex>
         <TextDiv>
           <H2 BOLD>{card.question}</H2>
-          {card.image_url_question || card.image_url_answer ? (
+          {card.image_url_question ? (
             <div>
-              <button type="button" onClick={() => toggleImage()}>
-                View image
+              <button type="button" onClick={() => toggleImageQuestion(true)}>
+                View image Question
               </button>
-              {open && (
+              {isOpen && (
                 <Lightbox
-                  mainSrc={imagePop}
-                  onCloseRequest={() => toggleClose()}
+                  mainSrc={questionImage}
+                  onCloseRequest={() => toggleDone()}
                 />
               )}
             </div>
           ) : (
-            // <Image src={card.image_url_question} alt="question" />
             <p />
           )}
-          {/* {card.image_url_answer ? (
-                  <div>
-              <button type="button" onClick={() => toggleImage()}>
+          {card.image_url_answer ? (
+            <div>
+              <button type="button" onClick={() => toggleImageAnswer(true)}>
                 View Image Answer
               </button>
-              {open && (
+              {isOpen && (
                 <Lightbox
                   mainSrc={answerImage}
-                  onCloseRequest={() => toggleClose()}
+                  onCloseRequest={() => toggleDone()}
                 />
               )}
             </div>
-                // <Image src={card.image_url_answer} alt="answer" />
-              ) : (
-                <p />
-              )} */}
+          ) : (
+            <p />
+          )}
           {showingAllAnswers || isShowingSingleAnswer ? (
             <div>
               <P>{card.answer}</P>
@@ -154,14 +155,6 @@ const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
               <MdEdit />
             </H2>
           </IconWithoutText>
-          {/* <button
-            type="button"
-            onClick={() => {
-              handleShowingImage();
-            }}
-          >
-            Show image
-          </button> */}
         </CardsActions>
       </DisplayCardFlex>
     </CardsFlex>
@@ -187,27 +180,5 @@ const DisplayCardFlex = styled.div`
   height: 100%;
   width: 100%;
 `;
-
-// const Image = styled.img`
-//   height: 100px;
-//   max-width: 100%;
-//   overflow: hidden;
-
-//   &:hover {
-//     transform: scale(6);
-//     overflow: hidden;
-//     max-width: 120px;
-//     align-items: center;
-//     display: block;
-//     position: fixed;
-//     top: 50%;
-//     left: 50%;
-//     margin-top: -80px;
-//     margin-left: -50px;
-//     // opacity: 0.6;
-//     // padding-left: 20%;
-//     // width: 100%;
-//   }
-// `;
 
 export default Decks;
