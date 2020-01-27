@@ -1,11 +1,11 @@
 // Import
 
 // Libraries
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { withFormik } from 'formik';
 import { connect } from 'react-redux';
 import * as yup from 'yup';
-import { SquareLoader } from 'react-spinners';
+// import { SquareLoader } from 'react-spinners';
 
 // Styles
 import { Text, H3 } from '../../../../styles/typography';
@@ -14,7 +14,7 @@ import * as c from '../../../../styles/variables/colours';
 import { Forms, Input, Label } from '../../../../styles/forms';
 
 // Actions
-import { userSignUp } from '../../../../modules/user/userActions';
+import { manageAccount } from '../../../../modules/user/userActions';
 
 const PasswordManagementForm = props => {
   const {
@@ -24,24 +24,30 @@ const PasswordManagementForm = props => {
     handleSubmit,
     touched,
     errors,
-    user,
   } = props;
-  const [response, setResponse] = useState(null);
-  useEffect(() => {
-    if (user.completed) {
-      setResponse(
-        <H3 color={c.SUCCESS_COLOR}>
-          Successfully created an account, please wait to be redirected
-        </H3>,
-      );
-    }
-    if (user.errors) {
-      setResponse(<H3 color={c.DANGER_COLOR}>User already exists</H3>);
-    }
-  }, [user.errors, user.completed]);
+
+  // const [response, setResponse] = useState(null);
+
+  // useEffect(() => {
+  //   if () {
+  //     setResponse(
+  //       <H3 color={c.SUCCESS_COLOR}>
+  //         Account update successfully
+  //       </H3>,
+  //     );
+  //   }
+  //   if (user.errors) {
+  //     setResponse(
+  //   <H3 color={c.DANGER_COLOR}>
+  //      Error while upadting account
+  //   </H3 >
+  // );
+  //   }
+  // }, []);
+
   return (
     <Forms onSubmit={handleSubmit}>
-      {response}
+      {/* {response} */}
 
       <Label>
         <H3>Current Password</H3>
@@ -85,12 +91,12 @@ const PasswordManagementForm = props => {
       <LineButton type="">
         <H3 color={c.DANGER_COLOR}>
           Delete
-          <SquareLoader
+          {/* <SquareLoader
             css={{ marginLeft: '20px' }}
             size={15}
             color="#FFA987"
             loading={user.loading}
-          />
+          /> */}
         </H3>
       </LineButton>
     </Forms>
@@ -98,7 +104,7 @@ const PasswordManagementForm = props => {
 };
 
 const validationSchema = yup.object().shape({
-  currentPassword: yup.string().required('Please provide a password'),
+  currentPassword: yup.string().required('Please provide your password'),
 
   password2: yup
     .string()
@@ -106,13 +112,13 @@ const validationSchema = yup.object().shape({
     .oneOf([yup.ref('password'), null], 'Passwords must match'),
 });
 
-const RegisterForm = withFormik({
+const AMForm = withFormik({
   mapPropsToValues: () => ({
     password: '',
     password2: '',
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
-    props.userSignUp(
+    props.manageAccount(
       {
         password: values.password,
       },
@@ -128,4 +134,4 @@ const mapStateToProps = state => {
     user: state.user,
   };
 };
-export default connect(mapStateToProps, { userSignUp })(RegisterForm);
+export default connect(mapStateToProps, { manageAccount })(AMForm);
