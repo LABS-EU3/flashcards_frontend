@@ -57,6 +57,7 @@ export const UpperCardSection = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
+
 // export const SessionContainer = styled.div`
 export const LeftBottomContainer = styled.div`
   align-self: flex-start;
@@ -73,6 +74,7 @@ export const RightBottomContainer = styled.div`
     align-self: unset;
   }
 `;
+
 export const InnerContainer = styled.div`
   margin: 30px auto;
 `;
@@ -110,6 +112,7 @@ const HideDiv1 = styled(InnerContainer).attrs({
     }
   }
 `;
+
 const HideDiv2 = styled(InnerContainer).attrs({
   className: 'mobileDiv2',
 })`
@@ -120,16 +123,8 @@ const HideDiv2 = styled(InnerContainer).attrs({
   }
 `;
 
-// const RBCONTAINER = styled(RightBottomContainer).attrs({
-//   className: 'rbContainer',
-// })`
-//   &.rbContainer {
-//     /* align-self: flex-start; */
-//   }
-// `;
 export default function Settings() {
   const { credentials } = useSelector(state => state.user);
-  console.log('ccc', credentials.full_name);
   const logoutUser = useAction(action.logoutUser);
   const history = useHistory();
   const onLogout = e => {
@@ -155,32 +150,9 @@ export default function Settings() {
     setOpen4(!open4);
   };
 
-  // const mql = window.matchMedia(`(max-width: 768px)`);
-  // let resizeTimeout;
-  // window.addEventListener('resize', function() {
-  //   clearTimeout(resizeTimeout);
-  //   resizeTimeout = setTimeout(function() {
-  //     window.location.reload();
-  //   }, 1500);
-  // });
-
-  // useEffect(() => {
-  //   /* eslint-disable-next-line no-unused-expressions */
-  //   !mql.matches ? setOpen1(!open1) : setOpen1(open1);
-  //   /* eslint-disable-next-line no-unused-expressions */
-  //   !mql.matches ? setOpen2(!open2) : setOpen2(open2);
-  // }, [mql.matches]);
   return (
-    // <div>
-    //   <h1>Settings</h1>
-    //   <NavLink to="/login" onClick={onLogout}>
-    //     Logout
-    //   </NavLink>
-    // </div>
     <Wrapper>
       <TopContainer>
-        {/* <h1>Settings</h1>
-         */}
         <ProfileImageDiv>
           <RoundedImage
             // eslint-disable-next-line max-len
@@ -216,6 +188,7 @@ export default function Settings() {
             <MyHR />
             {open1 && <ProfileManagementForm />}
           </InnerContainer>
+
           <InnerContainer className="mobileDiv2">
             <HideDiv2>
               <UpperCardSection>
@@ -235,6 +208,7 @@ export default function Settings() {
               {open3 && <PasswordManagementForm />}
             </HideDiv2>
           </InnerContainer>
+
           <InnerContainer>
             <UpperCardSection>
               <H1 fontSize="2em" lineHeight="1em">
@@ -256,13 +230,6 @@ export default function Settings() {
             <H2 fontSize="2.5em" color="red">
               Delete Account
             </H2>
-            {/* <UpperCardSection>
-              <H2 fontSize="2em" lineHeight="1em">
-                Version
-              </H2>
-              <P>Beta 0.3.0</P>
-            </UpperCardSection> */}
-            {/* <H2 color="#3399FF">Help Center</H2> */}
             <HideDiv1>
               <LogoutButton>
                 <StyledLink to="/login" onClick={onLogout}>
@@ -306,6 +273,7 @@ export default function Settings() {
             </H2>
             {open4 && <HelpCenterForm />}
           </InnerContainer>
+
           <InnerContainer className="mobileDiv2">
             <HideDiv2>
               <LogoutButton>
