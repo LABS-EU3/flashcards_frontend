@@ -155,3 +155,12 @@ export const googleAuthorized = (token, history) => dispatch => {
       });
     });
 };
+
+/* eslint-disable-next-line no-unused-vars */
+export const manageProfile = () => dispatch => {};
+/* eslint-disable-next-line no-unused-vars */
+export const manageAccount = () => dispatch => {};
+/* eslint-disable-next-line no-unused-vars */
+export const managePassword = () => dispatch => {};
+/* eslint-disable-next-line no-unused-vars */
+export const submitHelpCenterMsg = () => dispatch => {};
