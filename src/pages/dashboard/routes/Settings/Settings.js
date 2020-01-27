@@ -68,6 +68,10 @@ export const LeftBottomContainer = styled.div`
 export const RightBottomContainer = styled.div`
   margin: 10px 10px 10px 20px;
   width: 100%;
+  align-self: flex-start;
+  @media (max-width: 768px) {
+    align-self: unset;
+  }
 `;
 export const InnerContainer = styled.div`
   margin: 30px auto;
@@ -97,7 +101,16 @@ const StyledLink = styled(NavLink)`
   text-decoration: none;
 `;
 
-const HideDiv = styled(InnerContainer).attrs({
+const HideDiv1 = styled(InnerContainer).attrs({
+  className: 'mobileDiv1',
+})`
+  &.mobileDiv1 {
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+`;
+const HideDiv2 = styled(InnerContainer).attrs({
   className: 'mobileDiv2',
 })`
   &.mobileDiv2 {
@@ -106,6 +119,14 @@ const HideDiv = styled(InnerContainer).attrs({
     }
   }
 `;
+
+// const RBCONTAINER = styled(RightBottomContainer).attrs({
+//   className: 'rbContainer',
+// })`
+//   &.rbContainer {
+//     /* align-self: flex-start; */
+//   }
+// `;
 export default function Settings() {
   const { credentials } = useSelector(state => state.user);
   console.log('ccc', credentials.full_name);
@@ -208,22 +229,24 @@ export default function Settings() {
             <MyHR />
             {open2 && <AccountManagementForm />}
           </InnerContainer>
-          <InnerContainer>
+          <InnerContainer className="mobileDiv1">
             <H2 fontSize="3em" color="red">
               Delete Account
             </H2>
-            <UpperCardSection>
+            {/* <UpperCardSection>
               <H2 fontSize="2em" lineHeight="1em">
                 Version
               </H2>
               <P>Beta 0.3.0</P>
-            </UpperCardSection>
-            <H2 color="#3399FF">Help Center</H2>
-            <LogoutButton>
-              <StyledLink to="/login" onClick={onLogout}>
-                <H3 color="#444140">Log Out</H3>
-              </StyledLink>
-            </LogoutButton>
+            </UpperCardSection> */}
+            {/* <H2 color="#3399FF">Help Center</H2> */}
+            <HideDiv1>
+              <LogoutButton>
+                <StyledLink to="/login" onClick={onLogout}>
+                  <H3 color="#444140">Log Out</H3>
+                </StyledLink>
+              </LogoutButton>
+            </HideDiv1>
           </InnerContainer>
         </LeftBottomContainer>
 
@@ -245,6 +268,7 @@ export default function Settings() {
             <MyHR />
             {open3 && <PasswordManagementForm />}
           </InnerContainer>
+
           <InnerContainer>
             <UpperCardSection>
               <H2 fontSize="2em" lineHeight="1em">
@@ -255,13 +279,13 @@ export default function Settings() {
             <HelpCenterForm />
           </InnerContainer>
           <InnerContainer className="mobileDiv2">
-            <HideDiv>
+            <HideDiv2>
               <LogoutButton>
                 <StyledLink to="/login" onClick={onLogout}>
                   <H3 color="#444140">Log Out</H3>
                 </StyledLink>
               </LogoutButton>
-            </HideDiv>
+            </HideDiv2>
           </InnerContainer>
         </RightBottomContainer>
       </BottomContainer>
