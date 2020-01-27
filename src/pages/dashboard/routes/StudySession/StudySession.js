@@ -31,11 +31,11 @@ export const TopCompDiv = styled.div`
   margin: 30px auto;
 `;
 
-// export const EmojisCompDiv = styled.div`
-//   display: flex;
-//   align-items: center;
-//   justify-content: space-around;
-// `;
+export const EmojisCompDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+`;
 
 export const CardContainer = styled.div`
   /* display: flex; */
@@ -114,8 +114,12 @@ export default function CarouselComponent() {
           </Carousel>
           ;
         </CardContainer>
-        {/* </Carousel> */}
-        uheveihebiuorbiuoo
+
+        <EmojisCompDiv>
+          <span class="emoji">&#129303;</span>
+          <span class="emoji">&#128531;</span>
+          <span class="emoji">&#128557;</span>
+        </EmojisCompDiv>
       </TopCompDiv>
     </Container>
   );
