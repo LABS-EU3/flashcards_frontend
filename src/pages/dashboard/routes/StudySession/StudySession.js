@@ -1,6 +1,7 @@
 import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { Line } from 'rc-progress';
 
 import styled from 'styled-components';
 import { H2, P } from '../../../../styles/typography';
@@ -78,26 +79,21 @@ export const Card = styled.div`
   }
 `;
 
+export const MLower = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* justify-content: space-between; */
+  width: 90%;
+  margin: 5% auto auto auto;
+`;
+
 export default function CarouselComponent() {
   /* eslint-disable */
   return (
     <Container>
       <TopCompDiv>
-        <h3>Carousel in React</h3>
-        {/* <Carousel showThumbs={false} swipeable> */}
-        {/* <div
-          onClick={() => {
-            console.log('yeeeeeeaahhh');
-          }}
-        >
-          <img src="https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/HA1RQCRQJ7.jpg" />
-        </div>
-        <div>
-          <img src="https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/HA1RQCRQJ7.jpg" />
-        </div>
-        <div>
-          <img src="https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/HA1RQCRQJ7.jpg" />
-        </div> */}
         <CardContainer>
           <Carousel showThumbs={false} swipeable>
             {dummyData.map((data, index) => {
@@ -112,14 +108,26 @@ export default function CarouselComponent() {
               );
             })}
           </Carousel>
-          ;
         </CardContainer>
-
         <EmojisCompDiv>
           <span class="emoji">&#129303;</span>
           <span class="emoji">&#128531;</span>
           <span class="emoji">&#128557;</span>
         </EmojisCompDiv>
+
+        <MLower>
+          <H2>Organic Compounds</H2>
+          <Line
+            percent={50}
+            strokeLineColor="red"
+            strokeWidth="4"
+            trailWidth="4"
+            trailColor="#fafafa"
+            strokeColor="#FFA987"
+            className="pBar2"
+          />
+          <H2>15/30 Cards</H2>
+        </MLower>
       </TopCompDiv>
     </Container>
   );
