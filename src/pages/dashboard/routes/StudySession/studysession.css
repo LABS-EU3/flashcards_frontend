@@ -1,4 +1,4 @@
-.carousel .slide {
+/* .carousel .slide {
   background: none;
 }
 
@@ -8,12 +8,31 @@
 
 .carousel .slider-wrapper.axis-horizontal .slider .slide {
   background: none;
-}
+} */
 
-.XYFHd {
+/* .XYFHd {
   background: none;
+} */
+
+.carousel .control-next.control-arrow:before {
+  border-right: 8px solid #fff;
+  border: solid red;
+  border-width: 0 7px 7px 0;
+  display: inline-block;
+  padding: 15px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
 }
 
+.carousel .control-prev.control-arrow:before {
+  border-right: 8px solid #fff;
+  border: solid red;
+  border-width: 0 7px 7px 0;
+  display: inline-block;
+  padding: 15px;
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
 .emoji {
   font-size: 40px;
 }
@@ -26,4 +45,72 @@
   border-radius: 10px;
   margin-top: 2%;
   margin-bottom: 1.2%;
+}
+
+/* @import url(https://fonts.googleapis.com/css?family=Open+Sans); */
+/* body {
+  background: #f17563;
+  font-family: Open Sans;
+  font-size: 50px;
+  color: #222;
+} */
+label {
+  font-size: 50px;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  display: block;
+  width: 400px;
+  height: 400px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+.card {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transition: all 600ms;
+  transition: all 600ms;
+  z-index: 20;
+}
+.card div {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #fff;
+  text-align: center;
+  line-height: 200px;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 2px;
+}
+.card .back {
+  background: #222;
+  color: #fff;
+  -webkit-transform: rotateX(180deg);
+  transform: rotateX(180deg);
+}
+label:hover .card {
+  -webkit-transform: rotateX(20deg);
+  transform: rotateX(20deg);
+  box-shadow: 0 20px 20px rgba(50, 50, 50, 0.2);
+}
+input {
+  display: none;
+}
+:checked + .card {
+  transform: rotateX(180deg);
+  -webkit-transform: rotateX(180deg);
+}
+label:hover :checked + .card {
+  transform: rotateX(160deg);
+  -webkit-transform: rotateX(160deg);
+  box-shadow: 0 20px 20px rgba(255, 255, 255, 0.2);
 }
