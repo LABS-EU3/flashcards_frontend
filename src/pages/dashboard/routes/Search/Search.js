@@ -5,18 +5,23 @@ import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 
 // Styles
-import { HR, H5 } from '../../../../styles/typography';
+import { H5 } from '../../../../styles/typography';
 import { BackArrowButton } from '../../../../styles/buttons';
 
 // Actions
 import { CLEAR_RESPONSES } from '../../../../modules/user/userTypes';
 
+import { dummyData } from './dummyData';
+
 // Assets
 import BackArrow from '../../../../assets/icons/Arrow 1.svg';
+import TopSearch from './components/TopSearch';
+import SearchResults from './components/SearchResults';
 
 export default function Search() {
   const history = useHistory();
   const dispatch = useDispatch();
+  const decks = dummyData;
   return (
     <div>
       <BackArrowButton
@@ -28,8 +33,8 @@ export default function Search() {
         <img src={`${BackArrow}`} alt="back arrow" />
         <H5>Back</H5>
       </BackArrowButton>
-      <HR />
-      <h1>Search</h1>
+      <TopSearch />
+      <SearchResults decks={decks} dispatch={dispatch} />
     </div>
   );
 }

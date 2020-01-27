@@ -1,5 +1,5 @@
 import * as types from './dashboardTypes';
-import deckTags from '../../utils/deckTags';
+import { deckTags } from '../../utils/deckTags';
 
 const initialState = {
   loading: false,
