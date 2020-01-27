@@ -4,6 +4,7 @@ import { MdDelete, MdEdit } from 'react-icons/md';
 import styled from 'styled-components';
 import { H1, HR, H2, P } from '../../../../../styles/typography';
 import { CardsFlex } from '../../../../../components/cards/Cards';
+// import * as g from '../../../../../styles/variables/global';
 
 import {
   Collection,
@@ -150,11 +151,24 @@ const DisplayCardFlex = styled.div`
 
 const Image = styled.img`
   height: 100px;
+  max-width: 100%;
+  overflow: hidden;
 
-  // &:hover {
-  //   transform: scale(2);
-  //   // width: 50%;
-  // }
+  &:hover {
+    transform: scale(6);
+    overflow: hidden;
+    max-width: 120px;
+    align-items: center;
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -80px;
+    margin-left: -50px;
+    // opacity: 0.6;
+    // padding-left: 20%;
+    // width: 100%;
+  }
 `;
 
 export default Decks;
