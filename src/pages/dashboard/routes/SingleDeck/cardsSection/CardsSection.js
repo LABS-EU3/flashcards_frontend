@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import styled from 'styled-components';
+import Lightbox from 'react-image-lightbox';
 import { H1, HR, H2, P } from '../../../../../styles/typography';
 import { CardsFlex } from '../../../../../components/cards/Cards';
 // import * as g from '../../../../../styles/variables/global';
+import 'react-image-lightbox/style.css';
 
 import {
   Collection,
@@ -57,12 +59,27 @@ const Decks = ({ cards, deleteCard, showingAllAnswers }) => {
 const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
   const [isShowingSingleAnswer, setIsShowingSingleAnswer] = useState(false);
   // const [image, setImage] = useState('');
+  const [open, setOpen] = useState(false);
+  const [imagePop, setImagePop] = useState('');
+  // const [answerImage, setAnswerImage] = useState('');
   const dispatch = useDispatch();
   const toggleSingleAnswer = () => {
     if (showingAllAnswers) {
       dispatch({ type: types.TOGGLE_ANSWERS, payload: false });
       setIsShowingSingleAnswer(false);
     } else setIsShowingSingleAnswer(!isShowingSingleAnswer);
+  };
+  const toggleImage = () => {
+    setOpen(true);
+    if (card.image_url_question) {
+      setImagePop(card.image_url_question);
+    } else {
+      setImagePop(card.image_url_answer);
+    }
+  };
+
+  const toggleClose = () => {
+    setOpen(false);
   };
   // const handleShowingImage = () => {
   //   setImage(card.image_url_question);
@@ -78,19 +95,41 @@ const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
       <DisplayCardFlex>
         <TextDiv>
           <H2 BOLD>{card.question}</H2>
-          {card.image_url_question ? (
-            <Image src={card.image_url_question} alt="question" />
+          {card.image_url_question || card.image_url_answer ? (
+            <div>
+              <button type="button" onClick={() => toggleImage()}>
+                View image
+              </button>
+              {open && (
+                <Lightbox
+                  mainSrc={imagePop}
+                  onCloseRequest={() => toggleClose()}
+                />
+              )}
+            </div>
           ) : (
+            // <Image src={card.image_url_question} alt="question" />
             <p />
           )}
+          {/* {card.image_url_answer ? (
+                  <div>
+              <button type="button" onClick={() => toggleImage()}>
+                View Image Answer
+              </button>
+              {open && (
+                <Lightbox
+                  mainSrc={answerImage}
+                  onCloseRequest={() => toggleClose()}
+                />
+              )}
+            </div>
+                // <Image src={card.image_url_answer} alt="answer" />
+              ) : (
+                <p />
+              )} */}
           {showingAllAnswers || isShowingSingleAnswer ? (
             <div>
               <P>{card.answer}</P>
-              {card.image_url_answer ? (
-                <Image src={card.image_url_answer} alt="answer" />
-              ) : (
-                <p />
-              )}
             </div>
           ) : (
             <P>####</P>
@@ -149,26 +188,26 @@ const DisplayCardFlex = styled.div`
   width: 100%;
 `;
 
-const Image = styled.img`
-  height: 100px;
-  max-width: 100%;
-  overflow: hidden;
+// const Image = styled.img`
+//   height: 100px;
+//   max-width: 100%;
+//   overflow: hidden;
 
-  &:hover {
-    transform: scale(6);
-    overflow: hidden;
-    max-width: 120px;
-    align-items: center;
-    display: block;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    margin-top: -80px;
-    margin-left: -50px;
-    // opacity: 0.6;
-    // padding-left: 20%;
-    // width: 100%;
-  }
-`;
+//   &:hover {
+//     transform: scale(6);
+//     overflow: hidden;
+//     max-width: 120px;
+//     align-items: center;
+//     display: block;
+//     position: fixed;
+//     top: 50%;
+//     left: 50%;
+//     margin-top: -80px;
+//     margin-left: -50px;
+//     // opacity: 0.6;
+//     // padding-left: 20%;
+//     // width: 100%;
+//   }
+// `;
 
 export default Decks;
