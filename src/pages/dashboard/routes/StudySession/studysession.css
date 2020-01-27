@@ -17,3 +17,13 @@
 .emoji {
   font-size: 40px;
 }
+
+.pBar2 {
+  display: flex;
+  width: 75%;
+  height: 12px;
+  border: 2px solid #8d99ae;
+  border-radius: 10px;
+  margin-top: 2%;
+  margin-bottom: 1.2%;
+}
