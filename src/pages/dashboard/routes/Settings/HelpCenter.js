@@ -1,22 +1,22 @@
 // Import
 
 // Libraries
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { withFormik } from 'formik';
 import { connect } from 'react-redux';
 import * as yup from 'yup';
-import { SquareLoader } from 'react-spinners';
+// import { SquareLoader } from 'react-spinners';
 
 // Styles
-import { Text, H3, H2 } from '../../../../styles/typography';
+import { Text, H3 } from '../../../../styles/typography';
 import { Button2 } from '../../../../styles/buttons';
 import * as c from '../../../../styles/variables/colours';
 import { Forms, Label, TextArea } from '../../../../styles/forms';
 
 // Actions
-import { userSignUp } from '../../../../modules/user/userActions';
+import { submitHelpCenterMsg } from '../../../../modules/user/userActions';
 
-const PasswordManagementForm = props => {
+const HelpCenterForm = props => {
   const {
     values,
     handleChange,
@@ -24,32 +24,33 @@ const PasswordManagementForm = props => {
     handleSubmit,
     touched,
     errors,
-    user,
   } = props;
-  const [response, setResponse] = useState(null);
-  useEffect(() => {
-    if (user.completed) {
-      setResponse(
-        <H3 color={c.SUCCESS_COLOR}>
-          Successfully created an account, please wait to be redirected
-        </H3>,
-      );
-    }
-    if (user.errors) {
-      setResponse(<H3 color={c.DANGER_COLOR}>User already exists</H3>);
-    }
-  }, [user.errors, user.completed]);
+
+  // const [response, setResponse] = useState(null);
+
+  // useEffect(() => {
+  //   if () {
+  //     setResponse(
+  //       <H3 color={c.SUCCESS_COLOR}>
+  //         Message sent successfully
+  //       </H3>,
+  //     );
+  //   }
+  //   if (user.errors) {
+  //     setResponse(<H3 color={c.DANGER_COLOR}>Error Sending message</H3>);
+  //   }
+  // }, []);
+
   return (
     <Forms onSubmit={handleSubmit}>
-      {response}
+      {/* {response} */}
 
       <Label>
         {/* <H2 color="#3399FF">Help Center</H2> */}
-        {touched.password && errors.password && (
-          <Text color={c.DANGER_COLOR}>{errors.password}</Text>
+        {touched.helpCenter && errors.helpCenter && (
+          <Text color={c.DANGER_COLOR}>{errors.helpCenter}</Text>
         )}
         <TextArea
-          //   type="textfield"
           name="helpCenter"
           placeholder="Let us know how we can help or improve"
           value={values.helpCenter}
@@ -58,23 +59,18 @@ const PasswordManagementForm = props => {
           autoFocus
           onBlur={handleBlur}
           onChange={handleChange}
-          //   //   border={
-          //     touched.currentPassword &&
-          //     errors.currentPassword &&
-          //     `2px solid ${c.DANGER_COLOR}`
-          //   }
         />
       </Label>
 
       <Button2 type="">
         <H3 color={c.DARK_GRAY}>
           Submit
-          <SquareLoader
+          {/* <SquareLoader
             css={{ marginLeft: '20px' }}
             size={15}
             color="#FFA987"
             loading={user.loading}
-          />
+          /> */}
         </H3>
       </Button2>
     </Forms>
@@ -82,34 +78,28 @@ const PasswordManagementForm = props => {
 };
 
 const validationSchema = yup.object().shape({
-  currentPassword: yup.string().required('Please provide a password'),
-
-  password2: yup
-    .string()
-    .required("Passwords don't match")
-    .oneOf([yup.ref('password'), null], 'Passwords must match'),
+  helpCenter: yup.string().required('Can not send empty mail'),
 });
 
-const RegisterForm = withFormik({
+const HCForm = withFormik({
   mapPropsToValues: () => ({
-    password: '',
-    password2: '',
+    helpCenter: '',
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
-    props.userSignUp(
+    props.submitHelpCenterMsg(
       {
-        password: values.password,
+        helpCenter: values.helpCenter,
       },
       props.history,
     );
     setSubmitting(false);
   },
   validationSchema,
-})(PasswordManagementForm);
+})(HelpCenterForm);
 
 const mapStateToProps = state => {
   return {
     user: state.user,
   };
 };
-export default connect(mapStateToProps, { userSignUp })(RegisterForm);
+export default connect(mapStateToProps, { submitHelpCenterMsg })(HCForm);
