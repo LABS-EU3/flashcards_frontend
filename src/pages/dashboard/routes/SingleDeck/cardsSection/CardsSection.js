@@ -55,6 +55,7 @@ const Decks = ({ cards, deleteCard, showingAllAnswers }) => {
 
 const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
   const [isShowingSingleAnswer, setIsShowingSingleAnswer] = useState(false);
+  // const [image, setImage] = useState('');
   const dispatch = useDispatch();
   const toggleSingleAnswer = () => {
     if (showingAllAnswers) {
@@ -62,6 +63,9 @@ const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
       setIsShowingSingleAnswer(false);
     } else setIsShowingSingleAnswer(!isShowingSingleAnswer);
   };
+  // const handleShowingImage = () => {
+  //   setImage(card.image_url_question);
+  // };
   return (
     <CardsFlex
       onClick={toggleSingleAnswer}
@@ -73,8 +77,20 @@ const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
       <DisplayCardFlex>
         <TextDiv>
           <H2 BOLD>{card.question}</H2>
+          {card.image_url_question ? (
+            <Image src={card.image_url_question} alt="question" />
+          ) : (
+            <p />
+          )}
           {showingAllAnswers || isShowingSingleAnswer ? (
-            <P>{card.answer}</P>
+            <div>
+              <P>{card.answer}</P>
+              {card.image_url_answer ? (
+                <Image src={card.image_url_answer} alt="answer" />
+              ) : (
+                <p />
+              )}
+            </div>
           ) : (
             <P>####</P>
           )}
@@ -98,6 +114,14 @@ const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
               <MdEdit />
             </H2>
           </IconWithoutText>
+          {/* <button
+            type="button"
+            onClick={() => {
+              handleShowingImage();
+            }}
+          >
+            Show image
+          </button> */}
         </CardsActions>
       </DisplayCardFlex>
     </CardsFlex>
@@ -122,6 +146,15 @@ const DisplayCardFlex = styled.div`
   display: flex;
   height: 100%;
   width: 100%;
+`;
+
+const Image = styled.img`
+  height: 100px;
+
+  // &:hover {
+  //   transform: scale(2);
+  //   // width: 50%;
+  // }
 `;
 
 export default Decks;
