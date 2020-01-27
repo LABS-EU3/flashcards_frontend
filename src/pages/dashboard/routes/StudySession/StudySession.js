@@ -25,9 +25,19 @@ export const Container = styled.div`
   background: white;
   width: 100%;
   height: 100%;
+  /* margin: 0 auto; */
 `;
 
 export const TopCompDiv = styled.div`
+  display: flex;
+  text-align: center;
+  margin: 30px auto;
+`;
+export const BottomCompDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
   text-align: center;
   margin: 30px auto;
 `;
@@ -45,11 +55,11 @@ export const CardContainer = styled.div`
   justify-content: center;
   width: 70%;
   margin: 2.5% auto;
-  padding-top: 1%;
+  /* padding-top: 1%;
   padding-bottom: 5%;
-  background: #ffffff;
-  border: 1px solid #f6f1f0;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.02);
+  background: #ffffff; */
+  /* border: 1px solid #f6f1f0;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.02); */
 
   @media (max-width: 840px) {
     width: 80%;
@@ -61,21 +71,25 @@ export const Card = styled.div`
   align-items: center;
   justify-content: space-around;
   width: 400px;
-  height: 400px;
-  margin-top: 2%;
+  height: 300px;
+  /* margin-top: 2%; */
+  margin: 2% auto 0 auto;
   background: #ffffff;
   border: 1px solid #f6f1f0;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.02);
   text-align: center;
 
-  &:first-child {
+  /* &:first-child {
     background: rgba(255, 169, 135, 0.5);
-  }
+  } */
   @media (min-width: 2000px) {
     width: 600px;
   }
   @media (max-width: 1050px) {
     width: 278px;
+  }
+  @media (max-width: 840px) {
+    width: 90%;
   }
 `;
 
@@ -95,7 +109,12 @@ export default function CarouselComponent() {
     <Container>
       <TopCompDiv>
         <CardContainer>
-          <Carousel showThumbs={false} swipeable>
+          <Carousel
+            showThumbs={false}
+            swipeable
+            // centerMode
+            // centerSlidePercentage={1}
+          >
             {dummyData.map((data, index) => {
               return (
                 <Card key={`${data.id}`}>
@@ -109,6 +128,9 @@ export default function CarouselComponent() {
             })}
           </Carousel>
         </CardContainer>
+      </TopCompDiv>
+
+      <BottomCompDiv>
         <EmojisCompDiv>
           <span class="emoji">&#129303;</span>
           <span class="emoji">&#128531;</span>
@@ -128,7 +150,7 @@ export default function CarouselComponent() {
           />
           <H2>15/30 Cards</H2>
         </MLower>
-      </TopCompDiv>
+      </BottomCompDiv>
     </Container>
   );
 }
