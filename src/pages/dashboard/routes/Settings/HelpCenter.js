@@ -44,7 +44,7 @@ const PasswordManagementForm = props => {
       {response}
 
       <Label>
-        <H2 color="#3399FF">Help Center</H2>
+        {/* <H2 color="#3399FF">Help Center</H2> */}
         {touched.password && errors.password && (
           <Text color={c.DANGER_COLOR}>{errors.password}</Text>
         )}

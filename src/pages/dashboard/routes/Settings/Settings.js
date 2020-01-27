@@ -140,6 +140,7 @@ export default function Settings() {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
+  const [open4, setOpen4] = useState(false);
 
   const handleButtonClick1 = () => {
     setOpen1(!open1);
@@ -150,22 +151,25 @@ export default function Settings() {
   const handleButtonClick3 = () => {
     setOpen3(!open3);
   };
+  const handleButtonClick4 = () => {
+    setOpen4(!open4);
+  };
 
-  const mql = window.matchMedia(`(max-width: 768px)`);
-  let resizeTimeout;
-  window.addEventListener('resize', function() {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(function() {
-      window.location.reload();
-    }, 1500);
-  });
+  // const mql = window.matchMedia(`(max-width: 768px)`);
+  // let resizeTimeout;
+  // window.addEventListener('resize', function() {
+  //   clearTimeout(resizeTimeout);
+  //   resizeTimeout = setTimeout(function() {
+  //     window.location.reload();
+  //   }, 1500);
+  // });
 
-  useEffect(() => {
-    /* eslint-disable-next-line no-unused-expressions */
-    !mql.matches ? setOpen1(!open1) : setOpen1(open1);
-    /* eslint-disable-next-line no-unused-expressions */
-    !mql.matches ? setOpen2(!open2) : setOpen2(open2);
-  }, [mql.matches]);
+  // useEffect(() => {
+  //   /* eslint-disable-next-line no-unused-expressions */
+  //   !mql.matches ? setOpen1(!open1) : setOpen1(open1);
+  //   /* eslint-disable-next-line no-unused-expressions */
+  //   !mql.matches ? setOpen2(!open2) : setOpen2(open2);
+  // }, [mql.matches]);
   return (
     // <div>
     //   <h1>Settings</h1>
@@ -212,6 +216,25 @@ export default function Settings() {
             <MyHR />
             {open1 && <ProfileManagementForm />}
           </InnerContainer>
+          <InnerContainer className="mobileDiv2">
+            <HideDiv2>
+              <UpperCardSection>
+                <H1 fontSize="2em" lineHeight="0em">
+                  Password Management
+                </H1>
+                <IconButtonWrapper rotate={open3} onClick={handleButtonClick3}>
+                  <MdKeyboardArrowDown
+                    size="3.5em"
+                    color="grey"
+                    onClick={handleButtonClick3}
+                    className="material-icons"
+                  />
+                </IconButtonWrapper>
+              </UpperCardSection>
+              <MyHR />
+              {open3 && <PasswordManagementForm />}
+            </HideDiv2>
+          </InnerContainer>
           <InnerContainer>
             <UpperCardSection>
               <H1 fontSize="2em" lineHeight="1em">
@@ -230,7 +253,7 @@ export default function Settings() {
             {open2 && <AccountManagementForm />}
           </InnerContainer>
           <InnerContainer className="mobileDiv1">
-            <H2 fontSize="3em" color="red">
+            <H2 fontSize="2.5em" color="red">
               Delete Account
             </H2>
             {/* <UpperCardSection>
@@ -251,22 +274,24 @@ export default function Settings() {
         </LeftBottomContainer>
 
         <RightBottomContainer>
-          <InnerContainer>
-            <UpperCardSection>
-              <H1 fontSize="2em" lineHeight="0em">
-                Password Management
-              </H1>
-              <IconButtonWrapper rotate={open3} onClick={handleButtonClick3}>
-                <MdKeyboardArrowDown
-                  size="3.5em"
-                  color="grey"
-                  onClick={handleButtonClick3}
-                  className="material-icons"
-                />
-              </IconButtonWrapper>
-            </UpperCardSection>
-            <MyHR />
-            {open3 && <PasswordManagementForm />}
+          <InnerContainer className="mobileDiv1">
+            <HideDiv1>
+              <UpperCardSection>
+                <H1 fontSize="2em" lineHeight="0em">
+                  Password Management
+                </H1>
+                <IconButtonWrapper rotate={open3} onClick={handleButtonClick3}>
+                  <MdKeyboardArrowDown
+                    size="3.5em"
+                    color="grey"
+                    onClick={handleButtonClick3}
+                    className="material-icons"
+                  />
+                </IconButtonWrapper>
+              </UpperCardSection>
+              <MyHR />
+              {open3 && <PasswordManagementForm />}
+            </HideDiv1>
           </InnerContainer>
 
           <InnerContainer>
@@ -276,7 +301,10 @@ export default function Settings() {
               </H2>
               <P>Beta 0.3.0</P>
             </UpperCardSection>
-            <HelpCenterForm />
+            <H2 color="#3399FF" onClick={handleButtonClick4}>
+              Help Center
+            </H2>
+            {open4 && <HelpCenterForm />}
           </InnerContainer>
           <InnerContainer className="mobileDiv2">
             <HideDiv2>
