@@ -113,7 +113,7 @@ const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
                 onClick={() => toggleImageQuestion(true)}
               >
                 {' '}
-                View Question image
+                Question Image
               </Button>
               {isOpen && (
                 <Lightbox
@@ -129,7 +129,7 @@ const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
                 onClick={() => toggleImageAnswer(true)}
               >
                 {' '}
-                View Answer image
+                Answer Image
               </Button>
               {isOpen && (
                 <Lightbox
