@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import img from '../assets/images/rectangle_20.png';
+import img from '../assets/Vector.png';
 import * as g from './variables/global';
 
 import { BRAND_FONT } from './variables/fonts';
+import { LIGHT_NEUTRAL_COLOR } from './variables/colours';
 
 export const SidebarBody = styled.div`
   display: flex;
@@ -28,16 +29,21 @@ export const Image = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background: ${LIGHT_NEUTRAL_COLOR};
   background-image: url(${img});
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
   max-height: 50%;
-  min-height: 35vh;
-  margin-top: -1em;
+  min-height: 30vh;
   h1 {
     text-align: center;
   }
+  -webkit-transform: skewY(-16.27deg);
+  -moz-transform: skewY(-16.27deg);
+  -ms-transform: skewY(-16.27deg);
+  -o-transform: skewY(-16.27deg);
+  transform: skewY(-16.27deg);
 `;
 
 export const CardsStyled = styled.div`
@@ -71,4 +77,51 @@ export const IconButtonWrapper = styled.div`
 
 export const ViewedCardsStyled = styled(CardsStyled)`
   margin-top: 0em;
+`;
+export const MiddleHolder = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  -webkit-transform: skewY(16.27deg);
+  -moz-transform: skewY(16.27deg);
+  -ms-transform: skewY(16.27deg);
+  -o-transform: skewY(16.27deg);
+  transform: skewY(16.27deg);
+  h1 {
+    margin-top: 1em;
+    margin-bottom: -1em;
+  }
+  .pBar2 {
+    display: flex;
+    width: 100%;
+    height: 12px;
+    border: 2px solid #8d99ae;
+    border-radius: 10px;
+  }
+`;
+
+export const BlackContainer = styled.div`
+  background: #000000;
+  width: 100%;
+  max-height: 50%;
+  min-height: 35vh;
+  margin-top: -1em;
+  overflow: hidden;
+  z-index: -1;
+`;
+
+export const XPHolder = styled.div`
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  .xp {
+    align-self: flex-end;
+  }
+`;
+
+export const LevelHolder = styled.div`
+  margin-top: 2.5em;
+  align-self: flex-start;
+  display: flex;
 `;

@@ -2,14 +2,14 @@
 import React, { useState } from 'react';
 import Sidebar from 'react-sidebar';
 import { MdKeyboardArrowDown } from 'react-icons/md';
+import { Line } from 'rc-progress';
 
 // components
 import Card from '../cards/Cards';
 
 // styles
-import { H1, HR } from '../../styles/typography';
+import { H1, HR, H3, P, H2 } from '../../styles/typography';
 import * as g from '../../styles/variables/global';
-
 import {
   SidebarBody,
   Image,
@@ -18,7 +18,13 @@ import {
   SidebarStyled,
   IconButtonWrapper,
   ViewedCardsStyled,
+  MiddleHolder,
+  BlackContainer,
+  XPHolder,
+  LevelHolder,
 } from '../../styles/sidebarStyles';
+
+import levelIcon from '../../assets/icons/label_important_24px_outlined.svg';
 
 const cards = [
   {
@@ -102,9 +108,30 @@ const SideContent = ({ user }) => {
 
   return (
     <SidebarBody>
-      <Image>
-        <H1> Welcome {user.credentials.fullName}!</H1>
-      </Image>
+      <BlackContainer>
+        <Image>
+          <MiddleHolder>
+            <H1>{user.credentials.fullName}!</H1>
+            <H3>Ranked #1</H3>
+            <XPHolder>
+              <Line
+                percent="50"
+                strokeLineColor="red"
+                strokeWidth="4"
+                trailWidth="4"
+                trailColor="#fafafa"
+                strokeColor="#8D99AE"
+                className="pBar2"
+              />
+              <P className="xp">1000/2000 XP</P>
+            </XPHolder>
+            <LevelHolder>
+              <img src={levelIcon} alt="level icon" />
+              <H2>Level 1</H2>
+            </LevelHolder>
+          </MiddleHolder>
+        </Image>
+      </BlackContainer>
       <CardsStyled>
         <StyledStart>
           <H1 BOLD>

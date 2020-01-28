@@ -28,8 +28,7 @@ const CardCount = styled(SLower)`
   justify-content: center;
   align-items: center;
   align-self: flex-end;
-  position: relative;
-  margin-left: 0.5em;
+  float: left;
   .studyIcon {
     visibility: hidden;
   }
