@@ -3,7 +3,7 @@ import React from 'react';
 import Card from '../cards/Cards';
 
 import { MainSection, Content, Tag, Tags } from './styles';
-import { H1, H3, H5 } from '../../styles/typography';
+import { H1, H3, HR, P } from '../../styles/typography';
 
 const months = [
   'January',
@@ -66,6 +66,8 @@ const ProfileMainSection = ({ user }) => {
     <MainSection>
       <Content>
         <H1>About</H1>
+        <HR />
+        <br />
         <H3 REGULAR>
           {/* eslint-disable-next-line camelcase */}
           {full_name} has been a user since {period || `unspecified`}
@@ -74,10 +76,12 @@ const ProfileMainSection = ({ user }) => {
 
       <Content>
         <H1>Favourite Tags</H1>
+        <HR />
+        <br />
         <Tags>
           {tags.map(tag => (
             <Tag key={tag.id}>
-              <H5 REGULAR>{tag.name}</H5>
+              <P>{tag.name}</P>
             </Tag>
           ))}
         </Tags>
@@ -85,6 +89,8 @@ const ProfileMainSection = ({ user }) => {
 
       <Content>
         <H1>Decks</H1>
+        <HR />
+        <br />
         <div>
           {decks.map(deck => (
             <Card

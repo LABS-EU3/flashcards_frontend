@@ -20,9 +20,7 @@ export const Banner = styled.div`
 `;
 
 export const WelcomeMessage = styled.div`
-  h2 {
-    font-size: 24px;
-    color: #444140;
+  h1 {
     position: absolute;
     right: 30px;
     top: 0px;
@@ -30,11 +28,11 @@ export const WelcomeMessage = styled.div`
 `;
 
 export const Image = styled.div`
-  width: 120px;
-  height: 120px;
+  width: 12em;
+  height: 12em;
   position: relative;
-  margin-top: -90px;
-  margin-left: 30px;
+  margin-top: -9em;
+  margin-left: 3em;
 
   img {
     display: inline-block;
@@ -43,13 +41,10 @@ export const Image = styled.div`
     border: 1px solid #444140;
   }
 
-  h2 {
-    font-weight: bold;
-    font-size: 24px;
-    position: absolute;
-    top: 45%;
-    left: 120%;
-    color: #f6f1f0;
+  h1 {
+    position: relative;
+    top: -3.5em;
+    left: 6em;
     white-space: nowrap;
   }
 `;
@@ -67,7 +62,6 @@ export const MainSection = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
   }
-  }
 `;
 
 /* Content */
@@ -77,7 +71,6 @@ export const Content = styled.div`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 2px;
   padding: 1%;
-  font-size: 12px;
 `;
 
 export const Tag = styled.div`
@@ -92,7 +85,6 @@ export const Tags = styled.div`
   padding-left: 0.5em;
   padding-right: 0.5em;
   display: flex;
-  font-size: 1.2em;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-content: space-around;
@@ -100,7 +92,6 @@ export const Tags = styled.div`
 
 export const Card = styled.div`
   display: flex;
-  font-size: 1.5em;
   flex-direction: column;
   align-items: left;
   padding-left: 10px;
