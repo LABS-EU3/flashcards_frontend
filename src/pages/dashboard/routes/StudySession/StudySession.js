@@ -1,8 +1,11 @@
 /* eslint-disable */
 import React from 'react';
+import Ripples from 'react-ripples';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Line } from 'rc-progress';
+
+import StudyCard from '../StudyCard';
 
 import styled from 'styled-components';
 import { H2 } from '../../../../styles/typography';
@@ -94,35 +97,13 @@ export const MLower = styled.div`
 `;
 
 export default function CarouselComponent() {
-  const cards = document.getElementsByClassName('card');
-  function onFocus() {
-    if (cards) {
-      for (let i = 0; i < cards.length; i++) {
-        cards[i].classList.toggle('is-flipped');
-      }
-    }
-  }
-
   return (
     <Container>
       <TopCompDiv>
         <CardContainer>
           <Carousel showThumbs={false} swipeable>
             {dummyData.map((data, index) => {
-              return (
-                <div className="scene">
-                  <div className="card" onClick={onFocus}>
-                    <div className="card__face card__face--front">
-                      front
-                      {index}
-                    </div>
-                    <div className="card__face card__face--back">
-                      back
-                      {index + 1}
-                    </div>
-                  </div>
-                </div>
-              );
+              return <StudyCard key={index} card={data} />;
             })}
           </Carousel>
         </CardContainer>
