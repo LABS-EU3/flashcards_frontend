@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-
+import { MdImage } from 'react-icons/md';
 import { Formik, useField } from 'formik';
 import * as yup from 'yup';
 import { connect } from 'react-redux';
 import LightPopButton from '../buttons/LightPopButton';
-import { H1, Text, H3 } from '../../styles/typography';
+import { H1, Text, H3, H2 } from '../../styles/typography';
 import { Forms, TextArea, FormContainer, CardLabel } from '../../styles/forms';
 import * as c from '../../styles/variables/colours';
 import { GrowSpace } from '../../styles/displayFlex';
@@ -53,7 +53,9 @@ const InputField = ({ title, btnName, setCallback, ...props }) => {
           )
         }
       >
-        Upload Image
+        <H2 className="imageH2">
+          <MdImage />
+        </H2>
       </button>
     </CardLabel>
   );

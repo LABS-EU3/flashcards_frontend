@@ -112,7 +112,19 @@ export const Label = styled.label`
 `;
 
 export const CardLabel = styled(Label)`
-  // padding-top: 35px;
+  .imageH2 {
+    line-height: 0;
+  }
+  button {
+    background: inherit;
+    border: none;
+    align-self: flex-end;
+    position: relative;
+    top: -5em;
+    &:hover {
+      cursor: pointer;
+    }
+  }
 
   @media (min-width: ${g.phoneMediaBreak}px) {
     width: 120%;

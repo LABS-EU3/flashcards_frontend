@@ -2,13 +2,14 @@ import React from 'react';
 import banner from '../../assets/images/rectangle.png';
 
 import { Banner, WelcomeMessage } from './styles';
+import { H2 } from '../../styles/typography';
 
 const ProfileBanner = ({ name }) => {
   return (
     <Banner>
       <img src={banner} alt="profile banner" />
       <WelcomeMessage>
-        <h2>Welcome {name}!</h2>
+        <H2>Welcome {name}!</H2>
       </WelcomeMessage>
     </Banner>
   );

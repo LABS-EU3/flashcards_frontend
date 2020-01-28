@@ -1,30 +1,21 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
-import {
-  MdDelete,
-  MdAddToPhotos,
-  MdEdit,
-  MdRemoveRedEye,
-} from 'react-icons/md';
+
+import { MdDelete, MdAddToPhotos, MdEdit } from 'react-icons/md';
 
 import {
   TopComponentDiv,
   LibraryActions,
   IconWithText,
+  RedSquare,
 } from '../../../styles/DeckLibraryStyles';
 
 import * as types from '../../../../../modules/dashboard/dashboardTypes';
 
 import { H1, H2, Text } from '../../../../../styles/typography';
 
-import useAction from '../../../../../utils/useAction';
-
-import * as action from '../../../../../modules/dashboard/dashboardActions';
-
-const TopComponent = ({ deckName, deckId }) => {
+const TopComponent = ({ deckName }) => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const createDeck = () => {
     dispatch({ type: types.ON_START_CREATING_CARD });
   };
@@ -34,10 +25,9 @@ const TopComponent = ({ deckName, deckId }) => {
     dispatch({ type: types.ON_START_CREATING_DECK });
   };
 
-  const showAllAnswers = () => {
-    dispatch({ type: types.TOGGLE_ANSWERS });
+  const deleteDeck = () => {
+    dispatch({ type: types.ON_START_DELETE_CONFIRMATION });
   };
-  const deleteDeck = useAction(action.deleteDeck);
 
   return (
     <TopComponentDiv>
@@ -45,32 +35,24 @@ const TopComponent = ({ deckName, deckId }) => {
       <LibraryActions>
         <IconWithText onClick={createDeck}>
           <H2>
-            <MdAddToPhotos />
+            <MdAddToPhotos className="icon" />
           </H2>
+          <RedSquare />
           <Text>Add Card</Text>
         </IconWithText>
         <IconWithText onClick={editDeck}>
           <H2>
-            <MdEdit />
+            <MdEdit className="icon" />
           </H2>
+          <RedSquare />
           <Text>Edit Deck</Text>
         </IconWithText>
-        <IconWithText
-          onClick={async () => {
-            await deleteDeck(deckId);
-            await history.push('/dashboard/library');
-          }}
-        >
+        <IconWithText onClick={deleteDeck}>
           <H2>
-            <MdDelete />
+            <MdDelete className="icon" />
           </H2>
+          <RedSquare />
           <Text>Delete Deck</Text>
-        </IconWithText>
-        <IconWithText onClick={showAllAnswers}>
-          <H2>
-            <MdRemoveRedEye />
-          </H2>
-          <Text>Show Answers</Text>
         </IconWithText>
       </LibraryActions>
     </TopComponentDiv>

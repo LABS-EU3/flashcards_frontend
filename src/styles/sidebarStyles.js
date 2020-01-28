@@ -55,7 +55,6 @@ export const CardsStyled = styled.div`
   justify-content: space-evenly;
   margin-top: -4em;
   border-radius: 20px 20px 0 0;
-  border: 1px red solid;
   h1 {
     width: 100%;
   }

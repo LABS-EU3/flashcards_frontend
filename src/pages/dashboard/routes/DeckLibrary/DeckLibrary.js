@@ -21,6 +21,7 @@ const DeckLibrary = props => {
   const { creatingDeck, userDecks, tags } = dashboard;
 
   const [opacity, setOpacity] = useState(0);
+  const [isEditMode, setIsEditMode] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -44,7 +45,7 @@ const DeckLibrary = props => {
 
   return (
     <div>
-      <TopComponent />
+      <TopComponent setIsEditMode={setIsEditMode} />
       <FancyModal
         isOpen={creatingDeck}
         afterOpen={afterOpen}
@@ -55,7 +56,11 @@ const DeckLibrary = props => {
         <AddDeckForm tags={tags} />
       </FancyModal>
 
-      <DecksSection decks={userDecks} />
+      <DecksSection
+        decks={userDecks}
+        setIsEditMode={setIsEditMode}
+        isEditMode={isEditMode}
+      />
     </div>
   );
 };

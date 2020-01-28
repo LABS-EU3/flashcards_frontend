@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { MdCollectionsBookmark } from 'react-icons/md';
+import { NavLink } from 'react-router-dom';
 
 // styled
 import { P, H2 } from '../../styles/typography';
@@ -17,23 +18,31 @@ export default function Cards({ title, category, totalCard }) {
       </InfoHolder>
       <CardCount>
         <P color="grey">{totalCard} Cards </P>
-        <MdCollectionsBookmark size="2em" color="grey" className="studyIcon" />
+        <NavLink to="/dashboard/study">
+          <MdCollectionsBookmark
+            size="2em"
+            color="grey"
+            className="studyIcon"
+          />
+        </NavLink>
       </CardCount>
     </CardsFlex>
   );
 }
 
-const CardCount = styled(SLower)`
+export const CardCount = styled(SLower)`
   flex-direction: column-reverse;
   justify-content: center;
   align-items: center;
   align-self: flex-end;
+  width: 30%;
   float: left;
+
   .studyIcon {
     visibility: hidden;
   }
 `;
-const InfoHolder = styled.div`
+export const InfoHolder = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -42,8 +51,7 @@ const InfoHolder = styled.div`
 export const CardsFlex = styled.div`
   display: flex;
   align-items: left;
-  /* margin: 10px 20px 1 0px 20px; */
-  padding-left: 10px;
+  padding-left: 1em;
   border: 1px solid ${c.LIGHT_NEUTRAL_COLOR};
   box-sizing: border-box;
   background: white;
@@ -68,6 +76,11 @@ export const CardsFlex = styled.div`
     cursor: pointer;
     .studyIcon {
       visibility: visible;
+    }
+    .hover {
+      h2 {
+        visibility: visible;
+      }
     }
   }
 `;
