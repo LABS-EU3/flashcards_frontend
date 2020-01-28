@@ -111,9 +111,21 @@ export default function CarouselComponent() {
 
       <BottomCompDiv>
         <EmojisCompDiv>
-          <span className="emoji">&#129303;</span>
-          <span className="emoji">&#128531;</span>
-          <span className="emoji">&#128557;</span>
+          <Ripples color={'#FAFFDF '}>
+            <button type="button" className="emoji btn">
+              &#129303;
+            </button>
+          </Ripples>
+          <Ripples color={'#FAFFDF '}>
+            <button type="button" className="emoji btn">
+              &#128531;
+            </button>
+          </Ripples>
+          <Ripples color={'#FAFFDF'}>
+            <button type="button" className="emoji btn">
+              &#128557;
+            </button>
+          </Ripples>
         </EmojisCompDiv>
 
         <MLower>
