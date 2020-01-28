@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  MdDelete,
-  MdEdit,
-  MdRemoveRedEye,
-  // MdQuestionAnswer,
-  MdRadio,
-} from 'react-icons/md';
+import { MdDelete, MdEdit } from 'react-icons/md';
 import styled from 'styled-components';
 import Lightbox from 'react-image-lightbox';
 import { H1, HR, H2, P } from '../../../../../styles/typography';
@@ -19,7 +13,6 @@ import {
   CollectionLabel,
   IconWithoutText,
   CardsActions,
-  ImageIcons,
 } from '../../../styles/DeckLibraryStyles';
 import * as types from '../../../../../modules/dashboard/dashboardTypes';
 
@@ -114,80 +107,38 @@ const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
           )}
 
           <Images>
-            {card.image_url_question ? (
-              <div>
-                <IconLabel
-                  onClick={() => toggleImageQuestion(true)}
-                  img={<MdRemoveRedEye />}
-                  label="View Question image"
+            <div>
+              <Button
+                type="button"
+                disabled={!card.image_url_question}
+                onClick={() => toggleImageQuestion(true)}
+              >
+                {' '}
+                View Question image
+              </Button>
+              {isOpen && (
+                <Lightbox
+                  mainSrc={questionImage || answerImage}
+                  onCloseRequest={() => toggleDone()}
                 />
-                {isOpen && (
-                  <Lightbox
-                    mainSrc={questionImage || answerImage}
-                    onCloseRequest={() => toggleDone()}
-                  />
-                )}
-              </div>
-            ) : (
-              <IconLabel
-                img={<MdRemoveRedEye />}
-                label="Set Question image"
-                onClick={() => {
-                  handleUpdate(card);
-                }}
-              />
-            )}
-            {card.image_url_answer ? (
-              <div>
-                <IconLabel
-                  onClick={() => toggleImageAnswer(true)}
-                  img={<MdRadio />}
-                  label="View Answer image"
+              )}
+            </div>
+            <div>
+              <Button
+                type="button"
+                disabled={!card.image_url_answer}
+                onClick={() => toggleImageAnswer(true)}
+              >
+                {' '}
+                View Answer image
+              </Button>
+              {isOpen && (
+                <Lightbox
+                  mainSrc={answerImage || questionImage}
+                  onCloseRequest={() => toggleDone()}
                 />
-                {isOpen && (
-                  <Lightbox
-                    // mainSrc={answerImage}
-                    mainSrc={answerImage || questionImage}
-                    onCloseRequest={() => toggleDone()}
-                  />
-                )}
-              </div>
-            ) : (
-              <IconLabel
-                img={<MdRadio />}
-                onClick={() => {
-                  handleUpdate(card);
-                }}
-                label="Set Answer image"
-              />
-            )}
-            {/* {card.image_url_question && card.image_url_answer ? (
-              <div>
-                <IconLabel
-                  onClick={() => toggleBoth(true)}
-                  img={<MdRadio />}
-                  label="View Answer image"
-                />
-                {isOpen && (
-                  <Lightbox
-                    mainSrc={
-                      card.image_url_question
-                        ? card.image_url_question
-                        : card.image_url_answer
-                    }
-                    onCloseRequest={() => toggleDone()}
-                  />
-                )}
-              </div>
-            ) : (
-              <IconLabel
-                img={<MdRadio />}
-                onClick={() => {
-                  handleUpdate(card);
-                }}
-                label="Set Answer image"
-              />
-            )} */}
+              )}
+            </div>
           </Images>
         </TextDiv>
         <CardsActions>
@@ -215,15 +166,6 @@ const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
   );
 };
 
-export const IconLabel = ({ img, label, onClick }) => {
-  return (
-    <ImageIcons onClick={onClick || null}>
-      {img}
-      {/* <img scr={img} alt="question" /> */}
-      <p>{label}</p>
-    </ImageIcons>
-  );
-};
 const TextDiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -255,7 +197,9 @@ const Images = styled.div`
   // margin-top: 30px;
 `;
 
-// const Test = styled.div`
-//   background: red;
-// `;
+const Button = styled.button`
+  // border: 1px solid black;
+  background: white;
+  height: 50px;
+`;
 export default Decks;
