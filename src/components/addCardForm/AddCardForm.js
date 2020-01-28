@@ -44,6 +44,7 @@ const InputField = ({ title, btnName, setCallback, ...props }) => {
             ['an', 'array'],
             'flashcard_front_13',
             error => {
+              // eslint-disable-next-line no-console
               console.log(error);
             },
             // eslint-disable-next-line camelcase
