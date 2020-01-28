@@ -19,7 +19,7 @@ import {
   CollectionLabel,
   IconWithoutText,
   CardsActions,
-  IconWithText,
+  ImageIcons,
 } from '../../../styles/DeckLibraryStyles';
 import * as types from '../../../../../modules/dashboard/dashboardTypes';
 
@@ -87,7 +87,6 @@ const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
     setQuestionImage('');
     setAnswerImage(card.image_url_answer);
   };
-
   const toggleDone = () => {
     setIsOpen(false);
     setQuestionImage('');
@@ -98,8 +97,8 @@ const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
     <CardsFlex
       onClick={toggleSingleAnswer}
       backgroundImage={card.image_url_question}
+      height="220px"
       width="46%"
-      height="175px"
       marginLeft="0"
       marginRight="0"
     >
@@ -116,12 +115,7 @@ const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
 
           <Images>
             {card.image_url_question ? (
-              <Test>
-                {/* <IconWithText onClick={() => toggleImageQuestion(true)}>
-                  <H2>
-                    <MdRemoveRedEye />
-                  </H2>
-                </IconWithText> */}
+              <div>
                 <IconLabel
                   onClick={() => toggleImageQuestion(true)}
                   img={<MdRemoveRedEye />}
@@ -129,25 +123,22 @@ const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
                 />
                 {isOpen && (
                   <Lightbox
-                    mainSrc={questionImage}
+                    mainSrc={questionImage || answerImage}
                     onCloseRequest={() => toggleDone()}
                   />
                 )}
-              </Test>
+              </div>
             ) : (
-              <IconLabel img={<MdRemoveRedEye />} label="Set Question image" />
+              <IconLabel
+                img={<MdRemoveRedEye />}
+                label="Set Question image"
+                onClick={() => {
+                  handleUpdate(card);
+                }}
+              />
             )}
             {card.image_url_answer ? (
-              <Test>
-                {/* <IconWithoutText onClick={() => toggleImageAnswer(true)}>
-                  <H2>
-                    <MdQuestionAnswer />
-                  </H2>
-                   <IconLabel
-                  onClick={() => toggleImageQuestion(true)}
-                  label="View Question image"
-                />
-                </IconWithoutText> */}
+              <div>
                 <IconLabel
                   onClick={() => toggleImageAnswer(true)}
                   img={<MdRadio />}
@@ -155,18 +146,48 @@ const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
                 />
                 {isOpen && (
                   <Lightbox
-                    mainSrc={answerImage}
+                    // mainSrc={answerImage}
+                    mainSrc={answerImage || questionImage}
                     onCloseRequest={() => toggleDone()}
                   />
                 )}
-              </Test>
+              </div>
             ) : (
               <IconLabel
-                // onClick={() => ()}
                 img={<MdRadio />}
+                onClick={() => {
+                  handleUpdate(card);
+                }}
                 label="Set Answer image"
               />
             )}
+            {/* {card.image_url_question && card.image_url_answer ? (
+              <div>
+                <IconLabel
+                  onClick={() => toggleBoth(true)}
+                  img={<MdRadio />}
+                  label="View Answer image"
+                />
+                {isOpen && (
+                  <Lightbox
+                    mainSrc={
+                      card.image_url_question
+                        ? card.image_url_question
+                        : card.image_url_answer
+                    }
+                    onCloseRequest={() => toggleDone()}
+                  />
+                )}
+              </div>
+            ) : (
+              <IconLabel
+                img={<MdRadio />}
+                onClick={() => {
+                  handleUpdate(card);
+                }}
+                label="Set Answer image"
+              />
+            )} */}
           </Images>
         </TextDiv>
         <CardsActions>
@@ -196,21 +217,22 @@ const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
 
 export const IconLabel = ({ img, label, onClick }) => {
   return (
-    <IconWithText onClick={onClick || null}>
+    <ImageIcons onClick={onClick || null}>
       {img}
       {/* <img scr={img} alt="question" /> */}
       <p>{label}</p>
-    </IconWithText>
+    </ImageIcons>
   );
 };
 const TextDiv = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-self: center;
   width: inherit;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 10px;
+  height: 100%;
 
   h2 {
     max-width: 80%;
@@ -230,8 +252,10 @@ const Images = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 70%;
-  margin-top: 30px;
+  // margin-top: 30px;
 `;
 
-const Test = styled.div``;
+// const Test = styled.div`
+//   background: red;
+// `;
 export default Decks;
