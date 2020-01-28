@@ -1,6 +1,7 @@
 // Libraries
 import React, { useState } from 'react';
 import Sidebar from 'react-sidebar';
+import { MdKeyboardArrowDown } from 'react-icons/md';
 
 // components
 import Card from '../cards/Cards';
@@ -15,6 +16,8 @@ import {
   CardsStyled,
   StyledStart,
   SidebarStyled,
+  IconButtonWrapper,
+  ViewedCardsStyled,
 } from '../../styles/sidebarStyles';
 
 const cards = [
@@ -67,7 +70,7 @@ export default function RightSidebar(props) {
           sidebar: {
             background: 'white',
             width: '100%',
-            minWidth: '250px',
+            minWidth: '3em',
           },
 
           root: {
@@ -82,6 +85,16 @@ export default function RightSidebar(props) {
   );
 }
 const SideContent = ({ user }) => {
+  const [openLastPlayed, setOpenLastPlayed] = useState(false);
+  const [openRecentlyViewed, setOpenRecentlyViewed] = useState(true);
+
+  const handleButtonClickLastPlayed = () => {
+    setOpenLastPlayed(!openLastPlayed);
+  };
+  const handleButtonClickRecentlyViewed = () => {
+    setOpenRecentlyViewed(!openRecentlyViewed);
+  };
+
   return (
     <SidebarBody>
       <Image>
@@ -91,22 +104,64 @@ const SideContent = ({ user }) => {
         <StyledStart>
           <H1 BOLD>
             {' '}
-            Jump back into
+            Last Played
+            <IconButtonWrapper
+              rotate={openLastPlayed}
+              onClick={handleButtonClickLastPlayed}
+            >
+              <MdKeyboardArrowDown
+                size="1.15em"
+                color="grey"
+                onClick={handleButtonClickLastPlayed}
+              />
+            </IconButtonWrapper>
             <div>
               <HR />
             </div>
           </H1>
         </StyledStart>
-        {cards.map(card => {
-          return (
-            <Card
-              key={card.title}
-              title={card.title}
-              category={card.category}
-            />
-          );
-        })}
+        {openLastPlayed &&
+          cards.map(card => {
+            return (
+              <Card
+                key={card.title}
+                title={card.title}
+                category={card.category}
+              />
+            );
+          })}
       </CardsStyled>
+      <ViewedCardsStyled>
+        <StyledStart>
+          <H1 BOLD>
+            {' '}
+            Recently Viewed
+            <IconButtonWrapper
+              rotate={openRecentlyViewed}
+              onClick={handleButtonClickRecentlyViewed}
+            >
+              <MdKeyboardArrowDown
+                size="1.15em"
+                color="grey"
+                onClick={handleButtonClickRecentlyViewed}
+              />
+            </IconButtonWrapper>
+            <div>
+              <HR />
+            </div>
+          </H1>
+        </StyledStart>
+        {openRecentlyViewed &&
+          cards.map(card => {
+            return (
+              <Card
+                key={card.title}
+                title={card.title}
+                category={card.category}
+              />
+            );
+          })}
+      </ViewedCardsStyled>
     </SidebarBody>
   );
 };

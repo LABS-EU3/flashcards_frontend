@@ -7,8 +7,10 @@ import { BRAND_FONT } from './variables/fonts';
 export const SidebarBody = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   height: 100%;
+  overflow: hidden;
 `;
 
 export const SidebarStyled = styled.div`
@@ -30,8 +32,9 @@ export const Image = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
-  height: 50%;
-  margin-top: -10px;
+  max-height: 50%;
+  min-height: 35vh;
+  margin-top: -1em;
   h1 {
     text-align: center;
   }
@@ -42,17 +45,30 @@ export const CardsStyled = styled.div`
   flex-direction: column;
   align-items: left;
   background: white;
-  // background: whitesmoke;
   width: 100%;
-  justify-content: space-evently;
-  margin-top: -40px;
+  justify-content: space-evenly;
+  margin-top: -4em;
   border-radius: 20px 20px 0 0;
-  height: 100%;
+  max-height: 80%;
 `;
 
 export const StyledStart = styled.div`
   font: ${BRAND_FONT};
   text-align: left;
   justify-content: center;
-  margin: 10px 20px 10px 20px;
+  margin: 1em 2em 1em 2em;
+`;
+
+export const IconButtonWrapper = styled.div`
+  float: right;
+  position: relative;
+  top: 0.25em;
+  transform: rotate(0deg);
+  overflow: hidden;
+  transition: all 0.3s ease-out;
+  transform: ${props => (props.rotate ? `rotate(180deg)` : '')};
+`;
+
+export const ViewedCardsStyled = styled(CardsStyled)`
+  margin-top: 0em;
 `;
