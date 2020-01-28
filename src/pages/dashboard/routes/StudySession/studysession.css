@@ -5,7 +5,6 @@
 .carousel .control-next.control-arrow:before {
   border-right: 8px solid #fff;
   border: solid rgba(68, 65, 64, 0.5);
-  /* background: rgba(68, 65, 64, 0.5); */
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.02);
   border-width: 0 7px 7px 0;
   display: inline-block;
@@ -44,8 +43,6 @@ h2.bottomh2 {
 }
 
 .scene {
-  /* width: 200px;
-  height: 260px; */
   width: 80%;
   height: 260px;
   border: 1px solid #ccc;
