@@ -84,3 +84,10 @@ h2.bottomh2 {
   background: blue;
   transform: rotateY(180deg);
 }
+
+button.btn {
+  border-radius: 50%;
+  display: inline-flex;
+  outline: none;
+  overflow: hidden;
+}
