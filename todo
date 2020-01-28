@@ -1,0 +1,8 @@
+create deck: 
+create input for selecting private or public deck
+on modal X should be  on the right
+create card: 
+create UI for adding image on front and back
+on modal X should be  on the right
+nav bar: center images and nav bar when longer name appears
+create warning for delete deck
