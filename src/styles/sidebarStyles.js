@@ -55,7 +55,10 @@ export const CardsStyled = styled.div`
   justify-content: space-evenly;
   margin-top: -4em;
   border-radius: 20px 20px 0 0;
-  max-height: 80%;
+  border: 1px red solid;
+  h1 {
+    width: 100%;
+  }
 `;
 
 export const StyledStart = styled.div`
@@ -125,4 +128,9 @@ export const XPHolder = styled.div`
 export const LevelHolder = styled.div`
   align-self: flex-start;
   display: flex;
+`;
+
+export const SectionHolder = styled.div`
+  height: 80%;
+  width: 100%;
 `;
