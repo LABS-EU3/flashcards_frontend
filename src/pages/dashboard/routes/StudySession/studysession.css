@@ -1,22 +1,12 @@
-/* .carousel .slide {
+.carousel .slide {
   background: none;
 }
-
-.ZepjI:first-child {
-  background: white;
-}
-
-.carousel .slider-wrapper.axis-horizontal .slider .slide {
-  background: none;
-} */
-
-/* .XYFHd {
-  background: none;
-} */
 
 .carousel .control-next.control-arrow:before {
   border-right: 8px solid #fff;
-  border: solid red;
+  border: solid rgba(68, 65, 64, 0.5);
+  /* background: rgba(68, 65, 64, 0.5); */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.02);
   border-width: 0 7px 7px 0;
   display: inline-block;
   padding: 15px;
@@ -26,7 +16,7 @@
 
 .carousel .control-prev.control-arrow:before {
   border-right: 8px solid #fff;
-  border: solid red;
+  border: solid rgba(68, 65, 64, 0.5);
   border-width: 0 7px 7px 0;
   display: inline-block;
   padding: 15px;
@@ -35,6 +25,12 @@
 }
 .emoji {
   font-size: 40px;
+}
+h2.bottomh2 {
+  align-self: flex-end;
+  width: 42%;
+  font-size: 1.5em;
+  margin-top: 2%;
 }
 
 .pBar2 {
@@ -47,70 +43,47 @@
   margin-bottom: 1.2%;
 }
 
-/* @import url(https://fonts.googleapis.com/css?family=Open+Sans); */
-/* body {
-  background: #f17563;
-  font-family: Open Sans;
-  font-size: 50px;
-  color: #222;
-} */
-label {
-  font-size: 50px;
-  -webkit-perspective: 1000px;
-  perspective: 1000px;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  display: block;
-  width: 400px;
-  height: 400px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  cursor: pointer;
+.scene {
+  /* width: 200px;
+  height: 260px; */
+  width: 80%;
+  height: 260px;
+  border: 1px solid #ccc;
+  margin: 50px auto;
+  perspective: 600px;
 }
+
 .card {
   position: relative;
-  height: 100%;
   width: 100%;
-  -webkit-transform-style: preserve-3d;
+  height: 100%;
+  cursor: pointer;
   transform-style: preserve-3d;
-  -webkit-transition: all 600ms;
-  transition: all 600ms;
-  z-index: 20;
+  transform-origin: center right;
+  transition: transform 1s;
 }
-.card div {
+
+.card.is-flipped {
+  transform: translateX(-100%) rotateY(-180deg);
+}
+
+.card__face {
   position: absolute;
-  height: 100%;
   width: 100%;
-  background: #fff;
+  height: 100%;
+  line-height: 260px;
+  color: white;
   text-align: center;
-  line-height: 200px;
-  -webkit-backface-visibility: hidden;
+  font-weight: bold;
+  font-size: 40px;
   backface-visibility: hidden;
-  border-radius: 2px;
 }
-.card .back {
-  background: #222;
-  color: #fff;
-  -webkit-transform: rotateX(180deg);
-  transform: rotateX(180deg);
+
+.card__face--front {
+  background: red;
 }
-label:hover .card {
-  -webkit-transform: rotateX(20deg);
-  transform: rotateX(20deg);
-  box-shadow: 0 20px 20px rgba(50, 50, 50, 0.2);
-}
-input {
-  display: none;
-}
-:checked + .card {
-  transform: rotateX(180deg);
-  -webkit-transform: rotateX(180deg);
-}
-label:hover :checked + .card {
-  transform: rotateX(160deg);
-  -webkit-transform: rotateX(160deg);
-  box-shadow: 0 20px 20px rgba(255, 255, 255, 0.2);
+
+.card__face--back {
+  background: blue;
+  transform: rotateY(180deg);
 }
