@@ -3,7 +3,7 @@ import img from '../assets/Vector.png';
 import * as g from './variables/global';
 
 import { BRAND_FONT } from './variables/fonts';
-import { LIGHT_NEUTRAL_COLOR } from './variables/colours';
+import { LIGHT_NEUTRAL_COLOR, DARK_NEUTRAL_COLOR } from './variables/colours';
 
 export const SidebarBody = styled.div`
   display: flex;
@@ -25,6 +25,8 @@ export const SidebarStyled = styled.div`
 `;
 
 export const Image = styled.div`
+  min-height: 23.35em;
+  max-height: 23.35em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,8 +36,6 @@ export const Image = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
-  max-height: 50%;
-  min-height: 30vh;
   h1 {
     text-align: center;
   }
@@ -83,13 +83,14 @@ export const MiddleHolder = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-height: 23.35em;
+  max-height: 23.35em;
   -webkit-transform: skewY(16.27deg);
   -moz-transform: skewY(16.27deg);
   -ms-transform: skewY(16.27deg);
   -o-transform: skewY(16.27deg);
   transform: skewY(16.27deg);
   h1 {
-    margin-top: 1em;
     margin-bottom: -1em;
   }
   .pBar2 {
@@ -102,13 +103,14 @@ export const MiddleHolder = styled.div`
 `;
 
 export const BlackContainer = styled.div`
-  background: #000000;
+  background: ${DARK_NEUTRAL_COLOR};
   width: 100%;
-  max-height: 50%;
-  min-height: 35vh;
+  min-height: 23.35em;
+  max-height: 23.35em;
   margin-top: -1em;
   overflow: hidden;
   z-index: -1;
+  align-content: center;
 `;
 
 export const XPHolder = styled.div`
@@ -121,7 +123,6 @@ export const XPHolder = styled.div`
 `;
 
 export const LevelHolder = styled.div`
-  margin-top: 2.5em;
   align-self: flex-start;
   display: flex;
 `;
