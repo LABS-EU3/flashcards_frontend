@@ -89,8 +89,7 @@ const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
   return (
     <CardsFlex
       onClick={toggleSingleAnswer}
-      backgroundImage={card.image_url_question}
-      height="220px"
+      height="280px"
       width="46%"
       marginLeft="0"
       marginRight="0"
@@ -169,7 +168,7 @@ const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
 const TextDiv = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-self: center;
   width: inherit;
   align-items: center;
@@ -191,15 +190,25 @@ const DisplayCardFlex = styled.div`
 const Images = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-evenly;
+  align-self: bottom;
   width: 70%;
-  // margin-top: 30px;
 `;
 
 const Button = styled.button`
-  // border: 1px solid black;
+  border: 1px solid black;
+  border-radius: 5px;
   background: white;
   height: 50px;
+  margin-bottom: 10%;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:disabled {
+    background: white;
+    border: 1px solid #e0e0e0;
+  }
 `;
 export default Decks;
