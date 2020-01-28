@@ -24,22 +24,27 @@ const cards = [
   {
     title: 'Organic Compounds',
     category: 'Chemistry',
+    totalCard: 30,
   },
   {
     title: 'Quantum Mechanics',
     category: 'Physics',
+    totalCard: 40,
   },
   {
     title: 'Data Structures',
     category: 'Computer Science',
+    totalCard: 320,
   },
   {
     title: 'Advance Algorithms',
     category: 'Computer Science',
+    totalCard: 70,
   },
   {
     title: 'OWASP Basics',
     category: 'Computer Science',
+    totalCard: 100,
   },
 ];
 
@@ -127,6 +132,7 @@ const SideContent = ({ user }) => {
                 key={card.title}
                 title={card.title}
                 category={card.category}
+                totalCard={card.totalCard}
               />
             );
           })}
@@ -158,6 +164,7 @@ const SideContent = ({ user }) => {
                 key={card.title}
                 title={card.title}
                 category={card.category}
+                totalCard={card.totalCard}
               />
             );
           })}
