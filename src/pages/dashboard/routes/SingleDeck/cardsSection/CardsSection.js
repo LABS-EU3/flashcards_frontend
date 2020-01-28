@@ -190,7 +190,7 @@ const DisplayCardFlex = styled.div`
 const Images = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-self: bottom;
   width: 70%;
 `;
