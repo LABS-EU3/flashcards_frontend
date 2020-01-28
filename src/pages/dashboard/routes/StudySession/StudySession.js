@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+/* eslint-disable */
+import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Line } from 'rc-progress';
-// import ReactCardFlip from 'react-card-flip';
 
 import styled from 'styled-components';
 import { H2 } from '../../../../styles/typography';
@@ -34,6 +34,7 @@ export const TopCompDiv = styled.div`
   text-align: center;
   margin: 30px auto;
 `;
+
 export const BottomCompDiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -56,9 +57,6 @@ export const CardContainer = styled.div`
   justify-content: center;
   width: 70%;
   margin: 2.5% auto;
-  /* padding-top: 1%;
-  padding-bottom: 5%;
-  background: #ffffff; */
   border: 1px solid #f6f1f0;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.02);
 
@@ -73,16 +71,9 @@ export const Card = styled.div`
   justify-content: space-around;
   width: 400px;
   height: 300px;
-  /* margin-top: 2%; */
   margin: 2% auto 0 auto;
   background: #ffffff;
-  /* border: 1px solid #f6f1f0;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.02);
-  text-align: center; */
 
-  /* &:first-child {
-    background: rgba(255, 169, 135, 0.5);
-  } */
   @media (min-width: 2000px) {
     width: 600px;
   }
@@ -98,57 +89,14 @@ export const MLower = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
-  /* justify-content: space-between; */
   width: 90%;
   margin: 5% auto auto auto;
 `;
 
-export const Scene = styled.div``;
-export const SceneCard = styled.div``;
-export const CardFace = styled.div``;
-
 export default function CarouselComponent() {
-  /* eslint-disable */
-
-  const [state, setState] = useState(false);
-
-  function handleClick(e) {
-    e.preventDefault();
-    setState(prevState => ({ isFlipped: !prevState.isFlipped }));
-    e.preventDefault();
-  }
-
-  // const myRef = React.createRef();
-  // if (myRef) {
-  //   console.log('111111', myRef);
-  // }
-  // function handleClick() {
-  //   console.log('kkkk', myRef);
-  //   console.log('kkkk', myRef.current.classList[0]);
-  //   console.log('kkkk', myRef.current.classList.toggle('is-flipped'));
-  //   // myRef.current.classList.toggle('is-flipped');
-  //   // if (myRef.current.classList[0] === 'card') {
-  //   //   // return myRef.current.classList.setAttribute('class', 'is-flipped');
-  //   // }
-  // }
-  let cards = document.getElementsByClassName('card');
+  const cards = document.getElementsByClassName('card');
   function onFocus() {
-    // if (document.getElementById('joba')) {
     if (cards) {
-      // document.getElementById('joba').add('class', 'highlight');
-      // document.getElementById('joba').style.display = 'none';
-      // document.getElementById('joba').classList.toggle('is-flipped');
-      console.log(
-        // document
-        //   .getElementsByClassName('card')[0]
-        //   .classList.toggle('is-flipped'),
-        cards,
-      );
-      // document.getElementsByClassName('card').forEach(element => {
-      //   console.log(element);
-      // });
-
       for (let i = 0; i < cards.length; i++) {
         cards[i].classList.toggle('is-flipped');
       }
@@ -159,56 +107,11 @@ export default function CarouselComponent() {
     <Container>
       <TopCompDiv>
         <CardContainer>
-          <Carousel
-            showThumbs={false}
-            swipeable
-            // onClickItem={handleClick}
-            // centerMode // centerSlidePercentage={1}
-          >
+          <Carousel showThumbs={false} swipeable>
             {dummyData.map((data, index) => {
               return (
-                // <>
-                // <Card key={`${data.id}`}>
-                //   <H2>{index + 1}</H2>
-                //   <H2>{data.Question}</H2>
-                //   <P>
-                //     {data.score} <br /> Points
-                //   </P>
-                // </Card>
-
-                // <ReactCardFlip
-                //   isFlipped={state.isFlipped}
-                //   flipDirection="vertical"
-                // >
-
-                // <div className="scene">
-                //   <div class="card" onClick={onFocus}>
-                //     <Card
-                //       key={`${data.id}`}
-                //       className="card__face card__face--front"
-                //     >
-                //       <H2>{index + 1}</H2>
-                //       <H2>{data.Question}</H2>
-                //       <P>
-                //         {data.score} <br /> Points
-                //       </P>
-                //     </Card>
-
-                //     <Card
-                //       key={`${data.id}`}
-                //       className="card__face card__face--back"
-                //     >
-                //       This is the back of the card.
-                //       <H2>{index + 1}</H2>
-                //       <H2>{data.Answer}</H2>
-                //     </Card>
-                //   </div>
-                // </div>
-                // </ReactCardFlip>
-                // </>
-
                 <div className="scene">
-                  <div class="card" onClick={onFocus}>
+                  <div className="card" onClick={onFocus}>
                     <div className="card__face card__face--front">
                       front
                       {index}
@@ -227,9 +130,9 @@ export default function CarouselComponent() {
 
       <BottomCompDiv>
         <EmojisCompDiv>
-          <span class="emoji">&#129303;</span>
-          <span class="emoji">&#128531;</span>
-          <span class="emoji">&#128557;</span>
+          <span className="emoji">&#129303;</span>
+          <span className="emoji">&#128531;</span>
+          <span className="emoji">&#128557;</span>
         </EmojisCompDiv>
 
         <MLower>
@@ -243,22 +146,9 @@ export default function CarouselComponent() {
             strokeColor="#FFA987"
             className="pBar2"
           />
-          <h2 class="bottomh2">15/30 Cards</h2>
+          <h2 className="bottomh2">15/30 Cards</h2>
         </MLower>
       </BottomCompDiv>
     </Container>
   );
 }
-
-// <div className="scene scene--card">
-//   <div class="card" onClick={onFocus}>
-//     <div className="card__face card__face--front">
-//       front
-//                       {index}
-//     </div>
-//     <div className="card__face card__face--back">
-//       back
-//                       {index + 1}
-//     </div>
-//   </div>
-// </div>
