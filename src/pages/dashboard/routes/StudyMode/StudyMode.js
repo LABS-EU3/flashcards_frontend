@@ -70,7 +70,6 @@ export const SLowerCardSection = styled.div`
 
 export const SLower = styled.div`
   display: flex;
-  align-items: center;
   justify-content: space-around;
   width: 40%;
 `;
