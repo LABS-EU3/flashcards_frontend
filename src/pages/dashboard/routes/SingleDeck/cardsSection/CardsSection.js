@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import styled from 'styled-components';
+import Lightbox from 'react-image-lightbox';
 import { H1, HR, H2, P } from '../../../../../styles/typography';
 import { CardsFlex } from '../../../../../components/cards/Cards';
+import 'react-image-lightbox/style.css';
 
 import {
   Collection,
@@ -55,18 +57,40 @@ const Decks = ({ cards, deleteCard, showingAllAnswers }) => {
 
 const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
   const [isShowingSingleAnswer, setIsShowingSingleAnswer] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [questionImage, setQuestionImage] = useState('');
+  const [answerImage, setAnswerImage] = useState('');
   const dispatch = useDispatch();
+
   const toggleSingleAnswer = () => {
     if (showingAllAnswers) {
       dispatch({ type: types.TOGGLE_ANSWERS, payload: false });
       setIsShowingSingleAnswer(false);
     } else setIsShowingSingleAnswer(!isShowingSingleAnswer);
   };
+
+  const toggleImageQuestion = () => {
+    setIsOpen(true);
+    setQuestionImage(card.image_url_question);
+    setAnswerImage('');
+  };
+
+  const toggleImageAnswer = () => {
+    setIsOpen(true);
+    setQuestionImage('');
+    setAnswerImage(card.image_url_answer);
+  };
+  const toggleDone = () => {
+    setIsOpen(false);
+    setQuestionImage('');
+    setAnswerImage('');
+  };
+
   return (
     <CardsFlex
       onClick={toggleSingleAnswer}
+      height="280px"
       width="46%"
-      height="175px"
       marginLeft="0"
       marginRight="0"
     >
@@ -74,10 +98,47 @@ const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
         <TextDiv>
           <H2 BOLD>{card.question}</H2>
           {showingAllAnswers || isShowingSingleAnswer ? (
-            <P>{card.answer}</P>
+            <div>
+              <P>{card.answer}</P>
+            </div>
           ) : (
             <P>####</P>
           )}
+
+          <Images>
+            <div>
+              <Button
+                type="button"
+                disabled={!card.image_url_question}
+                onClick={() => toggleImageQuestion(true)}
+              >
+                {' '}
+                Question Image
+              </Button>
+              {isOpen && (
+                <Lightbox
+                  mainSrc={questionImage || answerImage}
+                  onCloseRequest={() => toggleDone()}
+                />
+              )}
+            </div>
+            <div>
+              <Button
+                type="button"
+                disabled={!card.image_url_answer}
+                onClick={() => toggleImageAnswer(true)}
+              >
+                {' '}
+                Answer Image
+              </Button>
+              {isOpen && (
+                <Lightbox
+                  mainSrc={answerImage || questionImage}
+                  onCloseRequest={() => toggleDone()}
+                />
+              )}
+            </div>
+          </Images>
         </TextDiv>
         <CardsActions>
           <IconWithoutText
@@ -107,10 +168,12 @@ const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
 const TextDiv = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-self; center;
+  justify-content: space-evenly;
+  align-self: center;
   width: inherit;
   align-items: center;
+  margin-top: 10px;
+  height: 100%;
 
   h2 {
     max-width: 80%;
@@ -124,4 +187,28 @@ const DisplayCardFlex = styled.div`
   width: 100%;
 `;
 
+const Images = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-self: bottom;
+  width: 70%;
+`;
+
+const Button = styled.button`
+  border: 1px solid black;
+  border-radius: 5px;
+  background: white;
+  height: 50px;
+  margin-bottom: 10%;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:disabled {
+    background: white;
+    border: 1px solid #e0e0e0;
+  }
+`;
 export default Decks;
