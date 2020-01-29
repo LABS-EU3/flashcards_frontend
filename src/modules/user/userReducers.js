@@ -9,6 +9,7 @@ const initialState = {
   credentials: {},
   errors: null,
   completed: false,
+  rankings: [],
 };
 
 const userReducer = (state = initialState, action) => {
@@ -150,6 +151,24 @@ const userReducer = (state = initialState, action) => {
         credentials: action.payload,
       };
     case types.GOOGLE_AUTH_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload,
+      };
+
+    case types.FETCH_RANK_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.FETCH_RANK_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        rankings: action.payload,
+      };
+    case types.FETCH_RANK_FAILURE:
       return {
         ...state,
         loading: false,
