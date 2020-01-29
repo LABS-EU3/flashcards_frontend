@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { MdDelete, MdEdit } from 'react-icons/md';
+import { FaSearch } from 'react-icons/fa';
 import styled from 'styled-components';
 import Lightbox from 'react-image-lightbox';
-import { H1, HR, H2, P } from '../../../../../styles/typography';
+import { HR, H2, P } from '../../../../../styles/typography';
 import { CardsFlex } from '../../../../../components/cards/Cards';
 import 'react-image-lightbox/style.css';
 
@@ -15,8 +16,58 @@ import {
   CardsActions,
 } from '../../../styles/DeckLibraryStyles';
 import * as types from '../../../../../modules/dashboard/dashboardTypes';
+import { DARK_NEUTRAL_COLOR } from '../../../../../styles/variables/colours';
+import { Input } from '../../../../../styles/forms';
+import { NavSearch, Search } from '../../../../../components/SearchBox/styles';
 
-const Decks = ({ cards, deleteCard, showingAllAnswers }) => {
+const TopHolder = styled.div`
+  display: flex;
+  justify-content: space-between;
+  a {
+    text-decoration: none;
+    color: ${DARK_NEUTRAL_COLOR};
+  }
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+`;
+const CardSearch = styled(Search)`
+  padding: 0em;
+  position: relative;
+  border: none;
+  right: 0;
+  top: 0em;
+  max-width: 50em;
+  min-width: 25em;
+  display: flex;
+  align-items: flex-end;
+  align-self: flex-end;
+  input {
+    width: 150%;
+    height: 25%;
+  }
+  .searchLink {
+    position: relative;
+    bottom: 2em;
+    left: 5em;
+  }
+  @media (max-width: 768px) {
+    align-items: center;
+    align-self: center;
+    input {
+      display: block;
+      margin-bottom: 3em;
+    }
+    .searchLink {
+      position: relative;
+      bottom: 2em;
+      left: 5em;
+    }
+  }
+`;
+
+const Decks = ({ cards, deleteCard }) => {
   const dispatch = useDispatch();
 
   const handleDelete = card => {
@@ -30,10 +81,18 @@ const Decks = ({ cards, deleteCard, showingAllAnswers }) => {
 
   return (
     <Collection>
-      <CollectionLabel>
-        <H1>Cards</H1>
-        <HR />
-      </CollectionLabel>
+      <TopHolder>
+        <CollectionLabel>
+          <HR />
+        </CollectionLabel>
+        <CardSearch>
+          <NavSearch>
+            <Input type="text" name="q" placeholder="Search deck" />
+          </NavSearch>
+
+          <FaSearch size={15} className="searchLink" />
+        </CardSearch>
+      </TopHolder>
 
       <DecksContainer>
         {cards &&
@@ -43,7 +102,6 @@ const Decks = ({ cards, deleteCard, showingAllAnswers }) => {
                 <DeckCard
                   key={card.id}
                   card={card}
-                  showingAllAnswers={showingAllAnswers}
                   handleDelete={handleDelete}
                   handleUpdate={handleUpdate}
                 />
@@ -55,19 +113,10 @@ const Decks = ({ cards, deleteCard, showingAllAnswers }) => {
   );
 };
 
-const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
-  const [isShowingSingleAnswer, setIsShowingSingleAnswer] = useState(false);
+const DeckCard = ({ card, handleDelete, handleUpdate }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [questionImage, setQuestionImage] = useState('');
   const [answerImage, setAnswerImage] = useState('');
-  const dispatch = useDispatch();
-
-  const toggleSingleAnswer = () => {
-    if (showingAllAnswers) {
-      dispatch({ type: types.TOGGLE_ANSWERS, payload: false });
-      setIsShowingSingleAnswer(false);
-    } else setIsShowingSingleAnswer(!isShowingSingleAnswer);
-  };
 
   const toggleImageQuestion = () => {
     setIsOpen(true);
@@ -87,23 +136,12 @@ const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
   };
 
   return (
-    <CardsFlex
-      onClick={toggleSingleAnswer}
-      height="280px"
-      width="46%"
-      marginLeft="0"
-      marginRight="0"
-    >
+    <CardsFlexed>
       <DisplayCardFlex>
         <TextDiv>
           <H2 BOLD>{card.question}</H2>
-          {showingAllAnswers || isShowingSingleAnswer ? (
-            <div>
-              <P>{card.answer}</P>
-            </div>
-          ) : (
-            <P>####</P>
-          )}
+
+          <P>{card.answer}</P>
 
           <Images>
             <div>
@@ -112,7 +150,6 @@ const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
                 disabled={!card.image_url_question}
                 onClick={() => toggleImageQuestion(true)}
               >
-                {' '}
                 Question Image
               </Button>
               {isOpen && (
@@ -128,7 +165,6 @@ const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
                 disabled={!card.image_url_answer}
                 onClick={() => toggleImageAnswer(true)}
               >
-                {' '}
                 Answer Image
               </Button>
               {isOpen && (
@@ -141,29 +177,50 @@ const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
           </Images>
         </TextDiv>
         <CardsActions>
-          <IconWithoutText
+          <IconWithoutTextHover
             onClick={() => {
               handleDelete(card);
             }}
+            className="hover"
           >
             <H2>
               <MdDelete />
             </H2>
-          </IconWithoutText>
-          <IconWithoutText
+          </IconWithoutTextHover>
+          <IconWithoutTextHover
             onClick={() => {
               handleUpdate(card);
             }}
+            className="hover"
           >
             <H2>
               <MdEdit />
             </H2>
-          </IconWithoutText>
+          </IconWithoutTextHover>
         </CardsActions>
       </DisplayCardFlex>
-    </CardsFlex>
+    </CardsFlexed>
   );
 };
+
+const IconWithoutTextHover = styled(IconWithoutText)`
+  h2 {
+    visibility: hidden;
+    position: absolute;
+  }
+`;
+
+const CardsFlexed = styled(CardsFlex)`
+  display: flex;
+  height: 280px;
+  width: 46%;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 1em;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+`;
 
 const TextDiv = styled.div`
   display: flex;

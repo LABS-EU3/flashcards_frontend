@@ -22,6 +22,7 @@ import {
   BlackContainer,
   XPHolder,
   LevelHolder,
+  SectionHolder,
 } from '../../styles/sidebarStyles';
 
 import levelIcon from '../../assets/icons/label_important_24px_outlined.svg';
@@ -132,70 +133,72 @@ const SideContent = ({ user }) => {
           </MiddleHolder>
         </Image>
       </BlackContainer>
-      <CardsStyled>
-        <StyledStart>
-          <H1 BOLD>
-            {' '}
-            Last Played
-            <IconButtonWrapper
-              rotate={openLastPlayed}
-              onClick={handleButtonClickLastPlayed}
-            >
-              <MdKeyboardArrowDown
-                size="1.15em"
-                color="grey"
+      <SectionHolder>
+        <CardsStyled>
+          <StyledStart>
+            <H1 BOLD>
+              {' '}
+              Last Played
+              <IconButtonWrapper
+                rotate={openLastPlayed}
                 onClick={handleButtonClickLastPlayed}
-              />
-            </IconButtonWrapper>
-            <div>
-              <HR />
-            </div>
-          </H1>
-        </StyledStart>
-        {openLastPlayed &&
-          cards.map(card => {
-            return (
-              <Card
-                key={card.title}
-                title={card.title}
-                category={card.category}
-                totalCard={card.totalCard}
-              />
-            );
-          })}
-      </CardsStyled>
-      <ViewedCardsStyled>
-        <StyledStart>
-          <H1 BOLD>
-            {' '}
-            Recently Viewed
-            <IconButtonWrapper
-              rotate={openRecentlyViewed}
-              onClick={handleButtonClickRecentlyViewed}
-            >
-              <MdKeyboardArrowDown
-                size="1.15em"
-                color="grey"
+              >
+                <MdKeyboardArrowDown
+                  size="1.15em"
+                  color="grey"
+                  onClick={handleButtonClickLastPlayed}
+                />
+              </IconButtonWrapper>
+              <div>
+                <HR />
+              </div>
+            </H1>
+          </StyledStart>
+          {openLastPlayed &&
+            cards.map(card => {
+              return (
+                <Card
+                  key={card.title}
+                  title={card.title}
+                  category={card.category}
+                  totalCard={card.totalCard}
+                />
+              );
+            })}
+        </CardsStyled>
+        <ViewedCardsStyled>
+          <StyledStart>
+            <H1 BOLD>
+              {' '}
+              Last Viewed
+              <IconButtonWrapper
+                rotate={openRecentlyViewed}
                 onClick={handleButtonClickRecentlyViewed}
-              />
-            </IconButtonWrapper>
-            <div>
-              <HR />
-            </div>
-          </H1>
-        </StyledStart>
-        {openRecentlyViewed &&
-          cards.map(card => {
-            return (
-              <Card
-                key={card.title}
-                title={card.title}
-                category={card.category}
-                totalCard={card.totalCard}
-              />
-            );
-          })}
-      </ViewedCardsStyled>
+              >
+                <MdKeyboardArrowDown
+                  size="1.15em"
+                  color="grey"
+                  onClick={handleButtonClickRecentlyViewed}
+                />
+              </IconButtonWrapper>
+              <div>
+                <HR />
+              </div>
+            </H1>
+          </StyledStart>
+          {openRecentlyViewed &&
+            cards.map(card => {
+              return (
+                <Card
+                  key={card.title}
+                  title={card.title}
+                  category={card.category}
+                  totalCard={card.totalCard}
+                />
+              );
+            })}
+        </ViewedCardsStyled>
+      </SectionHolder>
     </SidebarBody>
   );
 };

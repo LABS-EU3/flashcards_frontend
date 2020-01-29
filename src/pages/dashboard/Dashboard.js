@@ -24,7 +24,6 @@ import LeaderBoard from './routes/LeaderBoard/LeaderBoard';
 import StudySession from './routes/StudySession/StudySession';
 import Settings from './routes/Settings/Settings';
 import Search from './routes/Search/Search';
-import background from '../../assets/background.png';
 
 export const DashboardComponent = props => {
   const { user } = props;
@@ -62,14 +61,12 @@ export const DashboardComponent = props => {
 const RouteContainer = styled.div`
   margin-right: 25%;
   height: 100%;
-  background: #ffffff;
-  background-image: url(${background});
+  background: transparent;
   @media (min-width: ${g.phoneMediaBreak}px) {
     width: 100%;
     @media (min-width: ${g.desktopMediaBreak}px) {
       width: 75%;
-      background: #ffffff;
-      background-image: url(${background});
+      background: transparent;
     }
   }
 `;

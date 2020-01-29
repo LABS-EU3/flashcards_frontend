@@ -1,10 +1,11 @@
+/* eslint-disable react/destructuring-assignment */
 import React, { useState, useEffect } from 'react';
-
+import { MdImage, MdAddAPhoto } from 'react-icons/md';
 import { Formik, useField } from 'formik';
 import * as yup from 'yup';
 import { connect } from 'react-redux';
 import LightPopButton from '../buttons/LightPopButton';
-import { H1, Text, H3 } from '../../styles/typography';
+import { H1, Text, H3, H2, P } from '../../styles/typography';
 import { Forms, TextArea, FormContainer, CardLabel } from '../../styles/forms';
 import * as c from '../../styles/variables/colours';
 import { GrowSpace } from '../../styles/displayFlex';
@@ -28,7 +29,6 @@ const InputField = ({ title, btnName, setCallback, ...props }) => {
       <TextArea
         {...field}
         {...props}
-        // eslint-disable-next-line react/destructuring-assignment
         value={props.card[`${props.name}`]}
         onChange={handleChange}
       />
@@ -53,7 +53,21 @@ const InputField = ({ title, btnName, setCallback, ...props }) => {
           )
         }
       >
-        Upload Image
+        {props.card[btnName] ? (
+          <div>
+            <H2 className="imageH2">
+              <MdImage />
+            </H2>
+            <P>Edit</P>
+          </div>
+        ) : (
+          <div>
+            <H2 className="imageH2">
+              <MdAddAPhoto />
+            </H2>
+            <P>Add</P>
+          </div>
+        )}
       </button>
     </CardLabel>
   );
