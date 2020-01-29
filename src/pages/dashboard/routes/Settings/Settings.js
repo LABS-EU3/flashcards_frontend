@@ -3,6 +3,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import RoundedImage from 'react-rounded-image';
 import styled from 'styled-components';
+import './settings.css';
 import { MdKeyboardArrowDown, MdCloudUpload } from 'react-icons/md';
 import useAction from '../../../../utils/useAction';
 import * as action from '../../../../modules/user/userActions';
@@ -128,10 +129,29 @@ const HideDiv2 = styled(InnerContainer).attrs({
   }
 `;
 
+const Cursor = styled(H2).attrs({
+  className: 'cursor',
+})`
+  &.cursor {
+    font-size: 1.5em;
+    color: red;
+    cursor: pointer;
+  }
+`;
+const Cursor2 = styled(H2).attrs({
+  className: 'cursor2',
+})`
+  &.cursor2 {
+    font-size: 1em;
+    color: #3399ff;
+    cursor: pointer;
+  }
+`;
+
 const ProfileInnerContainer = styled.div`
- display: flex;
- align-items: center;
- justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export default function Settings() {
@@ -171,16 +191,20 @@ export default function Settings() {
       <TopContainer>
         <ProfileImageDiv>
           <ProfileInnerContainer>
-          <RoundedImage
-            // eslint-disable-next-line max-len
-            image={profileDefault}
-            alt="User's profile"
-            imageHeight="100"
-            imageWidth="100"
-            roundedSize="1"
-            roundedColor="#FFF"
-          />
-          <MdCloudUpload size="3.5em" color="grey" onClick={uploadProfileImg} />
+            <RoundedImage
+              // eslint-disable-next-line max-len
+              image={profileDefault}
+              alt="User's profile"
+              imageHeight="100"
+              imageWidth="100"
+              roundedSize="1"
+              roundedColor="#FFF"
+            />
+            <MdCloudUpload
+              size="3.5em"
+              color="grey"
+              onClick={uploadProfileImg}
+            />
           </ProfileInnerContainer>
           <H1>{credentials.full_name}</H1>
           <P>{credentials.email}</P>
@@ -242,8 +266,8 @@ export default function Settings() {
             {open2 && (
               <>
                 <TopLeftBottomContainer>
-                  <H2 fontSize="2.5em" color="red" onClick={handleButtonClick5}>
-                    Delete Account
+                  <H2 onClick={handleButtonClick5} className="cursor">
+                    <Cursor>Delete Account</Cursor>
                   </H2>
                   {open5 && <AccountManagementForm />}
                 </TopLeftBottomContainer>
@@ -254,8 +278,8 @@ export default function Settings() {
                     </H2>
                     <P>Beta 0.3.0</P>
                   </UpperCardSection>
-                  <H2 color="#3399FF" onClick={handleButtonClick4}>
-                    Help Center
+                  <H2 onClick={handleButtonClick4} className="cursor2">
+                    <Cursor2>Help Center</Cursor2>
                   </H2>
                   {open4 && <HelpCenterForm />}
                 </>
