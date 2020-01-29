@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
-
+import styled from 'styled-components';
 import AddDeckForm from '../../../../components/addDeckForm/AddDeckForm';
 import DecksSection from './components/DecksSection';
 import TopComponent from './components/TopComponent';
@@ -14,6 +14,9 @@ import * as types from '../../../../modules/dashboard/dashboardTypes';
 
 import FancyModal from '../../../../components/modals/CreateResourceModal';
 
+const DeckLibContainer = styled.div`
+  background: transparent;
+`;
 const DeckLibrary = props => {
   const { dashboard } = props;
   // eslint-disable-next-line react/destructuring-assignment
@@ -44,7 +47,7 @@ const DeckLibrary = props => {
   }, []);
 
   return (
-    <div>
+    <DeckLibContainer>
       <TopComponent setIsEditMode={setIsEditMode} />
       <FancyModal
         isOpen={creatingDeck}
@@ -61,7 +64,7 @@ const DeckLibrary = props => {
         setIsEditMode={setIsEditMode}
         isEditMode={isEditMode}
       />
-    </div>
+    </DeckLibContainer>
   );
 };
 

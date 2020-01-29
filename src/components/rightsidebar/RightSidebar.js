@@ -170,7 +170,7 @@ const SideContent = ({ user }) => {
           <StyledStart>
             <H1 BOLD>
               {' '}
-              Recently Viewed
+              Last Viewed
               <IconButtonWrapper
                 rotate={openRecentlyViewed}
                 onClick={handleButtonClickRecentlyViewed}

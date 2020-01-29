@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import * as c from '../../styles/variables/colours';
 
 export const MainPage = styled.div`
-  background: #fff;
   width: 100%;
+  background: transparent;
 `;
 
 export const Banner = styled.div`
@@ -62,11 +62,15 @@ export const MainSection = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
   }
+  h3 {
+    text-align: center;
+  }
 `;
 
 /* Content */
 export const Content = styled.div`
   flex-basis: 45%;
+  background: #ffffff;
   margin-bottom: 3%;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 2px;
@@ -107,4 +111,5 @@ export const Card = styled.div`
   &:hover {
     cursor: pointer;
   }
+  z-index: 1;
 `;
