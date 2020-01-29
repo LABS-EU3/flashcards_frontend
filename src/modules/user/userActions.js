@@ -155,3 +155,21 @@ export const googleAuthorized = (token, history) => dispatch => {
       });
     });
 };
+
+export const fetchRankings = () => dispatch => {
+  dispatch({ type: types.FETCH_RANKS_START });
+  axiosWithAuth()
+    .get(`/users/leaderboard`)
+    .then(({ data }) => {
+      dispatch({
+        type: types.FETCH_RANKS_SUCCESS,
+        payload: data.data,
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: types.FETCH_RANKS_FAILURE,
+        payload: err,
+      });
+    });
+};
