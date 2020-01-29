@@ -3,7 +3,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import RoundedImage from 'react-rounded-image';
 import styled from 'styled-components';
-import { MdKeyboardArrowDown } from 'react-icons/md';
+import { MdKeyboardArrowDown, MdCloudUpload } from 'react-icons/md';
 import useAction from '../../../../utils/useAction';
 import * as action from '../../../../modules/user/userActions';
 
@@ -128,6 +128,12 @@ const HideDiv2 = styled(InnerContainer).attrs({
   }
 `;
 
+const ProfileInnerContainer = styled.div`
+ display: flex;
+ align-items: center;
+ justify-content: center;
+`;
+
 export default function Settings() {
   const { credentials } = useSelector(state => state.user);
   const logoutUser = useAction(action.logoutUser);
@@ -158,11 +164,13 @@ export default function Settings() {
   const handleButtonClick5 = () => {
     setOpen5(!open5);
   };
+  const uploadProfileImg = () => {};
 
   return (
     <Wrapper>
       <TopContainer>
         <ProfileImageDiv>
+          <ProfileInnerContainer>
           <RoundedImage
             // eslint-disable-next-line max-len
             image={profileDefault}
@@ -172,7 +180,8 @@ export default function Settings() {
             roundedSize="1"
             roundedColor="#FFF"
           />
-
+          <MdCloudUpload size="3.5em" color="grey" onClick={uploadProfileImg} />
+          </ProfileInnerContainer>
           <H1>{credentials.full_name}</H1>
           <P>{credentials.email}</P>
         </ProfileImageDiv>
