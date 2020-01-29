@@ -190,7 +190,6 @@ export default function Settings() {
                   size="3.5em"
                   color="grey"
                   onClick={handleButtonClick1}
-                  className="material-icons"
                 />
               </IconButtonWrapper>
             </UpperCardSection>
@@ -209,7 +208,6 @@ export default function Settings() {
                     size="3.5em"
                     color="grey"
                     onClick={handleButtonClick3}
-                    className="material-icons"
                   />
                 </IconButtonWrapper>
               </UpperCardSection>
@@ -228,7 +226,6 @@ export default function Settings() {
                   size="3.5em"
                   color="grey"
                   onClick={handleButtonClick2}
-                  className="material-icons"
                 />
               </IconButtonWrapper>
             </UpperCardSection>
@@ -279,7 +276,6 @@ export default function Settings() {
                     size="3.5em"
                     color="grey"
                     onClick={handleButtonClick3}
-                    className="material-icons"
                   />
                 </IconButtonWrapper>
               </UpperCardSection>
