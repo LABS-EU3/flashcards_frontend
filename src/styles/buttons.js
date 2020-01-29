@@ -52,7 +52,7 @@ export const LogoutButton = styled.button`
   border: 3px solid #444140;
   outline: none;
   width: 100%;
-  margin: 1em 0em 1em 0em;
+  margin: 5em 0em 1em 0em;
   box-shadow: 0px 4px 4px rgba(210, 31, 60, 0.03);
   background: #ffffff;
   &:hover {
