@@ -19,6 +19,7 @@ import logo from '../../assets/logo.svg';
 import { getToken } from '../../utils/auth';
 
 const TopBarContainer = styled.div`
+  background: #ffffff;
   display: flex;
   align-content: center;
   justify-content: flex-start;

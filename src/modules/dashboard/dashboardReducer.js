@@ -1,5 +1,5 @@
 import * as types from './dashboardTypes';
-import deckTags from '../../utils/deckTags';
+import { deckTags } from '../../utils/deckTags';
 
 const initialState = {
   loading: false,
@@ -16,8 +16,8 @@ const initialState = {
   selectedDeck: {},
   selectedCard: {},
   tags: deckTags,
-  showingAnswers: false,
   showMenu: false,
+  confirmingDeletion: false,
 };
 
 const dashboardReducer = (state = initialState, action) => {
@@ -179,12 +179,6 @@ const dashboardReducer = (state = initialState, action) => {
         selectedCard: action.payload,
       };
 
-    case types.TOGGLE_ANSWERS:
-      return {
-        ...state,
-        showingAnswers:
-          action.payload != null ? action.payload : !state.showingAnswers,
-      };
     case types.HAMBURGER_CLICKED:
       return {
         ...state,
@@ -206,6 +200,23 @@ const dashboardReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         errors: action.payload,
+      };
+    case types.ON_START_DELETE_CONFIRMATION:
+      return { ...state, confirmingDeletion: true, loading: true };
+
+    case types.ON_DELETE_CONFIRMATION_SUCCESS:
+      return {
+        ...state,
+        confirmingDeletion: false,
+
+        loading: false,
+      };
+
+    case types.ON_DELETE_CONFIRMATION_CANCELED:
+      return {
+        ...state,
+        loading: false,
+        confirmingDeletion: false,
       };
 
     default:

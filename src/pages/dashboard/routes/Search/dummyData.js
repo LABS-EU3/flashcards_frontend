@@ -1,0 +1,48 @@
+// eslint-disable-next-line import/prefer-default-export
+export const dummyData = [
+  {
+    deck_id: 1,
+    user_id: 1,
+    deck_name: 'Statistical Learning',
+    public: true,
+    created_at: '2020-01-13T15:49:59.080Z',
+    updated_at: '2020-01-13T15:49:59.080Z',
+    tags: ['Accounting & Finance', 'Aeronautical & Manufacturing Engineering'],
+  },
+  {
+    deck_id: 3,
+    user_id: 3,
+    deck_name: 'Technology ',
+    public: true,
+    created_at: '2020-01-13T15:49:59.080Z',
+    updated_at: '2020-01-13T15:49:59.080Z',
+    tags: ['Anthropology', 'Archaeology'],
+  },
+  {
+    deck_id: 4,
+    user_id: 4,
+    deck_name: 'Biology ',
+    public: true,
+    created_at: '2020-01-13T15:49:59.080Z',
+    updated_at: '2020-01-13T15:49:59.080Z',
+    tags: ['Architecture', 'Art & Design'],
+  },
+  {
+    deck_id: 5,
+    user_id: 5,
+    deck_name: 'Basic General Knowledge',
+    public: true,
+    created_at: '2020-01-13T15:49:59.080Z',
+    updated_at: '2020-01-13T15:49:59.080Z',
+    tags: ['Aural & Oral Sciences', 'Biological Sciences'],
+  },
+  {
+    deck_id: 6,
+    user_id: 6,
+    deck_name: 'Famous Personalities',
+    public: true,
+    created_at: '2020-01-13T15:49:59.080Z',
+    updated_at: '2020-01-13T15:49:59.080Z',
+    tags: ['Building', 'Business & Management Studies'],
+  },
+];

@@ -9,9 +9,9 @@ import Modal from 'react-awesome-modal';
 // import { SquareLoader } from 'react-spinners';
 
 // Styles
+import styled from 'styled-components';
 import { Text, H1, H2, H3 } from '../../../../styles/typography';
 import { LineButton } from '../../../../styles/buttons';
-import styled from 'styled-components';
 import * as c from '../../../../styles/variables/colours';
 import { Forms, Input, Label } from '../../../../styles/forms';
 import { InnerContainer } from './Settings';

@@ -1,42 +1,57 @@
 // Libraries
 import React, { useState } from 'react';
 import Sidebar from 'react-sidebar';
+import { MdKeyboardArrowDown } from 'react-icons/md';
+import { Line } from 'rc-progress';
 
 // components
 import Card from '../cards/Cards';
 
 // styles
-import { H1, HR } from '../../styles/typography';
+import { H1, HR, H3, P, H2 } from '../../styles/typography';
 import * as g from '../../styles/variables/global';
-
 import {
   SidebarBody,
   Image,
   CardsStyled,
   StyledStart,
   SidebarStyled,
+  IconButtonWrapper,
+  ViewedCardsStyled,
+  MiddleHolder,
+  BlackContainer,
+  XPHolder,
+  LevelHolder,
+  SectionHolder,
 } from '../../styles/sidebarStyles';
+
+import levelIcon from '../../assets/icons/label_important_24px_outlined.svg';
 
 const cards = [
   {
     title: 'Organic Compounds',
     category: 'Chemistry',
+    totalCard: 30,
   },
   {
     title: 'Quantum Mechanics',
     category: 'Physics',
+    totalCard: 40,
   },
   {
     title: 'Data Structures',
     category: 'Computer Science',
+    totalCard: 320,
   },
   {
     title: 'Advance Algorithms',
     category: 'Computer Science',
+    totalCard: 70,
   },
   {
     title: 'OWASP Basics',
     category: 'Computer Science',
+    totalCard: 100,
   },
 ];
 
@@ -67,7 +82,7 @@ export default function RightSidebar(props) {
           sidebar: {
             background: 'white',
             width: '100%',
-            minWidth: '250px',
+            minWidth: '3em',
           },
 
           root: {
@@ -82,31 +97,108 @@ export default function RightSidebar(props) {
   );
 }
 const SideContent = ({ user }) => {
+  const [openLastPlayed, setOpenLastPlayed] = useState(false);
+  const [openRecentlyViewed, setOpenRecentlyViewed] = useState(true);
+
+  const handleButtonClickLastPlayed = () => {
+    setOpenLastPlayed(!openLastPlayed);
+  };
+  const handleButtonClickRecentlyViewed = () => {
+    setOpenRecentlyViewed(!openRecentlyViewed);
+  };
+
   return (
     <SidebarBody>
-      <Image>
-        <H1> Welcome {user.credentials.fullName}!</H1>
-      </Image>
-      <CardsStyled>
-        <StyledStart>
-          <H1 BOLD>
-            {' '}
-            Jump back into
-            <div>
-              <HR />
-            </div>
-          </H1>
-        </StyledStart>
-        {cards.map(card => {
-          return (
-            <Card
-              key={card.title}
-              title={card.title}
-              category={card.category}
-            />
-          );
-        })}
-      </CardsStyled>
+      <BlackContainer>
+        <Image>
+          <MiddleHolder>
+            <H1>{user.credentials.fullName}!</H1>
+            <H3>Ranked #1</H3>
+            <XPHolder>
+              <Line
+                percent="50"
+                strokeLineColor="red"
+                strokeWidth="4"
+                trailWidth="4"
+                trailColor="#fafafa"
+                strokeColor="#8D99AE"
+                className="pBar2"
+              />
+              <P className="xp">1000/2000 XP</P>
+            </XPHolder>
+            <LevelHolder>
+              <img src={levelIcon} alt="level icon" />
+              <H2>Level 1</H2>
+            </LevelHolder>
+          </MiddleHolder>
+        </Image>
+      </BlackContainer>
+      <SectionHolder>
+        <CardsStyled>
+          <StyledStart>
+            <H1 BOLD>
+              {' '}
+              Last Played
+              <IconButtonWrapper
+                rotate={openLastPlayed}
+                onClick={handleButtonClickLastPlayed}
+              >
+                <MdKeyboardArrowDown
+                  size="1.15em"
+                  color="grey"
+                  onClick={handleButtonClickLastPlayed}
+                />
+              </IconButtonWrapper>
+              <div>
+                <HR />
+              </div>
+            </H1>
+          </StyledStart>
+          {openLastPlayed &&
+            cards.map(card => {
+              return (
+                <Card
+                  key={card.title}
+                  title={card.title}
+                  category={card.category}
+                  totalCard={card.totalCard}
+                />
+              );
+            })}
+        </CardsStyled>
+        <ViewedCardsStyled>
+          <StyledStart>
+            <H1 BOLD>
+              {' '}
+              Last Viewed
+              <IconButtonWrapper
+                rotate={openRecentlyViewed}
+                onClick={handleButtonClickRecentlyViewed}
+              >
+                <MdKeyboardArrowDown
+                  size="1.15em"
+                  color="grey"
+                  onClick={handleButtonClickRecentlyViewed}
+                />
+              </IconButtonWrapper>
+              <div>
+                <HR />
+              </div>
+            </H1>
+          </StyledStart>
+          {openRecentlyViewed &&
+            cards.map(card => {
+              return (
+                <Card
+                  key={card.title}
+                  title={card.title}
+                  category={card.category}
+                  totalCard={card.totalCard}
+                />
+              );
+            })}
+        </ViewedCardsStyled>
+      </SectionHolder>
     </SidebarBody>
   );
 };

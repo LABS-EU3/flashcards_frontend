@@ -24,8 +24,8 @@ export default function FancyModal(props) {
 }
 
 const FancyH2 = styled(H2)`
-  align-self: flex-start;
-  margin-left: 10px;
+  align-self: flex-end;
+  margin-right: 10px;
 
   &:hover {
     cursor: pointer;

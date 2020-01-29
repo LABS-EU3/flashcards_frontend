@@ -90,7 +90,28 @@ const Form = props => {
             }
           />
         </CardLabel>
-
+        <CardLabel>
+          {/* THIS FUNCTIONALITY IS ALL WRONG I JUST COPIED AND PASTE */}
+          <H2>Deck Privacy</H2>
+          {touched.tag && errors.tag && (
+            <Text color={c.DANGER_COLOR}>{errors.deckName}</Text>
+          )}
+          <Select
+            placeholder="Add tags to your deck"
+            type="text"
+            onChange={e => {
+              handleChange(e);
+              addTag(e.target.value);
+            }}
+            onBlur={handleBlur}
+            value={values.tag}
+            name="tag"
+            border={touched.tag && errors.tag && `2px solid ${c.DANGER_COLOR}`}
+          >
+            <option value="false">Private</option>
+            <option value="true">Public</option>
+          </Select>
+        </CardLabel>
         <CardLabel>
           <H2>Tags</H2>
           {touched.tag && errors.tag && (

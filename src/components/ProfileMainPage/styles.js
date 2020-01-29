@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import * as c from '../../styles/variables/colours';
 
 export const MainPage = styled.div`
-  background: #fff;
   width: 100%;
+  background: transparent;
 `;
 
 export const Banner = styled.div`
@@ -20,22 +20,19 @@ export const Banner = styled.div`
 `;
 
 export const WelcomeMessage = styled.div`
-  h2 {
-    font-size: 24px;
-    color: #444140;
-    font-weight: bold;
+  h1 {
     position: absolute;
     right: 30px;
-    top: 50px;
+    top: 0px;
   }
 `;
 
 export const Image = styled.div`
-  width: 120px;
-  height: 120px;
+  width: 12em;
+  height: 12em;
   position: relative;
-  margin-top: -90px;
-  margin-left: 30px;
+  margin-top: -9em;
+  margin-left: 3em;
 
   img {
     display: inline-block;
@@ -44,13 +41,10 @@ export const Image = styled.div`
     border: 1px solid #444140;
   }
 
-  h2 {
-    font-weight: bold;
-    font-size: 24px;
-    position: absolute;
-    top: 45%;
-    left: 120%;
-    color: #f6f1f0;
+  h1 {
+    position: relative;
+    top: -3.5em;
+    left: 6em;
     white-space: nowrap;
   }
 `;
@@ -68,34 +62,19 @@ export const MainSection = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
   }
+  h3 {
+    text-align: center;
   }
 `;
 
 /* Content */
 export const Content = styled.div`
   flex-basis: 45%;
+  background: #ffffff;
   margin-bottom: 3%;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 2px;
   padding: 1%;
-  font-size: 12px;
-  h1 {
-    font-weight: bold;
-    font-size: 2.5em;
-    font-family: 'Lato';
-    line-height: 29px;
-    color: #444140;
-    padding-bottom: 0.6rem;
-    border-bottom: 1px solid pink;
-    margin-bottom: 0.5em;
-  }
-
-  span {
-    text-align: center;
-    margin-top: 0.7em;
-    font-size: 1.8rem;
-    display: block;
-  }
 `;
 
 export const Tag = styled.div`
@@ -108,9 +87,8 @@ export const Tag = styled.div`
 export const Tags = styled.div`
   padding: 0.2em;
   padding-left: 0.5em;
-  padding-right: 0.5em
+  padding-right: 0.5em;
   display: flex;
-  font-size: 1.2em;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-content: space-around;
@@ -118,7 +96,6 @@ export const Tags = styled.div`
 
 export const Card = styled.div`
   display: flex;
-  font-size: 1.5em;
   flex-direction: column;
   align-items: left;
   padding-left: 10px;
@@ -134,4 +111,5 @@ export const Card = styled.div`
   &:hover {
     cursor: pointer;
   }
+  z-index: 1;
 `;

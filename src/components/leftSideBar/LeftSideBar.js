@@ -6,7 +6,6 @@ import RoundedImage from 'react-rounded-image';
 import '../../App.css';
 import {
   MdDashboard,
-  MdAddToPhotos,
   MdSettings,
   MdPerson,
   MdContentCopy,
@@ -59,11 +58,11 @@ const LeftSideBar = ({ name }) => {
           text="Profile"
           route="/dashboard/profile"
         />
-        <MenuItem
+        {/* <MenuItem
           img={<MdAddToPhotos size="1.5em" />}
           text="Add Decks"
           route="/dashboard/add_decks"
-        />
+        /> */}
         <MenuItem
           img={<MdContentCopy size="1.5em" />}
           text="Deck Library"

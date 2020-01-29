@@ -122,7 +122,7 @@ const HideDiv2 = styled(InnerContainer).attrs({
   className: 'mobileDiv2',
 })`
   &.mobileDiv2 {
-    @media (min-width: 800px) {
+    @media (min-width: 768px) {
       display: none;
     }
   }

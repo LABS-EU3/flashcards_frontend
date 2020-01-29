@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
-
+import styled from 'styled-components';
 import AddDeckForm from '../../../../components/addDeckForm/AddDeckForm';
 import DecksSection from './components/DecksSection';
 import TopComponent from './components/TopComponent';
@@ -14,6 +14,9 @@ import * as types from '../../../../modules/dashboard/dashboardTypes';
 
 import FancyModal from '../../../../components/modals/CreateResourceModal';
 
+const DeckLibContainer = styled.div`
+  background: transparent;
+`;
 const DeckLibrary = props => {
   const { dashboard } = props;
   // eslint-disable-next-line react/destructuring-assignment
@@ -21,6 +24,7 @@ const DeckLibrary = props => {
   const { creatingDeck, userDecks, tags } = dashboard;
 
   const [opacity, setOpacity] = useState(0);
+  const [isEditMode, setIsEditMode] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -43,8 +47,8 @@ const DeckLibrary = props => {
   }, []);
 
   return (
-    <div>
-      <TopComponent />
+    <DeckLibContainer>
+      <TopComponent setIsEditMode={setIsEditMode} />
       <FancyModal
         isOpen={creatingDeck}
         afterOpen={afterOpen}
@@ -55,8 +59,12 @@ const DeckLibrary = props => {
         <AddDeckForm tags={tags} />
       </FancyModal>
 
-      <DecksSection decks={userDecks} />
-    </div>
+      <DecksSection
+        decks={userDecks}
+        setIsEditMode={setIsEditMode}
+        isEditMode={isEditMode}
+      />
+    </DeckLibContainer>
   );
 };
 
