@@ -3,7 +3,6 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import RoundedImage from 'react-rounded-image';
 import styled from 'styled-components';
-import './settings.css';
 import { MdKeyboardArrowDown, MdCloudUpload } from 'react-icons/md';
 import useAction from '../../../../utils/useAction';
 import * as action from '../../../../modules/user/userActions';
