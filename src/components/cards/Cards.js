@@ -37,7 +37,6 @@ export const CardCount = styled(SLower)`
   align-self: flex-end;
   width: 30%;
   float: left;
-
   .studyIcon {
     visibility: hidden;
   }

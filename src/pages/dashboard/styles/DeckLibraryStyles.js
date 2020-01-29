@@ -119,6 +119,11 @@ export const CardsFlexs = styled(CardsFlex)`
   input {
     margin-right: 1em;
   }
+  .navFlex {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
 `;
 
 export const EditControls = styled.div`

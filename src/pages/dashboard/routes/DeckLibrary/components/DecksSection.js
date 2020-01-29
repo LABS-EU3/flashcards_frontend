@@ -59,22 +59,23 @@ const Decks = ({ decks, isEditMode, setIsEditMode }) => {
               marginRight="0"
             >
               {isEditMode && <input type="checkbox" />}
-              <NavLink to={`/dashboard/deck/${d.deck_id}`}>
+              <NavLink to={`/dashboard/deck/${d.deck_id}`} className="navFlex">
                 <InfoHolder>
                   <H2 BOLD>{d.deck_name}</H2>
                   <P>Tags</P>
                 </InfoHolder>
+
+                <CardCount>
+                  <P color="grey">30 Cards </P>
+                  <NavLink to="/dashboard/study">
+                    <MdCollectionsBookmark
+                      size="2em"
+                      color="grey"
+                      className="studyIcon"
+                    />
+                  </NavLink>
+                </CardCount>
               </NavLink>
-              <CardCount>
-                <P color="grey">30 Cards </P>
-                <NavLink to="/dashboard/study">
-                  <MdCollectionsBookmark
-                    size="2em"
-                    color="grey"
-                    className="studyIcon"
-                  />
-                </NavLink>
-              </CardCount>
             </CardsFlexs>
           );
         })}
