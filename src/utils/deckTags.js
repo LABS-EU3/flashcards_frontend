@@ -1,4 +1,4 @@
-const deckTags = [
+export const deckTags = [
   { id: 1, name: 'Accounting & Finance' },
   { id: 2, name: 'Aeronautical & Manufacturing Engineering' },
   { id: 3, name: 'Agriculture & Forestry' },

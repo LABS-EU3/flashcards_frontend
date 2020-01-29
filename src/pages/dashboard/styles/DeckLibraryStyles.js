@@ -56,6 +56,16 @@ export const IconWithoutText = styled(IconWithText)`
   }
 `;
 
+// export const ImageIcons = styled(IconWithText)`
+//   // background: red;
+//   // padding-bottom: 20px;
+
+//   &:hover {
+//     cursor: pointer;
+//     background: none;
+//   }
+// `;
+
 export const TopComponentDiv = styled.div`
   display: flex;
   flex-direction: column;

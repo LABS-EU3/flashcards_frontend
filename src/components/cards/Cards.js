@@ -1,23 +1,46 @@
 import React from 'react';
 import styled from 'styled-components';
+import { MdCollectionsBookmark } from 'react-icons/md';
 
 // styled
 import { P, H2 } from '../../styles/typography';
 import * as c from '../../styles/variables/colours';
 import * as g from '../../styles/variables/global';
+import { SLower } from '../../pages/dashboard/routes/StudyMode/StudyMode';
 
-export default function Cards({ title, category }) {
+export default function Cards({ title, category, totalCard }) {
   return (
     <CardsFlex>
-      <H2 BOLD>{title}</H2>
-      <P>{category}</P>
+      <InfoHolder>
+        <H2 BOLD>{title}</H2>
+        <P>{category}</P>
+      </InfoHolder>
+      <CardCount>
+        <P color="grey">{totalCard} Cards </P>
+        <MdCollectionsBookmark size="2em" color="grey" className="studyIcon" />
+      </CardCount>
     </CardsFlex>
   );
 }
 
-export const CardsFlex = styled.div`
+const CardCount = styled(SLower)`
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+  align-self: flex-end;
+  float: left;
+  .studyIcon {
+    visibility: hidden;
+  }
+`;
+const InfoHolder = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
+`;
+
+export const CardsFlex = styled.div`
+  display: flex;
   align-items: left;
   /* margin: 10px 20px 1 0px 20px; */
   padding-left: 10px;
@@ -43,14 +66,8 @@ export const CardsFlex = styled.div`
   }
   &:hover {
     cursor: pointer;
+    .studyIcon {
+      visibility: visible;
+    }
   }
-  //   background: linear-gradient(
-  //     88.85deg,
-  //     rgba(210, 31, 60, 0.5) 38.43%,
-  //     rgba(255, 169, 135, 0.5) 136.86%
-  //   );
-`;
-
-export const CardsFlex2 = styled(CardsFlex)`
-  backgrond: red;
 `;
