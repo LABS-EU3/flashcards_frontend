@@ -75,6 +75,16 @@ export const RightBottomContainer = styled.div`
   }
 `;
 
+export const TopLeftBottomContainer = styled.div`
+  /* margin: 10px 10px 10px 20px;
+  width: 100%; */
+  margin: 5% auto;
+  text-align: center;
+  /* @media (max-width: 768px) {
+    align-self: unset;
+  } */
+`;
+
 export const InnerContainer = styled.div`
   margin: 30px auto;
 `;
@@ -136,6 +146,7 @@ export default function Settings() {
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
   const [open4, setOpen4] = useState(false);
+  const [open5, setOpen5] = useState(false);
 
   const handleButtonClick1 = () => {
     setOpen1(!open1);
@@ -148,6 +159,9 @@ export default function Settings() {
   };
   const handleButtonClick4 = () => {
     setOpen4(!open4);
+  };
+  const handleButtonClick5 = () => {
+    setOpen5(!open5);
   };
 
   return (
@@ -224,12 +238,33 @@ export default function Settings() {
               </IconButtonWrapper>
             </UpperCardSection>
             <MyHR />
-            {open2 && <AccountManagementForm />}
+            {open2 && (
+              <>
+                <TopLeftBottomContainer>
+                  <H2 fontSize="2.5em" color="red" onClick={handleButtonClick5}>
+                    Delete Account
+                  </H2>
+                  {open5 && <AccountManagementForm />}
+                </TopLeftBottomContainer>
+                <>
+                  <UpperCardSection>
+                    <H2 fontSize="2em" lineHeight="1em">
+                      Version
+                    </H2>
+                    <P>Beta 0.3.0</P>
+                  </UpperCardSection>
+                  <H2 color="#3399FF" onClick={handleButtonClick4}>
+                    Help Center
+                  </H2>
+                  {open4 && <HelpCenterForm />}
+                </>
+              </>
+            )}
           </InnerContainer>
           <InnerContainer className="mobileDiv1">
-            <H2 fontSize="2.5em" color="red">
+            {/* <H2 fontSize="2.5em" color="red">
               Delete Account
-            </H2>
+            </H2> */}
             <HideDiv1>
               <LogoutButton>
                 <StyledLink to="/login" onClick={onLogout}>
@@ -262,7 +297,7 @@ export default function Settings() {
           </InnerContainer>
 
           <InnerContainer>
-            <UpperCardSection>
+            {/* <UpperCardSection>
               <H2 fontSize="2em" lineHeight="1em">
                 Version
               </H2>
@@ -271,7 +306,7 @@ export default function Settings() {
             <H2 color="#3399FF" onClick={handleButtonClick4}>
               Help Center
             </H2>
-            {open4 && <HelpCenterForm />}
+            {open4 && <HelpCenterForm />} */}
           </InnerContainer>
 
           <InnerContainer className="mobileDiv2">
