@@ -10,13 +10,41 @@ import Modal from 'react-awesome-modal';
 
 // Styles
 import { Text, H1, H2, H3 } from '../../../../styles/typography';
-import { LineButton, Button2 } from '../../../../styles/buttons';
+import { LineButton } from '../../../../styles/buttons';
+import styled from 'styled-components';
 import * as c from '../../../../styles/variables/colours';
 import { Forms, Input, Label } from '../../../../styles/forms';
-import { Wrapper, InnerContainer } from './Settings';
+import { InnerContainer } from './Settings';
 
 // Actions
 import { manageAccount } from '../../../../modules/user/userActions';
+
+// export const ModalWrapper = styled.div``;
+export const ModalButton = styled.button`
+  text-align: center;
+  border-radius: 3px;
+  border: 1px solid #f6f1f0;
+  outline: none;
+  width: 60%;
+  margin: 1em 0em 1em 0em;
+  box-shadow: 0px 4px 4px rgba(210, 31, 60, 0.03);
+  background: #ffffff;
+  &:hover {
+    transform: scale(1.01);
+  }
+  &:active {
+    transform: scale(1.01);
+    background: ${c.PRIMARY_POP_COLOR};
+  }
+  &:not([disabled]) {
+    cursor: pointer;
+  }
+  @media (max-width: 900px) {
+    width: 95%;
+    margin: 1em 0;
+    padding-bottom: 0;
+  }
+`;
 
 const AccoutManagementForm = props => {
   const {
@@ -112,23 +140,25 @@ const AccoutManagementForm = props => {
       </LineButton>
       <Modal
         visible={state.visible}
-        width="400"
+        width="80%"
         height="300"
+        borde-radius="50%"
         effect="fadeInUp"
         onClickAway={closeModal}
+        className="modalClass"
       >
-        <Wrapper>
+        <ModalWrapper>
           <H1 color="red">Delete Account</H1>
           <H2>Are you sure you want to delete?</H2>
           <InnerContainer>
-            <Button2 onClick={closeModal}>
+            <ModalButton onClick={closeModal}>
               <H2>Close</H2>
-            </Button2>
-            <Button2 onClick={handleSubmit} onClick={closeModal}>
+            </ModalButton>
+            <ModalButton onClick={handleSubmit} onClick={closeModal}>
               <H2 color="red">Delete</H2>
-            </Button2>
+            </ModalButton>
           </InnerContainer>
-        </Wrapper>
+        </ModalWrapper>
       </Modal>
     </Forms>
   );
