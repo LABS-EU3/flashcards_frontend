@@ -19,7 +19,7 @@ import { InnerContainer } from './Settings';
 // Actions
 import { manageAccount } from '../../../../modules/user/userActions';
 
-// export const ModalWrapper = styled.div``;
+export const ModalWrapper = styled.div``;
 export const ModalButton = styled.button`
   text-align: center;
   border-radius: 3px;
