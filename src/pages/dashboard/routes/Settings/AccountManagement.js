@@ -1,22 +1,24 @@
 // Import
 
 // Libraries
-import React from 'react';
+import React, { useState } from 'react';
 import { withFormik } from 'formik';
 import { connect } from 'react-redux';
 import * as yup from 'yup';
+import Modal from 'react-awesome-modal';
 // import { SquareLoader } from 'react-spinners';
 
 // Styles
-import { Text, H3 } from '../../../../styles/typography';
-import { LineButton } from '../../../../styles/buttons';
+import { Text, H1, H2, H3 } from '../../../../styles/typography';
+import { LineButton, Button2 } from '../../../../styles/buttons';
 import * as c from '../../../../styles/variables/colours';
 import { Forms, Input, Label } from '../../../../styles/forms';
+import { Wrapper, InnerContainer } from './Settings';
 
 // Actions
 import { manageAccount } from '../../../../modules/user/userActions';
 
-const PasswordManagementForm = props => {
+const AccoutManagementForm = props => {
   const {
     values,
     handleChange,
@@ -26,6 +28,15 @@ const PasswordManagementForm = props => {
     errors,
   } = props;
 
+  const [state, setState] = useState({ visible: false });
+
+  function openModal() {
+    setState({ visible: true });
+  }
+
+  function closeModal() {
+    setState({ visible: false });
+  }
   // const [response, setResponse] = useState(null);
 
   // useEffect(() => {
@@ -88,7 +99,7 @@ const PasswordManagementForm = props => {
           }
         />
       </Label>
-      <LineButton type="">
+      <LineButton type="" onClick={openModal}>
         <H3 color={c.DANGER_COLOR}>
           Delete
           {/* <SquareLoader
@@ -99,6 +110,26 @@ const PasswordManagementForm = props => {
           /> */}
         </H3>
       </LineButton>
+      <Modal
+        visible={state.visible}
+        width="400"
+        height="300"
+        effect="fadeInUp"
+        onClickAway={closeModal}
+      >
+        <Wrapper>
+          <H1 color="red">Delete Account</H1>
+          <H2>Are you sure you want to delete?</H2>
+          <InnerContainer>
+            <Button2 onClick={closeModal}>
+              <H2>Close</H2>
+            </Button2>
+            <Button2 onClick={handleSubmit} onClick={closeModal}>
+              <H2 color="red">Delete</H2>
+            </Button2>
+          </InnerContainer>
+        </Wrapper>
+      </Modal>
     </Forms>
   );
 };
@@ -127,7 +158,7 @@ const AMForm = withFormik({
     setSubmitting(false);
   },
   validationSchema,
-})(PasswordManagementForm);
+})(AccoutManagementForm);
 
 const mapStateToProps = state => {
   return {
