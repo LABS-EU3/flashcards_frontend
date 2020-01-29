@@ -50,7 +50,7 @@ export default function TopBar() {
 
   return (
     <TopBarContainer>
-      {credentials.id ? (
+      {credentials && credentials.id ? (
         <HambuggerWrapper>
           <MdReorder
             onClick={() => {
