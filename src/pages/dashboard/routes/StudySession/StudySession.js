@@ -101,7 +101,12 @@ export default function CarouselComponent() {
     <Container>
       <TopCompDiv>
         <CardContainer>
-          <Carousel showThumbs={false} swipeable>
+          <Carousel
+            showThumbs={false}
+            showIndicators={false}
+            useKeyboardArrows={true}
+            swipeable
+          >
             {dummyData.map((data, index) => {
               return <StudyCard key={index} card={data} />;
             })}
