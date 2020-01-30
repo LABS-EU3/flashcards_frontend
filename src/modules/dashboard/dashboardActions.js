@@ -217,25 +217,25 @@ export const fetchSessions = () => dispatch => {
 };
 
 export const fetchSingleSession = id => dispatch => {
-  dispatch({ type: types.ON_START_FETCH_SESSIONS });
+  dispatch({ type: types.ON_START_FETCH_SINGLE_SESSION });
 
   axiosWithAuth()
     .get(`/sessions/${id}`)
     .then(({ data }) => {
       dispatch({
-        type: types.ON_FETCH_SESSIONS_SUCCESS,
-        payload: data.data,
+        type: types.ON_FETCH_SINGLE_SESSION_SUCCESS,
+        payload: data.session,
       });
     })
     .catch(error => {
       dispatch({
-        type: types.ON_FETCH_SESSIONS_FAILED,
+        type: types.ON_FETCH_SINGLE_SESSION_FAILED,
         payload: error.message,
       });
     });
 };
 
-export const startSession = deckId => dispatch => {
+export const startSession = (deckId, onSuccess) => dispatch => {
   dispatch({ type: types.ON_START_CREATE_SESSIONS });
 
   axiosWithAuth()
@@ -245,7 +245,8 @@ export const startSession = deckId => dispatch => {
         type: types.ON_CREATE_SESSIONS_SUCCESS,
         payload: data.session,
       });
-      dispatch(fetchSessions());
+      // dispatch(fetchSessions());
+      onSuccess(data.session.id);
     })
     .catch(error => {
       dispatch({
