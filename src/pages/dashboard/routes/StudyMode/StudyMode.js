@@ -284,18 +284,14 @@ const StudyMode = ({ dashboard, fetchDecks, getSessions, beginSession }) => {
           <CardContainer className="container" ref={container}>
             <StyledMyPart>
               {open1 &&
-                userSessions.map((data, index) => {
+                userSessions.map(data => {
+                  // Perform some gymnastics to obtain deck name since
+                  // it is currently not returned with the response.
+                  const deck = userDecks.find(d => d.deck_id === data.deck_id);
+                  const deckName = deck ? deck.deck_name : '';
                   return (
-                    /* eslint-disable-next-line react/no-array-index-key */
-                    <Card key={index}>
-                      <H2>
-                        {
-                          // Perform some gymnastics to obtain deck name since
-                          // it is currently not returned with the response.
-                          userDecks.find(d => d.deck_id === data.deck_id)
-                            .deck_name
-                        }
-                      </H2>
+                    <Card key={data.deck_id}>
+                      <H2>{deckName}</H2>
                       <SLowerCardSection>
                         <P>{data.mode || 'Regular'} mode</P>
                         <SLower>
