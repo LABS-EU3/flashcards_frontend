@@ -196,3 +196,41 @@ export const deleteDeck = deckId => dispatch => {
       });
     });
 };
+
+export const fetchSessions = () => dispatch => {
+  dispatch({ type: types.ON_START_FETCH_SESSIONS });
+
+  axiosWithAuth()
+    .get(`/sessions`)
+    .then(({ data }) => {
+      dispatch({
+        type: types.ON_FETCH_SESSIONS_SUCCESS,
+        payload: data,
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: types.ON_FETCH_SESSIONS_FAILED,
+        payload: error.message,
+      });
+    });
+};
+
+export const startSession = deckId => dispatch => {
+  dispatch({ type: types.ON_START_FETCH_SESSIONS });
+
+  axiosWithAuth()
+    .post(`/sessions`, { deckId })
+    .then(({ data }) => {
+      dispatch({
+        type: types.ON_FETCH_SESSIONS_SUCCESS,
+        payload: data,
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: types.ON_FETCH_SESSIONS_FAILED,
+        payload: error.message,
+      });
+    });
+};
