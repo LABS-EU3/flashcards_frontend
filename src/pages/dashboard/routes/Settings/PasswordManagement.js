@@ -1,11 +1,11 @@
 // Import
 
 // Libraries
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { withFormik } from 'formik';
 import { connect } from 'react-redux';
 import * as yup from 'yup';
-// import { SquareLoader } from 'react-spinners';
+import { SquareLoader } from 'react-spinners';
 
 // Styles
 import { Text, H3 } from '../../../../styles/typography';
@@ -24,35 +24,30 @@ const PasswordManagementForm = props => {
     handleSubmit,
     touched,
     errors,
+    user,
   } = props;
 
-  // const [response, setResponse] = useState(null);
+  const [response, setResponse] = useState(null);
 
-  // useEffect(() => {
-  //   if () {
-  //     setResponse(
-  //       <H3 color={c.SUCCESS_COLOR}>
-  //         Password update successfully
-  //       </H3>,
-  //     );
-  //   }
-  //   if (user.errors) {
-  //     setResponse(
-  //   <H3 color={c.DANGER_COLOR}>
-  //     Error while upadting account
-  //   </H3>
-  //  );
-  //   }
-  // }, [user.errors, user.completed]);
+  useEffect(() => {
+    if (user.completed) {
+      setResponse(
+        <H3 color={c.SUCCESS_COLOR}>Password update successfully</H3>,
+      );
+    }
+    if (user.errors) {
+      setResponse(<H3 color={c.DANGER_COLOR}>Error while upadting account</H3>);
+    }
+  }, [user.errors, user.completed]);
 
   return (
     <Forms onSubmit={handleSubmit}>
-      {/* {response} */}
+      {response}
 
       <Label>
         <H3>Current Password</H3>
-        {touched.password && errors.password && (
-          <Text color={c.DANGER_COLOR}>{errors.password}</Text>
+        {touched.currentPassword && errors.currentPassword && (
+          <Text color={c.DANGER_COLOR}>{errors.currentPassword}</Text>
         )}
         <Input
           type="password"
@@ -70,36 +65,38 @@ const PasswordManagementForm = props => {
       </Label>
       <Label>
         <H3>New Password</H3>
-        {touched.password && errors.password && (
-          <Text color={c.DANGER_COLOR}>{errors.password}</Text>
+        {touched.newPassword && errors.newPassword && (
+          <Text color={c.DANGER_COLOR}>{errors.newPassword}</Text>
         )}
         <Input
           type="password"
-          name="password"
-          placeholder="Password"
-          value={values.password}
+          name="newPassword"
+          placeholder="New Password"
+          value={values.newPassword}
           onBlur={handleBlur}
           onChange={handleChange}
           border={
-            touched.password && errors.password && `2px solid ${c.DANGER_COLOR}`
+            touched.newPassword &&
+            errors.newPassword &&
+            `2px solid ${c.DANGER_COLOR}`
           }
         />
       </Label>
       <Label>
         <H3>Confirm Password</H3>
-        {touched.password2 && errors.password2 && (
-          <Text color={c.DANGER_COLOR}>{errors.password2}</Text>
+        {touched.confirmNewPAssword && errors.confirmNewPAssword && (
+          <Text color={c.DANGER_COLOR}>{errors.confirmNewPAssword}</Text>
         )}
         <Input
           type="password"
-          name="password2"
-          placeholder="Confirm Password"
-          value={values.password2}
+          name="confirmNewPAssword"
+          placeholder="Confirm New Password"
+          value={values.confirmNewPAssword}
           onBlur={handleBlur}
           onChange={handleChange}
           border={
-            touched.password2 &&
-            errors.password2 &&
+            touched.confirmNewPAssword &&
+            errors.confirmNewPAssword &&
             `2px solid ${c.DANGER_COLOR}`
           }
         />
@@ -107,12 +104,12 @@ const PasswordManagementForm = props => {
       <Button2 type="">
         <H3 color={c.DARK_GRAY}>
           Submit
-          {/* <SquareLoader
+          <SquareLoader
             css={{ marginLeft: '20px' }}
             size={15}
             color="#FFA987"
             loading={user.loading}
-          /> */}
+          />
         </H3>
       </Button2>
     </Forms>
@@ -120,29 +117,28 @@ const PasswordManagementForm = props => {
 };
 
 const validationSchema = yup.object().shape({
-  currentPassword: yup.string().required('Please provide a password'),
-  password: yup
+  currentPassword: yup
     .string()
-    .required('Please provide a password')
+    .required('Please provide your current password'),
+  newPassword: yup
+    .string()
+    .required('Please provide a new password')
     .min(8, 'Password too short'),
-  password2: yup
+  confirmNewPAssword: yup
     .string()
     .required("Passwords don't match")
-    .oneOf([yup.ref('password'), null], 'Passwords must match'),
+    .oneOf([yup.ref('newPassword'), null], 'Passwords must match'),
 });
 
 const PWDMForm = withFormik({
   mapPropsToValues: () => ({
-    password: '',
-    password2: '',
+    newPassword: '',
+    confirmNewPAssword: '',
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
-    props.managePassword(
-      {
-        password: values.password,
-      },
-      props.history,
-    );
+    console.log('yyyyyy', props);
+    console.log('kkkkk', values);
+    props.managePassword(values);
     setSubmitting(false);
   },
   validationSchema,
