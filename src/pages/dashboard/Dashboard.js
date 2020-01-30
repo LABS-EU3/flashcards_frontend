@@ -43,7 +43,7 @@ export const DashboardComponent = props => {
               <Route path="/dashboard/study" component={StudyMode} />
               <Route path="/dashboard/leaderboard" component={LeaderBoard} />
               <Route
-                path="/dashboard/studysession/:sessionId"
+                path="/dashboard/studysession/:deckId"
                 component={StudySession}
               />
               <Route path="/dashboard/settings" component={Settings} />
