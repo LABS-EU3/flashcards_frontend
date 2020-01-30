@@ -6,6 +6,7 @@ import './studymode.css';
 import ReactSearchBox from 'react-search-box';
 import { MdCollectionsBookmark, MdKeyboardArrowDown } from 'react-icons/md';
 import { Line } from 'rc-progress';
+import { NavLink } from 'react-router-dom';
 import { H1, H2, H3, P } from '../../../../styles/typography';
 import {
   fetchUserDecks,
@@ -46,7 +47,7 @@ export const BottomContainer = styled.div`
   }
 `;
 
-export const Card = styled.div`
+export const Card = styled(NavLink)`
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -293,7 +294,10 @@ const StudyMode = ({ dashboard, fetchDecks, getSessions, beginSession }) => {
                   const deck = userDecks.find(d => d.deck_id === data.deck_id);
                   const deckName = deck ? deck.deck_name : '';
                   return (
-                    <Card key={data.deck_id}>
+                    <Card
+                      to={`/dashboard/studysession/${data.id}`}
+                      key={data.deck_id}
+                    >
                       <H2>{deckName}</H2>
                       <SLowerCardSection>
                         <P>{data.mode || 'Regular'} mode</P>
@@ -328,7 +332,7 @@ const StudyMode = ({ dashboard, fetchDecks, getSessions, beginSession }) => {
               mastery.map((data, index) => {
                 return (
                   /* eslint-disable-next-line react/no-array-index-key */
-                  <Card key={index}>
+                  <Card to="/dashboard/study" key={index}>
                     <H2>{data.cardTitle}</H2>
                     <MLower>
                       <Line
