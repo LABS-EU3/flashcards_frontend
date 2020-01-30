@@ -103,7 +103,6 @@ export const MLower = styled.div`
 const CarouselComponent = ({ match, getDeck, dashboard, fetchSession }) => {
   const { deckId } = match.params;
   const { selectedDeck, selectedSession } = dashboard;
-  console.log(selectedDeck);
 
   let reviewedCardIds = []
 
@@ -117,7 +116,6 @@ const CarouselComponent = ({ match, getDeck, dashboard, fetchSession }) => {
   if(selectedSession.flashcards){
     remainingCards = selectedSession.flashcards.filter(f => !reviewedCardIds.includes(f.id));
   }
-  console.log(reviewedCardIds, remainingCards);
 
   useEffect(() => {
     // fetchSession()

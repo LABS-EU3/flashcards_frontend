@@ -13,12 +13,12 @@ export default function StudyCard({ card }) {
       <div className="card">
         {!isFlipped && (
           <div>
-            <H1>front</H1>
+            <H1>{card.question}</H1>
           </div>
         )}
         {isFlipped && (
           <div>
-            <H1>back</H1>
+            <H1>{card.answer}</H1>
           </div>
         )}
       </div>
