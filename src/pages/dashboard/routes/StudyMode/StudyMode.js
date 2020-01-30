@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import './studymode.css';
 import ReactSearchBox from 'react-search-box';
@@ -188,6 +188,8 @@ export default function StudyMode() {
   //   }
   // };
 
+  const [selectedDeckId, setSelectedDeckId] = useState(0);
+
   const handleButtonClick1 = () => {
     setOpen1(!open1);
   };
@@ -216,6 +218,11 @@ export default function StudyMode() {
     !mql.matches ? setOpen2(!open2) : setOpen2(open2);
   }, [mql.matches]);
 
+  const history = useHistory();
+  const startStudyMode = deckId => {
+    history.push(`/dashboard/studysession/${deckId}`);
+  };
+
   return (
     <Wrapper>
       <TopContainer>
@@ -223,7 +230,7 @@ export default function StudyMode() {
         <ReactSearchBox
           placeholder="Type the deck name you want to use"
           data={dummyData}
-          callback={record => console.log(record)}
+          onSelect={item => setSelectedDeckId(item.key)}
         />
         <br />
 
@@ -233,7 +240,7 @@ export default function StudyMode() {
         <br />
         <br />
 
-        <BUTTON>
+        <BUTTON onClick={() => startStudyMode(selectedDeckId)}>
           <H3 color="white">Start</H3>
         </BUTTON>
       </TopContainer>
