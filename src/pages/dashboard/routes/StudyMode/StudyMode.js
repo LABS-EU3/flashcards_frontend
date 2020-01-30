@@ -7,6 +7,7 @@ import ReactSearchBox from 'react-search-box';
 import { MdCollectionsBookmark, MdKeyboardArrowDown } from 'react-icons/md';
 import { Line } from 'rc-progress';
 import { H1, H2, H3, P } from '../../../../styles/typography';
+import { fetchUserDecks } from '../../../../modules/dashboard/dashboardActions';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -169,7 +170,7 @@ const mastery = [
   { id: 7, cardTitle: 'Geography', percent: 100 },
 ];
 
-const StudyMode = ({ dashboard }) => {
+const StudyMode = ({ dashboard, fetchDecks }) => {
   const container = React.createRef();
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
@@ -214,6 +215,7 @@ const StudyMode = ({ dashboard }) => {
   });
 
   useEffect(() => {
+    fetchDecks();
     /* eslint-disable-next-line no-unused-expressions */
     !mql.matches ? setOpen1(!open1) : setOpen1(open1);
     /* eslint-disable-next-line no-unused-expressions */
@@ -347,4 +349,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {})(StudyMode);
+export default connect(mapStateToProps, { fetchDecks: fetchUserDecks })(
+  StudyMode,
+);
