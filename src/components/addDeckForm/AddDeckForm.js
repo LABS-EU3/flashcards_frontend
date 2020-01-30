@@ -105,7 +105,7 @@ const Form = props => {
             }}
             onBlur={handleBlur}
             value={values.tag}
-            name="tag"
+            name="public"
             border={touched.tag && errors.tag && `2px solid ${c.DANGER_COLOR}`}
           >
             <option value="false">Private</option>
@@ -179,7 +179,7 @@ const AddDeckForm = withFormik({
     const { selectedTags, isEditingDeck, selectedDeck } = props.dashboard;
 
     // Obtain an array of only ids for all currently selected tags.
-    const selectedTagIds = selectedTags.map(t => t && t.id);
+    const selectedTagIds = selectedTags.map(t => t && t.id).filter(t => t);
 
     if (isEditingDeck) {
       /**
@@ -227,9 +227,11 @@ const AddDeckForm = withFormik({
        * We're not editing a deck, so we simply get form values and
        * send to the server.
        */
+
       const deck = {
         name: values.deckName,
         tags: selectedTagIds,
+        public: values.public,
       };
 
       props.createDeck(deck, setSubmitting(false));

@@ -79,6 +79,7 @@ const dashboardReducer = (state = initialState, action) => {
         creatingDeck: false,
         isEditingDeck: false,
         loading: false,
+        selectedDeck: action.payload,
       };
 
     case types.SET_SELECTED_TAGS:
