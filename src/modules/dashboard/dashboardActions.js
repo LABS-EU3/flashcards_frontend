@@ -196,3 +196,22 @@ export const deleteDeck = deckId => dispatch => {
       });
     });
 };
+
+export const fetchAllDecks = () => dispatch => {
+  dispatch({ type: types.ON_START_GET_ALL_DECKS });
+
+  axiosWithAuth()
+    .get('/decks/public')
+    .then(({ data }) => {
+      dispatch({
+        type: types.ON_GET_ALL_DECKS_SUCCESS,
+        payload: data.data,
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: types.ON_GET_ALL_DECKS_FAILED,
+        payload: error.message,
+      });
+    });
+};
