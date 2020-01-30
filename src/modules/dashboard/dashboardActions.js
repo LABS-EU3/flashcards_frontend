@@ -217,19 +217,19 @@ export const fetchSessions = () => dispatch => {
 };
 
 export const startSession = deckId => dispatch => {
-  dispatch({ type: types.ON_START_FETCH_SESSIONS });
+  dispatch({ type: types.ON_START_CREATE_SESSIONS });
 
   axiosWithAuth()
     .post(`/sessions`, { deckId })
     .then(({ data }) => {
       dispatch({
-        type: types.ON_FETCH_SESSIONS_SUCCESS,
+        type: types.ON_CREATE_SESSIONS_SUCCESS,
         payload: data,
       });
     })
     .catch(error => {
       dispatch({
-        type: types.ON_FETCH_SESSIONS_FAILED,
+        type: types.ON_CREATE_SESSIONS_FAILED,
         payload: error.message,
       });
     });
