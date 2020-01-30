@@ -94,7 +94,7 @@ export const MLower = styled.div`
 `;
 
 const CarouselComponent = ({ match, dashboard, fetchSession }) => {
-  const { deckId } = match.params;
+  const { sessionId } = match.params;
   const { selectedSession } = dashboard;
 
   let reviewedCardIds = [];
@@ -114,7 +114,7 @@ const CarouselComponent = ({ match, dashboard, fetchSession }) => {
   }
 
   useEffect(() => {
-    fetchSession(deckId);
+    fetchSession(sessionId);
   }, []);
 
   return (
