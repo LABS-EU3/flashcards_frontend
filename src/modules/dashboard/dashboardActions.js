@@ -226,6 +226,7 @@ export const startSession = deckId => dispatch => {
         type: types.ON_CREATE_SESSIONS_SUCCESS,
         payload: data,
       });
+      dispatch(fetchSessions());
     })
     .catch(error => {
       dispatch({

@@ -220,6 +220,44 @@ const dashboardReducer = (state = initialState, action) => {
         confirmingDeletion: false,
       };
 
+    case types.ON_START_FETCH_SESSIONS:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case types.ON_FETCH_SESSIONS_SUCCESS:
+      return {
+        ...state,
+        loading: true,
+        userSessions: action.payload,
+      };
+
+    case types.ON_FETCH_SESSIONS_FAILED:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    case types.ON_START_CREATE_SESSIONS:
+      return {
+        ...state,
+        // loading: true,
+      };
+
+    case types.ON_CREATE_SESSIONS_SUCCESS:
+      return {
+        ...state,
+        loading: true,
+        userSessions: action.payload,
+      };
+
+    case types.ON_CREATE_SESSIONS_FAILED:
+      return {
+        ...state,
+        loading: false,
+      };
+
     default:
       return state;
   }
