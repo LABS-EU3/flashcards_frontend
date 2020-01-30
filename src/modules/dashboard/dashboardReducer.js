@@ -15,6 +15,7 @@ const initialState = {
   selectedTags: [],
   selectedDeck: {},
   selectedCard: {},
+  userSessions: [],
   tags: deckTags,
   showMenu: false,
   confirmingDeletion: false,
