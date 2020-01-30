@@ -136,8 +136,6 @@ const PWDMForm = withFormik({
     confirmNewPAssword: '',
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
-    console.log('yyyyyy', props);
-    console.log('kkkkk', values);
     props.managePassword(values);
     setSubmitting(false);
   },
