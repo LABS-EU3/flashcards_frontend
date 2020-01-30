@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
 
 import styled from 'styled-components';
 import './studymode.css';
@@ -119,6 +118,7 @@ export const BUTTON = styled.button`
   outline: none;
   background: #ffa987;
   border-radius: 3px;
+  cursor: pointer;
 `;
 
 export const MyHR = styled.hr`
@@ -139,10 +139,6 @@ const IconButtonWrapper = styled.div`
   overflow: hidden;
   transition: all 0.3s ease-out;
   transform: ${props => (props.rotate ? `rotate(180deg)` : '')};
-`;
-
-const StyledLink = styled(NavLink)`
-  text-decoration: none;
 `;
 
 // dummy data
@@ -238,9 +234,7 @@ export default function StudyMode() {
         <br />
 
         <BUTTON>
-          <StyledLink to="/dashboard/studysession/sessionId">
-            <H3 color="white">Start</H3>
-          </StyledLink>
+          <H3 color="white">Start</H3>
         </BUTTON>
       </TopContainer>
       <BottomContainer>
