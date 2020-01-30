@@ -155,6 +155,23 @@ const userReducer = (state = initialState, action) => {
         loading: false,
         errors: action.payload,
       };
+    case types.MANAGE_PASSWORD_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.MANAGE_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        completed: true,
+      };
+    case types.MANAGE_PASSWORD_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload,
+      };
 
     default:
       return state;
