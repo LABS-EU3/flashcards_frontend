@@ -90,8 +90,8 @@ const AccoutManagementForm = props => {
 
       <Label>
         <H3>Current Password</H3>
-        {touched.password && errors.password && (
-          <Text color={c.DANGER_COLOR}>{errors.password}</Text>
+        {touched.currentPassword && errors.currentPassword && (
+          <Text color={c.DANGER_COLOR}>{errors.currentPassword}</Text>
         )}
         <Input
           type="password"
@@ -128,6 +128,7 @@ const AccoutManagementForm = props => {
         />
       </Label>
       <LineButton type="" onClick={openModal}>
+        {/* <LineButton type=""> */}
         <H3 color={c.DANGER_COLOR}>
           Delete
           {/* <SquareLoader
@@ -154,7 +155,8 @@ const AccoutManagementForm = props => {
             <ModalButton onClick={closeModal}>
               <H2>Close</H2>
             </ModalButton>
-            <ModalButton onClick={handleSubmit} onClick={closeModal}>
+            {/* <ModalButton onClick={handleSubmit} onClick={closeModal}> */}
+            <ModalButton onClick={handleSubmit}>
               <H2 color="red">Delete</H2>
             </ModalButton>
           </InnerContainer>
@@ -170,21 +172,18 @@ const validationSchema = yup.object().shape({
   password2: yup
     .string()
     .required("Passwords don't match")
-    .oneOf([yup.ref('password'), null], 'Passwords must match'),
+    .oneOf([yup.ref('currentPassword'), null], 'Passwords must match'),
 });
 
 const AMForm = withFormik({
   mapPropsToValues: () => ({
-    password: '',
+    currentPassword: '',
     password2: '',
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
-    props.manageAccount(
-      {
-        password: values.password,
-      },
-      props.history,
-    );
+    const { id } = props.user.credentials;
+    props.manageAccount(id);
+    console.log('////', props, id);
     setSubmitting(false);
   },
   validationSchema,
