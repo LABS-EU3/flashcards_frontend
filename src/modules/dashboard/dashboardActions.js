@@ -216,6 +216,25 @@ export const fetchSessions = () => dispatch => {
     });
 };
 
+export const fetchSingleSession = id => dispatch => {
+  dispatch({ type: types.ON_START_FETCH_SESSIONS });
+
+  axiosWithAuth()
+    .get(`/sessions/${id}`)
+    .then(({ data }) => {
+      dispatch({
+        type: types.ON_FETCH_SESSIONS_SUCCESS,
+        payload: data.data,
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: types.ON_FETCH_SESSIONS_FAILED,
+        payload: error.message,
+      });
+    });
+};
+
 export const startSession = deckId => dispatch => {
   dispatch({ type: types.ON_START_CREATE_SESSIONS });
 
@@ -224,7 +243,7 @@ export const startSession = deckId => dispatch => {
     .then(({ data }) => {
       dispatch({
         type: types.ON_CREATE_SESSIONS_SUCCESS,
-        payload: data,
+        payload: data.session,
       });
       dispatch(fetchSessions());
     })

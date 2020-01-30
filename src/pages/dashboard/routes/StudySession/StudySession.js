@@ -1,12 +1,16 @@
 /* eslint-disable */
-import React from 'react';
+import React, { useEffect } from 'react';
 import Ripples from 'react-ripples';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Line } from 'rc-progress';
+import { connect } from 'react-redux';
 
 import StudyCard from '../StudyCard';
-
+import {
+  getSingleDeck,
+  fetchSingleSession,
+} from '../../../../modules/dashboard/dashboardActions';
 import styled from 'styled-components';
 import { H2 } from '../../../../styles/typography';
 import './studysession.css';
@@ -96,7 +100,30 @@ export const MLower = styled.div`
   margin: 5% auto auto auto;
 `;
 
-const CarouselComponent = props => {
+const CarouselComponent = ({ match, getDeck, dashboard, fetchSession }) => {
+  const { deckId } = match.params;
+  const { selectedDeck, selectedSession } = dashboard;
+  console.log(selectedDeck);
+
+  let reviewedCardIds = []
+
+  if(selectedSession.reviewed_cards) {
+    reviewedCardIds = selectedSession.reviewed_cards.map(c => c ? c.id : null);
+  }
+
+  
+  let remainingCards = []
+  
+  if(selectedSession.flashcards){
+    remainingCards = selectedSession.flashcards.filter(f => !reviewedCardIds.includes(f.id));
+  }
+  console.log(reviewedCardIds, remainingCards);
+
+  useEffect(() => {
+    // fetchSession()
+    getDeck(deckId);
+  }, []);
+
   return (
     <Container>
       <TopCompDiv>
@@ -107,7 +134,7 @@ const CarouselComponent = props => {
             useKeyboardArrows={true}
             swipeable
           >
-            {dummyData.map((data, index) => {
+            {remainingCards.map((data, index) => {
               return <StudyCard key={index} card={data} />;
             })}
           </Carousel>
@@ -151,4 +178,13 @@ const CarouselComponent = props => {
   );
 };
 
-export default CarouselComponent;
+const mapStateToProps = state => {
+  return {
+    dashboard: state.dashboard,
+  };
+};
+
+export default connect(mapStateToProps, {
+  getDeck: getSingleDeck,
+  fetchSession: fetchSingleSession,
+})(CarouselComponent);

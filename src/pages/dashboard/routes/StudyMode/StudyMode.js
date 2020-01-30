@@ -206,8 +206,10 @@ const StudyMode = ({ dashboard, fetchDecks, getSessions, beginSession }) => {
 
   const mql = window.matchMedia(`(max-width: 768px)`);
   let resizeTimeout;
+  // eslint-disable-next-line func-names
   window.addEventListener('resize', function() {
     clearTimeout(resizeTimeout);
+    // eslint-disable-next-line func-names
     resizeTimeout = setTimeout(function() {
       window.location.reload();
     }, 1500);

@@ -16,6 +16,7 @@ const initialState = {
   selectedDeck: {},
   selectedCard: {},
   userSessions: [],
+  selectedSession: {},
   tags: deckTags,
   showMenu: false,
   confirmingDeletion: false,
@@ -239,6 +240,25 @@ const dashboardReducer = (state = initialState, action) => {
         loading: false,
       };
 
+    case types.ON_START_FETCH_SINGLE_SESSION:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case types.ON_FETCH_SINGLE_SESSION_SUCCESS:
+      return {
+        ...state,
+        loading: true,
+        selectedSession: action.payload,
+      };
+
+    case types.ON_FETCH_SINGLE_SESSION_FAILED:
+      return {
+        ...state,
+        loading: false,
+      };
+
     case types.ON_START_CREATE_SESSIONS:
       return {
         ...state,
@@ -249,7 +269,7 @@ const dashboardReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        userSessions: action.payload,
+        selectedSession: action.payload,
       };
 
     case types.ON_CREATE_SESSIONS_FAILED:
