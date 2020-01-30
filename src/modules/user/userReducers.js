@@ -190,6 +190,23 @@ const userReducer = (state = initialState, action) => {
         loading: false,
         errors: action.payload,
       };
+    case types.SUBMIT_FEEDBACK_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.SUBMIT_FEEDBACK_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        completed: true,
+      };
+    case types.SUBMIT_FEEDBACK_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload,
+      };
 
     default:
       return state;
