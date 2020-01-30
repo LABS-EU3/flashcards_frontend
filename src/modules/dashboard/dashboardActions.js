@@ -205,7 +205,7 @@ export const fetchSessions = () => dispatch => {
     .then(({ data }) => {
       dispatch({
         type: types.ON_FETCH_SESSIONS_SUCCESS,
-        payload: data,
+        payload: data.data,
       });
     })
     .catch(error => {

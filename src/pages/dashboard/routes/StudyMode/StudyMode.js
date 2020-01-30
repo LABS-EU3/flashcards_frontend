@@ -7,7 +7,11 @@ import ReactSearchBox from 'react-search-box';
 import { MdCollectionsBookmark, MdKeyboardArrowDown } from 'react-icons/md';
 import { Line } from 'rc-progress';
 import { H1, H2, H3, P } from '../../../../styles/typography';
-import { fetchUserDecks } from '../../../../modules/dashboard/dashboardActions';
+import {
+  fetchUserDecks,
+  fetchSessions,
+  startSession,
+} from '../../../../modules/dashboard/dashboardActions';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -170,7 +174,7 @@ const mastery = [
   { id: 7, cardTitle: 'Geography', percent: 100 },
 ];
 
-const StudyMode = ({ dashboard, fetchDecks }) => {
+const StudyMode = ({ dashboard, fetchDecks, getSessions, beginSession }) => {
   const container = React.createRef();
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
@@ -216,6 +220,7 @@ const StudyMode = ({ dashboard, fetchDecks }) => {
 
   useEffect(() => {
     fetchDecks();
+    getSessions();
     /* eslint-disable-next-line no-unused-expressions */
     !mql.matches ? setOpen1(!open1) : setOpen1(open1);
     /* eslint-disable-next-line no-unused-expressions */
@@ -224,7 +229,10 @@ const StudyMode = ({ dashboard, fetchDecks }) => {
 
   const history = useHistory();
   const startStudyMode = deckId => {
-    if (deckId > 0) history.push(`/dashboard/studysession/${deckId}`);
+    if (deckId > 0) {
+      beginSession(deckId);
+      history.push(`/dashboard/studysession/${deckId}`);
+    }
   };
 
   return (
@@ -349,6 +357,8 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { fetchDecks: fetchUserDecks })(
-  StudyMode,
-);
+export default connect(mapStateToProps, {
+  fetchDecks: fetchUserDecks,
+  beginSession: startSession,
+  getSessions: fetchSessions,
+})(StudyMode);
