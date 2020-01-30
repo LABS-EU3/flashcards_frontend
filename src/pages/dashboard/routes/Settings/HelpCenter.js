@@ -1,11 +1,11 @@
 // Import
 
 // Libraries
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { withFormik } from 'formik';
 import { connect } from 'react-redux';
 import * as yup from 'yup';
-// import { SquareLoader } from 'react-spinners';
+import { SquareLoader } from 'react-spinners';
 
 // Styles
 import { Text, H3 } from '../../../../styles/typography';
@@ -24,53 +24,53 @@ const HelpCenterForm = props => {
     handleSubmit,
     touched,
     errors,
+    user,
   } = props;
 
-  // const [response, setResponse] = useState(null);
+  const [response, setResponse] = useState(null);
 
-  // useEffect(() => {
-  //   if () {
-  //     setResponse(
-  //       <H3 color={c.SUCCESS_COLOR}>
-  //         Message sent successfully
-  //       </H3>,
-  //     );
-  //   }
-  //   if (user.errors) {
-  //     setResponse(<H3 color={c.DANGER_COLOR}>Error Sending message</H3>);
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (user.completed) {
+      setResponse(<H3 color={c.SUCCESS_COLOR}>Message sent successfully</H3>);
+    }
+    if (user.errors) {
+      setResponse(<H3 color={c.DANGER_COLOR}>Error Sending message</H3>);
+    }
+  }, [user.errors, user.completed]);
 
   return (
     <Forms onSubmit={handleSubmit}>
-      {/* {response} */}
+      {response}
 
       <Label>
         {/* <H2 color="#3399FF">Help Center</H2> */}
-        {touched.helpCenter && errors.helpCenter && (
-          <Text color={c.DANGER_COLOR}>{errors.helpCenter}</Text>
+        {touched.feedback && errors.feedback && (
+          <Text color={c.DANGER_COLOR}>{errors.feedback}</Text>
         )}
         <TextArea
-          name="helpCenter"
+          name="feedback"
           placeholder="Let us know how we can help or improve"
-          value={values.helpCenter}
+          value={values.feedback}
           rows="10"
           cols="40"
           autoFocus
           onBlur={handleBlur}
           onChange={handleChange}
+          border={
+            touched.feedback && errors.feedback && `2px solid ${c.DANGER_COLOR}`
+          }
         />
       </Label>
 
       <Button2 type="">
         <H3 color={c.DARK_GRAY}>
           Submit
-          {/* <SquareLoader
+          <SquareLoader
             css={{ marginLeft: '20px' }}
             size={15}
             color="#FFA987"
             loading={user.loading}
-          /> */}
+          />
         </H3>
       </Button2>
     </Forms>
@@ -78,20 +78,17 @@ const HelpCenterForm = props => {
 };
 
 const validationSchema = yup.object().shape({
-  helpCenter: yup.string().required('Can not send empty mail'),
+  feedback: yup.string().required('Text area cannot be empty please'),
 });
 
 const HCForm = withFormik({
   mapPropsToValues: () => ({
-    helpCenter: '',
+    feedback: '',
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
-    props.submitHelpCenterMsg(
-      {
-        helpCenter: values.helpCenter,
-      },
-      props.history,
-    );
+    props.submitHelpCenterMsg({
+      values,
+    });
     setSubmitting(false);
   },
   validationSchema,
