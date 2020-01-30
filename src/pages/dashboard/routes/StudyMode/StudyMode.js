@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import './studymode.css';
 import ReactSearchBox from 'react-search-box';
@@ -144,24 +145,16 @@ const IconButtonWrapper = styled.div`
 // dummy data
 const dummyData = [
   {
-    key: 'john',
-    value: 'John Doe',
+    key: '1',
+    value: 'Regular',
   },
   {
-    key: 'jane',
-    value: 'Jane Doe',
+    key: '2',
+    value: 'Extreme',
   },
   {
-    key: 'mary',
-    value: 'Mary Phillips',
-  },
-  {
-    key: 'robert',
-    value: 'Robert',
-  },
-  {
-    key: 'karius',
-    value: 'Karius',
+    key: '3',
+    value: 'Insane',
   },
 ];
 
@@ -176,7 +169,7 @@ const mastery = [
   { id: 7, cardTitle: 'Geography', percent: 100 },
 ];
 
-export default function StudyMode() {
+const StudyMode = ({ dashboard }) => {
   const container = React.createRef();
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
@@ -201,6 +194,15 @@ export default function StudyMode() {
   };
   // document.addEventListener('mousedown', handleClickOutside);
   // document.removeEventListener('mousedown', handleClickOutside);
+
+  const { userDecks } = dashboard;
+
+  const deckSearchData = userDecks.map(d => {
+    return {
+      key: d.deck_id,
+      value: d.deck_name,
+    };
+  });
 
   const mql = window.matchMedia(`(max-width: 768px)`);
   let resizeTimeout;
@@ -229,7 +231,7 @@ export default function StudyMode() {
         <H3>Deck</H3>
         <ReactSearchBox
           placeholder="Type the deck name you want to use"
-          data={dummyData}
+          data={deckSearchData}
           onSelect={item => setSelectedDeckId(item.key)}
         />
         <br />
@@ -337,4 +339,12 @@ export default function StudyMode() {
       </BottomContainer>
     </Wrapper>
   );
-}
+};
+
+const mapStateToProps = state => {
+  return {
+    dashboard: state.dashboard,
+  };
+};
+
+export default connect(mapStateToProps, {})(StudyMode);
