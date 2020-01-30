@@ -224,7 +224,7 @@ const StudyMode = ({ dashboard, fetchDecks }) => {
 
   const history = useHistory();
   const startStudyMode = deckId => {
-    history.push(`/dashboard/studysession/${deckId}`);
+    if (deckId > 0) history.push(`/dashboard/studysession/${deckId}`);
   };
 
   return (
