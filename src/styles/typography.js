@@ -19,7 +19,11 @@ export const H1 = styled.h1`
   font-weight: ${f.BOLD};
   font-size: ${f.H1_FONT_SIZE}em;
   line-height: ${f.H1_LINE_HEIGHT}em;
+
   color: ${props => props.color || c.DARK_NEUTRAL_COLOR};
+  line-height: ${props => props.lineHeight || `${f.H1_LINE_HEIGHT}em`};
+  font-size: ${props => props.fontSize || `${f.H1_FONT_SIZE}em`};
+
   line-height: ${props => props.lineHeight || `${f.H1_LINE_HEIGHT}em`};
 
   line-height: ${props => props.lineHeight || `${f.H1_LINE_HEIGHT}em`};
@@ -39,6 +43,8 @@ export const H2 = styled.h2`
   font-size: ${f.H2_FONT_SIZE}em;
   line-height: ${f.H2_LINE_HEIGHT}em;
   color: ${props => props.color || c.DARK_NEUTRAL_COLOR};
+
+  font-size: ${props => props.fontSize || `${f.H2_FONT_SIZE}em`};
 
   ${props => (props.BRAND ? `font-family:${f.BRAND_FONT}` : null)};
   ${props => (props.REGULAR ? `font-weight:${f.REGULAR}` : null)};
