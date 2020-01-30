@@ -173,6 +173,24 @@ const userReducer = (state = initialState, action) => {
         errors: action.payload,
       };
 
+    case types.DELETE_USER_ACCOUNT_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.DELETE_USER_ACCOUNT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        completed: true,
+      };
+    case types.DELETE_USER_ACCOUNT_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload,
+      };
+
     default:
       return state;
   }
