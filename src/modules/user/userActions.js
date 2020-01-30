@@ -159,7 +159,7 @@ export const googleAuthorized = (token, history) => dispatch => {
 /* eslint-disable-next-line no-unused-vars */
 export const manageProfile = () => dispatch => {};
 /* eslint-disable-next-line no-unused-vars */
-export const manageAccount = () => dispatch => {};
+// export const manageAccount = () => dispatch => {};
 /* eslint-disable-next-line no-unused-vars */
 // export const managePassword = () => dispatch => {};
 /* eslint-disable-next-line no-unused-vars */
@@ -181,6 +181,23 @@ export const managePassword = passwordData => dispatch => {
     .catch(errors => {
       dispatch({
         type: types.MANAGE_PASSWORD_FAILURE,
+        payload: errors.response.data.message,
+      });
+    });
+};
+
+export const manageAccount = id => dispatch => {
+  dispatch({ type: types.DELETE_USER_ACCOUNT_START });
+
+  axiosWithAuth()
+    .delete(`${baseUrl}/users/${id}`)
+    .then(res => {
+      dispatch({ type: types.DELETE_USER_ACCOUNT_SUCCESS, payload: res.data });
+      dispatch({ type: types.CLEAR_RESPONSES });
+    })
+    .catch(errors => {
+      dispatch({
+        type: types.DELETE_USER_ACCOUNT_FAILURE,
         payload: errors.response.data.message,
       });
     });
