@@ -96,7 +96,7 @@ export const MLower = styled.div`
   margin: 5% auto auto auto;
 `;
 
-export default function CarouselComponent() {
+const CarouselComponent = props => {
   return (
     <Container>
       <TopCompDiv>
@@ -149,4 +149,6 @@ export default function CarouselComponent() {
       </BottomCompDiv>
     </Container>
   );
-}
+};
+
+export default CarouselComponent;
