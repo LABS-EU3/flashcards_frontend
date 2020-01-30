@@ -83,86 +83,191 @@ const AccoutManagementForm = props => {
   // );
   //   }
   // }, []);
-
+  function handleFinalSubmit() {
+    // if (para === 'submit') {
+    handleSubmit();
+    closeModal();
+    // } else if (para === 'close') {
+    //   closeModal();
+    // }
+    // else {
+    //   openModal();
+    // }
+  }
   return (
-    <Forms onSubmit={handleSubmit}>
-      {/* {response} */}
+    // // <Forms onSubmit={() => handleFinalSubmit()}>
+    // <Forms>
+    //   {/* {response} */}
 
-      <Label>
-        <H3>Current Password</H3>
-        {touched.currentPassword && errors.currentPassword && (
-          <Text color={c.DANGER_COLOR}>{errors.currentPassword}</Text>
-        )}
-        <Input
-          type="password"
-          name="currentPassword"
-          placeholder="Current Password"
-          value={values.currentPassword}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          border={
-            touched.currentPassword &&
-            errors.currentPassword &&
-            `2px solid ${c.DANGER_COLOR}`
-          }
-        />
-      </Label>
+    //   <Label>
+    //     <H3>Current Password</H3>
+    //     {touched.currentPassword && errors.currentPassword && (
+    //       <Text color={c.DANGER_COLOR}>{errors.currentPassword}</Text>
+    //     )}
+    //     <Input
+    //       type="password"
+    //       name="currentPassword"
+    //       placeholder="Current Password"
+    //       value={values.currentPassword}
+    //       onBlur={handleBlur}
+    //       onChange={handleChange}
+    //       border={
+    //         touched.currentPassword &&
+    //         errors.currentPassword &&
+    //         `2px solid ${c.DANGER_COLOR}`
+    //       }
+    //     />
+    //   </Label>
 
-      <Label>
-        <H3>Confirm Password</H3>
-        {touched.password2 && errors.password2 && (
-          <Text color={c.DANGER_COLOR}>{errors.password2}</Text>
-        )}
-        <Input
-          type="password"
-          name="password2"
-          placeholder="Confirm Password"
-          value={values.password2}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          border={
-            touched.password2 &&
-            errors.password2 &&
-            `2px solid ${c.DANGER_COLOR}`
-          }
-        />
-      </Label>
+    //   <Label>
+    //     <H3>Confirm Password</H3>
+    //     {touched.password2 && errors.password2 && (
+    //       <Text color={c.DANGER_COLOR}>{errors.password2}</Text>
+    //     )}
+    //     <Input
+    //       type="password"
+    //       name="password2"
+    //       placeholder="Confirm Password"
+    //       value={values.password2}
+    //       onBlur={handleBlur}
+    //       onChange={handleChange}
+    //       border={
+    //         touched.password2 &&
+    //         errors.password2 &&
+    //         `2px solid ${c.DANGER_COLOR}`
+    //       }
+    //     />
+    //   </Label>
+    //   <LineButton type="" onClick={openModal}>
+    //     {/* <LineButton type=""> */}
+    //     <H3 color={c.DANGER_COLOR}>
+    //       Delete
+    //       {/* <SquareLoader
+    //         css={{ marginLeft: '20px' }}
+    //         size={15}
+    //         color="#FFA987"
+    //         loading={user.loading}
+    //       /> */}
+    //     </H3>
+    //   </LineButton>
+    //   <Modal
+    //     visible={state.visible}
+    //     width="80%"
+    //     height="300"
+    //     borde-radius="50%"
+    //     effect="fadeInUp"
+    //     onClickAway={closeModal}
+    //     className="modalClass"
+    //   >
+    //     <ModalWrapper>
+    //       <H1 color="red">Delete Account</H1>
+    //       <H2>Are you sure you want to delete?</H2>
+    //       <InnerContainer>
+    //         <ModalButton onClick={closeModal}>
+    //           <H2>Close</H2>
+    //         </ModalButton>
+    //         {/* <ModalButton onClick={handleSubmit} onClick={closeModal}> */}
+    //         <ModalButton onClick={handleFinalSubmit}>
+    //           <H2 color="red">Delete</H2>
+    //         </ModalButton>
+    //       </InnerContainer>
+    //     </ModalWrapper>
+    //   </Modal>
+    // </Forms>
+
+    // <Forms onSubmit={() => handleFinalSubmit()}>
+    <>
       <LineButton type="" onClick={openModal}>
         {/* <LineButton type=""> */}
         <H3 color={c.DANGER_COLOR}>
-          Delete
+          Proceed to Delete
           {/* <SquareLoader
-            css={{ marginLeft: '20px' }}
-            size={15}
-            color="#FFA987"
-            loading={user.loading}
-          /> */}
+    //         css={{ marginLeft: '20px' }}
+    //         size={15}
+    //         color="#FFA987"
+    //         loading={user.loading}
+    //       /> */}
         </H3>
       </LineButton>
       <Modal
         visible={state.visible}
         width="80%"
-        height="300"
+        height="98%"
         borde-radius="50%"
         effect="fadeInUp"
         onClickAway={closeModal}
         className="modalClass"
       >
         <ModalWrapper>
-          <H1 color="red">Delete Account</H1>
+          <H1 color="red">Delete Account1</H1>
           <H2>Are you sure you want to delete?</H2>
           <InnerContainer>
             <ModalButton onClick={closeModal}>
               <H2>Close</H2>
             </ModalButton>
             {/* <ModalButton onClick={handleSubmit} onClick={closeModal}> */}
-            <ModalButton onClick={handleSubmit}>
-              <H2 color="red">Delete</H2>
+            <ModalButton>
+              {/* <H2 color="red">Delete</H2> */}
+              <Forms>
+                {/* {response} */}
+
+                <Label>
+                  <H3>Current Password</H3>
+                  {touched.currentPassword && errors.currentPassword && (
+                    <Text color={c.DANGER_COLOR}>{errors.currentPassword}</Text>
+                  )}
+                  <Input
+                    type="password"
+                    name="currentPassword"
+                    placeholder="Current Password"
+                    value={values.currentPassword}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    border={
+                      touched.currentPassword &&
+                      errors.currentPassword &&
+                      `2px solid ${c.DANGER_COLOR}`
+                    }
+                  />
+                </Label>
+
+                <Label>
+                  <H3>Confirm Password</H3>
+                  {touched.password2 && errors.password2 && (
+                    <Text color={c.DANGER_COLOR}>{errors.password2}</Text>
+                  )}
+                  <Input
+                    type="password"
+                    name="password2"
+                    placeholder="Confirm Password"
+                    value={values.password2}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    border={
+                      touched.password2 &&
+                      errors.password2 &&
+                      `2px solid ${c.DANGER_COLOR}`
+                    }
+                  />
+                </Label>
+                <LineButton type="" onClick={handleFinalSubmit}>
+                  {/* <LineButton type=""> */}
+                  <H3 color={c.DANGER_COLOR}>
+                    Delete
+                    {/* <SquareLoader
+            css={{ marginLeft: '20px' }}
+            size={15}
+            color="#FFA987"
+            loading={user.loading}
+          /> */}
+                  </H3>
+                </LineButton>
+              </Forms>
             </ModalButton>
           </InnerContainer>
         </ModalWrapper>
       </Modal>
-    </Forms>
+    </>
   );
 };
 
@@ -186,6 +291,15 @@ const AMForm = withFormik({
     console.log('////', props, id);
     setSubmitting(false);
   },
+  // // handleSubmit: 'open'
+  // //   ? (values, { props, setSubmitting }) => {
+  // //       const { id } = props.user.credentials;
+  // //       props.manageAccount(id);
+  // //       console.log('////', props, id);
+  // //       setSubmitting(false);
+  // //     }
+  // //   : 'close',
+  // handleSubmit: closeModal,
   validationSchema,
 })(AccoutManagementForm);
 
