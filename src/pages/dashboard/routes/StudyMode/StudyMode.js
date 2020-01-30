@@ -163,11 +163,6 @@ const dummyData = [
   },
 ];
 
-const sessions = [
-  { deckId: 1, mode: 'Regular', cardTitle: 'Oragnic Compounds', totalCard: 10 },
-  { deckId: 4, mode: 'Regular', cardTitle: 'Quantum Mechanics', totalCard: 39 },
-];
-
 const mastery = [
   { id: 1, cardTitle: 'Oragnic Compounds', percent: 40 },
   { id: 4, cardTitle: 'Quantum Mechanics', percent: 60 },
@@ -200,7 +195,7 @@ const StudyMode = ({ dashboard, fetchDecks, getSessions, beginSession }) => {
   // document.addEventListener('mousedown', handleClickOutside);
   // document.removeEventListener('mousedown', handleClickOutside);
 
-  const { userDecks } = dashboard;
+  const { userDecks, userSessions } = dashboard;
 
   const deckSearchData = userDecks.map(d => {
     return {
@@ -289,15 +284,22 @@ const StudyMode = ({ dashboard, fetchDecks, getSessions, beginSession }) => {
           <CardContainer className="container" ref={container}>
             <StyledMyPart>
               {open1 &&
-                sessions.map((data, index) => {
+                userSessions.map((data, index) => {
                   return (
                     /* eslint-disable-next-line react/no-array-index-key */
                     <Card key={index}>
-                      <H2>{data.cardTitle}</H2>
+                      <H2>
+                        {
+                          // Perform some gymnastics to obtain deck name since
+                          // it is currently not returned with the response.
+                          userDecks.find(d => d.deck_id === data.deck_id)
+                            .deck_name
+                        }
+                      </H2>
                       <SLowerCardSection>
-                        <P>{data.mode} mode</P>
+                        <P>{data.mode || 'Regular'} mode</P>
                         <SLower>
-                          <P color="grey">{data.totalCard} Cards left</P>
+                          <P color="grey">{data.cards_left} Cards left</P>
                           <MdCollectionsBookmark size="2em" color="grey" />
                         </SLower>
                       </SLowerCardSection>
