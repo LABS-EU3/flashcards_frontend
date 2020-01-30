@@ -1,5 +1,5 @@
 // Libraries
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from 'react-sidebar';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { Line } from 'rc-progress';
@@ -27,37 +27,45 @@ import {
 
 import levelIcon from '../../assets/icons/label_important_24px_outlined.svg';
 
-const cards = [
-  {
-    title: 'Organic Compounds',
-    category: 'Chemistry',
-    totalCard: 30,
-  },
-  {
-    title: 'Quantum Mechanics',
-    category: 'Physics',
-    totalCard: 40,
-  },
-  {
-    title: 'Data Structures',
-    category: 'Computer Science',
-    totalCard: 320,
-  },
-  {
-    title: 'Advance Algorithms',
-    category: 'Computer Science',
-    totalCard: 70,
-  },
-  {
-    title: 'OWASP Basics',
-    category: 'Computer Science',
-    totalCard: 100,
-  },
-];
+// const cards = [
+//   {
+//     title: 'Organic Compounds',
+//     category: 'Chemistry',
+//     totalCard: 30,
+//   },
+//   {
+//     title: 'Quantum Mechanics',
+//     category: 'Physics',
+//     totalCard: 40,
+//   },
+//   {
+//     title: 'Data Structures',
+//     category: 'Computer Science',
+//     totalCard: 320,
+//   },
+//   {
+//     title: 'Advance Algorithms',
+//     category: 'Computer Science',
+//     totalCard: 70,
+//   },
+//   {
+//     title: 'OWASP Basics',
+//     category: 'Computer Science',
+//     totalCard: 100,
+//   },
+// ];
 
 export default function RightSidebar(props) {
-  const { user } = props;
-
+  const { user, getRecentCards } = props;
+  // console.log(user);
+  const { id } = user.credentials;
+  // console.log(id)
+  // const handleGet = id => {
+  //   getRecentCards(id);
+  // };
+  console.log('yo', getRecentCards(id));
+  const [cards, setCards] = useState([]);
+  console.log(cards);
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const mql = window.matchMedia(`(min-width: ${g.desktopMediaBreak}px)`);
@@ -70,10 +78,25 @@ export default function RightSidebar(props) {
   };
 
   mql.addListener(mediaQueryChanged);
+
+  useEffect(async () => {
+    // const { fetchRooms } = this.props
+    console.log(1);
+    await setCards(console.log(2));
+    console.log(3);
+    // fetchRooms()
+  }, []);
+
   return (
     <SidebarStyled>
       <Sidebar
-        sidebar={<SideContent user={user} />}
+        sidebar={
+          <SideContent
+            user={user}
+            getRecentCards={getRecentCards}
+            cards={['getert', 'hert']}
+          />
+        }
         open={sidebarOpen}
         onSetOpen={setSidebarOpen}
         docked={sideBarDocked}
@@ -96,16 +119,24 @@ export default function RightSidebar(props) {
     </SidebarStyled>
   );
 }
-const SideContent = ({ user }) => {
+const SideContent = ({ user, cards }) => {
   const [openLastPlayed, setOpenLastPlayed] = useState(false);
   const [openRecentlyViewed, setOpenRecentlyViewed] = useState(true);
 
+  // const getCard = getRecentCards(id);
+  // console.log("test", getCard);
+
   const handleButtonClickLastPlayed = () => {
     setOpenLastPlayed(!openLastPlayed);
+    // setCards(['hello', 'test']);
   };
+  // console.log('card', cards);
   const handleButtonClickRecentlyViewed = () => {
     setOpenRecentlyViewed(!openRecentlyViewed);
   };
+  // const onFetch = () => {
+  //   setCards(getRecentCards);
+  // }
 
   return (
     <SidebarBody>
@@ -186,7 +217,7 @@ const SideContent = ({ user }) => {
               </div>
             </H1>
           </StyledStart>
-          {openRecentlyViewed &&
+          {/* {openRecentlyViewed &&
             cards.map(card => {
               return (
                 <Card
@@ -196,7 +227,7 @@ const SideContent = ({ user }) => {
                   totalCard={card.totalCard}
                 />
               );
-            })}
+            })} */}
         </ViewedCardsStyled>
       </SectionHolder>
     </SidebarBody>
