@@ -13,6 +13,7 @@ import { LogoutButton } from '../../../../styles/buttons';
 
 import ProfileManagementForm from './ProfileManagement';
 import PasswordManagementForm from './PasswordManagement';
+// eslint-disable-next-line import/no-cycle
 import AccountManagementForm from './AccountManagement';
 import HelpCenterForm from './HelpCenter';
 import { ProfileImageDiv } from '../../styles/DashboardStyles';

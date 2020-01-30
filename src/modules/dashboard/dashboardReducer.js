@@ -4,7 +4,7 @@ import { deckTags } from '../../utils/deckTags';
 const initialState = {
   loading: false,
   errors: null,
-  recentCards: {},
+  recentCards: [],
   creatingDeck: false,
   creatingCard: false,
   deleteingCard: false,
@@ -31,7 +31,7 @@ const dashboardReducer = (state = initialState, action) => {
     case types.RECENT_CARDS_SUCCESS:
       return {
         ...state,
-        loading: true,
+        loading: false,
         recentCards: action.payload,
       };
 

@@ -6,11 +6,12 @@ export const getRecentCards = userId => dispatch => {
   dispatch({ type: types.RECENT_CARDS_START });
 
   return axiosWithAuth()
-    .get(`/api/cards/users/${userId}`)
+    .get(`/cards/${userId}`)
     .then(({ data }) => {
+      console.log('data', data.card);
       dispatch({
         type: types.RECENT_CARDS_SUCCESS,
-        payload: data.data.user,
+        payload: data.card,
       });
     })
     .catch(err => {
@@ -20,6 +21,7 @@ export const getRecentCards = userId => dispatch => {
       });
     });
 };
+
 export const fetchTags = () => dispatch => {
   dispatch({ type: types.ON_START_FETCHING_TAGS });
 
