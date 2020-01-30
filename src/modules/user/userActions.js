@@ -161,6 +161,27 @@ export const manageProfile = () => dispatch => {};
 /* eslint-disable-next-line no-unused-vars */
 export const manageAccount = () => dispatch => {};
 /* eslint-disable-next-line no-unused-vars */
-export const managePassword = () => dispatch => {};
+// export const managePassword = () => dispatch => {};
 /* eslint-disable-next-line no-unused-vars */
 export const submitHelpCenterMsg = () => dispatch => {};
+
+export const managePassword = passwordData => dispatch => {
+  dispatch({ type: types.MANAGE_PASSWORD_START });
+
+  axiosWithAuth()
+    .post(`${baseUrl}/auth/update_password`, {
+      oldPassword: passwordData.currentPassword,
+      newPassword: passwordData.newPassword,
+      confirmPassword: passwordData.confirmNewPAssword,
+    })
+    .then(res => {
+      dispatch({ type: types.MANAGE_PASSWORD_SUCCESS, payload: res.data });
+      dispatch({ type: types.CLEAR_RESPONSES });
+    })
+    .catch(errors => {
+      dispatch({
+        type: types.MANAGE_PASSWORD_FAILURE,
+        payload: errors.response.data.message,
+      });
+    });
+};
