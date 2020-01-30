@@ -163,7 +163,7 @@ export const manageProfile = () => dispatch => {};
 /* eslint-disable-next-line no-unused-vars */
 // export const managePassword = () => dispatch => {};
 /* eslint-disable-next-line no-unused-vars */
-export const submitHelpCenterMsg = () => dispatch => {};
+// export const submitHelpCenterMsg = () => dispatch => {};
 
 export const managePassword = passwordData => dispatch => {
   dispatch({ type: types.MANAGE_PASSWORD_START });
@@ -198,6 +198,23 @@ export const manageAccount = id => dispatch => {
     .catch(errors => {
       dispatch({
         type: types.DELETE_USER_ACCOUNT_FAILURE,
+        payload: errors.response.data.message,
+      });
+    });
+};
+
+export const submitHelpCenterMsg = feedback => dispatch => {
+  dispatch({ type: types.SUBMIT_FEEDBACK_START });
+
+  axiosWithAuth()
+    .post(`${baseUrl}/feedback`, { feedback: feedback.values.feedback })
+    .then(res => {
+      dispatch({ type: types.SUBMIT_FEEDBACK_SUCCESS, payload: res.data });
+      dispatch({ type: types.CLEAR_RESPONSES });
+    })
+    .catch(errors => {
+      dispatch({
+        type: types.SUBMIT_FEEDBACK_FAILURE,
         payload: errors.response.data.message,
       });
     });
