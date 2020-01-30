@@ -254,3 +254,23 @@ export const startSession = deckId => dispatch => {
       });
     });
 };
+
+// eslint-disable-next-line camelcase
+export const rateCard = ({ card_id, deck_id, rating }) => dispatch => {
+  dispatch({ type: types.ON_START_CARD_RATING });
+
+  axiosWithAuth()
+    .post(`/cards/scoring`, { card_id, deck_id, rating })
+    .then(({ data }) => {
+      dispatch({
+        type: types.ON_CARD_RATING_SUCCESS,
+        payload: data.session,
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: types.ON_CARD_RATING_FAILED,
+        payload: error.message,
+      });
+    });
+};

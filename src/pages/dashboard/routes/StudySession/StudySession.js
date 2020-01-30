@@ -1,6 +1,5 @@
 /* eslint-disable */
 import React, { useEffect } from 'react';
-import Ripples from 'react-ripples';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Line } from 'rc-progress';
@@ -10,6 +9,7 @@ import StudyCard from '../StudyCard';
 import {
   getSingleDeck,
   fetchSingleSession,
+  rateCard,
 } from '../../../../modules/dashboard/dashboardActions';
 import styled from 'styled-components';
 import { H2 } from '../../../../styles/typography';
@@ -51,11 +51,7 @@ export const BottomCompDiv = styled.div`
   margin: 30px auto;
 `;
 
-export const EmojisCompDiv = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-`;
+
 
 export const CardContainer = styled.div`
   /* display: flex; */
@@ -100,27 +96,37 @@ export const MLower = styled.div`
   margin: 5% auto auto auto;
 `;
 
-const CarouselComponent = ({ match, getDeck, dashboard, fetchSession }) => {
+const CarouselComponent = ({
+  match,
+  getDeck,
+  dashboard,
+  rateSingeleCard: rateCard,
+}) => {
   const { deckId } = match.params;
   const { selectedDeck, selectedSession } = dashboard;
 
-  let reviewedCardIds = []
+  let reviewedCardIds = [];
 
-  if(selectedSession.reviewed_cards) {
-    reviewedCardIds = selectedSession.reviewed_cards.map(c => c ? c.id : null);
+  if (selectedSession.reviewed_cards) {
+    reviewedCardIds = selectedSession.reviewed_cards.map(c =>
+      c ? c.id : null,
+    );
   }
 
-  
-  let remainingCards = []
-  
-  if(selectedSession.flashcards){
-    remainingCards = selectedSession.flashcards.filter(f => !reviewedCardIds.includes(f.id));
+  let remainingCards = [];
+
+  if (selectedSession.flashcards) {
+    remainingCards = selectedSession.flashcards.filter(
+      f => !reviewedCardIds.includes(f.id),
+    );
   }
 
   useEffect(() => {
     // fetchSession()
     getDeck(deckId);
   }, []);
+
+ 
 
   return (
     <Container>
@@ -140,23 +146,7 @@ const CarouselComponent = ({ match, getDeck, dashboard, fetchSession }) => {
       </TopCompDiv>
 
       <BottomCompDiv>
-        <EmojisCompDiv>
-          <Ripples color={'#FAFFDF '}>
-            <button type="button" className="emoji btn">
-              &#129303;
-            </button>
-          </Ripples>
-          <Ripples color={'#FAFFDF '}>
-            <button type="button" className="emoji btn">
-              &#128531;
-            </button>
-          </Ripples>
-          <Ripples color={'#FAFFDF'}>
-            <button type="button" className="emoji btn">
-              &#128557;
-            </button>
-          </Ripples>
-        </EmojisCompDiv>
+       
 
         <MLower>
           <H2>Organic Compounds</H2>
@@ -185,4 +175,5 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   getDeck: getSingleDeck,
   fetchSession: fetchSingleSession,
+  rateCard,
 })(CarouselComponent);

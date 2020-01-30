@@ -278,6 +278,24 @@ const dashboardReducer = (state = initialState, action) => {
         loading: false,
       };
 
+    case types.ON_START_CARD_RATING:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case types.ON_CARD_RATING_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    case types.ON_CARD_RATING_FAILED:
+      return {
+        ...state,
+        loading: false,
+      };
+
     default:
       return state;
   }
