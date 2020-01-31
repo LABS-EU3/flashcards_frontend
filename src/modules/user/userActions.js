@@ -225,7 +225,7 @@ export const uploadProfileImg = imageUrl => dispatch => {
   console.log('>>>>>>>', imageUrl);
   axiosWithAuth()
     .post(`${baseUrl}/auth/uploadProfile_img`, {
-      imageUrl: imageUrl,
+      imageUrl,
     })
     .then(res => {
       dispatch({ type: types.UPLOAD_PROFILE_IMAGE_SUCCESS, payload: res.data });
