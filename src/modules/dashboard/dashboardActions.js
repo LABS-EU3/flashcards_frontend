@@ -8,7 +8,6 @@ export const getRecentDecks = () => dispatch => {
   return axiosWithAuth()
     .get(`/decks/access/`)
     .then(({ data }) => {
-      // console.log(data.data);
       dispatch({
         type: types.RECENT_DECKS_SUCCESS,
         payload: data.data,

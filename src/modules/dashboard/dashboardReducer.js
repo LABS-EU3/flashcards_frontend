@@ -29,7 +29,6 @@ const dashboardReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        // recentDecks: [],
       };
 
     case types.RECENT_DECKS_SUCCESS:
@@ -43,7 +42,6 @@ const dashboardReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        // recentDecks: [],
         errors: action.payload,
       };
 

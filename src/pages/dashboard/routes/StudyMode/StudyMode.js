@@ -190,16 +190,7 @@ export default function StudyMode(props) {
 
   const { recentDecks } = dashboard;
   const [decks, setDecks] = useState([]);
-  // const handleClickOutside = event => {
-  //   if (container.current && !container.current.contains(event.target)) {
-  //     setOpen(false);
-  //   }
-  // };
 
-  // const onGetRecentDecks = () => {
-  //   // getRecentDecks();
-  //   setDecks(recentDecks);
-  // };
   const handleButtonClick1 = () => {
     setOpen1(!open1);
   };
@@ -210,8 +201,6 @@ export default function StudyMode(props) {
     setOpen3(!open3);
     setDecks(recentDecks);
   };
-  // document.addEventListener('mousedown', handleClickOutside);
-  // document.removeEventListener('mousedown', handleClickOutside);
 
   const mql = window.matchMedia(`(max-width: 768px)`);
   let resizeTimeout;
@@ -282,12 +271,6 @@ export default function StudyMode(props) {
                         </SLower>
                       </SLowerCardSection>
                     </CardStyled>
-                    // <Card
-                    //   key={deck.deck_id}
-                    //   title={deck.deck_name}
-                    //   public={deck.public}
-                    //   totalCard={deck.totalCard}
-                    // />
                   );
                 })}
             </StyledMyPart>

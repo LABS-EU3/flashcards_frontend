@@ -34,11 +34,9 @@ export default function RightSidebar(props) {
   const [decks, setDecks] = useState([]);
   const [viewedDecks, setViewedDecks] = useState([]);
   const onGetRecentDecks = () => {
-    // getRecentDecks();
     setDecks(recentDecks);
   };
   const onGetRecentViewedDecks = () => {
-    // getRecentDecks();
     setViewedDecks(recentDecks);
   };
   const [sidebarOpen, setSidebarOpen] = useState(true);
