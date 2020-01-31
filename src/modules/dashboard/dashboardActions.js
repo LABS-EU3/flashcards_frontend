@@ -262,10 +262,10 @@ export const rateCard = ({ card_id, deck_id, rating }) => dispatch => {
 
   axiosWithAuth()
     .post(`/cards/scoring`, { card_id, deck_id, rating })
-    .then(({ data }) => {
+    .then(() => {
       dispatch({
         type: types.ON_CARD_RATING_SUCCESS,
-        payload: data.session,
+        payload: card_id,
       });
     })
     .catch(error => {

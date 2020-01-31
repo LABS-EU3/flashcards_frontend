@@ -17,6 +17,7 @@ const initialState = {
   selectedCard: {},
   userSessions: [],
   selectedSession: {},
+  sessionCards: [],
   tags: deckTags,
   showMenu: false,
   confirmingDeletion: false,
@@ -251,6 +252,8 @@ const dashboardReducer = (state = initialState, action) => {
         ...state,
         loading: true,
         selectedSession: action.payload,
+        // eslint-disable-next-line no-use-before-define
+        sessionCards: filterCards(action.payload),
       };
 
     case types.ON_FETCH_SINGLE_SESSION_FAILED:
@@ -288,6 +291,7 @@ const dashboardReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        sessionCards: state.sessionCards.filter(f => f.id !== action.payload),
       };
 
     case types.ON_CARD_RATING_FAILED:
@@ -299,6 +303,16 @@ const dashboardReducer = (state = initialState, action) => {
     default:
       return state;
   }
+};
+
+const filterCards = session => {
+  const reviewedCardIds = session.reviewed_cards.map(c => (c ? c.id : null));
+
+  const remainingCards = session.flashcards.filter(
+    f => f !== null && !reviewedCardIds.includes(f.id),
+  );
+
+  return remainingCards;
 };
 
 export default dashboardReducer;

@@ -95,7 +95,7 @@ export const MLower = styled.div`
 
 const CarouselComponent = ({ match, dashboard, fetchSession }) => {
   const { sessionId } = match.params;
-  const { selectedSession } = dashboard;
+  const { selectedSession, sessionCards } = dashboard;
 
   let reviewedCardIds = [];
 
@@ -127,7 +127,7 @@ const CarouselComponent = ({ match, dashboard, fetchSession }) => {
             useKeyboardArrows={true}
             swipeable
           >
-            {remainingCards.map((data, index) => {
+            {sessionCards.map((data, index) => {
               return <StudyCard key={index} card={data} />;
             })}
           </Carousel>
