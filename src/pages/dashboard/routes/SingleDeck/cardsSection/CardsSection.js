@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, connect } from 'react-redux';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import { FaSearch } from 'react-icons/fa';
 import styled from 'styled-components';
@@ -67,8 +67,40 @@ const CardSearch = styled(Search)`
   }
 `;
 
-const Decks = ({ cards, deleteCard }) => {
+const Decks = ({ cards, deleteCard, dashboard }) => {
+  const { singleDeckCards } = dashboard;
   const dispatch = useDispatch();
+  const [inputValue, setInputValue] = useState('');
+
+  const handleSearchChange = event => {
+    setInputValue(event.target.value);
+  };
+
+  const filterThroughCards = async () => {
+    const cardsFiltered =
+      inputValue !== ''
+        ? await cards.filter(card => {
+            return (
+              card.question
+                .replace(/[^\w\s]/gi, '')
+                .toUpperCase()
+                .match(inputValue.replace(/[^\w\s]/gi, '').toUpperCase()) ||
+              card.answer
+                .replace(/[^\w\s]/gi, '')
+                .toUpperCase()
+                .match(inputValue.replace(/[^\w\s]/gi, '').toUpperCase())
+            );
+          })
+        : cards;
+    dispatch({
+      type: types.ON_DECK_CARDS_FETCH_SUCCESS,
+      payload: cardsFiltered,
+    });
+  };
+
+  useEffect(() => {
+    filterThroughCards();
+  }, [inputValue]);
 
   const handleDelete = card => {
     deleteCard(card);
@@ -87,7 +119,16 @@ const Decks = ({ cards, deleteCard }) => {
         </CollectionLabel>
         <CardSearch>
           <NavSearch>
-            <Input type="text" name="q" placeholder="Search deck" />
+            <Input
+              type="text"
+              name="cardSearch"
+              placeholder="Search deck"
+              onChange={e => {
+                handleSearchChange(e);
+                filterThroughCards();
+              }}
+              value={inputValue}
+            />
           </NavSearch>
 
           <FaSearch size={15} className="searchLink" />
@@ -95,19 +136,33 @@ const Decks = ({ cards, deleteCard }) => {
       </TopHolder>
 
       <DecksContainer>
-        {cards &&
-          cards.map(card => {
-            return (
-              card && (
-                <DeckCard
-                  key={card.id}
-                  card={card}
-                  handleDelete={handleDelete}
-                  handleUpdate={handleUpdate}
-                />
-              )
-            );
-          })}
+        {inputValue !== ''
+          ? singleDeckCards &&
+            singleDeckCards.map(card => {
+              return (
+                card && (
+                  <DeckCard
+                    key={card.id}
+                    card={card}
+                    handleDelete={handleDelete}
+                    handleUpdate={handleUpdate}
+                  />
+                )
+              );
+            })
+          : cards &&
+            cards.map(card => {
+              return (
+                card && (
+                  <DeckCard
+                    key={card.id}
+                    card={card}
+                    handleDelete={handleDelete}
+                    handleUpdate={handleUpdate}
+                  />
+                )
+              );
+            })}
       </DecksContainer>
     </Collection>
   );
@@ -268,4 +323,11 @@ const Button = styled.button`
     border: 1px solid #e0e0e0;
   }
 `;
-export default Decks;
+
+const mapStateToProps = state => {
+  return {
+    dashboard: state.dashboard,
+  };
+};
+
+export default connect(mapStateToProps)(Decks);

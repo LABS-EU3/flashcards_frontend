@@ -95,6 +95,10 @@ export const getSingleDeck = deckId => dispatch => {
         type: types.ON_GET_SINGLE_DECK_SUCCESS,
         payload: data,
       });
+      dispatch({
+        type: types.ON_DECK_CARDS_FETCH_SUCCESS,
+        payload: data.flashcards,
+      });
     })
     .catch(error => {
       dispatch({
