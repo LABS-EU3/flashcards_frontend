@@ -16,7 +16,7 @@ import {
 } from '../../../styles/DeckLibraryStyles';
 import * as types from '../../../../../modules/dashboard/dashboardTypes';
 
-const Decks = ({ decks, isEditMode, setIsEditMode }) => {
+const Decks = ({ decks, isEditMode, setIsEditMode, updateAccess }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   return (
@@ -53,6 +53,7 @@ const Decks = ({ decks, isEditMode, setIsEditMode }) => {
             <CardsFlexs
               onClick={() => {
                 dispatch({ type: types.ON_SELECT_DECK, payload: { ...d } });
+                updateAccess(d.deck_id);
               }}
               key={d.deck_id}
               width="46%"
