@@ -6,7 +6,6 @@ export function objectPropertyCompare(array, property) {
       position,
   );
 }
-
 export function valueCompare(array) {
   return array.filter((a, b) => array.indexOf(a) === b);
 }

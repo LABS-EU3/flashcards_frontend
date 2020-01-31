@@ -1,6 +1,6 @@
 import React from 'react';
-import { H2, HR, P } from '../../styles/typography';
-import { Container, Title, Card, CardFooter } from './styles';
+import { H2, HR } from '../../styles/typography';
+import { Container, Title } from './styles';
 import CardItem from './CardItem';
 
 const data = [
@@ -43,7 +43,6 @@ const DashboardCenterBar = () => {
           />
         ))}
       </div>
-
     </Container>
   );
 };
