@@ -102,7 +102,7 @@ const SideContent = ({
   onGetRecentViewedDecks,
 }) => {
   const [openLastPlayed, setOpenLastPlayed] = useState(false);
-  const [openRecentlyViewed, setOpenRecentlyViewed] = useState(true);
+  const [openRecentlyViewed, setOpenRecentlyViewed] = useState(false);
   const handleButtonClickLastPlayed = () => {
     setOpenLastPlayed(!openLastPlayed);
     onGetRecentDecks();
