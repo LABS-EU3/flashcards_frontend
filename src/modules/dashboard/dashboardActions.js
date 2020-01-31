@@ -253,3 +253,19 @@ export const updateAccessTime = id => dispatch => {
     });
   }
 };
+
+export const getFavoriteTags = () => dispatch => {
+  dispatch({ type: types.ON_START_FETCH_FAV_TAGS });
+  try {
+    axiosWithAuth()
+      .get(`/decks/favorite`)
+      .then(({ data }) => {
+        dispatch({ type: types.ON_FETCH_FAV_TAGS_SUCCESS, payload: data });
+      });
+  } catch (error) {
+    dispatch({
+      type: types.ON_FETCH_FAV_TAGS_FAIL,
+      payload: error.message,
+    });
+  }
+};

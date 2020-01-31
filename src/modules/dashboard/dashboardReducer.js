@@ -22,6 +22,7 @@ const initialState = {
   allDecks: [],
   siftedDecks: [],
   cardOfTheDay: {},
+  favoriteTags: [],
 };
 
 const dashboardReducer = (state = initialState, action) => {
@@ -281,6 +282,22 @@ const dashboardReducer = (state = initialState, action) => {
     case types.ON_UPDATE_ACCESS_SUCCESS:
       return {
         ...state,
+        loading: false,
+      };
+    case types.ON_START_FETCH_FAV_TAGS:
+      return { ...state, loading: true };
+
+    case types.ON_FETCH_FAV_TAGS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload,
+      };
+
+    case types.ON_FETCH_FAV_TAGS_SUCCESS:
+      return {
+        ...state,
+        favoriteTags: action.payload,
         loading: false,
       };
     default:
