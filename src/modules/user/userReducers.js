@@ -225,6 +225,23 @@ const userReducer = (state = initialState, action) => {
         errors: action.payload,
       };
 
+    case types.UPDATE_USER_PROFILE_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.UPDATE_USER_PROFILE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        completed: true,
+      };
+    case types.UPDATE_USER_PROFILE_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload,
+      };
     default:
       return state;
   }
