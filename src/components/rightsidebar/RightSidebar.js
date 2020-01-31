@@ -1,7 +1,8 @@
 // Libraries
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Sidebar from 'react-sidebar';
 import { MdKeyboardArrowDown } from 'react-icons/md';
+
 import { Line } from 'rc-progress';
 
 // components
@@ -26,8 +27,9 @@ import {
 } from '../../styles/sidebarStyles';
 
 import levelIcon from '../../assets/icons/label_important_24px_outlined.svg';
+// import { ok } from 'assert';
 
-// const cards = [
+// const decks = [
 //   {
 //     title: 'Organic Compounds',
 //     category: 'Chemistry',
@@ -56,16 +58,24 @@ import levelIcon from '../../assets/icons/label_important_24px_outlined.svg';
 // ];
 
 export default function RightSidebar(props) {
-  const { user, getRecentCards } = props;
-  // console.log(user);
-  const { id } = user.credentials;
-  // console.log(id)
-  // const handleGet = id => {
-  //   getRecentCards(id);
-  // };
-  console.log('yo', getRecentCards(id));
-  const [cards, setCards] = useState([]);
-  console.log(cards);
+  const { user, getRecentDecks } = props;
+  const [decks, setDecks] = useState([]);
+
+  const onGetRecentDecks = () => {
+    getRecentDecks().then(ok => {
+      setDecks(ok.data.data);
+      console.log(ok.data.data);
+    });
+  };
+  // console.log(getRecentCards());
+  // setCards(data.cards);
+  //   .then(ok => {
+  //   setCards(ok.data.cards);
+  //   console.log('yoyo')
+  // });
+  // console.log(decks);
+  // const cardsArray = Object.keys(cards);
+  // console.log(cardsArray)
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const mql = window.matchMedia(`(min-width: ${g.desktopMediaBreak}px)`);
@@ -79,22 +89,14 @@ export default function RightSidebar(props) {
 
   mql.addListener(mediaQueryChanged);
 
-  useEffect(async () => {
-    // const { fetchRooms } = this.props
-    console.log(1);
-    await setCards(console.log(2));
-    console.log(3);
-    // fetchRooms()
-  }, []);
-
   return (
     <SidebarStyled>
       <Sidebar
         sidebar={
           <SideContent
             user={user}
-            getRecentCards={getRecentCards}
-            cards={['getert', 'hert']}
+            onGetRecentDecks={onGetRecentDecks}
+            decks={decks}
           />
         }
         open={sidebarOpen}
@@ -119,20 +121,21 @@ export default function RightSidebar(props) {
     </SidebarStyled>
   );
 }
-const SideContent = ({ user, cards }) => {
+const SideContent = ({ user, decks, onGetRecentDecks }) => {
   const [openLastPlayed, setOpenLastPlayed] = useState(false);
   const [openRecentlyViewed, setOpenRecentlyViewed] = useState(true);
-
   // const getCard = getRecentCards(id);
   // console.log("test", getCard);
 
   const handleButtonClickLastPlayed = () => {
     setOpenLastPlayed(!openLastPlayed);
+    onGetRecentDecks();
     // setCards(['hello', 'test']);
   };
   // console.log('card', cards);
   const handleButtonClickRecentlyViewed = () => {
     setOpenRecentlyViewed(!openRecentlyViewed);
+    onGetRecentDecks();
   };
   // const onFetch = () => {
   //   setCards(getRecentCards);
@@ -186,13 +189,13 @@ const SideContent = ({ user, cards }) => {
             </H1>
           </StyledStart>
           {openLastPlayed &&
-            cards.map(card => {
+            decks.map(deck => {
               return (
                 <Card
-                  key={card.title}
-                  title={card.title}
-                  category={card.category}
-                  totalCard={card.totalCard}
+                  key={deck.id}
+                  title={deck.deck_name}
+                  public={deck.public}
+                  totalCard={deck.totalCard}
                 />
               );
             })}
@@ -217,17 +220,17 @@ const SideContent = ({ user, cards }) => {
               </div>
             </H1>
           </StyledStart>
-          {/* {openRecentlyViewed &&
-            cards.map(card => {
+          {openRecentlyViewed &&
+            decks.map(deck => {
               return (
                 <Card
-                  key={card.title}
-                  title={card.title}
-                  category={card.category}
-                  totalCard={card.totalCard}
+                  key={deck.id}
+                  title={deck.deck_name}
+                  public={deck.public}
+                  totalCard={deck.totalCard}
                 />
               );
-            })} */}
+            })}
         </ViewedCardsStyled>
       </SectionHolder>
     </SidebarBody>
