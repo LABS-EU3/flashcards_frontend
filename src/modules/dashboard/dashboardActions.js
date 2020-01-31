@@ -237,3 +237,19 @@ export const getCOTD = () => dispatch => {
       });
     });
 };
+
+export const updateAccessTime = id => dispatch => {
+  dispatch({ type: types.ON_START_UPDATE_ACCESS });
+  try {
+    axiosWithAuth()
+      .put(`/decks/access/${id}`)
+      .then(() => {
+        dispatch({ type: types.ON_UPDATE_ACCESS_SUCCESS });
+      });
+  } catch (error) {
+    dispatch({
+      type: types.ON_UPDATE_ACCESS_FAIL,
+      payload: error.message,
+    });
+  }
+};

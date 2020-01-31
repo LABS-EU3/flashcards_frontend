@@ -63,11 +63,17 @@ const Decks = ({ decks, isEditMode, setIsEditMode }) => {
               <NavLink to={`/dashboard/deck/${d.deck_id}`} className="navFlex">
                 <InfoHolder>
                   <H2 BOLD>{d.deck_name}</H2>
-                  <P>Tags</P>
+                  {d.tags[0] !== null ? (
+                    d.tags.map((tag, index) => (
+                      <P key={`${index + 1}`}>{tag.name}</P>
+                    ))
+                  ) : (
+                    <P>-</P>
+                  )}
                 </InfoHolder>
 
                 <CardCount>
-                  <P color="grey">30 Cards </P>
+                  <P color="grey">{d.flashcards.length} Cards </P>
                   <button
                     type="button"
                     onClick={() => {
