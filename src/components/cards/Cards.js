@@ -40,6 +40,10 @@ export const CardCount = styled(SLower)`
   .studyIcon {
     visibility: hidden;
   }
+  button {
+    background: inherit;
+    border: none;
+  }
 `;
 export const InfoHolder = styled.div`
   display: flex;

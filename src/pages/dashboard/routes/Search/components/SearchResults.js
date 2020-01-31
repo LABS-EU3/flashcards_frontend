@@ -1,38 +1,60 @@
 /* eslint-disable max-len */
 import React from 'react';
+import { MdCollectionsBookmark } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
 import {
   Collection,
   CollectionLabel,
   DecksContainer,
+  CardsFlexs,
 } from '../../../styles/DeckLibraryStyles';
 import { HR, H2, P } from '../../../../../styles/typography';
-import { ON_SELECT_DECK } from '../../../../../modules/dashboard/dashboardTypes';
-import { CardsFlex } from '../../../../../components/cards/Cards';
 
-export default function SearchResults({ decks, dispatch }) {
+import { InfoHolder, CardCount } from '../../../../../components/cards/Cards';
+
+export default function SearchResults({ siftedDecks, selectDeck, history }) {
   return (
     <Collection>
       <CollectionLabel>
         <HR />
       </CollectionLabel>
       <DecksContainer>
-        {decks.map(d => {
+        {siftedDecks.map((d, index) => {
           return (
-            <CardsFlex
+            <CardsFlexs
               onClick={() => {
-                dispatch({ type: ON_SELECT_DECK, payload: { ...d } });
+                selectDeck(d);
               }}
-              key={d.deck_id}
+              key={`${index + d.deck_id}${d.deck_id}`}
               width="46%"
               marginLeft="0"
               marginRight="0"
             >
-              <NavLink to={`/dashboard/deck/${d.deck_id}`}>
-                <H2 BOLD>{d.deck_name}</H2>
-                <P>{d.isPublic ? 'Public' : 'Private'}</P>
+              <NavLink to={`/dashboard/deck/${d.deck_id}`} className="navFlex">
+                <InfoHolder>
+                  <H2 BOLD>{d.deck_name}</H2>
+                  {d.tags.map((tag, idx) => (
+                    <P key={`${idx + 1}`}>{tag}</P>
+                  ))}
+                </InfoHolder>
+
+                <CardCount>
+                  <P color="grey">30 Cards </P>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      history.push('/dashboard/study');
+                    }}
+                  >
+                    <MdCollectionsBookmark
+                      size="2em"
+                      color="grey"
+                      className="studyIcon"
+                    />
+                  </button>
+                </CardCount>
               </NavLink>
-            </CardsFlex>
+            </CardsFlexs>
           );
         })}
       </DecksContainer>

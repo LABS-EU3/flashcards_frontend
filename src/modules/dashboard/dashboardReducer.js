@@ -1,5 +1,6 @@
 import * as types from './dashboardTypes';
 import { deckTags } from '../../utils/deckTags';
+import { objectPropertyCompare } from '../../utils/comparisionFunctions';
 
 const initialState = {
   loading: false,
@@ -21,6 +22,8 @@ const initialState = {
   tags: deckTags,
   showMenu: false,
   confirmingDeletion: false,
+  allDecks: [],
+  siftedDecks: [],
 };
 
 const dashboardReducer = (state = initialState, action) => {
@@ -298,6 +301,35 @@ const dashboardReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+      };
+
+    case types.ON_START_GET_ALL_DECKS:
+      return { ...state, loading: false };
+
+    case types.ON_GET_ALL_DECKS_SUCCESS:
+      return {
+        ...state,
+        allDecks: objectPropertyCompare(
+          [...action.payload, ...state.userDecks],
+          'deck_id',
+        ),
+        siftedDecks: objectPropertyCompare(
+          [...action.payload, ...state.userDecks],
+          'deck_id',
+        ),
+        loading: false,
+      };
+
+    case types.ON_GET_ALL_DECKS_FAILED:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload,
+      };
+    case types.ON_DECK_NAME_SEARCH:
+      return {
+        ...state,
+        siftedDecks: action.payload,
       };
 
     default:

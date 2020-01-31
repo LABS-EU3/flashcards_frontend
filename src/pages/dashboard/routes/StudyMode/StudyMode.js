@@ -337,7 +337,7 @@ const StudyMode = ({ dashboard, fetchDecks, getSessions, beginSession }) => {
                     <MLower>
                       <Line
                         percent={data.percent}
-                        strokeLineColor="red"
+                        strokelinecolor="red"
                         strokeWidth="4"
                         trailWidth="4"
                         trailColor="#fafafa"

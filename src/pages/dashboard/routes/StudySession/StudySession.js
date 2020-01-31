@@ -123,7 +123,7 @@ const CarouselComponent = ({ match, dashboard, fetchSession }) => {
           <H2>Organic Compounds</H2>
           <Line
             percent={50}
-            strokeLineColor="red"
+            strokelinecolor="red"
             strokeWidth="4"
             trailWidth="4"
             trailColor="#fafafa"
