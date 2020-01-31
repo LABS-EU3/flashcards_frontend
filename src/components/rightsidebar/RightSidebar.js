@@ -59,14 +59,11 @@ import levelIcon from '../../assets/icons/label_important_24px_outlined.svg';
 export default function RightSidebar(props) {
   const { user, getRecentDecks, dashboard } = props;
   const { recentDecks } = dashboard;
-  console.log('rcD', recentDecks);
   const [decks, setDecks] = useState([]);
 
   const onGetRecentDecks = () => {
     getRecentDecks();
     setDecks(recentDecks);
-    // setDecks(['hello', 'test', 'heruhte'])
-    // console.log('deck', recentDecks, decks);
   };
 
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -93,8 +90,6 @@ export default function RightSidebar(props) {
         sidebar={
           <SideContent
             user={user}
-            // recentDecks={recentDecks}
-            // getRecentDecks={getRecentDecks}
             onGetRecentDecks={onGetRecentDecks}
             decks={decks}
           />
@@ -121,37 +116,18 @@ export default function RightSidebar(props) {
     </SidebarStyled>
   );
 }
-const SideContent = ({
-  user,
-  decks,
-  // recentDecks,
-  // getRecentDecks,
-  onGetRecentDecks,
-}) => {
+const SideContent = ({ user, decks, onGetRecentDecks }) => {
   const [openLastPlayed, setOpenLastPlayed] = useState(false);
   const [openRecentlyViewed, setOpenRecentlyViewed] = useState(true);
-  // const [decks, setDecks] = useState([]);
-
-  //  const onGetRecentDecks = () => {
-  //    getRecentDecks();
-  //    setDecks(recentDecks);
-  //  };
 
   const handleButtonClickLastPlayed = () => {
     setOpenLastPlayed(!openLastPlayed);
     onGetRecentDecks();
   };
-  // console.log('card', decks);
   const handleButtonClickRecentlyViewed = () => {
     setOpenRecentlyViewed(!openRecentlyViewed);
-    // getRecentDecks();
-    // setDecks(['hello', 'test', 'heruhte']);
+    onGetRecentDecks();
   };
-  // useEffect(() => {
-  //   getRecentDecks();
-  //   setDecks(recentDecks);
-  //   console.log('effect!!!')
-  // }, [decks]);
 
   return (
     <SidebarBody>
@@ -230,7 +206,7 @@ const SideContent = ({
               </div>
             </H1>
           </StyledStart>
-          {/* {openRecentlyViewed &&
+          {openRecentlyViewed &&
             decks.map(deck => {
               return (
                 <Card
@@ -240,7 +216,7 @@ const SideContent = ({
                   totalCard={deck.totalCard}
                 />
               );
-            })} */}
+            })}
         </ViewedCardsStyled>
       </SectionHolder>
     </SidebarBody>
