@@ -60,12 +60,10 @@ export const fetchUserDecks = () => dispatch => {
 
 export const createDeck = (deck, onComplete, onFailed) => dispatch => {
   dispatch({ type: types.ON_START_CREATING_DECK });
-  debugger;
 
   axiosWithAuth()
     .post(`/decks`, deck)
     .then(({ data }) => {
-      debugger;
       dispatch({
         type: types.ON_DECK_CREATION_COMPLETE,
         payload: data.deck,
@@ -74,12 +72,11 @@ export const createDeck = (deck, onComplete, onFailed) => dispatch => {
       if (onComplete) onComplete();
     })
     .catch(err => {
-      debugger;
       dispatch({
         type: types.ON_DECK_CREATION_CANCELLED,
         payload: err.message,
       });
-
+      window.alert(err.response.data.error);
       if (onFailed) onFailed();
     });
 };

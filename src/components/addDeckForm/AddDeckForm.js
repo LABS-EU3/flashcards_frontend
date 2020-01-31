@@ -97,14 +97,10 @@ const Form = props => {
             <Text color={c.DANGER_COLOR}>{errors.deckName}</Text>
           )}
           <Select
-            placeholder="Add tags to your deck"
-            type="text"
             onChange={e => {
               handleChange(e);
               addTag(e.target.value);
             }}
-            onBlur={handleBlur}
-            value={values.tag}
             name="public"
             border={touched.tag && errors.tag && `2px solid ${c.DANGER_COLOR}`}
           >
@@ -231,7 +227,7 @@ const AddDeckForm = withFormik({
       const deck = {
         name: values.deckName,
         tags: selectedTagIds,
-        public: values.public,
+        isPublic: values.public,
       };
 
       props.createDeck(deck, setSubmitting(false));
