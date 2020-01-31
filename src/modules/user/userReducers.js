@@ -207,6 +207,23 @@ const userReducer = (state = initialState, action) => {
         loading: false,
         errors: action.payload,
       };
+    case types.UPLOAD_PROFILE_IMAGE_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.UPLOAD_PROFILE_IMAGE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        completed: true,
+      };
+    case types.UPLOAD_PROFILE_IMAGE_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload,
+      };
 
     default:
       return state;
