@@ -21,10 +21,10 @@ import { ON_DECK_NAME_SEARCH } from '../../../../../modules/dashboard/dashboardT
 
 function TopSearch({ dashboard, decks, updateSiftedDecks }) {
   const { tags } = dashboard;
+  const headerSearchBar = window.history.state.state;
   const [selectedTags, setSelectedTags] = useState([]);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState(headerSearchBar.deckNameValue);
   const [isPublic, setIsPublic] = useState(true);
-
   const removeTag = tag => {
     const remainingTags = selectedTags.filter(t => t.id !== tag.id);
     setSelectedTags(remainingTags);
