@@ -227,7 +227,7 @@ export const getCOTD = () => dispatch => {
     .then(({ data }) => {
       dispatch({
         type: types.ON_CARD_OF_THE_DAY_FETCH_SUCCESS,
-        payload: data.data,
+        payload: data.card[0],
       });
     })
     .catch(error => {

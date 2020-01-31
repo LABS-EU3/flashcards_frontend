@@ -34,12 +34,12 @@ const DashboardCenterBar = () => {
       </Title>
 
       <div className="dashboard-cards">
-        {data.map(item => (
+        {data.map((item, index) => (
           <CardItem
             title={item.title}
             cardsLeft={item.cardsLeft}
             library={item.library}
-            key={item.title}
+            key={`${index + 1}`}
           />
         ))}
       </div>

@@ -52,13 +52,9 @@ export const Title = styled.div`
 `;
 
 export const CardFooter = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
   padding: 2.5em;
   padding: 2.5em;
   background: #fff;
   margin-top: 1em;
-  font-size: 1.2rem;
 `;

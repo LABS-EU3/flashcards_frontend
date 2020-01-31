@@ -1,29 +1,23 @@
 .dashboard-welcome {
-	display: flex;
-	min-height: 100vh;
+  display: flex;
+  min-height: 100vh;
 }
 
 .dashboard-welcome__item {
-	width: 50%;
-	padding: 1em;
+  width: 50%;
+  padding: 1em;
 }
 
 .dashboard-cards_footer {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	padding-top: 2em;
-	padding-bottom: 2em;
+  width: 100%;
 }
 
 @media (max-width: 768px) {
-	.dashboard-welcome {
-		flex-direction: column;
-	}
+  .dashboard-welcome {
+    flex-direction: column;
+  }
 
-	.dashboard-welcome__item {
-		width: 100%;
-	}
-
+  .dashboard-welcome__item {
+    width: 100%;
+  }
 }
