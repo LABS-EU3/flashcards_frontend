@@ -16,7 +16,6 @@ import {
   SelectAll,
 } from '../../../styles/DeckLibraryStyles';
 import * as types from '../../../../../modules/dashboard/dashboardTypes';
-import { StyledButton } from '../styles/deckSectionStyles';
 
 const Decks = ({ decks, isEditMode, setIsEditMode, updateAccess }) => {
   const dispatch = useDispatch();
@@ -51,17 +50,10 @@ const Decks = ({ decks, isEditMode, setIsEditMode, updateAccess }) => {
               />
               <P>Select All</P>
             </SelectAll>
-            <StyledButton
-              type="button"
-              onClick={() => {
-                const nonRepeatingIds = selectedDecks.filter((a, b) => a !== b);
-                console.log(nonRepeatingIds);
-              }}
-            >
-              <H2>
-                <MdDelete />
-              </H2>
-            </StyledButton>
+
+            <H2>
+              <MdDelete />
+            </H2>
 
             <button
               type="button"
