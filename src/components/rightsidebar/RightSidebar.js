@@ -1,5 +1,5 @@
 // Libraries
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from 'react-sidebar';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
@@ -65,7 +65,8 @@ export default function RightSidebar(props) {
   const onGetRecentDecks = () => {
     getRecentDecks();
     setDecks(recentDecks);
-    console.log('deck', recentDecks, decks);
+    // setDecks(['hello', 'test', 'heruhte'])
+    // console.log('deck', recentDecks, decks);
   };
 
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -80,6 +81,11 @@ export default function RightSidebar(props) {
   };
 
   mql.addListener(mediaQueryChanged);
+
+  useEffect(() => {
+    getRecentDecks();
+    setDecks(recentDecks);
+  }, [decks]);
 
   return (
     <SidebarStyled>
@@ -134,8 +140,6 @@ const SideContent = ({
   const handleButtonClickLastPlayed = () => {
     setOpenLastPlayed(!openLastPlayed);
     onGetRecentDecks();
-    // setDecks(recentDecks);
-    console.log('yoooo', decks);
   };
   // console.log('card', decks);
   const handleButtonClickRecentlyViewed = () => {
@@ -143,6 +147,11 @@ const SideContent = ({
     // getRecentDecks();
     // setDecks(['hello', 'test', 'heruhte']);
   };
+  // useEffect(() => {
+  //   getRecentDecks();
+  //   setDecks(recentDecks);
+  //   console.log('effect!!!')
+  // }, [decks]);
 
   return (
     <SidebarBody>
