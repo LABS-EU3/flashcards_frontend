@@ -97,22 +97,6 @@ const CarouselComponent = ({ match, dashboard, fetchSession }) => {
   const { sessionId } = match.params;
   const { selectedSession, sessionCards } = dashboard;
 
-  let reviewedCardIds = [];
-
-  if (selectedSession.reviewed_cards) {
-    reviewedCardIds = selectedSession.reviewed_cards.map(c =>
-      c ? c.id : null,
-    );
-  }
-
-  let remainingCards = [];
-
-  if (selectedSession.flashcards) {
-    remainingCards = selectedSession.flashcards.filter(
-      f => f !== null && !reviewedCardIds.includes(f.id),
-    );
-  }
-
   useEffect(() => {
     fetchSession(sessionId);
   }, []);
