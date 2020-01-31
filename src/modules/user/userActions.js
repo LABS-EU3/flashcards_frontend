@@ -186,11 +186,13 @@ export const managePassword = passwordData => dispatch => {
     });
 };
 
-export const manageAccount = id => dispatch => {
+export const manageAccount = (id, password) => dispatch => {
   dispatch({ type: types.DELETE_USER_ACCOUNT_START });
-
+  console.log('bbbbbb', id, password);
   axiosWithAuth()
-    .delete(`${baseUrl}/users/${id}`)
+    .delete(`${baseUrl}/users/${id}`, {
+      password: password.password,
+    })
     .then(res => {
       dispatch({ type: types.DELETE_USER_ACCOUNT_SUCCESS, payload: res.data });
       dispatch({ type: types.CLEAR_RESPONSES });
@@ -243,7 +245,7 @@ export const manageProfile = updatedData => dispatch => {
   dispatch({ type: types.UPDATE_USER_PROFILE_START });
 
   axiosWithAuth()
-    .post(`${baseUrl}/users/updateprofile`, {
+    .put(`${baseUrl}/users/updateprofile`, {
       fullName: updatedData.fullName,
     })
     .then(res => {
