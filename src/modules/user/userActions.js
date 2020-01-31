@@ -157,7 +157,7 @@ export const googleAuthorized = (token, history) => dispatch => {
 };
 
 /* eslint-disable-next-line no-unused-vars */
-export const manageProfile = () => dispatch => {};
+// export const manageProfile = () => dispatch => {};
 /* eslint-disable-next-line no-unused-vars */
 // export const manageAccount = () => dispatch => {};
 /* eslint-disable-next-line no-unused-vars */
@@ -234,6 +234,26 @@ export const uploadProfileImg = imageUrl => dispatch => {
     .catch(errors => {
       dispatch({
         type: types.UPLOAD_PROFILE_IMAGE_FAILURE,
+        payload: errors.response.data.message,
+      });
+    });
+};
+
+export const manageProfile = updatedData => dispatch => {
+  dispatch({ type: types.UPDATE_USER_PROFILE_START });
+
+  axiosWithAuth()
+    .post(`${baseUrl}/users/updateprofile`, {
+      fullName: updatedData.fullName,
+      email: updatedData.email,
+    })
+    .then(res => {
+      dispatch({ type: types.UPDATE_USER_PROFILE_SUCCESS, payload: res.data });
+      dispatch({ type: types.CLEAR_RESPONSES });
+    })
+    .catch(errors => {
+      dispatch({
+        type: types.UPDATE_USER_PROFILE_FAILURE,
         payload: errors.response.data.message,
       });
     });
