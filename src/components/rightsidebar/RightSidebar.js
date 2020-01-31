@@ -28,44 +28,19 @@ import {
 
 import levelIcon from '../../assets/icons/label_important_24px_outlined.svg';
 
-// const decks = [
-//   {
-//     title: 'Organic Compounds',
-//     category: 'Chemistry',
-//     totalCard: 30,
-//   },
-//   {
-//     title: 'Quantum Mechanics',
-//     category: 'Physics',
-//     totalCard: 40,
-//   },
-//   {
-//     title: 'Data Structures',
-//     category: 'Computer Science',
-//     totalCard: 320,
-//   },
-//   {
-//     title: 'Advance Algorithms',
-//     category: 'Computer Science',
-//     totalCard: 70,
-//   },
-//   {
-//     title: 'OWASP Basics',
-//     category: 'Computer Science',
-//     totalCard: 100,
-//   },
-// ];
-
 export default function RightSidebar(props) {
   const { user, getRecentDecks, dashboard } = props;
   const { recentDecks } = dashboard;
   const [decks, setDecks] = useState([]);
-
+  const [viewedDecks, setViewedDecks] = useState([]);
   const onGetRecentDecks = () => {
-    getRecentDecks();
+    // getRecentDecks();
     setDecks(recentDecks);
   };
-
+  const onGetRecentViewedDecks = () => {
+    // getRecentDecks();
+    setViewedDecks(recentDecks);
+  };
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const mql = window.matchMedia(`(min-width: ${g.desktopMediaBreak}px)`);
@@ -81,8 +56,9 @@ export default function RightSidebar(props) {
 
   useEffect(() => {
     getRecentDecks();
+    setViewedDecks(recentDecks);
     setDecks(recentDecks);
-  }, [decks]);
+  }, []);
 
   return (
     <SidebarStyled>
@@ -92,6 +68,8 @@ export default function RightSidebar(props) {
             user={user}
             onGetRecentDecks={onGetRecentDecks}
             decks={decks}
+            viewedDecks={viewedDecks}
+            onGetRecentViewedDecks={onGetRecentViewedDecks}
           />
         }
         open={sidebarOpen}
@@ -116,17 +94,22 @@ export default function RightSidebar(props) {
     </SidebarStyled>
   );
 }
-const SideContent = ({ user, decks, onGetRecentDecks }) => {
+const SideContent = ({
+  user,
+  decks,
+  viewedDecks,
+  onGetRecentDecks,
+  onGetRecentViewedDecks,
+}) => {
   const [openLastPlayed, setOpenLastPlayed] = useState(false);
   const [openRecentlyViewed, setOpenRecentlyViewed] = useState(true);
-
   const handleButtonClickLastPlayed = () => {
     setOpenLastPlayed(!openLastPlayed);
     onGetRecentDecks();
   };
   const handleButtonClickRecentlyViewed = () => {
     setOpenRecentlyViewed(!openRecentlyViewed);
-    onGetRecentDecks();
+    onGetRecentViewedDecks();
   };
 
   return (
@@ -207,10 +190,10 @@ const SideContent = ({ user, decks, onGetRecentDecks }) => {
             </H1>
           </StyledStart>
           {openRecentlyViewed &&
-            decks.map(deck => {
+            viewedDecks.map(deck => {
               return (
                 <Card
-                  key={deck.id}
+                  key={deck.deck_id}
                   title={deck.deck_name}
                   public={deck.public}
                   totalCard={deck.totalCard}
