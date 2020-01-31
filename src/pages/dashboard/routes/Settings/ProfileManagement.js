@@ -57,23 +57,7 @@ const ProfileManagementForm = props => {
           }
         />
       </Label>
-      <Label>
-        <H3>Email</H3>
-        {touched.email && errors.email && (
-          <Text color={c.DANGER_COLOR}>{errors.email}</Text>
-        )}
-        <Input
-          type="email"
-          name="email"
-          value={values.email.toLowerCase()}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          placeholder="Email"
-          border={
-            touched.email && errors.email && `2px solid ${c.DANGER_COLOR}`
-          }
-        />
-      </Label>
+
       <Button2 type="submit">
         <H3 color={c.DARK_GRAY}>
           Submit
@@ -91,22 +75,16 @@ const ProfileManagementForm = props => {
 
 const validationSchema = yup.object().shape({
   fullName: yup.string().required('Please provide your full name'),
-  email: yup
-    .string()
-    .email('Email is not valid')
-    .required('Please provide your email'),
 });
 
 const PMForm = withFormik({
   mapPropsToValues: () => ({
     fullName: '',
-    email: '',
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
     props.manageProfile(
       {
         fullName: values.fullName,
-        email: values.email,
       },
       props.history,
     );
