@@ -41,7 +41,7 @@ export const BottomContainer = styled.div`
   }
 `;
 
-export const Card = styled.div`
+export const CardStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -180,18 +180,26 @@ const mastery = [
   { id: 7, cardTitle: 'Geography', percent: 100 },
 ];
 
-export default function StudyMode() {
+export default function StudyMode(props) {
+  const { dashboard, getRecentDecks } = props;
+
   const container = React.createRef();
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
 
+  const { recentDecks } = dashboard;
+  const [decks, setDecks] = useState([]);
   // const handleClickOutside = event => {
   //   if (container.current && !container.current.contains(event.target)) {
   //     setOpen(false);
   //   }
   // };
 
+  // const onGetRecentDecks = () => {
+  //   // getRecentDecks();
+  //   setDecks(recentDecks);
+  // };
   const handleButtonClick1 = () => {
     setOpen1(!open1);
   };
@@ -200,6 +208,7 @@ export default function StudyMode() {
   };
   const handleButtonClick3 = () => {
     setOpen3(!open3);
+    setDecks(recentDecks);
   };
   // document.addEventListener('mousedown', handleClickOutside);
   // document.removeEventListener('mousedown', handleClickOutside);
@@ -218,6 +227,8 @@ export default function StudyMode() {
     !mql.matches ? setOpen1(!open1) : setOpen1(open1);
     /* eslint-disable-next-line no-unused-expressions */
     !mql.matches ? setOpen2(!open2) : setOpen2(open2);
+    getRecentDecks();
+    setDecks(recentDecks);
   }, [mql.matches]);
 
   return (
@@ -257,6 +268,30 @@ export default function StudyMode() {
             </IconButtonWrapper>
           </UpperCardSection>
           <MyHR />
+
+          <CardContainer className="container" ref={container}>
+            <StyledMyPart>
+              {open3 &&
+                decks.map(deck => {
+                  return (
+                    <CardStyled key={deck.id}>
+                      <H2>{deck.deck_name}</H2>
+                      <SLowerCardSection>
+                        <SLower>
+                          <MdCollectionsBookmark size="2em" color="grey" />
+                        </SLower>
+                      </SLowerCardSection>
+                    </CardStyled>
+                    // <Card
+                    //   key={deck.deck_id}
+                    //   title={deck.deck_name}
+                    //   public={deck.public}
+                    //   totalCard={deck.totalCard}
+                    // />
+                  );
+                })}
+            </StyledMyPart>
+          </CardContainer>
         </RecentlyViewContainer>
 
         <SessionContainer>
@@ -279,7 +314,7 @@ export default function StudyMode() {
                 sessions.map((data, index) => {
                   return (
                     /* eslint-disable-next-line react/no-array-index-key */
-                    <Card key={index}>
+                    <CardStyled key={index}>
                       <H2>{data.cardTitle}</H2>
                       <SLowerCardSection>
                         <P>{data.mode} mode</P>
@@ -288,7 +323,7 @@ export default function StudyMode() {
                           <MdCollectionsBookmark size="2em" color="grey" />
                         </SLower>
                       </SLowerCardSection>
-                    </Card>
+                    </CardStyled>
                   );
                 })}
             </StyledMyPart>
@@ -314,7 +349,7 @@ export default function StudyMode() {
               mastery.map((data, index) => {
                 return (
                   /* eslint-disable-next-line react/no-array-index-key */
-                  <Card key={index}>
+                  <CardStyled key={index}>
                     <H2>{data.cardTitle}</H2>
                     <MLower>
                       <Line
@@ -328,7 +363,7 @@ export default function StudyMode() {
                       />
                       <H2>{data.percent} %</H2>
                     </MLower>
-                  </Card>
+                  </CardStyled>
                 );
               })}
           </CardContainer>

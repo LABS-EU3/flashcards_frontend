@@ -42,7 +42,13 @@ export const DashboardComponent = props => {
               <Route path="/dashboard/profile">
                 <Profile user={user} />
               </Route>
-              <Route path="/dashboard/study" component={StudyMode} />
+              <Route path="/dashboard/study">
+                <StudyMode
+                  dashboard={dashboard}
+                  // eslint-disable-next-line react/destructuring-assignment
+                  getRecentDecks={props.getRecentDecks}
+                />
+              </Route>
               <Route path="/dashboard/leaderboard" component={LeaderBoard} />
               <Route
                 path="/dashboard/studysession/:sessionId"
@@ -58,7 +64,6 @@ export const DashboardComponent = props => {
             dashboard={dashboard}
             // eslint-disable-next-line react/destructuring-assignment
             getRecentDecks={props.getRecentDecks}
-            // recentCard={recentCard}
           />
         </DashboardLayout>
       </ModalProvider>
