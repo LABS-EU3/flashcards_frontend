@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { PropagateLoader } from 'react-spinners';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { fetchRankings } from '../../../../modules/user/userActions';
 
-import { H1, H2, P } from '../../../../styles/typography';
+import { H1, H2, P, H3 } from '../../../../styles/typography';
 
 export const Container = styled.div`
   background-color: transparent;
@@ -94,21 +95,26 @@ export default function LeaderBoard() {
   const rankings = useSelector(state => state.user.rankings);
   const loading = useSelector(state => state.user.loading);
   const error = useSelector(state => state.user.errors);
+  const [loader, setLoader] = useState();
 
   useEffect(() => {
     dispatch(fetchRankings());
+    if (loading) {
+      setLoader(
+        <div className="overcast">
+          <PropagateLoader size={30} color="#FFA987" loading={loading} />
+        </div>,
+      );
+    }
   }, []);
 
-  if (loading) {
-    return <Loading>Loading...</Loading>;
-  }
   return (
     <Container>
+      {loader}
       <TopCompDiv>
         <H1 lineHeight="1.5em">Rankings</H1>
         <MyHR />
       </TopCompDiv>
-
       <Errors>{error && error.message}</Errors>
 
       <CardContainer>
@@ -125,7 +131,9 @@ export default function LeaderBoard() {
             );
           })
         ) : (
-          <Loading>No rankings to display yet</Loading>
+          <Loading>
+            <H3>No rankings to display yet</H3>
+          </Loading>
         )}
       </CardContainer>
     </Container>
