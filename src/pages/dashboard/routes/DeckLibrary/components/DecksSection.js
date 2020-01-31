@@ -19,6 +19,10 @@ import * as types from '../../../../../modules/dashboard/dashboardTypes';
 const Decks = ({ decks, isEditMode, setIsEditMode, updateAccess }) => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const selectAll = () => {
+    const checkboxes = document.getElementsByName('selectThisDeck');
+    console.log(checkboxes);
+  };
   return (
     <Collection>
       <EditControls>
@@ -29,7 +33,12 @@ const Decks = ({ decks, isEditMode, setIsEditMode, updateAccess }) => {
         {isEditMode && (
           <EditModeHolder>
             <SelectAll>
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                onClick={() => {
+                  selectAll();
+                }}
+              />
               <P>Select All</P>
             </SelectAll>
             <H2>
@@ -60,7 +69,7 @@ const Decks = ({ decks, isEditMode, setIsEditMode, updateAccess }) => {
               marginLeft="0"
               marginRight="0"
             >
-              {isEditMode && <input type="checkbox" />}
+              {isEditMode && <input type="checkbox" name="selectThisDeck" />}
               <NavLink to={`/dashboard/deck/${d.deck_id}`} className="navFlex">
                 <InfoHolder>
                   <H2 BOLD>{d.deck_name}</H2>
