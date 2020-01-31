@@ -95,6 +95,10 @@ export const getSingleDeck = deckId => dispatch => {
         type: types.ON_GET_SINGLE_DECK_SUCCESS,
         payload: data,
       });
+      dispatch({
+        type: types.ON_DECK_CARDS_FETCH_SUCCESS,
+        payload: data.flashcards,
+      });
     })
     .catch(error => {
       dispatch({
@@ -192,6 +196,25 @@ export const deleteDeck = deckId => dispatch => {
     .catch(error => {
       dispatch({
         type: types.ON_DELETE_DECK_FAILED,
+        payload: error.message,
+      });
+    });
+};
+
+export const fetchAllDecks = () => dispatch => {
+  dispatch({ type: types.ON_START_GET_ALL_DECKS });
+
+  axiosWithAuth()
+    .get('/decks/public')
+    .then(({ data }) => {
+      dispatch({
+        type: types.ON_GET_ALL_DECKS_SUCCESS,
+        payload: data.data,
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: types.ON_GET_ALL_DECKS_FAILED,
         payload: error.message,
       });
     });

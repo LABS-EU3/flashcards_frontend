@@ -117,7 +117,7 @@ const SideContent = ({ user }) => {
             <XPHolder>
               <Line
                 percent="50"
-                strokeLineColor="red"
+                strokelinecolor="red"
                 strokeWidth="4"
                 trailWidth="4"
                 trailColor="#fafafa"
@@ -137,10 +137,9 @@ const SideContent = ({ user }) => {
         <CardsStyled>
           <StyledStart>
             <H1 BOLD>
-              {' '}
               Last Played
               <IconButtonWrapper
-                rotate={openLastPlayed}
+                rotate={openLastPlayed.toString()}
                 onClick={handleButtonClickLastPlayed}
               >
                 <MdKeyboardArrowDown
@@ -169,10 +168,9 @@ const SideContent = ({ user }) => {
         <ViewedCardsStyled>
           <StyledStart>
             <H1 BOLD>
-              {' '}
               Last Viewed
               <IconButtonWrapper
-                rotate={openRecentlyViewed}
+                rotate={openRecentlyViewed.toString()}
                 onClick={handleButtonClickRecentlyViewed}
               >
                 <MdKeyboardArrowDown
