@@ -219,3 +219,22 @@ export const submitHelpCenterMsg = feedback => dispatch => {
       });
     });
 };
+
+export const uploadProfileImg = imageUrl => dispatch => {
+  dispatch({ type: types.UPLOAD_PROFILE_IMAGE_START });
+  console.log('>>>>>>>', imageUrl);
+  axiosWithAuth()
+    .post(`${baseUrl}/auth/uploadProfile_img`, {
+      imageUrl: imageUrl,
+    })
+    .then(res => {
+      dispatch({ type: types.UPLOAD_PROFILE_IMAGE_SUCCESS, payload: res.data });
+      dispatch({ type: types.CLEAR_RESPONSES });
+    })
+    .catch(errors => {
+      dispatch({
+        type: types.UPLOAD_PROFILE_IMAGE_FAILURE,
+        payload: errors.response.data.message,
+      });
+    });
+};
