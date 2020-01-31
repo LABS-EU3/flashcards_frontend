@@ -17,7 +17,6 @@ import AccountManagementForm from './AccountManagement';
 import HelpCenterForm from './HelpCenter';
 import { ProfileImageDiv } from '../../styles/DashboardStyles';
 import profileDefault from '../../../../assets/user_profile_default.jpg';
-// import { uploadProfileImg } from '../../../../modules/user/userActions';
 
 import { openUploadWidget } from '../../../../utils/CloudinaryService';
 
@@ -157,28 +156,16 @@ const ProfileInnerContainer = styled.div`
 `;
 
 export default function Settings() {
-  // export function Settings(props) {
   const { credentials } = useSelector(state => state.user);
   const imgUrl = useSelector(state => state.user.credentials.image_url);
-  // console.log('pppppp', props);
-  // console.log('yyyyyy', props.uploadProfileImg);
-  console.log('cccccc', credentials);
-  console.log('iiiiiiii', imgUrl);
 
-  // const logoutUser = useAction(action.logoutUser);
-  // const logoutUser = useAction(action.logoutUser);
-  //   const history = useHistory();
-  //   const onLogout = e => {
-  //     e.preventDefault();
-  //     logoutUser(history);
-  //   };
+  const uploadProfileImg = useAction(action.uploadProfileImg);
   const logoutUser = useAction(action.logoutUser);
   const history = useHistory();
   const onLogout = e => {
     e.preventDefault();
     logoutUser(history);
   };
-  const uploadProfileImg = useAction(action.uploadProfileImg);
 
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
@@ -211,13 +198,10 @@ export default function Settings() {
         console.log(error);
       },
       // eslint-disable-next-line camelcase
-      // image_url => console.log('????', image_url),
       imageUrl => {
         uploadProfileImg(imageUrl);
       },
     );
-
-    console.log('clicked');
   };
 
   return (
@@ -227,7 +211,6 @@ export default function Settings() {
           <ProfileInnerContainer>
             <RoundedImage
               // eslint-disable-next-line max-len
-              // image={profileDefault}
               image={imgUrl || profileDefault}
               alt="User's profile"
               imageHeight="100"
@@ -362,5 +345,3 @@ export default function Settings() {
     </Wrapper>
   );
 }
-
-// export default connect(null, { uploadProfileImg })(Settings);
