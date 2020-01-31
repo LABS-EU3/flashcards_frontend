@@ -17,6 +17,9 @@ import AccountManagementForm from './AccountManagement';
 import HelpCenterForm from './HelpCenter';
 import { ProfileImageDiv } from '../../styles/DashboardStyles';
 import profileDefault from '../../../../assets/user_profile_default.jpg';
+// import { uploadProfileImg } from '../../../../modules/user/userActions';
+
+import { openUploadWidget } from '../../../../utils/CloudinaryService';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -154,13 +157,28 @@ const ProfileInnerContainer = styled.div`
 `;
 
 export default function Settings() {
+  // export function Settings(props) {
   const { credentials } = useSelector(state => state.user);
+  const imgUrl = useSelector(state => state.user.credentials.image_url);
+  // console.log('pppppp', props);
+  // console.log('yyyyyy', props.uploadProfileImg);
+  console.log('cccccc', credentials);
+  console.log('iiiiiiii', imgUrl);
+
+  // const logoutUser = useAction(action.logoutUser);
+  // const logoutUser = useAction(action.logoutUser);
+  //   const history = useHistory();
+  //   const onLogout = e => {
+  //     e.preventDefault();
+  //     logoutUser(history);
+  //   };
   const logoutUser = useAction(action.logoutUser);
   const history = useHistory();
   const onLogout = e => {
     e.preventDefault();
     logoutUser(history);
   };
+  const uploadProfileImg = useAction(action.uploadProfileImg);
 
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
@@ -183,7 +201,24 @@ export default function Settings() {
   const handleButtonClick5 = () => {
     setOpen5(!open5);
   };
-  const uploadProfileImg = () => {};
+
+  const loadProfileImg = () => {
+    openUploadWidget(
+      ['an', 'array'],
+      'flashcard_front_13',
+      error => {
+        // eslint-disable-next-line no-console
+        console.log(error);
+      },
+      // eslint-disable-next-line camelcase
+      // image_url => console.log('????', image_url),
+      imageUrl => {
+        uploadProfileImg(imageUrl);
+      },
+    );
+
+    console.log('clicked');
+  };
 
   return (
     <Wrapper>
@@ -192,18 +227,15 @@ export default function Settings() {
           <ProfileInnerContainer>
             <RoundedImage
               // eslint-disable-next-line max-len
-              image={profileDefault}
+              // image={profileDefault}
+              image={imgUrl || profileDefault}
               alt="User's profile"
               imageHeight="100"
               imageWidth="100"
               roundedSize="1"
               roundedColor="#FFF"
             />
-            <MdCloudUpload
-              size="3.5em"
-              color="grey"
-              onClick={uploadProfileImg}
-            />
+            <MdCloudUpload size="3.5em" color="grey" onClick={loadProfileImg} />
           </ProfileInnerContainer>
           <H1>{credentials.full_name}</H1>
           <P>{credentials.email}</P>
@@ -330,3 +362,5 @@ export default function Settings() {
     </Wrapper>
   );
 }
+
+// export default connect(null, { uploadProfileImg })(Settings);
