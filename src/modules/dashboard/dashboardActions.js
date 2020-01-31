@@ -219,3 +219,21 @@ export const fetchAllDecks = () => dispatch => {
       });
     });
 };
+
+export const getCOTD = () => dispatch => {
+  dispatch({ type: types.ON_START_FETCHING_CARD_OF_THE_DAY });
+  axiosWithAuth()
+    .get('/cards/COTD')
+    .then(({ data }) => {
+      dispatch({
+        type: types.ON_CARD_OF_THE_DAY_FETCH_SUCCESS,
+        payload: data.data,
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: types.ON_CARD_OF_THE_DAY_FETCH_FAILED,
+        payload: error.message,
+      });
+    });
+};

@@ -21,6 +21,7 @@ const initialState = {
   confirmingDeletion: false,
   allDecks: [],
   siftedDecks: [],
+  cardOfTheDay: {},
 };
 
 const dashboardReducer = (state = initialState, action) => {
@@ -249,6 +250,23 @@ const dashboardReducer = (state = initialState, action) => {
       return {
         ...state,
         siftedDecks: action.payload,
+      };
+
+    case types.ON_START_FETCHING_CARD_OF_THE_DAY:
+      return { ...state, loading: true };
+
+    case types.ON_CARD_OF_THE_DAY_FETCH_FAILED:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload,
+      };
+
+    case types.ON_CARD_OF_THE_DAY_FETCH_SUCCESS:
+      return {
+        ...state,
+        cardOfTheDay: action.payload,
+        loading: false,
       };
     default:
       return state;
