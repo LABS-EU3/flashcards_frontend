@@ -1,11 +1,11 @@
 // Import
 
 // Libraries
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { withFormik } from 'formik';
 import { connect } from 'react-redux';
 import * as yup from 'yup';
-// import { SquareLoader } from 'react-spinners';
+import { SquareLoader } from 'react-spinners';
 
 // Styles
 import { Text, H3 } from '../../../../styles/typography';
@@ -24,29 +24,22 @@ const ProfileManagementForm = props => {
     handleSubmit,
     touched,
     errors,
+    user,
   } = props;
 
-  // const [response, setResponse] = useState(null);
+  const [response, setResponse] = useState(null);
 
-  // useEffect(() => {
-  //   if () {
-  //     setResponse(
-  //       <H3 color={c.SUCCESS_COLOR}>
-  //         Profile update successfully
-  //       </H3>,
-  //     );
-  //   }
-  //   if (user.errors) {
-  //     setResponse(
-  //   <H3 color={c.DANGER_COLOR}>
-  //     Error while upadting profile
-  //   </H3>
-  // );
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (user.completed) {
+      setResponse(<H3 color={c.SUCCESS_COLOR}>Profile update successfully</H3>);
+    }
+    if (user.errors) {
+      setResponse(<H3 color={c.DANGER_COLOR}>Error while upadting profile</H3>);
+    }
+  }, [user.errors, user.completed]);
   return (
     <Forms onSubmit={handleSubmit}>
-      {/* {response} */}
+      {response}
       <Label>
         <H3>Name</H3>
         {touched.fullName && errors.fullName && (
@@ -84,12 +77,12 @@ const ProfileManagementForm = props => {
       <Button2 type="submit">
         <H3 color={c.DARK_GRAY}>
           Submit
-          {/* <SquareLoader
+          <SquareLoader
             css={{ marginLeft: '20px' }}
             size={15}
             color="#FFA987"
             loading={user.loading}
-          /> */}
+          />
         </H3>
       </Button2>
     </Forms>
