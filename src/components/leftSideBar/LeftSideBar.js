@@ -37,7 +37,6 @@ const LeftSideBar = ({ name }) => {
       <ProfileImageDiv>
         <RoundedImage
           // eslint-disable-next-line max-len
-          // image={profileDefault}
           image={imgUrl || profileDefault}
           alt="User's profile"
           imageHeight="100"

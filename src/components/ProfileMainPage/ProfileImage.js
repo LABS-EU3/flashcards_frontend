@@ -10,10 +10,8 @@ import { H1 } from '../../styles/typography';
 const ProfileImage = ({ user }) => {
   return (
     <Image>
-      {/* <img src={user.image_url || profileImg} alt="profile" /> */}
       <RoundedImage
         // eslint-disable-next-line max-len
-        // image={profileDefault}
         image={user.image_url || profileImg}
         alt="User's profile"
         imageHeight="100"
