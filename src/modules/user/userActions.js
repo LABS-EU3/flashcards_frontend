@@ -245,7 +245,6 @@ export const manageProfile = updatedData => dispatch => {
   axiosWithAuth()
     .post(`${baseUrl}/users/updateprofile`, {
       fullName: updatedData.fullName,
-      email: updatedData.email,
     })
     .then(res => {
       dispatch({ type: types.UPDATE_USER_PROFILE_SUCCESS, payload: res.data });
