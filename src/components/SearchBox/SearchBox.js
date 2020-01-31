@@ -23,6 +23,7 @@ const SearchBox = () => {
             if (event.keyCode === 13) {
               history.push({
                 pathname: '/dashboard/search',
+                // sends state to the next page
                 state: { deckNameValue: inputValue },
               });
             }
@@ -32,7 +33,10 @@ const SearchBox = () => {
       <button
         type="submit"
         onClick={() => {
-          history.push('/dashboard/search');
+          history.push({
+            pathname: '/dashboard/search',
+            state: { deckNameValue: inputValue },
+          });
         }}
       >
         <FaSearch size={15} />

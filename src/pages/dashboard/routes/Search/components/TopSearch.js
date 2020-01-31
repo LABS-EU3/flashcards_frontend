@@ -43,11 +43,13 @@ function TopSearch({ dashboard, decks, updateSiftedDecks }) {
 
   const filterFunction = async () => {
     let siftedThroughDecks;
+    // filters through deck name input first
     const filteredDecks = await decks.filter(deck =>
       deck.deck_name.toUpperCase().match(inputValue.toUpperCase()),
     );
     siftedThroughDecks = filteredDecks;
     if (selectedTags.length > 0) {
+      // this returns a value in an array at deck index if matches input
       const tagOrganized = await siftedThroughDecks.map(deck =>
         deck.tags.filter(deckTag => {
           return selectedTags.some(selectTag => {
@@ -58,7 +60,9 @@ function TopSearch({ dashboard, decks, updateSiftedDecks }) {
       siftedThroughDecks =
         selectedTags.length > 0
           ? await tagOrganized
+              // returns array of the full deck information
               .map((deck, idx) => (deck.length > 0 ? decks[idx] : null))
+              // check if the deck contains all the tags selected
               .filter(value => {
                 if (value !== null) {
                   if (selectedTags.length > 0) {
@@ -67,6 +71,7 @@ function TopSearch({ dashboard, decks, updateSiftedDecks }) {
                       .map(tag => value.tags.includes(tag));
                     return results.reduce((a, b) => a && b);
                   }
+                  // if there is one tag selected it returns that true or false
                   return value.tags.includes(selectedTags.name);
                 }
                 return false;
@@ -75,6 +80,7 @@ function TopSearch({ dashboard, decks, updateSiftedDecks }) {
     }
     if (isPublic === false) {
       siftedThroughDecks = await siftedThroughDecks.filter(deck => {
+        // ensures deck.public is compared to a boolean and not string
         return deck.public === (`${isPublic}` === 'true');
       });
     }

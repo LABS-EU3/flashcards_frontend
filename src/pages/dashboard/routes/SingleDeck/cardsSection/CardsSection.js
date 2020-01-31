@@ -82,6 +82,7 @@ const Decks = ({ cards, deleteCard, dashboard }) => {
         ? await cards.filter(card => {
             return (
               card.question
+                // regenx replaces all special characters with ''
                 .replace(/[^\w\s]/gi, '')
                 .toUpperCase()
                 .match(inputValue.replace(/[^\w\s]/gi, '').toUpperCase()) ||
