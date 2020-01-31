@@ -15,7 +15,7 @@ import RightSidebar from '../../components/rightsidebar/RightSidebar';
 import WelcomePage from './routes/WelcomePage/WelcomePage';
 import DeckLibrary from './routes/DeckLibrary/DeckLibrary';
 import SingleDeck from './routes/SingleDeck/SingleDeck';
-import { getRecentCards } from '../../modules/dashboard/dashboardActions';
+import { getRecentDecks } from '../../modules/dashboard/dashboardActions';
 import { logoutUser } from '../../modules/user/userActions';
 import Profile from './routes/Profile/Profile';
 import * as g from '../../styles/variables/global';
@@ -26,7 +26,9 @@ import Settings from './routes/Settings/Settings';
 import Search from './routes/Search/Search';
 
 export const DashboardComponent = props => {
-  const { user } = props;
+  // console.log(props);
+  const { user, dashboard } = props;
+  // console.log(dashboard)
   return (
     <CloudinaryContext>
       <ModalProvider backgroundComponent={FadingBackground}>
@@ -40,7 +42,13 @@ export const DashboardComponent = props => {
               <Route path="/dashboard/profile">
                 <Profile user={user} />
               </Route>
-              <Route path="/dashboard/study" component={StudyMode} />
+              <Route path="/dashboard/study">
+                <StudyMode
+                  dashboard={dashboard}
+                  // eslint-disable-next-line react/destructuring-assignment
+                  getRecentDecks={props.getRecentDecks}
+                />
+              </Route>
               <Route path="/dashboard/leaderboard" component={LeaderBoard} />
               <Route
                 path="/dashboard/studysession/:sessionId"
@@ -51,7 +59,12 @@ export const DashboardComponent = props => {
             </Switch>
           </RouteContainer>
           {/* eslint-disable-next-line react/destructuring-assignment  */}
-          <RightSidebar user={user} getRecentCards={props.getRecentCards} />
+          <RightSidebar
+            user={user}
+            dashboard={dashboard}
+            // eslint-disable-next-line react/destructuring-assignment
+            getRecentDecks={props.getRecentDecks}
+          />
         </DashboardLayout>
       </ModalProvider>
     </CloudinaryContext>
@@ -74,10 +87,11 @@ const RouteContainer = styled.div`
 const mapStateToProps = state => {
   return {
     user: state.user,
+    dashboard: state.dashboard,
   };
 };
 
 export default connect(mapStateToProps, {
   logoutUser,
-  getRecentCards,
+  getRecentDecks,
 })(DashboardComponent);

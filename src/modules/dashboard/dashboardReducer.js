@@ -5,7 +5,7 @@ import { objectPropertyCompare } from '../../utils/comparisionFunctions';
 const initialState = {
   loading: false,
   errors: null,
-  recentCards: {},
+  recentDecks: [],
   creatingDeck: false,
   creatingCard: false,
   deleteingCard: false,
@@ -25,20 +25,20 @@ const initialState = {
 
 const dashboardReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.RECENT_CARDS_START:
+    case types.RECENT_DECKS_START:
       return {
         ...state,
         loading: true,
       };
 
-    case types.RECENT_CARDS_SUCCESS:
+    case types.RECENT_DECKS_SUCCESS:
       return {
         ...state,
-        loading: true,
-        recentCards: action.payload,
+        loading: false,
+        recentDecks: action.payload,
       };
 
-    case types.RECENT_CARDS_FAILED:
+    case types.RECENT_DECKS_FAILED:
       return {
         ...state,
         loading: false,

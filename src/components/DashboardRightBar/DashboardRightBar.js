@@ -1,5 +1,5 @@
 import React from 'react';
-import { H1, H2, P, HR } from '../../styles/typography';
+import { H2, P } from '../../styles/typography';
 import { Container, Main, Main1, Main2 } from './styles';
 
 const DashboardRightBar = () => {
