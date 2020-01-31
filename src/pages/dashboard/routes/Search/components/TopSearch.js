@@ -23,7 +23,9 @@ function TopSearch({ dashboard, decks, updateSiftedDecks }) {
   const { tags } = dashboard;
   const headerSearchBar = window.history.state.state;
   const [selectedTags, setSelectedTags] = useState([]);
-  const [inputValue, setInputValue] = useState(headerSearchBar.deckNameValue);
+  const [inputValue, setInputValue] = useState(
+    headerSearchBar ? headerSearchBar.deckNameValue : '',
+  );
   const [isPublic, setIsPublic] = useState(true);
   const removeTag = tag => {
     const remainingTags = selectedTags.filter(t => t.id !== tag.id);
@@ -53,10 +55,11 @@ function TopSearch({ dashboard, decks, updateSiftedDecks }) {
       const tagOrganized = await siftedThroughDecks.map(deck =>
         deck.tags.filter(deckTag => {
           return selectedTags.some(selectTag => {
-            return selectTag.name === deckTag;
+            return selectTag.name === deckTag.name;
           });
         }),
       );
+
       siftedThroughDecks =
         selectedTags.length > 0
           ? await tagOrganized
