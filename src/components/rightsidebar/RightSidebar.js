@@ -4,6 +4,7 @@ import Sidebar from 'react-sidebar';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
 import { Line } from 'rc-progress';
+import styled from 'styled-components';
 
 // components
 import Card from '../cards/Cards';
@@ -156,7 +157,13 @@ const SideContent = ({
               </div>
             </H1>
           </StyledStart>
-          {openLastPlayed &&
+          {decks.length === 0 && openLastPlayed ? (
+            <Test>
+              {' '}
+              <H2 BOLD>No decks played yet...</H2>
+            </Test>
+          ) : (
+            openLastPlayed &&
             decks.map(deck => {
               return (
                 <Card
@@ -166,7 +173,8 @@ const SideContent = ({
                   totalCard={deck.totalCard}
                 />
               );
-            })}
+            })
+          )}
         </CardsStyled>
         <ViewedCardsStyled>
           <StyledStart>
@@ -187,7 +195,13 @@ const SideContent = ({
               </div>
             </H1>
           </StyledStart>
-          {openRecentlyViewed &&
+          {viewedDecks.length === 0 && openRecentlyViewed ? (
+            <Test>
+              {' '}
+              <H2 BOLD>No decks viewed yet...</H2>
+            </Test>
+          ) : (
+            openRecentlyViewed &&
             viewedDecks.map(deck => {
               return (
                 <Card
@@ -197,9 +211,16 @@ const SideContent = ({
                   totalCard={deck.totalCard}
                 />
               );
-            })}
+            })
+          )}
         </ViewedCardsStyled>
       </SectionHolder>
     </SidebarBody>
   );
 };
+
+const Test = styled.div`
+  // background: red
+  // height: 100%;
+  text-align: center;
+`;
