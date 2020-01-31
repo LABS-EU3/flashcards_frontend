@@ -16,6 +16,7 @@ import { Text, H1, H2, H3 } from '../../../../styles/typography';
 import { LineButton } from '../../../../styles/buttons';
 import * as c from '../../../../styles/variables/colours';
 import { Forms, Input, Label } from '../../../../styles/forms';
+// eslint-disable-next-line import/no-cycle
 import { InnerContainer } from './Settings';
 
 // Actions
@@ -156,6 +157,7 @@ const AccoutManagementForm = props => {
             <ModalButton onClick={closeModal}>
               <H2>Close</H2>
             </ModalButton>
+            {/* eslint-disable-next-line react/jsx-no-duplicate-props */}
             <ModalButton onClick={handleSubmit} onClick={closeModal}>
               <H2 color="red">Delete</H2>
             </ModalButton>

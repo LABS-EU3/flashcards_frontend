@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { CardFooter } from '../../../../components/DashboardCenterBar/styles';
 import DashboardCenterBar from '../../../../components/DashboardCenterBar/DashboardCenterBar';
+// eslint-disable-next-line max-len
 import DashboardRightBar from '../../../../components/DashboardRightBar/DashboardRightBar';
 import './styles.css';
 import { getCOTD } from '../../../../modules/dashboard/dashboardActions';
