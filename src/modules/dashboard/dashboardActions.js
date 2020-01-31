@@ -2,24 +2,23 @@ import * as types from './dashboardTypes';
 
 import { axiosWithAuth } from '../../utils/auth';
 
-export const getRecentCards = userId => dispatch => {
-  dispatch({ type: types.RECENT_CARDS_START });
+export const getRecentDecks = () => dispatch => {
+  dispatch({ type: types.RECENT_DECKS_START });
 
-  return axiosWithAuth()
-    .get(`/cards/${userId}`)
-    .then(({ data }) => {
-      console.log('data', data.card);
-      dispatch({
-        type: types.RECENT_CARDS_SUCCESS,
-        payload: data.card,
-      });
-    })
-    .catch(err => {
-      dispatch({
-        type: types.RECENT_CARDS_FAILED,
-        payload: err,
-      });
-    });
+  return axiosWithAuth().get(`/decks/access/`);
+  // .then(({ data }) => {
+  //   console.log(data.data);
+  //   dispatch({
+  //     type: types.RECENT_DECKS_SUCCESS,
+  //     payload: data.data,
+  //   });
+  // })
+  // .catch(err => {
+  //   dispatch({
+  //     type: types.RECENT_DECKS_FAILED,
+  //     payload: err,
+  //   });
+  // });
 };
 
 export const fetchTags = () => dispatch => {
