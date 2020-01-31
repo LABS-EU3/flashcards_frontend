@@ -27,8 +27,8 @@ import Search from './routes/Search/Search';
 
 export const DashboardComponent = props => {
   // console.log(props);
-  const { user } = props;
-  // const { recentCard } = props;
+  const { user, dashboard } = props;
+  // console.log(dashboard)
   return (
     <CloudinaryContext>
       <ModalProvider backgroundComponent={FadingBackground}>
@@ -55,6 +55,7 @@ export const DashboardComponent = props => {
           {/* eslint-disable-next-line react/destructuring-assignment  */}
           <RightSidebar
             user={user}
+            dashboard={dashboard}
             // eslint-disable-next-line react/destructuring-assignment
             getRecentDecks={props.getRecentDecks}
             // recentCard={recentCard}
@@ -81,7 +82,7 @@ const RouteContainer = styled.div`
 const mapStateToProps = state => {
   return {
     user: state.user,
-    // recentCards: state.recentCards,
+    dashboard: state.dashboard,
   };
 };
 

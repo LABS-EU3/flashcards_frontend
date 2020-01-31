@@ -27,7 +27,6 @@ import {
 } from '../../styles/sidebarStyles';
 
 import levelIcon from '../../assets/icons/label_important_24px_outlined.svg';
-// import { ok } from 'assert';
 
 // const decks = [
 //   {
@@ -58,24 +57,17 @@ import levelIcon from '../../assets/icons/label_important_24px_outlined.svg';
 // ];
 
 export default function RightSidebar(props) {
-  const { user, getRecentDecks } = props;
+  const { user, getRecentDecks, dashboard } = props;
+  const { recentDecks } = dashboard;
+  console.log('rcD', recentDecks);
   const [decks, setDecks] = useState([]);
 
   const onGetRecentDecks = () => {
-    getRecentDecks().then(ok => {
-      setDecks(ok.data.data);
-      console.log(ok.data.data);
-    });
+    getRecentDecks();
+    setDecks(recentDecks);
+    console.log('deck', recentDecks, decks);
   };
-  // console.log(getRecentCards());
-  // setCards(data.cards);
-  //   .then(ok => {
-  //   setCards(ok.data.cards);
-  //   console.log('yoyo')
-  // });
-  // console.log(decks);
-  // const cardsArray = Object.keys(cards);
-  // console.log(cardsArray)
+
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const mql = window.matchMedia(`(min-width: ${g.desktopMediaBreak}px)`);
@@ -95,6 +87,8 @@ export default function RightSidebar(props) {
         sidebar={
           <SideContent
             user={user}
+            // recentDecks={recentDecks}
+            // getRecentDecks={getRecentDecks}
             onGetRecentDecks={onGetRecentDecks}
             decks={decks}
           />
@@ -121,25 +115,34 @@ export default function RightSidebar(props) {
     </SidebarStyled>
   );
 }
-const SideContent = ({ user, decks, onGetRecentDecks }) => {
+const SideContent = ({
+  user,
+  decks,
+  // recentDecks,
+  // getRecentDecks,
+  onGetRecentDecks,
+}) => {
   const [openLastPlayed, setOpenLastPlayed] = useState(false);
   const [openRecentlyViewed, setOpenRecentlyViewed] = useState(true);
-  // const getCard = getRecentCards(id);
-  // console.log("test", getCard);
+  // const [decks, setDecks] = useState([]);
+
+  //  const onGetRecentDecks = () => {
+  //    getRecentDecks();
+  //    setDecks(recentDecks);
+  //  };
 
   const handleButtonClickLastPlayed = () => {
     setOpenLastPlayed(!openLastPlayed);
     onGetRecentDecks();
-    // setCards(['hello', 'test']);
+    // setDecks(recentDecks);
+    console.log('yoooo', decks);
   };
-  // console.log('card', cards);
+  // console.log('card', decks);
   const handleButtonClickRecentlyViewed = () => {
     setOpenRecentlyViewed(!openRecentlyViewed);
-    onGetRecentDecks();
+    // getRecentDecks();
+    // setDecks(['hello', 'test', 'heruhte']);
   };
-  // const onFetch = () => {
-  //   setCards(getRecentCards);
-  // }
 
   return (
     <SidebarBody>
@@ -192,7 +195,7 @@ const SideContent = ({ user, decks, onGetRecentDecks }) => {
             decks.map(deck => {
               return (
                 <Card
-                  key={deck.id}
+                  key={deck.deck_id}
                   title={deck.deck_name}
                   public={deck.public}
                   totalCard={deck.totalCard}
@@ -220,7 +223,7 @@ const SideContent = ({ user, decks, onGetRecentDecks }) => {
               </div>
             </H1>
           </StyledStart>
-          {openRecentlyViewed &&
+          {/* {openRecentlyViewed &&
             decks.map(deck => {
               return (
                 <Card
@@ -230,7 +233,7 @@ const SideContent = ({ user, decks, onGetRecentDecks }) => {
                   totalCard={deck.totalCard}
                 />
               );
-            })}
+            })} */}
         </ViewedCardsStyled>
       </SectionHolder>
     </SidebarBody>

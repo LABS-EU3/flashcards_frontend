@@ -5,20 +5,21 @@ import { axiosWithAuth } from '../../utils/auth';
 export const getRecentDecks = () => dispatch => {
   dispatch({ type: types.RECENT_DECKS_START });
 
-  return axiosWithAuth().get(`/decks/access/`);
-  // .then(({ data }) => {
-  //   console.log(data.data);
-  //   dispatch({
-  //     type: types.RECENT_DECKS_SUCCESS,
-  //     payload: data.data,
-  //   });
-  // })
-  // .catch(err => {
-  //   dispatch({
-  //     type: types.RECENT_DECKS_FAILED,
-  //     payload: err,
-  //   });
-  // });
+  return axiosWithAuth()
+    .get(`/decks/access/`)
+    .then(({ data }) => {
+      // console.log(data.data);
+      dispatch({
+        type: types.RECENT_DECKS_SUCCESS,
+        payload: data.data,
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: types.RECENT_DECKS_FAILED,
+        payload: err,
+      });
+    });
 };
 
 export const fetchTags = () => dispatch => {
