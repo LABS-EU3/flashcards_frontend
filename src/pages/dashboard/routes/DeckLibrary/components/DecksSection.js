@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable no-plusplus */
+import React, { useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { MdCollectionsBookmark, MdDelete } from 'react-icons/md';
@@ -15,14 +16,21 @@ import {
   SelectAll,
 } from '../../../styles/DeckLibraryStyles';
 import * as types from '../../../../../modules/dashboard/dashboardTypes';
+import { StyledButton } from '../styles/deckSectionStyles';
 
 const Decks = ({ decks, isEditMode, setIsEditMode, updateAccess }) => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const [selectedDecks, setSelectedDecks] = useState([]);
+
   const selectAll = () => {
     const checkboxes = document.getElementsByName('selectThisDeck');
-    console.log(checkboxes);
+    let i;
+    for (i = 0; i < checkboxes.length; i++) {
+      checkboxes[i].checked = 1;
+    }
   };
+
   return (
     <Collection>
       <EditControls>
@@ -37,13 +45,23 @@ const Decks = ({ decks, isEditMode, setIsEditMode, updateAccess }) => {
                 type="checkbox"
                 onClick={() => {
                   selectAll();
+                  const deckIds = decks.map(deck => deck.deck_id);
+                  setSelectedDecks(deckIds);
                 }}
               />
               <P>Select All</P>
             </SelectAll>
-            <H2>
-              <MdDelete />
-            </H2>
+            <StyledButton
+              type="button"
+              onClick={() => {
+                const nonRepeatingIds = selectedDecks.filter((a, b) => a !== b);
+                console.log(nonRepeatingIds);
+              }}
+            >
+              <H2>
+                <MdDelete />
+              </H2>
+            </StyledButton>
 
             <button
               type="button"
@@ -69,7 +87,21 @@ const Decks = ({ decks, isEditMode, setIsEditMode, updateAccess }) => {
               marginLeft="0"
               marginRight="0"
             >
-              {isEditMode && <input type="checkbox" name="selectThisDeck" />}
+              {isEditMode && (
+                <input
+                  type="checkbox"
+                  name="selectThisDeck"
+                  value={d.deck_id}
+                  onChange={() => {
+                    selectedDecks.push(d.deck_id);
+                    const nonRepeatingIds = selectedDecks.filter(
+                      (a, b) => a === b,
+                    );
+                    setSelectedDecks(nonRepeatingIds);
+                    console.log(selectedDecks);
+                  }}
+                />
+              )}
               <NavLink to={`/dashboard/deck/${d.deck_id}`} className="navFlex">
                 <InfoHolder>
                   <H2 BOLD>{d.deck_name}</H2>
