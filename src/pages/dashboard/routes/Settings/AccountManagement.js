@@ -86,7 +86,7 @@ const AccoutManagementForm = props => {
   function handleFinalSubmit() {
     // if (para === 'submit') {
     handleSubmit();
-    closeModal();
+    // closeModal();
     // } else if (para === 'close') {
     //   closeModal();
     // }
@@ -212,20 +212,20 @@ const AccoutManagementForm = props => {
                 {/* {response} */}
 
                 <Label>
-                  <H3>Current Password</H3>
-                  {touched.currentPassword && errors.currentPassword && (
-                    <Text color={c.DANGER_COLOR}>{errors.currentPassword}</Text>
+                  <H3>Password</H3>
+                  {touched.password && errors.password && (
+                    <Text color={c.DANGER_COLOR}>{errors.password}</Text>
                   )}
                   <Input
                     type="password"
-                    name="currentPassword"
-                    placeholder="Current Password"
-                    value={values.currentPassword}
+                    name="password"
+                    placeholder="Password"
+                    value={values.password}
                     onBlur={handleBlur}
                     onChange={handleChange}
                     border={
-                      touched.currentPassword &&
-                      errors.currentPassword &&
+                      touched.password &&
+                      errors.password &&
                       `2px solid ${c.DANGER_COLOR}`
                     }
                   />
@@ -272,23 +272,23 @@ const AccoutManagementForm = props => {
 };
 
 const validationSchema = yup.object().shape({
-  currentPassword: yup.string().required('Please provide your password'),
+  password: yup.string().required('Please provide your password'),
 
   password2: yup
     .string()
     .required("Passwords don't match")
-    .oneOf([yup.ref('currentPassword'), null], 'Passwords must match'),
+    .oneOf([yup.ref('password'), null], 'Passwords must match'),
 });
 
 const AMForm = withFormik({
   mapPropsToValues: () => ({
-    currentPassword: '',
-    password2: '',
+    password: '',
+    // password2: '',
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
     const { id } = props.user.credentials;
-    props.manageAccount(id);
-    console.log('////', props, id);
+    props.manageAccount(values);
+    console.log('////', props, id, values);
     setSubmitting(false);
   },
   // // handleSubmit: 'open'
