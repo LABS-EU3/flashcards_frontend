@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-no-duplicate-props */
+/* eslint-disable import/no-cycle */
 // Import
 
 // Libraries

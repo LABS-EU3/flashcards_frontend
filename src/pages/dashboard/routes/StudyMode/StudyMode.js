@@ -319,7 +319,7 @@ export default function StudyMode() {
                     <MLower>
                       <Line
                         percent={data.percent}
-                        strokeLineColor="red"
+                        strokelinecolor="red"
                         strokeWidth="4"
                         trailWidth="4"
                         trailColor="#fafafa"
