@@ -8,15 +8,15 @@ import * as yup from 'yup';
 import { SquareLoader } from 'react-spinners';
 
 // Styles
-import { Text, H3 } from '../../../../styles/typography';
-import { Button2 } from '../../../../styles/buttons';
-import * as c from '../../../../styles/variables/colours';
-import { Forms, Input, Label } from '../../../../styles/forms';
+import { Text, H3 } from '../../../../../styles/typography';
+import { Button2 } from '../../../../../styles/buttons';
+import * as c from '../../../../../styles/variables/colours';
+import { Forms, Label, TextArea } from '../../../../../styles/forms';
 
 // Actions
-import { manageProfile } from '../../../../modules/user/userActions';
+import { submitHelpCenterMsg } from '../../../../../modules/user/userActions';
 
-const ProfileManagementForm = props => {
+const HelpCenterForm = props => {
   const {
     values,
     handleChange,
@@ -31,30 +31,32 @@ const ProfileManagementForm = props => {
 
   useEffect(() => {
     if (user.completed) {
-      setResponse(<H3 color={c.SUCCESS_COLOR}>Profile update successfully</H3>);
+      setResponse(<H3 color={c.SUCCESS_COLOR}>Message sent successfully</H3>);
     }
     if (user.errors) {
-      setResponse(<H3 color={c.DANGER_COLOR}>Error while upadting profile</H3>);
+      setResponse(<H3 color={c.DANGER_COLOR}>Error Sending message</H3>);
     }
   }, [user.errors, user.completed]);
 
   return (
     <Forms onSubmit={handleSubmit}>
       {response}
+
       <Label>
-        <H3>Name</H3>
-        {touched.fullName && errors.fullName && (
-          <Text color={c.DANGER_COLOR}>{errors.fullName}</Text>
+        {touched.feedback && errors.feedback && (
+          <Text color={c.DANGER_COLOR}>{errors.feedback}</Text>
         )}
-        <Input
-          type="text"
-          name="fullName"
-          value={values.fullName}
-          onChange={handleChange}
+        <TextArea
+          name="feedback"
+          placeholder="Let us know how we can help or improve"
+          value={values.feedback}
+          rows="10"
+          cols="40"
+          autoFocus
           onBlur={handleBlur}
-          placeholder="Full Name"
+          onChange={handleChange}
           border={
-            touched.fullName && errors.fullName && `2px solid ${c.DANGER_COLOR}`
+            touched.feedback && errors.feedback && `2px solid ${c.DANGER_COLOR}`
           }
         />
       </Label>
@@ -75,24 +77,21 @@ const ProfileManagementForm = props => {
 };
 
 const validationSchema = yup.object().shape({
-  fullName: yup.string().required('Please provide your full name'),
+  feedback: yup.string().required('Text area cannot be empty please'),
 });
 
-const PMForm = withFormik({
+const HCForm = withFormik({
   mapPropsToValues: () => ({
-    fullName: '',
+    feedback: '',
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
-    props.manageProfile(
-      {
-        fullName: values.fullName,
-      },
-      props.history,
-    );
+    props.submitHelpCenterMsg({
+      values,
+    });
     setSubmitting(false);
   },
   validationSchema,
-})(ProfileManagementForm);
+})(HelpCenterForm);
 
 const mapStateToProps = state => {
   return {
@@ -100,4 +99,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { manageProfile })(PMForm);
+export default connect(mapStateToProps, { submitHelpCenterMsg })(HCForm);

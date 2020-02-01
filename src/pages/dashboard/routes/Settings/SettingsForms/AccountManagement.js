@@ -10,14 +10,15 @@ import { SquareLoader } from 'react-spinners';
 
 // Styles
 import styled from 'styled-components';
-import { Text, H1, H2, H3 } from '../../../../styles/typography';
-import { LineButton } from '../../../../styles/buttons';
-import * as c from '../../../../styles/variables/colours';
-import { Forms, Input, Label } from '../../../../styles/forms';
-import { InnerContainer } from './Settings';
+import { Text, H1, H2, H3 } from '../../../../../styles/typography';
+import { LineButton } from '../../../../../styles/buttons';
+import * as c from '../../../../../styles/variables/colours';
+import { Forms, Input, Label } from '../../../../../styles/forms';
 
 // Actions
-import { manageAccount } from '../../../../modules/user/userActions';
+import { manageAccount } from '../../../../../modules/user/userActions';
+
+import { InnerContainer } from '../SettingsStyles';
 
 export const ModalWrapper = styled.div``;
 export const ModalButton = styled.button`
@@ -56,7 +57,7 @@ const AccoutManagementForm = props => {
     errors,
     user,
   } = props;
-  
+
   const [response, setResponse] = useState(null);
   const [state, setState] = useState({ visible: false });
 
@@ -67,7 +68,7 @@ const AccoutManagementForm = props => {
     setState({ visible: false });
   }
 
-   useEffect(() => {
+  useEffect(() => {
     if (user.completed) {
       setResponse(
         <H3 color={c.SUCCESS_COLOR}>Account successfully deleted</H3>,

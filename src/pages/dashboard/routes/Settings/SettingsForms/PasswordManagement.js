@@ -8,13 +8,13 @@ import * as yup from 'yup';
 import { SquareLoader } from 'react-spinners';
 
 // Styles
-import { Text, H3 } from '../../../../styles/typography';
-import { Button2 } from '../../../../styles/buttons';
-import * as c from '../../../../styles/variables/colours';
-import { Forms, Input, Label } from '../../../../styles/forms';
+import { Text, H3 } from '../../../../../styles/typography';
+import { Button2 } from '../../../../../styles/buttons';
+import * as c from '../../../../../styles/variables/colours';
+import { Forms, Input, Label } from '../../../../../styles/forms';
 
 // Actions
-import { managePassword } from '../../../../modules/user/userActions';
+import { managePassword } from '../../../../../modules/user/userActions';
 
 const PasswordManagementForm = props => {
   const {

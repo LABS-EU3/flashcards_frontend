@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import RoundedImage from 'react-rounded-image';
-import styled from 'styled-components';
+// import styled from 'styled-components';
+// import * as sStyles from './SettingsStyles';
 import { MdKeyboardArrowDown, MdCloudUpload } from 'react-icons/md';
 import useAction from '../../../../utils/useAction';
 import * as action from '../../../../modules/user/userActions';
@@ -11,149 +12,33 @@ import { H1, H2, H3, P } from '../../../../styles/typography';
 
 import { LogoutButton } from '../../../../styles/buttons';
 
-import ProfileManagementForm from './ProfileManagement';
-import PasswordManagementForm from './PasswordManagement';
-import AccountManagementForm from './AccountManagement';
-import HelpCenterForm from './HelpCenter';
+import ProfileManagementForm from './SettingsForms/ProfileManagement';
+import PasswordManagementForm from './SettingsForms/PasswordManagement';
+import AccountManagementForm from './SettingsForms/AccountManagement';
+import HelpCenterForm from './SettingsForms/HelpCenter';
 import { ProfileImageDiv } from '../../styles/DashboardStyles';
 import profileDefault from '../../../../assets/user_profile_default.jpg';
 
 import { openUploadWidget } from '../../../../utils/CloudinaryService';
 
-export const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: white;
-`;
-
-export const TopContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-
-  margin-top: 30px;
-  @media (max-width: 900px) {
-    width: 80%;
-    flex-direction: column;
-  }
-`;
-
-export const BottomContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  margin-top: 40px;
-  width: 95%;
-  @media (min-width: 1500px) {
-    width: 75%;
-  }
-  @media (max-width: 900px) {
-    width: 80%;
-    flex-direction: column;
-  }
-`;
-
-export const UpperCardSection = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-// export const SessionContainer = styled.div`
-export const LeftBottomContainer = styled.div`
-  align-self: flex-start;
-  margin: 10px 10px 10px 5px;
-  width: 100%;
-`;
-
-// export const MasteryContainer = styled.div`
-export const RightBottomContainer = styled.div`
-  margin: 10px 10px 10px 20px;
-  width: 100%;
-  align-self: flex-start;
-  @media (max-width: 768px) {
-    align-self: unset;
-  }
-`;
-
-export const TopLeftBottomContainer = styled.div`
-  margin: 5% auto;
-  text-align: center;
-`;
-
-export const InnerContainer = styled.div`
-  margin: 30px auto;
-`;
-
-const IconButtonWrapper = styled.div`
-  float: right;
-  transform: rotate(0deg);
-  overflow: hidden;
-  transition: all 0.3s ease-out;
-  transform: ${props => (props.rotate ? `rotate(180deg)` : '')};
-`;
-
-export const MyHR = styled.hr`
-  width: 98%;
-  height: 1px;
-  margin-left: 0;
-  border: 0;
-  background: linear-gradient(
-    88.85deg,
-    rgba(210, 31, 60, 0.5) 38.43%,
-    rgba(255, 169, 135, 0.5) 136.86%
-  );
-`;
-
-const StyledLink = styled(NavLink)`
-  text-decoration: none;
-`;
-
-const HideDiv1 = styled(InnerContainer).attrs({
-  className: 'mobileDiv1',
-})`
-  &.mobileDiv1 {
-    @media (max-width: 850px) {
-      display: none;
-    }
-  }
-`;
-
-const HideDiv2 = styled(InnerContainer).attrs({
-  className: 'mobileDiv2',
-})`
-  &.mobileDiv2 {
-    @media (min-width: 850px) {
-      display: none;
-    }
-  }
-`;
-
-const Cursor = styled(H2).attrs({
-  className: 'cursor',
-})`
-  &.cursor {
-    font-size: 1.5em;
-    color: red;
-    cursor: pointer;
-  }
-`;
-const Cursor2 = styled(H2).attrs({
-  className: 'cursor2',
-})`
-  &.cursor2 {
-    font-size: 1em;
-    color: #3399ff;
-    cursor: pointer;
-  }
-`;
-
-const ProfileInnerContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+import {
+  BottomContainer,
+  Cursor,
+  Cursor2,
+  HideDiv1,
+  HideDiv2,
+  IconButtonWrapper,
+  InnerContainer,
+  LeftBottomContainer,
+  MyHR,
+  ProfileInnerContainer,
+  RightBottomContainer,
+  StyledLink,
+  TopContainer,
+  TopLeftBottomContainer,
+  UpperCardSection,
+  Wrapper,
+} from './SettingsStyles';
 
 export default function Settings() {
   const { credentials } = useSelector(state => state.user);
