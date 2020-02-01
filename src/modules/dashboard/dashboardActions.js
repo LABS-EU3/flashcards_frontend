@@ -2,24 +2,25 @@ import * as types from './dashboardTypes';
 
 import { axiosWithAuth } from '../../utils/auth';
 
-export const getRecentCards = userId => dispatch => {
-  dispatch({ type: types.RECENT_CARDS_START });
+export const getRecentDecks = () => dispatch => {
+  dispatch({ type: types.RECENT_DECKS_START });
 
   return axiosWithAuth()
-    .get(`/api/cards/users/${userId}`)
+    .get(`/decks/access/`)
     .then(({ data }) => {
       dispatch({
-        type: types.RECENT_CARDS_SUCCESS,
-        payload: data.data.user,
+        type: types.RECENT_DECKS_SUCCESS,
+        payload: data.data,
       });
     })
     .catch(err => {
       dispatch({
-        type: types.RECENT_CARDS_FAILED,
+        type: types.RECENT_DECKS_FAILED,
         payload: err,
       });
     });
 };
+
 export const fetchTags = () => dispatch => {
   dispatch({ type: types.ON_START_FETCHING_TAGS });
 
@@ -76,7 +77,6 @@ export const createDeck = (deck, onComplete, onFailed) => dispatch => {
         type: types.ON_DECK_CREATION_CANCELLED,
         payload: err.message,
       });
-
       if (onFailed) onFailed();
     });
 };
@@ -136,7 +136,7 @@ export const deleteCard = ({ id: cardId, deck_id: deckId }) => dispatch => {
     .catch(error => {
       dispatch({
         type: types.ON_DELETE_CARD_FAILED,
-        pasyload: error.message,
+        payload: error.message,
       });
     });
 };

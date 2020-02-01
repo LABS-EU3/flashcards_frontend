@@ -12,6 +12,7 @@ import {
   fetchUserDecks,
   fetchSessions,
   startSession,
+  getRecentDecks,
 } from '../../../../modules/dashboard/dashboardActions';
 
 export const Wrapper = styled.div`
@@ -170,17 +171,20 @@ const mastery = [
   { id: 7, cardTitle: 'Geography', percent: 100 },
 ];
 
-const StudyMode = ({ dashboard, fetchDecks, getSessions, beginSession }) => {
+const StudyMode = ({
+  dashboard,
+  fetchDecks,
+  getSessions,
+  beginSession,
+  getRecentUserDecks,
+}) => {
   const container = React.createRef();
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
 
-  // const handleClickOutside = event => {
-  //   if (container.current && !container.current.contains(event.target)) {
-  //     setOpen(false);
-  //   }
-  // };
+  const { recentDecks } = dashboard;
+  const [decks, setDecks] = useState([]);
 
   const [selectedDeckId, setSelectedDeckId] = useState(0);
 
@@ -192,9 +196,8 @@ const StudyMode = ({ dashboard, fetchDecks, getSessions, beginSession }) => {
   };
   const handleButtonClick3 = () => {
     setOpen3(!open3);
+    setDecks(recentDecks);
   };
-  // document.addEventListener('mousedown', handleClickOutside);
-  // document.removeEventListener('mousedown', handleClickOutside);
 
   const { userDecks, userSessions } = dashboard;
 
@@ -206,15 +209,6 @@ const StudyMode = ({ dashboard, fetchDecks, getSessions, beginSession }) => {
   });
 
   const mql = window.matchMedia(`(max-width: 768px)`);
-  let resizeTimeout;
-  // eslint-disable-next-line func-names
-  window.addEventListener('resize', function() {
-    clearTimeout(resizeTimeout);
-    // eslint-disable-next-line func-names
-    resizeTimeout = setTimeout(function() {
-      window.location.reload();
-    }, 1500);
-  });
 
   useEffect(() => {
     fetchDecks();
@@ -223,6 +217,8 @@ const StudyMode = ({ dashboard, fetchDecks, getSessions, beginSession }) => {
     !mql.matches ? setOpen1(!open1) : setOpen1(open1);
     /* eslint-disable-next-line no-unused-expressions */
     !mql.matches ? setOpen2(!open2) : setOpen2(open2);
+    getRecentUserDecks();
+    setDecks(recentDecks);
   }, [mql.matches]);
 
   const history = useHistory();
@@ -269,6 +265,24 @@ const StudyMode = ({ dashboard, fetchDecks, getSessions, beginSession }) => {
             </IconButtonWrapper>
           </UpperCardSection>
           <MyHR />
+
+          <CardContainer className="container" ref={container}>
+            <StyledMyPart>
+              {open3 &&
+                decks.map(deck => {
+                  return (
+                    <Card to="/dashboard/study" key={deck.deck_id}>
+                      <H2>{deck.deck_name}</H2>
+                      <SLowerCardSection>
+                        <SLower>
+                          <MdCollectionsBookmark size="2em" color="grey" />
+                        </SLower>
+                      </SLowerCardSection>
+                    </Card>
+                  );
+                })}
+            </StyledMyPart>
+          </CardContainer>
         </RecentlyViewContainer>
 
         <SessionContainer>
@@ -331,8 +345,7 @@ const StudyMode = ({ dashboard, fetchDecks, getSessions, beginSession }) => {
             {open2 &&
               mastery.map((data, index) => {
                 return (
-                  /* eslint-disable-next-line react/no-array-index-key */
-                  <Card to="/dashboard/study" key={index}>
+                  <Card to="/dashboard/study" key={`card-${index + 1}`}>
                     <H2>{data.cardTitle}</H2>
                     <MLower>
                       <Line
@@ -366,4 +379,5 @@ export default connect(mapStateToProps, {
   fetchDecks: fetchUserDecks,
   beginSession: startSession,
   getSessions: fetchSessions,
+  getRecentUserDecks: getRecentDecks,
 })(StudyMode);

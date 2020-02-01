@@ -1,8 +1,10 @@
 // Libraries
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from 'react-sidebar';
 import { MdKeyboardArrowDown } from 'react-icons/md';
+
 import { Line } from 'rc-progress';
+import styled from 'styled-components';
 
 // components
 import Card from '../cards/Cards';
@@ -27,37 +29,17 @@ import {
 
 import levelIcon from '../../assets/icons/label_important_24px_outlined.svg';
 
-const cards = [
-  {
-    title: 'Organic Compounds',
-    category: 'Chemistry',
-    totalCard: 30,
-  },
-  {
-    title: 'Quantum Mechanics',
-    category: 'Physics',
-    totalCard: 40,
-  },
-  {
-    title: 'Data Structures',
-    category: 'Computer Science',
-    totalCard: 320,
-  },
-  {
-    title: 'Advance Algorithms',
-    category: 'Computer Science',
-    totalCard: 70,
-  },
-  {
-    title: 'OWASP Basics',
-    category: 'Computer Science',
-    totalCard: 100,
-  },
-];
-
 export default function RightSidebar(props) {
-  const { user } = props;
-
+  const { user, getRecentDecks, dashboard } = props;
+  const { recentDecks } = dashboard;
+  const [decks, setDecks] = useState([]);
+  const [viewedDecks, setViewedDecks] = useState([]);
+  const onGetRecentDecks = () => {
+    setDecks(recentDecks);
+  };
+  const onGetRecentViewedDecks = () => {
+    setViewedDecks(recentDecks);
+  };
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const mql = window.matchMedia(`(min-width: ${g.desktopMediaBreak}px)`);
@@ -70,10 +52,25 @@ export default function RightSidebar(props) {
   };
 
   mql.addListener(mediaQueryChanged);
+
+  useEffect(() => {
+    getRecentDecks();
+    setViewedDecks(recentDecks);
+    setDecks(recentDecks);
+  }, []);
+
   return (
     <SidebarStyled>
       <Sidebar
-        sidebar={<SideContent user={user} />}
+        sidebar={
+          <SideContent
+            user={user}
+            onGetRecentDecks={onGetRecentDecks}
+            decks={decks}
+            viewedDecks={viewedDecks}
+            onGetRecentViewedDecks={onGetRecentViewedDecks}
+          />
+        }
         open={sidebarOpen}
         onSetOpen={setSidebarOpen}
         docked={sideBarDocked}
@@ -96,15 +93,22 @@ export default function RightSidebar(props) {
     </SidebarStyled>
   );
 }
-const SideContent = ({ user }) => {
+const SideContent = ({
+  user,
+  decks,
+  viewedDecks,
+  onGetRecentDecks,
+  onGetRecentViewedDecks,
+}) => {
   const [openLastPlayed, setOpenLastPlayed] = useState(false);
-  const [openRecentlyViewed, setOpenRecentlyViewed] = useState(true);
-
+  const [openRecentlyViewed, setOpenRecentlyViewed] = useState(false);
   const handleButtonClickLastPlayed = () => {
     setOpenLastPlayed(!openLastPlayed);
+    onGetRecentDecks();
   };
   const handleButtonClickRecentlyViewed = () => {
     setOpenRecentlyViewed(!openRecentlyViewed);
+    onGetRecentViewedDecks();
   };
 
   return (
@@ -139,7 +143,7 @@ const SideContent = ({ user }) => {
             <H1 BOLD>
               Last Played
               <IconButtonWrapper
-                rotate={openLastPlayed.toString()}
+                rotate={openLastPlayed}
                 onClick={handleButtonClickLastPlayed}
               >
                 <MdKeyboardArrowDown
@@ -153,24 +157,31 @@ const SideContent = ({ user }) => {
               </div>
             </H1>
           </StyledStart>
-          {openLastPlayed &&
-            cards.map(card => {
+          {decks.length === 0 && openLastPlayed ? (
+            <Test>
+              {' '}
+              <H2 BOLD>No decks played yet...</H2>
+            </Test>
+          ) : (
+            openLastPlayed &&
+            decks.map(deck => {
               return (
                 <Card
-                  key={card.title}
-                  title={card.title}
-                  category={card.category}
-                  totalCard={card.totalCard}
+                  key={deck.deck_id}
+                  title={deck.deck_name}
+                  public={deck.public}
+                  totalCard={deck.totalCard}
                 />
               );
-            })}
+            })
+          )}
         </CardsStyled>
         <ViewedCardsStyled>
           <StyledStart>
             <H1 BOLD>
               Last Viewed
               <IconButtonWrapper
-                rotate={openRecentlyViewed.toString()}
+                rotate={openRecentlyViewed}
                 onClick={handleButtonClickRecentlyViewed}
               >
                 <MdKeyboardArrowDown
@@ -184,19 +195,32 @@ const SideContent = ({ user }) => {
               </div>
             </H1>
           </StyledStart>
-          {openRecentlyViewed &&
-            cards.map(card => {
+          {viewedDecks.length === 0 && openRecentlyViewed ? (
+            <Test>
+              {' '}
+              <H2 BOLD>No decks viewed yet...</H2>
+            </Test>
+          ) : (
+            openRecentlyViewed &&
+            viewedDecks.map(deck => {
               return (
                 <Card
-                  key={card.title}
-                  title={card.title}
-                  category={card.category}
-                  totalCard={card.totalCard}
+                  key={deck.deck_id}
+                  title={deck.deck_name}
+                  public={deck.public}
+                  totalCard={deck.totalCard}
                 />
               );
-            })}
+            })
+          )}
         </ViewedCardsStyled>
       </SectionHolder>
     </SidebarBody>
   );
 };
+
+const Test = styled.div`
+  // background: red
+  // height: 100%;
+  text-align: center;
+`;
