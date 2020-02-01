@@ -1,9 +1,8 @@
+/* eslint-disable max-len */
 import React from 'react';
 import { H2, P } from '../../../../styles/typography';
 import { CardFooter } from '../../../../components/DashboardCenterBar/styles';
-// eslint-disable-next-line max-len
 import DashboardCenterBar from '../../../../components/DashboardCenterBar/DashboardCenterBar';
-// eslint-disable-next-line max-len
 import DashboardRightBar from '../../../../components/DashboardRightBar/DashboardRightBar';
 import './styles.css';
 

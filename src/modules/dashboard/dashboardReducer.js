@@ -16,6 +16,9 @@ const initialState = {
   selectedTags: [],
   selectedDeck: {},
   selectedCard: {},
+  userSessions: [],
+  selectedSession: {},
+  sessionCards: [],
   tags: deckTags,
   showMenu: false,
   confirmingDeletion: false,
@@ -223,6 +226,84 @@ const dashboardReducer = (state = initialState, action) => {
         confirmingDeletion: false,
       };
 
+    case types.ON_START_FETCH_SESSIONS:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case types.ON_FETCH_SESSIONS_SUCCESS:
+      return {
+        ...state,
+        loading: true,
+        userSessions: action.payload,
+      };
+
+    case types.ON_FETCH_SESSIONS_FAILED:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    case types.ON_START_FETCH_SINGLE_SESSION:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case types.ON_FETCH_SINGLE_SESSION_SUCCESS:
+      return {
+        ...state,
+        loading: true,
+        selectedSession: action.payload,
+        // eslint-disable-next-line no-use-before-define
+        sessionCards: filterCards(action.payload),
+      };
+
+    case types.ON_FETCH_SINGLE_SESSION_FAILED:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    case types.ON_START_CREATE_SESSIONS:
+      return {
+        ...state,
+        // loading: true,
+      };
+
+    case types.ON_CREATE_SESSIONS_SUCCESS:
+      return {
+        ...state,
+        loading: true,
+        selectedSession: action.payload,
+      };
+
+    case types.ON_CREATE_SESSIONS_FAILED:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    case types.ON_START_CARD_RATING:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case types.ON_CARD_RATING_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        sessionCards: state.sessionCards.filter(f => f.id !== action.payload),
+      };
+
+    case types.ON_CARD_RATING_FAILED:
+      return {
+        ...state,
+        loading: false,
+      };
+
     case types.ON_START_GET_ALL_DECKS:
       return { ...state, loading: false };
 
@@ -251,9 +332,20 @@ const dashboardReducer = (state = initialState, action) => {
         ...state,
         siftedDecks: action.payload,
       };
+
     default:
       return state;
   }
+};
+
+const filterCards = session => {
+  const reviewedCardIds = session.reviewed_cards.map(c => (c ? c.id : null));
+
+  const remainingCards = session.flashcards.filter(
+    f => f !== null && !reviewedCardIds.includes(f.id),
+  );
+
+  return remainingCards;
 };
 
 export default dashboardReducer;

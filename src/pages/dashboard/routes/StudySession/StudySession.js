@@ -1,12 +1,15 @@
 /* eslint-disable */
-import React from 'react';
-import Ripples from 'react-ripples';
+import React, { useEffect } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Line } from 'rc-progress';
+import { connect } from 'react-redux';
 
 import StudyCard from '../StudyCard';
-
+import {
+  getSingleDeck,
+  fetchSingleSession,
+} from '../../../../modules/dashboard/dashboardActions';
 import styled from 'styled-components';
 import { H2 } from '../../../../styles/typography';
 import './studysession.css';
@@ -45,12 +48,6 @@ export const BottomCompDiv = styled.div`
   justify-content: space-around;
   text-align: center;
   margin: 30px auto;
-`;
-
-export const EmojisCompDiv = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
 `;
 
 export const CardContainer = styled.div`
@@ -96,7 +93,14 @@ export const MLower = styled.div`
   margin: 5% auto auto auto;
 `;
 
-export default function CarouselComponent() {
+const CarouselComponent = ({ match, dashboard, fetchSession }) => {
+  const { sessionId } = match.params;
+  const { selectedSession, sessionCards } = dashboard;
+
+  useEffect(() => {
+    fetchSession(sessionId);
+  }, []);
+
   return (
     <Container>
       <TopCompDiv>
@@ -107,7 +111,7 @@ export default function CarouselComponent() {
             useKeyboardArrows={true}
             swipeable
           >
-            {dummyData.map((data, index) => {
+            {sessionCards.map((data, index) => {
               return <StudyCard key={index} card={data} />;
             })}
           </Carousel>
@@ -115,24 +119,6 @@ export default function CarouselComponent() {
       </TopCompDiv>
 
       <BottomCompDiv>
-        <EmojisCompDiv>
-          <Ripples color={'#FAFFDF '}>
-            <button type="button" className="emoji btn">
-              &#129303;
-            </button>
-          </Ripples>
-          <Ripples color={'#FAFFDF '}>
-            <button type="button" className="emoji btn">
-              &#128531;
-            </button>
-          </Ripples>
-          <Ripples color={'#FAFFDF'}>
-            <button type="button" className="emoji btn">
-              &#128557;
-            </button>
-          </Ripples>
-        </EmojisCompDiv>
-
         <MLower>
           <H2>Organic Compounds</H2>
           <Line
@@ -149,4 +135,15 @@ export default function CarouselComponent() {
       </BottomCompDiv>
     </Container>
   );
-}
+};
+
+const mapStateToProps = state => {
+  return {
+    dashboard: state.dashboard,
+  };
+};
+
+export default connect(mapStateToProps, {
+  getDeck: getSingleDeck,
+  fetchSession: fetchSingleSession,
+})(CarouselComponent);
