@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import * as yup from 'yup';
 import Modal from 'react-awesome-modal';
 import { SquareLoader } from 'react-spinners';
+import { useHistory } from 'react-router-dom';
 
 // Styles
 import styled from 'styled-components';
@@ -184,7 +185,10 @@ const AMForm = withFormik({
     password: '',
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
-    props.manageAccount({ password: values.password });
+    props.manageAccount({
+      password: values.password,
+      history: props.useHistory,
+    });
     setSubmitting(false);
   },
   validationSchema,
@@ -196,4 +200,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { manageAccount })(AMForm);
+export default connect(mapStateToProps, { manageAccount, useHistory })(AMForm);
