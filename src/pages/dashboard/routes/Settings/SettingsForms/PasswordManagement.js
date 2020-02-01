@@ -36,7 +36,9 @@ const PasswordManagementForm = props => {
       );
     }
     if (user.errors) {
-      setResponse(<H3 color={c.DANGER_COLOR}>Error while upadting account</H3>);
+      setResponse(
+        <H3 color={c.DANGER_COLOR}>Error while updating password</H3>,
+      );
     }
   }, [user.errors, user.completed]);
 
@@ -85,19 +87,19 @@ const PasswordManagementForm = props => {
 
       <Label>
         <H3>Confirm Password</H3>
-        {touched.confirmNewPAssword && errors.confirmNewPAssword && (
-          <Text color={c.DANGER_COLOR}>{errors.confirmNewPAssword}</Text>
+        {touched.confirmNewPassword && errors.confirmNewPassword && (
+          <Text color={c.DANGER_COLOR}>{errors.confirmNewPassword}</Text>
         )}
         <Input
           type="password"
-          name="confirmNewPAssword"
+          name="confirmNewPassword"
           placeholder="Confirm New Password"
-          value={values.confirmNewPAssword}
+          value={values.confirmNewPassword}
           onBlur={handleBlur}
           onChange={handleChange}
           border={
-            touched.confirmNewPAssword &&
-            errors.confirmNewPAssword &&
+            touched.confirmNewPassword &&
+            errors.confirmNewPassword &&
             `2px solid ${c.DANGER_COLOR}`
           }
         />
@@ -126,7 +128,7 @@ const validationSchema = yup.object().shape({
     .string()
     .required('Please provide a new password')
     .min(8, 'Password too short'),
-  confirmNewPAssword: yup
+  confirmNewPassword: yup
     .string()
     .required("Passwords don't match")
     .oneOf([yup.ref('newPassword'), null], 'Passwords must match'),
@@ -134,11 +136,14 @@ const validationSchema = yup.object().shape({
 
 const PWDMForm = withFormik({
   mapPropsToValues: () => ({
+    currentPassword: '',
     newPassword: '',
-    confirmNewPAssword: '',
+    confirmNewPassword: '',
   }),
-  handleSubmit: (values, { props, setSubmitting }) => {
-    props.managePassword(values);
+  handleSubmit: async (values, { props, setSubmitting, resetForm }) => {
+    setSubmitting(true);
+    await props.managePassword(values);
+    resetForm();
     setSubmitting(false);
   },
   validationSchema,

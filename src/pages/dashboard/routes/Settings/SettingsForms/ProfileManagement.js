@@ -82,7 +82,8 @@ const PMForm = withFormik({
   mapPropsToValues: () => ({
     fullName: '',
   }),
-  handleSubmit: (values, { props, setSubmitting }) => {
+  handleSubmit: (values, { props, setSubmitting, resetForm }) => {
+    setSubmitting(true);
     props.manageProfile(
       {
         fullName: values.fullName,
@@ -90,6 +91,7 @@ const PMForm = withFormik({
       props.history,
     );
     setSubmitting(false);
+    resetForm();
   },
   validationSchema,
 })(ProfileManagementForm);

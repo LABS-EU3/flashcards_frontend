@@ -6,6 +6,7 @@ import * as types from './userTypes';
 const initialState = {
   loading: false,
   authenticated: false,
+  rankings: [],
   credentials: {},
   errors: null,
   completed: false,
@@ -121,14 +122,12 @@ const userReducer = (state = initialState, action) => {
         ...state,
         loading: true,
       };
-
     case types.ON_PROFILE_FETCH_FAILED:
       return {
         ...state,
         loading: false,
         errors: action.payload,
       };
-
     case types.ON_PROFILE_FETCH_SUCCESS:
       return {
         ...state,
@@ -172,8 +171,12 @@ const userReducer = (state = initialState, action) => {
         loading: false,
         errors: action.payload,
       };
-
     case types.DELETE_USER_ACCOUNT_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.FETCH_RANKS_START:
       return {
         ...state,
         loading: true,
@@ -224,7 +227,18 @@ const userReducer = (state = initialState, action) => {
         loading: false,
         errors: action.payload,
       };
-
+    case types.FETCH_RANKS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        rankings: action.payload || [],
+      };
+    case types.FETCH_RANKS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload,
+      };
     case types.UPDATE_USER_PROFILE_START:
       return {
         ...state,

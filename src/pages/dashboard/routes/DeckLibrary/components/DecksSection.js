@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { MdCollectionsBookmark, MdDelete } from 'react-icons/md';
 
@@ -18,6 +18,7 @@ import * as types from '../../../../../modules/dashboard/dashboardTypes';
 
 const Decks = ({ decks, isEditMode, setIsEditMode }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   return (
     <Collection>
       <EditControls>
@@ -67,13 +68,18 @@ const Decks = ({ decks, isEditMode, setIsEditMode }) => {
 
                 <CardCount>
                   <P color="grey">30 Cards </P>
-                  <NavLink to="/dashboard/study">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      history.push('/dashboard/study');
+                    }}
+                  >
                     <MdCollectionsBookmark
                       size="2em"
                       color="grey"
                       className="studyIcon"
                     />
-                  </NavLink>
+                  </button>
                 </CardCount>
               </NavLink>
             </CardsFlexs>

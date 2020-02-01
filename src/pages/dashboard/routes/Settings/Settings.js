@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -22,8 +23,6 @@ import { openUploadWidget } from '../../../../utils/CloudinaryService';
 
 import {
   BottomContainer,
-  Cursor,
-  Cursor2,
   HideDiv1,
   HideDiv2,
   IconButtonWrapper,
@@ -46,10 +45,6 @@ export default function Settings() {
   const uploadProfileImg = useAction(action.uploadProfileImg);
   const logoutUser = useAction(action.logoutUser);
   const history = useHistory();
-  const onLogout = e => {
-    e.preventDefault();
-    logoutUser(history);
-  };
 
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
@@ -81,7 +76,6 @@ export default function Settings() {
         // eslint-disable-next-line no-console
         console.log(error);
       },
-      // eslint-disable-next-line camelcase
       imageUrl => {
         uploadProfileImg(imageUrl);
       },
@@ -94,7 +88,6 @@ export default function Settings() {
         <ProfileImageDiv>
           <ProfileInnerContainer>
             <RoundedImage
-              // eslint-disable-next-line max-len
               image={imgUrl || profileDefault}
               alt="User's profile"
               imageHeight="100"
@@ -164,10 +157,15 @@ export default function Settings() {
             {open2 && (
               <>
                 <TopLeftBottomContainer>
-                  <H2 onClick={handleButtonClick5} className="cursor">
-                    <Cursor>Delete Account</Cursor>
+                  <H2
+                    fontSize="2.5em"
+                    style={{ cursor: 'pointer' }}
+                    color="red"
+                    onClick={handleButtonClick5}
+                  >
+                    Delete Account
                   </H2>
-                  {open5 && <AccountManagementForm />}
+                  {open5 && <AccountManagementForm history={history} />}
                 </TopLeftBottomContainer>
                 <>
                   <UpperCardSection>
@@ -176,8 +174,12 @@ export default function Settings() {
                     </H2>
                     <P>Beta 0.3.0</P>
                   </UpperCardSection>
-                  <H2 onClick={handleButtonClick4} className="cursor2">
-                    <Cursor2>Help Center</Cursor2>
+                  <H2
+                    color="#3399FF"
+                    style={{ cursor: 'pointer' }}
+                    onClick={handleButtonClick4}
+                  >
+                    Help Center
                   </H2>
                   {open4 && <HelpCenterForm />}
                 </>
@@ -187,7 +189,7 @@ export default function Settings() {
           <InnerContainer className="mobileDiv1">
             <HideDiv1>
               <LogoutButton>
-                <StyledLink to="/login" onClick={onLogout}>
+                <StyledLink to="/login" onClick={() => logoutUser(history)}>
                   <H3 color="#444140">Log Out</H3>
                 </StyledLink>
               </LogoutButton>
@@ -199,7 +201,7 @@ export default function Settings() {
           <InnerContainer className="mobileDiv1">
             <HideDiv1>
               <UpperCardSection>
-                <H1 fontSize="2em" lineHeight="0em">
+                <H1 fontSize="2em" lineHeight="1em">
                   Password Management
                 </H1>
                 <IconButtonWrapper rotate={open3} onClick={handleButtonClick3}>
@@ -218,7 +220,7 @@ export default function Settings() {
           <InnerContainer className="mobileDiv2">
             <HideDiv2>
               <LogoutButton>
-                <StyledLink to="/login" onClick={onLogout}>
+                <StyledLink to="/login" onClick={() => logoutUser(history)}>
                   <H3 color="#444140">Log Out</H3>
                 </StyledLink>
               </LogoutButton>

@@ -105,7 +105,7 @@ const Form = props => {
       <a href={`${baseUrl}/auth/google`}>
         <GoogleButton type="button">
           <img src={GoogleIcon} alt="google-icon" />
-          <H3 BRAND>Login With Google+</H3>
+          <H3 BRAND>Login With Google</H3>
         </GoogleButton>
       </a>
     </Forms>

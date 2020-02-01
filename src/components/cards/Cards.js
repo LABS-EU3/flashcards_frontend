@@ -9,12 +9,12 @@ import * as c from '../../styles/variables/colours';
 import * as g from '../../styles/variables/global';
 import { SLower } from '../../pages/dashboard/routes/StudyMode/StudyModeStyles';
 
-export default function Cards({ title, category, totalCard }) {
+export default function Cards({ title, totalCard }) {
   return (
     <CardsFlex>
       <InfoHolder>
         <H2 BOLD>{title}</H2>
-        <P>{category}</P>
+        {/* <P>{public}</P> */}
       </InfoHolder>
       <CardCount>
         <P color="grey">{totalCard} Cards </P>
@@ -39,6 +39,10 @@ export const CardCount = styled(SLower)`
   float: left;
   .studyIcon {
     visibility: hidden;
+  }
+  button {
+    background: inherit;
+    border: none;
   }
 `;
 export const InfoHolder = styled.div`

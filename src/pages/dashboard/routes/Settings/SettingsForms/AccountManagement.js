@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import * as yup from 'yup';
 import Modal from 'react-awesome-modal';
 import { SquareLoader } from 'react-spinners';
-import { useHistory } from 'react-router-dom';
 
 // Styles
 import styled from 'styled-components';
@@ -21,16 +20,20 @@ import { manageAccount } from '../../../../../modules/user/userActions';
 
 import { InnerContainer } from '../SettingsStyles';
 
-export const ModalWrapper = styled.div``;
+export const ModalWrapper = styled.div`
+  padding: 10px;
+`;
+
 export const ModalButton = styled.button`
   text-align: center;
   border-radius: 3px;
   border: 1px solid #f6f1f0;
   outline: none;
   width: 60%;
-  margin: 1em 0em 1em 0em;
+  margin: 3px;
   box-shadow: 0px 4px 4px rgba(210, 31, 60, 0.03);
   background: #ffffff;
+
   &:hover {
     transform: scale(1.01);
   }
@@ -43,12 +46,12 @@ export const ModalButton = styled.button`
   }
   @media (max-width: 900px) {
     width: 95%;
-    margin: 1em 0;
+    margin: 3px 0;
     padding-bottom: 0;
   }
 `;
 
-const AccoutManagementForm = props => {
+const AccountManagementForm = props => {
   const {
     values,
     handleChange,
@@ -95,8 +98,8 @@ const AccoutManagementForm = props => {
       </LineButton>
       <Modal
         visible={state.visible}
-        width="80%"
-        height="98%"
+        width="300px"
+        height="450px"
         effect="fadeInUp"
         onClickAway={closeModal}
         className="modalClass"
@@ -105,66 +108,62 @@ const AccoutManagementForm = props => {
           <H1 color="red">Delete Account</H1>
           <H2>Are you sure you want to delete?</H2>
           <InnerContainer>
-            <ModalButton onClick={closeModal}>
-              <H2>Close</H2>
-            </ModalButton>
+            <Forms onSubmit={handleSubmit}>
+              {response}
+              <Label>
+                <H3>Password</H3>
+                {touched.password && errors.password && (
+                  <Text color={c.DANGER_COLOR}>{errors.password}</Text>
+                )}
+                <Input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  value={values.password}
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  border={
+                    touched.password &&
+                    errors.password &&
+                    `2px solid ${c.DANGER_COLOR}`
+                  }
+                />
+              </Label>
 
-            <ModalButton>
-              <Forms onSubmit={handleSubmit}>
-                {response}
-                <Label>
-                  <H3>Password</H3>
-                  {touched.password && errors.password && (
-                    <Text color={c.DANGER_COLOR}>{errors.password}</Text>
-                  )}
-                  <Input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    value={values.password}
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    border={
-                      touched.password &&
-                      errors.password &&
-                      `2px solid ${c.DANGER_COLOR}`
-                    }
+              <Label>
+                <H3>Confirm Password</H3>
+                {touched.password2 && errors.password2 && (
+                  <Text color={c.DANGER_COLOR}>{errors.password2}</Text>
+                )}
+                <Input
+                  type="password"
+                  name="password2"
+                  placeholder="Confirm Password"
+                  value={values.password2}
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  border={
+                    touched.password2 &&
+                    errors.password2 &&
+                    `2px solid ${c.DANGER_COLOR}`
+                  }
+                />
+              </Label>
+              <ModalButton onClick={closeModal}>
+                <H2>Close</H2>
+              </ModalButton>
+              <ModalButton>
+                <H3 color={c.DANGER_COLOR}>
+                  Delete
+                  <SquareLoader
+                    css={{ marginLeft: '20px' }}
+                    size={15}
+                    color="#FFA987"
+                    loading={user.loading}
                   />
-                </Label>
-
-                <Label>
-                  <H3>Confirm Password</H3>
-                  {touched.password2 && errors.password2 && (
-                    <Text color={c.DANGER_COLOR}>{errors.password2}</Text>
-                  )}
-                  <Input
-                    type="password"
-                    name="password2"
-                    placeholder="Confirm Password"
-                    value={values.password2}
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    border={
-                      touched.password2 &&
-                      errors.password2 &&
-                      `2px solid ${c.DANGER_COLOR}`
-                    }
-                  />
-                </Label>
-
-                <LineButton type="submit" onClick={handleSubmit}>
-                  <H3 color={c.DANGER_COLOR}>
-                    Delete
-                    <SquareLoader
-                      css={{ marginLeft: '20px' }}
-                      size={15}
-                      color="#FFA987"
-                      loading={user.loading}
-                    />
-                  </H3>
-                </LineButton>
-              </Forms>
-            </ModalButton>
+                </H3>
+              </ModalButton>
+            </Forms>
           </InnerContainer>
         </ModalWrapper>
       </Modal>
@@ -184,15 +183,14 @@ const AMForm = withFormik({
   mapPropsToValues: () => ({
     password: '',
   }),
-  handleSubmit: (values, { props, setSubmitting }) => {
-    props.manageAccount({
-      password: values.password,
-      history: props.useHistory,
-    });
+  handleSubmit: (values, { props, setSubmitting, resetForm }) => {
+    setSubmitting(true);
+    props.manageAccount(values.password, props.history);
     setSubmitting(false);
+    resetForm();
   },
   validationSchema,
-})(AccoutManagementForm);
+})(AccountManagementForm);
 
 const mapStateToProps = state => {
   return {
@@ -200,4 +198,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { manageAccount, useHistory })(AMForm);
+export default connect(mapStateToProps, { manageAccount })(AMForm);
