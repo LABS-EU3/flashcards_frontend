@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import styled from 'styled-components';
@@ -8,6 +9,7 @@ import {
   createDeck,
   fetchTags,
   fetchUserDecks,
+  updateAccessTime,
 } from '../../../../modules/dashboard/dashboardActions';
 
 import * as types from '../../../../modules/dashboard/dashboardTypes';
@@ -18,8 +20,10 @@ const DeckLibContainer = styled.div`
   background: transparent;
 `;
 const DeckLibrary = props => {
+  // eslint-disable-next-line no-shadow
   const { dashboard } = props;
-  // eslint-disable-next-line react/destructuring-assignment
+  const updateAccess = props.updateAccessTime;
+
   const fetchDecks = props.fetchUserDecks;
   const { creatingDeck, userDecks, tags } = dashboard;
 
@@ -63,6 +67,7 @@ const DeckLibrary = props => {
         decks={userDecks}
         setIsEditMode={setIsEditMode}
         isEditMode={isEditMode}
+        updateAccess={updateAccess}
       />
     </DeckLibContainer>
   );
@@ -78,4 +83,5 @@ export default connect(mapStateToProps, {
   createDeck,
   fetchTags,
   fetchUserDecks,
+  updateAccessTime,
 })(DeckLibrary);

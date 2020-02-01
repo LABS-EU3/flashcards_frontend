@@ -12,7 +12,12 @@ import { HR, H2, P } from '../../../../../styles/typography';
 
 import { InfoHolder, CardCount } from '../../../../../components/cards/Cards';
 
-export default function SearchResults({ siftedDecks, selectDeck, history }) {
+export default function SearchResults({
+  siftedDecks,
+  selectDeck,
+  history,
+  updateAccess,
+}) {
   return (
     <Collection>
       <CollectionLabel>
@@ -24,6 +29,7 @@ export default function SearchResults({ siftedDecks, selectDeck, history }) {
             <CardsFlexs
               onClick={() => {
                 selectDeck(d);
+                updateAccess(d.deck_id);
               }}
               key={`${index + d.deck_id}${d.deck_id}`}
               width="46%"
@@ -33,13 +39,13 @@ export default function SearchResults({ siftedDecks, selectDeck, history }) {
               <NavLink to={`/dashboard/deck/${d.deck_id}`} className="navFlex">
                 <InfoHolder>
                   <H2 BOLD>{d.deck_name}</H2>
-                  {d.tags.map((tag, idx) => (
-                    <P key={`${idx + 1}`}>{tag}</P>
-                  ))}
+                  {d.tags.map(
+                    (tag, idx) => tag && <P key={`${idx + 1}`}>{tag.name}</P>,
+                  )}
                 </InfoHolder>
 
                 <CardCount>
-                  <P color="grey">30 Cards </P>
+                  <P color="grey">{d.flashcards.length} Cards </P>
                   <button
                     type="button"
                     onClick={() => {

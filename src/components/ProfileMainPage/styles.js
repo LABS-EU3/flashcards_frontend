@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import * as c from '../../styles/variables/colours';
+import { CardsFlexs } from '../../pages/dashboard/styles/DeckLibraryStyles';
 
 export const MainPage = styled.div`
   width: 100%;
@@ -75,6 +76,10 @@ export const Content = styled.div`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 2px;
   padding: 1%;
+`;
+
+export const ProfileDecks = styled(CardsFlexs)`
+  width: 100%;
 `;
 
 export const Tag = styled.div`

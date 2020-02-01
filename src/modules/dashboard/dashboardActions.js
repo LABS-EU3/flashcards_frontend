@@ -298,3 +298,53 @@ export const fetchAllDecks = () => dispatch => {
       });
     });
 };
+
+export const getCOTD = () => dispatch => {
+  dispatch({ type: types.ON_START_FETCHING_CARD_OF_THE_DAY });
+  axiosWithAuth()
+    .get('/cards/COTD')
+    .then(({ data }) => {
+      dispatch({
+        type: types.ON_CARD_OF_THE_DAY_FETCH_SUCCESS,
+        payload: data.card[0],
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: types.ON_CARD_OF_THE_DAY_FETCH_FAILED,
+        payload: error.message,
+      });
+    });
+};
+
+export const updateAccessTime = id => dispatch => {
+  dispatch({ type: types.ON_START_UPDATE_ACCESS });
+  try {
+    axiosWithAuth()
+      .put(`/decks/access/${id}`)
+      .then(() => {
+        dispatch({ type: types.ON_UPDATE_ACCESS_SUCCESS });
+      });
+  } catch (error) {
+    dispatch({
+      type: types.ON_UPDATE_ACCESS_FAIL,
+      payload: error.message,
+    });
+  }
+};
+
+export const getFavoriteTags = () => dispatch => {
+  dispatch({ type: types.ON_START_FETCH_FAV_TAGS });
+  try {
+    axiosWithAuth()
+      .get(`/decks/favorite`)
+      .then(({ data }) => {
+        dispatch({ type: types.ON_FETCH_FAV_TAGS_SUCCESS, payload: data });
+      });
+  } catch (error) {
+    dispatch({
+      type: types.ON_FETCH_FAV_TAGS_FAIL,
+      payload: error.message,
+    });
+  }
+};

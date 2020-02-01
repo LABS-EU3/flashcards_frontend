@@ -10,7 +10,10 @@ import { BackArrowButton } from '../../../../styles/buttons';
 
 // Actions
 import { CLEAR_RESPONSES } from '../../../../modules/user/userTypes';
-import { fetchAllDecks } from '../../../../modules/dashboard/dashboardActions';
+import {
+  fetchAllDecks,
+  updateAccessTime,
+} from '../../../../modules/dashboard/dashboardActions';
 
 // Assets
 import BackArrow from '../../../../assets/icons/Arrow 1.svg';
@@ -18,7 +21,7 @@ import TopSearch from './components/TopSearch';
 import SearchResults from './components/SearchResults';
 import { ON_SELECT_DECK } from '../../../../modules/dashboard/dashboardTypes';
 
-function Search({ dashboard, getAllDecks, selectDeck, goBack }) {
+function Search({ dashboard, getAllDecks, selectDeck, goBack, updateAccess }) {
   const { allDecks, siftedDecks } = dashboard;
   const history = useHistory();
 
@@ -41,6 +44,7 @@ function Search({ dashboard, getAllDecks, selectDeck, goBack }) {
         siftedDecks={siftedDecks}
         selectDeck={selectDeck}
         history={history}
+        updateAccess={updateAccess}
       />
     </div>
   );
@@ -57,6 +61,7 @@ const mapDispatchToProps = dispatch => {
     getAllDecks: () => dispatch(fetchAllDecks()),
     selectDeck: d => dispatch({ type: ON_SELECT_DECK, payload: { ...d } }),
     goBack: () => dispatch({ type: CLEAR_RESPONSES }),
+    updateAccess: id => dispatch(updateAccessTime(id)),
   };
 };
 

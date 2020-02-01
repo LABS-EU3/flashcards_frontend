@@ -1,20 +1,33 @@
 /* eslint-disable max-len */
-import React from 'react';
-import { H2, P } from '../../../../styles/typography';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+
+import { H1, HR } from '../../../../styles/typography';
 import { CardFooter } from '../../../../components/DashboardCenterBar/styles';
 import DashboardCenterBar from '../../../../components/DashboardCenterBar/DashboardCenterBar';
 import DashboardRightBar from '../../../../components/DashboardRightBar/DashboardRightBar';
 import './styles.css';
+import { getCOTD } from '../../../../modules/dashboard/dashboardActions';
+import COTD from './components/COTD';
 
-const WelcomePage = () => {
+const WelcomePage = ({ getCardOfTheDay, dashboard }) => {
+  const { cardOfTheDay } = dashboard;
+
+  useEffect(() => {
+    getCardOfTheDay();
+  }, []);
+
   return (
     <div className="dashboard-welcome">
       <div className="dashboard-welcome__item">
         <DashboardCenterBar />
-        <CardFooter>
-          <H2>Card of the Day</H2>
-          <P>What is the formula that you use to find that you</P>
-        </CardFooter>
+        {cardOfTheDay && (
+          <CardFooter>
+            <H1>Card of The Day</H1>
+            <HR />
+            <COTD card={cardOfTheDay} />
+          </CardFooter>
+        )}
       </div>
       <div className="dashboard-welcome__item">
         <DashboardRightBar />
@@ -23,4 +36,16 @@ const WelcomePage = () => {
   );
 };
 
-export default WelcomePage;
+const mapStateToProps = state => {
+  return {
+    dashboard: state.dashboard,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getCardOfTheDay: () => dispatch(getCOTD()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(WelcomePage);

@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
+import { PropagateLoader } from 'react-spinners';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { fetchRankings } from '../../../../modules/user/userActions';
 
-import { H1, H2, P } from '../../../../styles/typography';
+import { H1, H2, P, H3 } from '../../../../styles/typography';
 
 export const Container = styled.div`
   background-color: transparent;
@@ -99,34 +100,33 @@ export default function LeaderBoard() {
     dispatch(fetchRankings());
   }, []);
 
-  if (loading) {
-    return <Loading>Loading...</Loading>;
-  }
   return (
     <Container>
       <TopCompDiv>
         <H1 lineHeight="1.5em">Rankings</H1>
         <MyHR />
       </TopCompDiv>
-
       <Errors>{error && error.message}</Errors>
-
       <CardContainer>
-        {rankings.length ? (
-          rankings.map((data, index) => {
-            return (
-              <Card key={`${data.id}`}>
-                <H2>{index + 1}</H2>
-                <H2>{data.name}</H2>
-                <P>
-                  {data.score} <br /> Points
-                </P>
-              </Card>
-            );
-          })
-        ) : (
-          <Loading>No rankings to display yet</Loading>
-        )}
+        <PropagateLoader size={30} color="#FFA987" loading={loading} />
+        {!loading &&
+          (rankings.length ? (
+            rankings.map((data, index) => {
+              return (
+                <Card key={`${data.id}-${index + 1}`}>
+                  <H2>{index + 1}</H2>
+                  <H2>{data.full_name}</H2>
+                  <P>
+                    {data.score} <br /> Points
+                  </P>
+                </Card>
+              );
+            })
+          ) : (
+            <Loading>
+              <H3>No rankings to display yet</H3>
+            </Loading>
+          ))}
       </CardContainer>
     </Container>
   );

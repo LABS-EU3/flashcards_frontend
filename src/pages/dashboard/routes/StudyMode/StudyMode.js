@@ -301,7 +301,7 @@ const StudyMode = ({
 
           <CardContainer className="container">
             <StyledMyPart>
-              {open1 &&
+              {open1 && userSessions.length ? (
                 userSessions.map(data => {
                   // Perform some gymnastics to obtain deck name since
                   // it is currently not returned with the response.
@@ -322,7 +322,10 @@ const StudyMode = ({
                       </SLowerCardSection>
                     </Card>
                   );
-                })}
+                })
+              ) : (
+                <P>You don&apos;t have any sessions yet</P>
+              )}
             </StyledMyPart>
           </CardContainer>
         </SessionContainer>

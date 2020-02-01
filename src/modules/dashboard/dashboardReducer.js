@@ -24,6 +24,8 @@ const initialState = {
   confirmingDeletion: false,
   allDecks: [],
   siftedDecks: [],
+  cardOfTheDay: {},
+  favoriteTags: [],
 };
 
 const dashboardReducer = (state = initialState, action) => {
@@ -215,7 +217,6 @@ const dashboardReducer = (state = initialState, action) => {
       return {
         ...state,
         confirmingDeletion: false,
-
         loading: false,
       };
 
@@ -332,7 +333,51 @@ const dashboardReducer = (state = initialState, action) => {
         ...state,
         siftedDecks: action.payload,
       };
+    case types.ON_START_FETCHING_CARD_OF_THE_DAY:
+      return { ...state, loading: true };
 
+    case types.ON_CARD_OF_THE_DAY_FETCH_FAILED:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload,
+      };
+
+    case types.ON_CARD_OF_THE_DAY_FETCH_SUCCESS:
+      return {
+        ...state,
+        cardOfTheDay: action.payload,
+        loading: false,
+      };
+    case types.ON_START_UPDATE_ACCESS:
+      return { ...state, loading: true };
+
+    case types.ON_UPDATE_ACCESS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload,
+      };
+    case types.ON_UPDATE_ACCESS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+      };
+    case types.ON_START_FETCH_FAV_TAGS:
+      return { ...state, loading: true };
+
+    case types.ON_FETCH_FAV_TAGS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload,
+      };
+    case types.ON_FETCH_FAV_TAGS_SUCCESS:
+      return {
+        ...state,
+        favoriteTags: action.payload,
+        loading: false,
+      };
     default:
       return state;
   }

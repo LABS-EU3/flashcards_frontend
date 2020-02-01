@@ -63,7 +63,7 @@ export default function TopBar() {
       ) : null}
 
       <LogoWrapper>
-        <NavLink to="/">
+        <NavLink to="/dashboard/welcome">
           <img src={`${logo}`} alt="quickdecks logo" />
         </NavLink>
       </LogoWrapper>
