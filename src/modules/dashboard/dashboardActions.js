@@ -77,7 +77,6 @@ export const createDeck = (deck, onComplete, onFailed) => dispatch => {
         type: types.ON_DECK_CREATION_CANCELLED,
         payload: err.message,
       });
-
       if (onFailed) onFailed();
     });
 };
