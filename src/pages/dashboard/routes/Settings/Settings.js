@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+
 import RoundedImage from 'react-rounded-image';
-// import styled from 'styled-components';
-// import * as sStyles from './SettingsStyles';
 import { MdKeyboardArrowDown, MdCloudUpload } from 'react-icons/md';
 import useAction from '../../../../utils/useAction';
 import * as action from '../../../../modules/user/userActions';
