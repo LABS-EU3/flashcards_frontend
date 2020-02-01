@@ -220,6 +220,7 @@ const AccoutManagementForm = props => {
                     type="password"
                     name="password"
                     placeholder="Password"
+                    // value={values.password.toString()}
                     value={values.password}
                     onBlur={handleBlur}
                     onChange={handleChange}
@@ -286,9 +287,10 @@ const AMForm = withFormik({
     // password2: '',
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
-    const { id } = props.user.credentials;
-    props.manageAccount(values);
-    console.log('////', props, id, values);
+    // const { id } = props.user.credentials;
+    props.manageAccount({ password: values.password });
+    // props.manageAccount(values);
+    // console.log('////', props, id, values);
     setSubmitting(false);
   },
   // // handleSubmit: 'open'
@@ -302,7 +304,6 @@ const AMForm = withFormik({
   // handleSubmit: closeModal,
   validationSchema,
 })(AccoutManagementForm);
-
 const mapStateToProps = state => {
   return {
     user: state.user,
