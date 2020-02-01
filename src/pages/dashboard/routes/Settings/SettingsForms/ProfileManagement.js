@@ -1,20 +1,20 @@
 // Import
 
 // Libraries
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { withFormik } from 'formik';
 import { connect } from 'react-redux';
 import * as yup from 'yup';
-// import { SquareLoader } from 'react-spinners';
+import { SquareLoader } from 'react-spinners';
 
 // Styles
-import { Text, H3 } from '../../../../styles/typography';
-import { Button2 } from '../../../../styles/buttons';
-import * as c from '../../../../styles/variables/colours';
-import { Forms, Input, Label } from '../../../../styles/forms';
+import { Text, H3 } from '../../../../../styles/typography';
+import { Button2 } from '../../../../../styles/buttons';
+import * as c from '../../../../../styles/variables/colours';
+import { Forms, Input, Label } from '../../../../../styles/forms';
 
 // Actions
-import { manageProfile } from '../../../../modules/user/userActions';
+import { manageProfile } from '../../../../../modules/user/userActions';
 
 const ProfileManagementForm = props => {
   const {
@@ -24,29 +24,23 @@ const ProfileManagementForm = props => {
     handleSubmit,
     touched,
     errors,
+    user,
   } = props;
 
-  // const [response, setResponse] = useState(null);
+  const [response, setResponse] = useState(null);
 
-  // useEffect(() => {
-  //   if () {
-  //     setResponse(
-  //       <H3 color={c.SUCCESS_COLOR}>
-  //         Profile update successfully
-  //       </H3>,
-  //     );
-  //   }
-  //   if (user.errors) {
-  //     setResponse(
-  //   <H3 color={c.DANGER_COLOR}>
-  //     Error while upadting profile
-  //   </H3>
-  // );
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (user.completed) {
+      setResponse(<H3 color={c.SUCCESS_COLOR}>Profile update successfully</H3>);
+    }
+    if (user.errors) {
+      setResponse(<H3 color={c.DANGER_COLOR}>Error while upadting profile</H3>);
+    }
+  }, [user.errors, user.completed]);
+
   return (
     <Forms onSubmit={handleSubmit}>
-      {/* {response} */}
+      {response}
       <Label>
         <H3>Name</H3>
         {touched.fullName && errors.fullName && (
@@ -64,32 +58,16 @@ const ProfileManagementForm = props => {
           }
         />
       </Label>
-      <Label>
-        <H3>Email</H3>
-        {touched.email && errors.email && (
-          <Text color={c.DANGER_COLOR}>{errors.email}</Text>
-        )}
-        <Input
-          type="email"
-          name="email"
-          value={values.email.toLowerCase()}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          placeholder="Email"
-          border={
-            touched.email && errors.email && `2px solid ${c.DANGER_COLOR}`
-          }
-        />
-      </Label>
+
       <Button2 type="submit">
         <H3 color={c.DARK_GRAY}>
           Submit
-          {/* <SquareLoader
+          <SquareLoader
             css={{ marginLeft: '20px' }}
             size={15}
             color="#FFA987"
             loading={user.loading}
-          /> */}
+          />
         </H3>
       </Button2>
     </Forms>
@@ -98,26 +76,22 @@ const ProfileManagementForm = props => {
 
 const validationSchema = yup.object().shape({
   fullName: yup.string().required('Please provide your full name'),
-  email: yup
-    .string()
-    .email('Email is not valid')
-    .required('Please provide your email'),
 });
 
 const PMForm = withFormik({
   mapPropsToValues: () => ({
     fullName: '',
-    email: '',
   }),
-  handleSubmit: (values, { props, setSubmitting }) => {
+  handleSubmit: (values, { props, setSubmitting, resetForm }) => {
+    setSubmitting(true);
     props.manageProfile(
       {
         fullName: values.fullName,
-        email: values.email,
       },
       props.history,
     );
     setSubmitting(false);
+    resetForm();
   },
   validationSchema,
 })(ProfileManagementForm);

@@ -299,7 +299,7 @@ const StudyMode = ({
           </UpperCardSection>
           <MyHR />
 
-          <CardContainer className="container" ref={container}>
+          <CardContainer className="container">
             <StyledMyPart>
               {open1 &&
                 userSessions.map(data => {
@@ -341,7 +341,7 @@ const StudyMode = ({
           </UpperCardSection>
           <MyHR />
 
-          <CardContainer className="container" ref={container}>
+          <CardContainer className="container">
             {open2 &&
               mastery.map((data, index) => {
                 return (
