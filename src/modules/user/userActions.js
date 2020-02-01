@@ -177,14 +177,17 @@ export const managePassword = passwordData => dispatch => {
     });
 };
 
-export const manageAccount = password => dispatch => {
+// eslint-disable-next-line no-unused-vars
+export const manageAccount = (password, history) => dispatch => {
   dispatch({ type: types.DELETE_USER_ACCOUNT_START });
 
   axiosWithAuth()
     .delete(`${baseUrl}/users`, { data: password })
     .then(res => {
       dispatch({ type: types.DELETE_USER_ACCOUNT_SUCCESS, payload: res.data });
-      dispatch({ type: types.CLEAR_RESPONSES });
+      clearLocalStorage();
+      // history.push('/');
+      window.location.reload();
     })
     .catch(errors => {
       dispatch({
