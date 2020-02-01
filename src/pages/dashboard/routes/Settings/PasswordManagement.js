@@ -43,7 +43,6 @@ const PasswordManagementForm = props => {
   return (
     <Forms onSubmit={handleSubmit}>
       {response}
-
       <Label>
         <H3>Current Password</H3>
         {touched.currentPassword && errors.currentPassword && (
@@ -63,6 +62,7 @@ const PasswordManagementForm = props => {
           }
         />
       </Label>
+
       <Label>
         <H3>New Password</H3>
         {touched.newPassword && errors.newPassword && (
@@ -82,6 +82,7 @@ const PasswordManagementForm = props => {
           }
         />
       </Label>
+
       <Label>
         <H3>Confirm Password</H3>
         {touched.confirmNewPAssword && errors.confirmNewPAssword && (
@@ -101,7 +102,8 @@ const PasswordManagementForm = props => {
           }
         />
       </Label>
-      <Button2 type="">
+
+      <Button2 type="submit">
         <H3 color={c.DARK_GRAY}>
           Submit
           <SquareLoader
@@ -147,4 +149,5 @@ const mapStateToProps = state => {
     user: state.user,
   };
 };
+
 export default connect(mapStateToProps, { managePassword })(PWDMForm);

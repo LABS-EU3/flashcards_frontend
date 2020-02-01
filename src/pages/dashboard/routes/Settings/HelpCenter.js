@@ -43,7 +43,6 @@ const HelpCenterForm = props => {
       {response}
 
       <Label>
-        {/* <H2 color="#3399FF">Help Center</H2> */}
         {touched.feedback && errors.feedback && (
           <Text color={c.DANGER_COLOR}>{errors.feedback}</Text>
         )}
@@ -62,7 +61,7 @@ const HelpCenterForm = props => {
         />
       </Label>
 
-      <Button2 type="">
+      <Button2 type="submit">
         <H3 color={c.DARK_GRAY}>
           Submit
           <SquareLoader
@@ -99,4 +98,5 @@ const mapStateToProps = state => {
     user: state.user,
   };
 };
+
 export default connect(mapStateToProps, { submitHelpCenterMsg })(HCForm);

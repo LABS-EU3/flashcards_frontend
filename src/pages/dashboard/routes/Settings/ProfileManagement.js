@@ -37,6 +37,7 @@ const ProfileManagementForm = props => {
       setResponse(<H3 color={c.DANGER_COLOR}>Error while upadting profile</H3>);
     }
   }, [user.errors, user.completed]);
+
   return (
     <Forms onSubmit={handleSubmit}>
       {response}

@@ -1,12 +1,12 @@
 // Import
 
 // Libraries
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withFormik } from 'formik';
 import { connect } from 'react-redux';
 import * as yup from 'yup';
 import Modal from 'react-awesome-modal';
-// import { SquareLoader } from 'react-spinners';
+import { SquareLoader } from 'react-spinners';
 
 // Styles
 import styled from 'styled-components';
@@ -54,163 +54,62 @@ const AccoutManagementForm = props => {
     handleSubmit,
     touched,
     errors,
+    user,
   } = props;
-
+  
+  const [response, setResponse] = useState(null);
   const [state, setState] = useState({ visible: false });
 
   function openModal() {
     setState({ visible: true });
   }
-
   function closeModal() {
     setState({ visible: false });
   }
-  // const [response, setResponse] = useState(null);
 
-  // useEffect(() => {
-  //   if () {
-  //     setResponse(
-  //       <H3 color={c.SUCCESS_COLOR}>
-  //         Account update successfully
-  //       </H3>,
-  //     );
-  //   }
-  //   if (user.errors) {
-  //     setResponse(
-  //   <H3 color={c.DANGER_COLOR}>
-  //      Error while upadting account
-  //   </H3 >
-  // );
-  //   }
-  // }, []);
-  function handleFinalSubmit() {
-    // if (para === 'submit') {
-    handleSubmit();
-    // closeModal();
-    // } else if (para === 'close') {
-    //   closeModal();
-    // }
-    // else {
-    //   openModal();
-    // }
-  }
+   useEffect(() => {
+    if (user.completed) {
+      setResponse(
+        <H3 color={c.SUCCESS_COLOR}>Account successfully deleted</H3>,
+      );
+    }
+    if (user.errors) {
+      setResponse(<H3 color={c.DANGER_COLOR}>Error while deleting account</H3>);
+    }
+  }, [user.errors, user.completed]);
+
   return (
-    // // <Forms onSubmit={() => handleFinalSubmit()}>
-    // <Forms>
-    //   {/* {response} */}
-
-    //   <Label>
-    //     <H3>Current Password</H3>
-    //     {touched.currentPassword && errors.currentPassword && (
-    //       <Text color={c.DANGER_COLOR}>{errors.currentPassword}</Text>
-    //     )}
-    //     <Input
-    //       type="password"
-    //       name="currentPassword"
-    //       placeholder="Current Password"
-    //       value={values.currentPassword}
-    //       onBlur={handleBlur}
-    //       onChange={handleChange}
-    //       border={
-    //         touched.currentPassword &&
-    //         errors.currentPassword &&
-    //         `2px solid ${c.DANGER_COLOR}`
-    //       }
-    //     />
-    //   </Label>
-
-    //   <Label>
-    //     <H3>Confirm Password</H3>
-    //     {touched.password2 && errors.password2 && (
-    //       <Text color={c.DANGER_COLOR}>{errors.password2}</Text>
-    //     )}
-    //     <Input
-    //       type="password"
-    //       name="password2"
-    //       placeholder="Confirm Password"
-    //       value={values.password2}
-    //       onBlur={handleBlur}
-    //       onChange={handleChange}
-    //       border={
-    //         touched.password2 &&
-    //         errors.password2 &&
-    //         `2px solid ${c.DANGER_COLOR}`
-    //       }
-    //     />
-    //   </Label>
-    //   <LineButton type="" onClick={openModal}>
-    //     {/* <LineButton type=""> */}
-    //     <H3 color={c.DANGER_COLOR}>
-    //       Delete
-    //       {/* <SquareLoader
-    //         css={{ marginLeft: '20px' }}
-    //         size={15}
-    //         color="#FFA987"
-    //         loading={user.loading}
-    //       /> */}
-    //     </H3>
-    //   </LineButton>
-    //   <Modal
-    //     visible={state.visible}
-    //     width="80%"
-    //     height="300"
-    //     borde-radius="50%"
-    //     effect="fadeInUp"
-    //     onClickAway={closeModal}
-    //     className="modalClass"
-    //   >
-    //     <ModalWrapper>
-    //       <H1 color="red">Delete Account</H1>
-    //       <H2>Are you sure you want to delete?</H2>
-    //       <InnerContainer>
-    //         <ModalButton onClick={closeModal}>
-    //           <H2>Close</H2>
-    //         </ModalButton>
-    //         {/* <ModalButton onClick={handleSubmit} onClick={closeModal}> */}
-    //         <ModalButton onClick={handleFinalSubmit}>
-    //           <H2 color="red">Delete</H2>
-    //         </ModalButton>
-    //       </InnerContainer>
-    //     </ModalWrapper>
-    //   </Modal>
-    // </Forms>
-
-    // <Forms onSubmit={() => handleFinalSubmit()}>
     <>
       <LineButton type="" onClick={openModal}>
-        {/* <LineButton type=""> */}
         <H3 color={c.DANGER_COLOR}>
           Proceed to Delete
-          {/* <SquareLoader
-    //         css={{ marginLeft: '20px' }}
-    //         size={15}
-    //         color="#FFA987"
-    //         loading={user.loading}
-    //       /> */}
+          <SquareLoader
+            css={{ marginLeft: '20px' }}
+            size={15}
+            color="#FFA987"
+            loading={user.loading}
+          />
         </H3>
       </LineButton>
       <Modal
         visible={state.visible}
         width="80%"
         height="98%"
-        borde-radius="50%"
         effect="fadeInUp"
         onClickAway={closeModal}
         className="modalClass"
       >
         <ModalWrapper>
-          <H1 color="red">Delete Account1</H1>
+          <H1 color="red">Delete Account</H1>
           <H2>Are you sure you want to delete?</H2>
           <InnerContainer>
             <ModalButton onClick={closeModal}>
               <H2>Close</H2>
             </ModalButton>
-            {/* <ModalButton onClick={handleSubmit} onClick={closeModal}> */}
-            <ModalButton>
-              {/* <H2 color="red">Delete</H2> */}
-              <Forms>
-                {/* {response} */}
 
+            <ModalButton>
+              <Forms onSubmit={handleSubmit}>
+                {response}
                 <Label>
                   <H3>Password</H3>
                   {touched.password && errors.password && (
@@ -220,7 +119,6 @@ const AccoutManagementForm = props => {
                     type="password"
                     name="password"
                     placeholder="Password"
-                    // value={values.password.toString()}
                     value={values.password}
                     onBlur={handleBlur}
                     onChange={handleChange}
@@ -251,16 +149,16 @@ const AccoutManagementForm = props => {
                     }
                   />
                 </Label>
-                <LineButton type="" onClick={handleFinalSubmit}>
-                  {/* <LineButton type=""> */}
+
+                <LineButton type="submit" onClick={handleSubmit}>
                   <H3 color={c.DANGER_COLOR}>
                     Delete
-                    {/* <SquareLoader
-            css={{ marginLeft: '20px' }}
-            size={15}
-            color="#FFA987"
-            loading={user.loading}
-          /> */}
+                    <SquareLoader
+                      css={{ marginLeft: '20px' }}
+                      size={15}
+                      color="#FFA987"
+                      loading={user.loading}
+                    />
                   </H3>
                 </LineButton>
               </Forms>
@@ -274,7 +172,6 @@ const AccoutManagementForm = props => {
 
 const validationSchema = yup.object().shape({
   password: yup.string().required('Please provide your password'),
-
   password2: yup
     .string()
     .required("Passwords don't match")
@@ -284,29 +181,18 @@ const validationSchema = yup.object().shape({
 const AMForm = withFormik({
   mapPropsToValues: () => ({
     password: '',
-    // password2: '',
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
-    // const { id } = props.user.credentials;
     props.manageAccount({ password: values.password });
-    // props.manageAccount(values);
-    // console.log('////', props, id, values);
     setSubmitting(false);
   },
-  // // handleSubmit: 'open'
-  // //   ? (values, { props, setSubmitting }) => {
-  // //       const { id } = props.user.credentials;
-  // //       props.manageAccount(id);
-  // //       console.log('////', props, id);
-  // //       setSubmitting(false);
-  // //     }
-  // //   : 'close',
-  // handleSubmit: closeModal,
   validationSchema,
 })(AccoutManagementForm);
+
 const mapStateToProps = state => {
   return {
     user: state.user,
   };
 };
+
 export default connect(mapStateToProps, { manageAccount })(AMForm);

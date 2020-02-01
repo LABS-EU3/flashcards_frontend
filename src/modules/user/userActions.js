@@ -156,15 +156,6 @@ export const googleAuthorized = (token, history) => dispatch => {
     });
 };
 
-/* eslint-disable-next-line no-unused-vars */
-// export const manageProfile = () => dispatch => {};
-/* eslint-disable-next-line no-unused-vars */
-// export const manageAccount = () => dispatch => {};
-/* eslint-disable-next-line no-unused-vars */
-// export const managePassword = () => dispatch => {};
-/* eslint-disable-next-line no-unused-vars */
-// export const submitHelpCenterMsg = () => dispatch => {};
-
 export const managePassword = passwordData => dispatch => {
   dispatch({ type: types.MANAGE_PASSWORD_START });
 
@@ -186,10 +177,9 @@ export const managePassword = passwordData => dispatch => {
     });
 };
 
-/////////////
 export const manageAccount = password => dispatch => {
   dispatch({ type: types.DELETE_USER_ACCOUNT_START });
-  console.log(typeof password.password);
+
   axiosWithAuth()
     .delete(`${baseUrl}/users`, { data: password })
     .then(res => {
