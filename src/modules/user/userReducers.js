@@ -6,6 +6,7 @@ import * as types from './userTypes';
 const initialState = {
   loading: false,
   authenticated: false,
+  rankings: [],
   credentials: {},
   errors: null,
   completed: false,
@@ -150,6 +151,24 @@ const userReducer = (state = initialState, action) => {
         credentials: action.payload,
       };
     case types.GOOGLE_AUTH_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload,
+      };
+
+    case types.FETCH_RANKS_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.FETCH_RANKS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        rankings: action.payload || [],
+      };
+    case types.FETCH_RANKS_FAILURE:
       return {
         ...state,
         loading: false,

@@ -7,7 +7,11 @@ import { H2 } from '../../../styles/typography';
 const Tag = props => {
   const { value, removeTag } = props;
   return (
-    <TagContainer onClick={() => removeTag(value)}>
+    <TagContainer
+      onClick={() => {
+        removeTag(value);
+      }}
+    >
       <H2
         style={{
           textOverflow: 'ellipsis',

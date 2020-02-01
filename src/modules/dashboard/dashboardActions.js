@@ -2,24 +2,25 @@ import * as types from './dashboardTypes';
 
 import { axiosWithAuth } from '../../utils/auth';
 
-export const getRecentCards = userId => dispatch => {
-  dispatch({ type: types.RECENT_CARDS_START });
+export const getRecentDecks = () => dispatch => {
+  dispatch({ type: types.RECENT_DECKS_START });
 
   return axiosWithAuth()
-    .get(`/api/cards/users/${userId}`)
+    .get(`/decks/access/`)
     .then(({ data }) => {
       dispatch({
-        type: types.RECENT_CARDS_SUCCESS,
-        payload: data.data.user,
+        type: types.RECENT_DECKS_SUCCESS,
+        payload: data.data,
       });
     })
     .catch(err => {
       dispatch({
-        type: types.RECENT_CARDS_FAILED,
+        type: types.RECENT_DECKS_FAILED,
         payload: err,
       });
     });
 };
+
 export const fetchTags = () => dispatch => {
   dispatch({ type: types.ON_START_FETCHING_TAGS });
 
@@ -94,6 +95,10 @@ export const getSingleDeck = deckId => dispatch => {
       dispatch({
         type: types.ON_GET_SINGLE_DECK_SUCCESS,
         payload: data,
+      });
+      dispatch({
+        type: types.ON_DECK_CARDS_FETCH_SUCCESS,
+        payload: data.flashcards,
       });
     })
     .catch(error => {
@@ -192,6 +197,25 @@ export const deleteDeck = deckId => dispatch => {
     .catch(error => {
       dispatch({
         type: types.ON_DELETE_DECK_FAILED,
+        payload: error.message,
+      });
+    });
+};
+
+export const fetchAllDecks = () => dispatch => {
+  dispatch({ type: types.ON_START_GET_ALL_DECKS });
+
+  axiosWithAuth()
+    .get('/decks/public')
+    .then(({ data }) => {
+      dispatch({
+        type: types.ON_GET_ALL_DECKS_SUCCESS,
+        payload: data.data,
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: types.ON_GET_ALL_DECKS_FAILED,
         payload: error.message,
       });
     });
