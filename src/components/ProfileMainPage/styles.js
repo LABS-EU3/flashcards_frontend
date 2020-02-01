@@ -32,7 +32,7 @@ export const Image = styled.div`
   width: 12em;
   height: 12em;
   position: relative;
-  margin-top: -9em;
+  margin-top: -7em;
   margin-left: 3em;
 
   img {

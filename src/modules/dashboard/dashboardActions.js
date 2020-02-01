@@ -77,7 +77,6 @@ export const createDeck = (deck, onComplete, onFailed) => dispatch => {
         type: types.ON_DECK_CREATION_CANCELLED,
         payload: err.message,
       });
-
       if (onFailed) onFailed();
     });
 };
@@ -137,7 +136,7 @@ export const deleteCard = ({ id: cardId, deck_id: deckId }) => dispatch => {
     .catch(error => {
       dispatch({
         type: types.ON_DELETE_CARD_FAILED,
-        pasyload: error.message,
+        payload: error.message,
       });
     });
 };
@@ -197,6 +196,85 @@ export const deleteDeck = deckId => dispatch => {
     .catch(error => {
       dispatch({
         type: types.ON_DELETE_DECK_FAILED,
+        payload: error.message,
+      });
+    });
+};
+
+export const fetchSessions = () => dispatch => {
+  dispatch({ type: types.ON_START_FETCH_SESSIONS });
+
+  axiosWithAuth()
+    .get(`/sessions`)
+    .then(({ data }) => {
+      dispatch({
+        type: types.ON_FETCH_SESSIONS_SUCCESS,
+        payload: data.data,
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: types.ON_FETCH_SESSIONS_FAILED,
+        payload: error.message,
+      });
+    });
+};
+
+export const fetchSingleSession = id => dispatch => {
+  dispatch({ type: types.ON_START_FETCH_SINGLE_SESSION });
+
+  axiosWithAuth()
+    .get(`/sessions/${id}`)
+    .then(({ data }) => {
+      dispatch({
+        type: types.ON_FETCH_SINGLE_SESSION_SUCCESS,
+        payload: data.session,
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: types.ON_FETCH_SINGLE_SESSION_FAILED,
+        payload: error.message,
+      });
+    });
+};
+
+export const startSession = (deckId, onSuccess) => dispatch => {
+  dispatch({ type: types.ON_START_CREATE_SESSIONS });
+
+  axiosWithAuth()
+    .post(`/sessions`, { deckId })
+    .then(({ data }) => {
+      dispatch({
+        type: types.ON_CREATE_SESSIONS_SUCCESS,
+        payload: data.session,
+      });
+      // dispatch(fetchSessions());
+      onSuccess(data.session.id);
+    })
+    .catch(error => {
+      dispatch({
+        type: types.ON_CREATE_SESSIONS_FAILED,
+        payload: error.message,
+      });
+    });
+};
+
+// eslint-disable-next-line camelcase
+export const rateCard = ({ card_id, deck_id, rating }) => dispatch => {
+  dispatch({ type: types.ON_START_CARD_RATING });
+
+  axiosWithAuth()
+    .post(`/cards/scoring`, { card_id, deck_id, rating })
+    .then(() => {
+      dispatch({
+        type: types.ON_CARD_RATING_SUCCESS,
+        payload: card_id,
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: types.ON_CARD_RATING_FAILED,
         payload: error.message,
       });
     });

@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 import { P, H2 } from '../../styles/typography';
 import * as c from '../../styles/variables/colours';
 import * as g from '../../styles/variables/global';
-import { SLower } from '../../pages/dashboard/routes/StudyMode/StudyMode';
+import { SLower } from '../../pages/dashboard/routes/StudyMode/StudyModeStyles';
 
 export default function Cards({ title, totalCard }) {
   return (

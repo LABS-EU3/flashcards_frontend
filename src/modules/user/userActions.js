@@ -1,21 +1,15 @@
 // Import
 
-// Libraries
-import axios from 'axios';
-
 // Types
 import * as types from './userTypes';
-
-// Configs
-import { baseUrl } from '../../config/index';
 
 // Utils
 import { axiosWithAuth, setToken, clearLocalStorage } from '../../utils/auth';
 
 export const userLogin = (userData, history) => dispatch => {
   dispatch({ type: types.LOGIN_START });
-  axios
-    .post(`${baseUrl}/auth/login`, userData)
+  axiosWithAuth()
+    .post(`/auth/login`, userData)
     .then(({ data }) => {
       dispatch({
         type: types.LOGIN_SUCCESS,
@@ -35,8 +29,8 @@ export const userLogin = (userData, history) => dispatch => {
 
 export const userSignUp = (userData, history) => dispatch => {
   dispatch({ type: types.SIGNUP_START });
-  axios
-    .post(`${baseUrl}/auth/register`, userData)
+  axiosWithAuth()
+    .post(`/auth/register`, userData)
     .then(res => {
       dispatch({ type: types.SIGNUP_SUCCESS, payload: res.data.data.user });
       setToken(res.data.data.token);
@@ -61,8 +55,8 @@ export const logoutUser = history => dispatch => {
 
 export const resetPassword = (token, passwordData, history) => dispatch => {
   dispatch({ type: types.RESET_PASSWORD_START });
-  axios
-    .post(`${baseUrl}/auth/reset_password/${token}`, {
+  axiosWithAuth()
+    .post(`/auth/reset_password/${token}`, {
       password: passwordData.password,
       confirmPassword: passwordData.confirmPassword,
     })
@@ -98,8 +92,8 @@ export const forgotPassword = emailData => dispatch => {
 
 export const emailConfirmation = (token, history) => dispatch => {
   dispatch({ type: types.CONFIRM_EMAIL_START });
-  axios
-    .post(`${baseUrl}/auth/confirm_email`, {
+  axiosWithAuth()
+    .post(`/auth/confirm_email`, {
       token,
     })
     .then(({ data }) => {
@@ -137,8 +131,8 @@ export const fetchProfile = () => dispatch => {
 
 export const googleAuthorized = (token, history) => dispatch => {
   dispatch({ type: types.GOOGLE_AUTH_START });
-  axios
-    .post(`${baseUrl}/auth/google/${token}`)
+  axiosWithAuth()
+    .post(`/auth/google/${token}`)
     .then(({ data }) => {
       dispatch({
         type: types.GOOGLE_AUTH_SUCCESS,
@@ -156,6 +150,104 @@ export const googleAuthorized = (token, history) => dispatch => {
     });
 };
 
+export const managePassword = passwordData => dispatch => {
+  dispatch({ type: types.MANAGE_PASSWORD_START });
+
+  axiosWithAuth()
+    .post(`/auth/update_password`, {
+      oldPassword: passwordData.currentPassword,
+      newPassword: passwordData.newPassword,
+      confirmPassword: passwordData.confirmNewPassword,
+    })
+    .then(res => {
+      dispatch({ type: types.MANAGE_PASSWORD_SUCCESS, payload: res.data });
+      dispatch({ type: types.CLEAR_RESPONSES });
+    })
+    .catch(errors => {
+      dispatch({
+        type: types.MANAGE_PASSWORD_FAILURE,
+        payload: errors.response.data.message,
+      });
+    });
+};
+
+export const manageAccount = (password, history) => dispatch => {
+  dispatch({ type: types.DELETE_USER_ACCOUNT_START });
+
+  axiosWithAuth()
+    .delete(`/users`, { data: { password } })
+    .then(res => {
+      dispatch(logoutUser(history));
+      dispatch({
+        type: types.DELETE_USER_ACCOUNT_SUCCESS,
+        payload: res.message,
+      });
+      dispatch({ type: types.CLEAR_RESPONSES });
+    })
+    .catch(errors => {
+      dispatch({
+        type: types.DELETE_USER_ACCOUNT_FAILURE,
+        payload: errors.response.data.message,
+      });
+    });
+};
+
+export const submitHelpCenterMsg = feedback => dispatch => {
+  dispatch({ type: types.SUBMIT_FEEDBACK_START });
+
+  axiosWithAuth()
+    .post(`$/feedback`, { feedback: feedback.values.feedback })
+    .then(res => {
+      dispatch({ type: types.SUBMIT_FEEDBACK_SUCCESS, payload: res.data });
+      dispatch({ type: types.CLEAR_RESPONSES });
+    })
+    .catch(errors => {
+      dispatch({
+        type: types.SUBMIT_FEEDBACK_FAILURE,
+        payload: errors.response.data.message,
+      });
+    });
+};
+
+export const uploadProfileImg = imageUrl => dispatch => {
+  dispatch({ type: types.UPLOAD_PROFILE_IMAGE_START });
+
+  axiosWithAuth()
+    .post(`/auth/uploadProfile_img`, {
+      imageUrl,
+    })
+    .then(res => {
+      dispatch({ type: types.UPLOAD_PROFILE_IMAGE_SUCCESS, payload: res.data });
+      dispatch(fetchProfile());
+      dispatch({ type: types.CLEAR_RESPONSES });
+    })
+    .catch(errors => {
+      dispatch({
+        type: types.UPLOAD_PROFILE_IMAGE_FAILURE,
+        payload: errors.response.data.message,
+      });
+    });
+};
+
+export const manageProfile = updatedData => dispatch => {
+  dispatch({ type: types.UPDATE_USER_PROFILE_START });
+
+  axiosWithAuth()
+    .put(`/users/updateprofile`, {
+      fullName: updatedData.fullName,
+    })
+    .then(res => {
+      dispatch({ type: types.UPDATE_USER_PROFILE_SUCCESS, payload: res.data });
+      dispatch(fetchProfile());
+      dispatch({ type: types.CLEAR_RESPONSES });
+    })
+    .catch(errors => {
+      dispatch({
+        type: types.UPDATE_USER_PROFILE_FAILURE,
+        payload: errors.response.data.message,
+      });
+    });
+};
 export const fetchRankings = () => dispatch => {
   dispatch({ type: types.FETCH_RANKS_START });
   axiosWithAuth()
@@ -173,11 +265,3 @@ export const fetchRankings = () => dispatch => {
       });
     });
 };
-/* eslint-disable-next-line no-unused-vars */
-export const manageProfile = () => dispatch => {};
-/* eslint-disable-next-line no-unused-vars */
-export const manageAccount = () => dispatch => {};
-/* eslint-disable-next-line no-unused-vars */
-export const managePassword = () => dispatch => {};
-/* eslint-disable-next-line no-unused-vars */
-export const submitHelpCenterMsg = () => dispatch => {};

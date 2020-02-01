@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { PropagateLoader } from 'react-spinners';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
@@ -95,46 +95,38 @@ export default function LeaderBoard() {
   const rankings = useSelector(state => state.user.rankings);
   const loading = useSelector(state => state.user.loading);
   const error = useSelector(state => state.user.errors);
-  const [loader, setLoader] = useState();
 
   useEffect(() => {
     dispatch(fetchRankings());
-    if (loading) {
-      setLoader(
-        <div className="overcast">
-          <PropagateLoader size={30} color="#FFA987" loading={loading} />
-        </div>,
-      );
-    }
   }, []);
 
   return (
     <Container>
-      {loader}
       <TopCompDiv>
         <H1 lineHeight="1.5em">Rankings</H1>
         <MyHR />
       </TopCompDiv>
       <Errors>{error && error.message}</Errors>
-
       <CardContainer>
-        {rankings.length ? (
-          rankings.map((data, index) => {
-            return (
-              <Card key={`${data.id}`}>
-                <H2>{index + 1}</H2>
-                <H2>{data.name}</H2>
-                <P>
-                  {data.score} <br /> Points
-                </P>
-              </Card>
-            );
-          })
-        ) : (
-          <Loading>
-            <H3>No rankings to display yet</H3>
-          </Loading>
-        )}
+        <PropagateLoader size={30} color="#FFA987" loading={loading} />
+        {!loading &&
+          (rankings.length ? (
+            rankings.map((data, index) => {
+              return (
+                <Card key={`${data.id}-${index + 1}`}>
+                  <H2>{index + 1}</H2>
+                  <H2>{data.full_name}</H2>
+                  <P>
+                    {data.score} <br /> Points
+                  </P>
+                </Card>
+              );
+            })
+          ) : (
+            <Loading>
+              <H3>No rankings to display yet</H3>
+            </Loading>
+          ))}
       </CardContainer>
     </Container>
   );

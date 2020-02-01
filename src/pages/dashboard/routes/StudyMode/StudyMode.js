@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
-
+import { useHistory } from 'react-router';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import './studymode.css';
 import ReactSearchBox from 'react-search-box';
 import { MdCollectionsBookmark, MdKeyboardArrowDown } from 'react-icons/md';
 import { Line } from 'rc-progress';
+import { NavLink } from 'react-router-dom';
 import { H1, H2, H3, P } from '../../../../styles/typography';
+import {
+  fetchUserDecks,
+  fetchSessions,
+  startSession,
+  getRecentDecks,
+} from '../../../../modules/dashboard/dashboardActions';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -41,7 +48,7 @@ export const BottomContainer = styled.div`
   }
 `;
 
-export const CardStyled = styled.div`
+export const Card = styled(NavLink)`
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -119,6 +126,7 @@ export const BUTTON = styled.button`
   outline: none;
   background: #ffa987;
   border-radius: 3px;
+  cursor: pointer;
 `;
 
 export const MyHR = styled.hr`
@@ -141,37 +149,20 @@ const IconButtonWrapper = styled.div`
   transform: ${props => (props.rotate ? `rotate(180deg)` : '')};
 `;
 
-const StyledLink = styled(NavLink)`
-  text-decoration: none;
-`;
-
 // dummy data
 const dummyData = [
   {
-    key: 'john',
-    value: 'John Doe',
+    key: '1',
+    value: 'Regular',
   },
   {
-    key: 'jane',
-    value: 'Jane Doe',
+    key: '2',
+    value: 'Extreme',
   },
   {
-    key: 'mary',
-    value: 'Mary Phillips',
+    key: '3',
+    value: 'Insane',
   },
-  {
-    key: 'robert',
-    value: 'Robert',
-  },
-  {
-    key: 'karius',
-    value: 'Karius',
-  },
-];
-
-const sessions = [
-  { deckId: 1, mode: 'Regular', cardTitle: 'Oragnic Compounds', totalCard: 10 },
-  { deckId: 4, mode: 'Regular', cardTitle: 'Quantum Mechanics', totalCard: 39 },
 ];
 
 const mastery = [
@@ -180,9 +171,13 @@ const mastery = [
   { id: 7, cardTitle: 'Geography', percent: 100 },
 ];
 
-export default function StudyMode(props) {
-  const { dashboard, getRecentDecks } = props;
-
+const StudyMode = ({
+  dashboard,
+  fetchDecks,
+  getSessions,
+  beginSession,
+  getRecentUserDecks,
+}) => {
   const container = React.createRef();
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
@@ -190,6 +185,8 @@ export default function StudyMode(props) {
 
   const { recentDecks } = dashboard;
   const [decks, setDecks] = useState([]);
+
+  const [selectedDeckId, setSelectedDeckId] = useState(0);
 
   const handleButtonClick1 = () => {
     setOpen1(!open1);
@@ -202,23 +199,36 @@ export default function StudyMode(props) {
     setDecks(recentDecks);
   };
 
-  const mql = window.matchMedia(`(max-width: 768px)`);
-  let resizeTimeout;
-  window.addEventListener('resize', function() {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(function() {
-      window.location.reload();
-    }, 1500);
+  const { userDecks, userSessions } = dashboard;
+
+  const deckSearchData = userDecks.map(d => {
+    return {
+      key: d.deck_id,
+      value: d.deck_name,
+    };
   });
 
+  const mql = window.matchMedia(`(max-width: 768px)`);
+
   useEffect(() => {
+    fetchDecks();
+    getSessions();
     /* eslint-disable-next-line no-unused-expressions */
     !mql.matches ? setOpen1(!open1) : setOpen1(open1);
     /* eslint-disable-next-line no-unused-expressions */
     !mql.matches ? setOpen2(!open2) : setOpen2(open2);
-    getRecentDecks();
+    getRecentUserDecks();
     setDecks(recentDecks);
   }, [mql.matches]);
+
+  const history = useHistory();
+  const startStudyMode = deckId => {
+    if (deckId > 0) {
+      beginSession(deckId, sessionId => {
+        history.push(`/dashboard/studysession/${sessionId}`);
+      });
+    }
+  };
 
   return (
     <Wrapper>
@@ -226,8 +236,8 @@ export default function StudyMode(props) {
         <H3>Deck</H3>
         <ReactSearchBox
           placeholder="Type the deck name you want to use"
-          data={dummyData}
-          callback={record => console.log(record)}
+          data={deckSearchData}
+          onSelect={item => setSelectedDeckId(item.key)}
         />
         <br />
 
@@ -237,10 +247,8 @@ export default function StudyMode(props) {
         <br />
         <br />
 
-        <BUTTON>
-          <StyledLink to="/dashboard/studysession/sessionId">
-            <H3 color="white">Start</H3>
-          </StyledLink>
+        <BUTTON onClick={() => startStudyMode(selectedDeckId)}>
+          <H3 color="white">Start</H3>
         </BUTTON>
       </TopContainer>
       <BottomContainer>
@@ -263,14 +271,14 @@ export default function StudyMode(props) {
               {open3 &&
                 decks.map(deck => {
                   return (
-                    <CardStyled key={deck.id}>
+                    <Card to="/dashboard/study" key={deck.deck_id}>
                       <H2>{deck.deck_name}</H2>
                       <SLowerCardSection>
                         <SLower>
                           <MdCollectionsBookmark size="2em" color="grey" />
                         </SLower>
                       </SLowerCardSection>
-                    </CardStyled>
+                    </Card>
                   );
                 })}
             </StyledMyPart>
@@ -291,24 +299,33 @@ export default function StudyMode(props) {
           </UpperCardSection>
           <MyHR />
 
-          <CardContainer className="container" ref={container}>
+          <CardContainer className="container">
             <StyledMyPart>
-              {open1 &&
-                sessions.map((data, index) => {
+              {open1 && userSessions.length ? (
+                userSessions.map(data => {
+                  // Perform some gymnastics to obtain deck name since
+                  // it is currently not returned with the response.
+                  const deck = userDecks.find(d => d.deck_id === data.deck_id);
+                  const deckName = deck ? deck.deck_name : '';
                   return (
-                    /* eslint-disable-next-line react/no-array-index-key */
-                    <CardStyled key={index}>
-                      <H2>{data.cardTitle}</H2>
+                    <Card
+                      to={`/dashboard/studysession/${data.id}`}
+                      key={data.deck_id}
+                    >
+                      <H2>{deckName}</H2>
                       <SLowerCardSection>
-                        <P>{data.mode} mode</P>
+                        <P>{data.mode || 'Regular'} mode</P>
                         <SLower>
-                          <P color="grey">{data.totalCard} Cards left</P>
+                          <P color="grey">{data.cards_left} Cards left</P>
                           <MdCollectionsBookmark size="2em" color="grey" />
                         </SLower>
                       </SLowerCardSection>
-                    </CardStyled>
+                    </Card>
                   );
-                })}
+                })
+              ) : (
+                <P>You don&apos;t have any sessions yet</P>
+              )}
             </StyledMyPart>
           </CardContainer>
         </SessionContainer>
@@ -327,12 +344,11 @@ export default function StudyMode(props) {
           </UpperCardSection>
           <MyHR />
 
-          <CardContainer className="container" ref={container}>
+          <CardContainer className="container">
             {open2 &&
               mastery.map((data, index) => {
                 return (
-                  /* eslint-disable-next-line react/no-array-index-key */
-                  <CardStyled key={index}>
+                  <Card to="/dashboard/study" key={`card-${index + 1}`}>
                     <H2>{data.cardTitle}</H2>
                     <MLower>
                       <Line
@@ -346,7 +362,7 @@ export default function StudyMode(props) {
                       />
                       <H2>{data.percent} %</H2>
                     </MLower>
-                  </CardStyled>
+                  </Card>
                 );
               })}
           </CardContainer>
@@ -354,4 +370,17 @@ export default function StudyMode(props) {
       </BottomContainer>
     </Wrapper>
   );
-}
+};
+
+const mapStateToProps = state => {
+  return {
+    dashboard: state.dashboard,
+  };
+};
+
+export default connect(mapStateToProps, {
+  fetchDecks: fetchUserDecks,
+  beginSession: startSession,
+  getSessions: fetchSessions,
+  getRecentUserDecks: getRecentDecks,
+})(StudyMode);
