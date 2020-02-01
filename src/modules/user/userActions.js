@@ -186,11 +186,12 @@ export const managePassword = passwordData => dispatch => {
     });
 };
 
+/////////////
 export const manageAccount = password => dispatch => {
   dispatch({ type: types.DELETE_USER_ACCOUNT_START });
-  console.log('bbbbbb', password.password);
+  console.log(typeof password.password);
   axiosWithAuth()
-    .delete(`${baseUrl}/users`, { password: password.password })
+    .delete(`${baseUrl}/users`, { data: password })
     .then(res => {
       dispatch({ type: types.DELETE_USER_ACCOUNT_SUCCESS, payload: res.data });
       dispatch({ type: types.CLEAR_RESPONSES });
