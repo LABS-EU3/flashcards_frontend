@@ -107,7 +107,7 @@ const CarouselComponent = ({ match, dashboard, fetchSession }) => {
 
       <BottomCompDiv>
         <MLower>
-          <H2>Organic Compounds</H2>
+          <H2>{selectedSession.name}</H2>
           <Line
             percent={50}
             strokelinecolor="red"
@@ -117,7 +117,7 @@ const CarouselComponent = ({ match, dashboard, fetchSession }) => {
             strokeColor="#FFA987"
             className="pBar2"
           />
-          <h2 className="bottomh2">15/30 Cards</h2>
+          {/* <h2 className="bottomh2">15/30 Cards</h2> */}
         </MLower>
       </BottomCompDiv>
     </Container>
