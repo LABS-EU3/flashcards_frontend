@@ -196,7 +196,7 @@ export const submitHelpCenterMsg = feedback => dispatch => {
   dispatch({ type: types.SUBMIT_FEEDBACK_START });
 
   axiosWithAuth()
-    .post(`$/feedback`, { feedback: feedback.values.feedback })
+    .post(`/feedback`, feedback)
     .then(res => {
       dispatch({ type: types.SUBMIT_FEEDBACK_SUCCESS, payload: res.data });
       dispatch({ type: types.CLEAR_RESPONSES });
