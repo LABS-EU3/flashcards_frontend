@@ -34,6 +34,7 @@ const dashboardReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
+        error: '',
       };
 
     case types.RECENT_DECKS_SUCCESS:
@@ -144,6 +145,7 @@ const dashboardReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
+        error: '',
         selectedDeck: action.payload,
       };
 
@@ -185,6 +187,7 @@ const dashboardReducer = (state = initialState, action) => {
         ...state,
         isUpdatingCard: true,
         loading: true,
+        error: '',
         selectedCard: action.payload,
       };
 
@@ -231,12 +234,14 @@ const dashboardReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
+        error: '',
       };
 
     case types.ON_FETCH_SESSIONS_SUCCESS:
       return {
         ...state,
         loading: true,
+        error: '',
         userSessions: action.payload,
       };
 
@@ -250,12 +255,14 @@ const dashboardReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
+        error: '',
       };
 
     case types.ON_FETCH_SINGLE_SESSION_SUCCESS:
       return {
         ...state,
         loading: true,
+        error: '',
         selectedSession: action.payload,
         // eslint-disable-next-line no-use-before-define
         sessionCards: filterCards(action.payload),
@@ -270,13 +277,15 @@ const dashboardReducer = (state = initialState, action) => {
     case types.ON_START_CREATE_SESSIONS:
       return {
         ...state,
-        // loading: true,
+        loading: true,
+        error: '',
       };
 
     case types.ON_CREATE_SESSIONS_SUCCESS:
       return {
         ...state,
         loading: true,
+        error: '',
         selectedSession: action.payload,
       };
 
@@ -284,12 +293,14 @@ const dashboardReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        error: action.payload,
       };
 
     case types.ON_START_CARD_RATING:
       return {
         ...state,
         loading: true,
+        error: '',
       };
 
     case types.ON_CARD_RATING_SUCCESS:

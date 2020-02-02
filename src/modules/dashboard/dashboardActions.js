@@ -255,7 +255,7 @@ export const startSession = (deckId, onSuccess) => dispatch => {
     .catch(error => {
       dispatch({
         type: types.ON_CREATE_SESSIONS_FAILED,
-        payload: error.message,
+        payload: error.response.data.message,
       });
     });
 };
