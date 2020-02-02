@@ -84,11 +84,11 @@ const HCForm = withFormik({
   mapPropsToValues: () => ({
     feedback: '',
   }),
-  handleSubmit: (values, { props, setSubmitting }) => {
-    props.submitHelpCenterMsg({
-      values,
-    });
+  handleSubmit: (values, { props, setSubmitting, resetForm }) => {
+    setSubmitting(true);
+    props.submitHelpCenterMsg(values);
     setSubmitting(false);
+    resetForm()
   },
   validationSchema,
 })(HelpCenterForm);
