@@ -28,11 +28,13 @@ const TopBarContainer = styled.div`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.02);
   box-sizing: border-box;
   padding: 1em;
+  z-index: 999;
 `;
-const HambuggerWrapper = styled.div`
+const HamburgerWrapper = styled.div`
   display: flex;
   align-items: center;
   margin-right: 2em;
+  z-index: 999;
   @media (min-width: 767px) {
     display: none;
   }
@@ -51,7 +53,7 @@ export default function TopBar() {
   return (
     <TopBarContainer>
       {credentials && credentials.id ? (
-        <HambuggerWrapper>
+        <HamburgerWrapper>
           <MdReorder
             onClick={() => {
               dispatch({ type: HAMBURGER_CLICKED });
@@ -59,7 +61,7 @@ export default function TopBar() {
             size="2.8em"
             color="#D21F3C"
           />
-        </HambuggerWrapper>
+        </HamburgerWrapper>
       ) : null}
 
       <LogoWrapper>

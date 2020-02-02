@@ -20,8 +20,7 @@ import {
 
 export default function DashboardLayout(props) {
   const { user, children, logoutUser } = props;
-  const clickeRes = useSelector(state => state.dashboard);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const showMenu = useSelector(state => state.dashboard.showMenu);
 
   const mql = window.matchMedia(`(min-width: ${g.desktopMediaBreak}px)`);
 
@@ -29,14 +28,9 @@ export default function DashboardLayout(props) {
 
   const mediaQueryChanged = () => {
     setSideBarDocked(mql.matches);
-    setSidebarOpen(false);
   };
 
   mql.addListener(mediaQueryChanged);
-
-  useEffect(() => {
-    setSidebarOpen(!sidebarOpen);
-  }, [clickeRes.showMenu]);
 
   return (
     <DashboardContainer>
@@ -47,8 +41,7 @@ export default function DashboardLayout(props) {
             logoutUser={logoutUser}
           />
         }
-        open={sidebarOpen}
-        onSetOpen={setSidebarOpen}
+        open={showMenu}
         docked={sideBarDocked}
         styles={{
           sidebar: sideBarStyle,
