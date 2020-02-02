@@ -88,7 +88,7 @@ const HCForm = withFormik({
     setSubmitting(true);
     props.submitHelpCenterMsg(values);
     setSubmitting(false);
-    resetForm()
+    resetForm();
   },
   validationSchema,
 })(HelpCenterForm);
