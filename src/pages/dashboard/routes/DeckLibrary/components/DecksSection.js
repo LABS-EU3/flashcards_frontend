@@ -106,7 +106,9 @@ const Decks = ({ decks, isEditMode, setIsEditMode, updateAccess }) => {
                 </InfoHolder>
 
                 <CardCount>
-                  <P color="grey">{d.flashcards.length} Cards </P>
+                  <P color="grey">
+                    {d.flashcards[0] === null ? 0 : d.flashcards.length} Cards
+                  </P>
                   <button
                     type="button"
                     onClick={() => {
