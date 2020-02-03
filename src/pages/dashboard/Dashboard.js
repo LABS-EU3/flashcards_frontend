@@ -30,7 +30,6 @@ import Settings from './routes/Settings/Settings';
 import Search from './routes/Search/Search';
 
 export const DashboardComponent = props => {
-  // console.log(props.location);
   const { user, dashboard, location } = props;
   return (
     <CloudinaryContext>

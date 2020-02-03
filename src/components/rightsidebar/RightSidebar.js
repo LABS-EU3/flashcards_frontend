@@ -55,17 +55,6 @@ export default function RightSidebar(props) {
 
   mql.addListener(mediaQueryChanged);
 
-  // console.log(location);
-  // const dashboardPath = () => {
-  //   if (location.pathname === '/dashboard/welcome') {
-  //     setSidebarOpen(false);
-  //   } else {
-  //     setSidebarOpen(false);
-  //   }
-  // };
-
-  // console.log(dashboardPath)
-
   useEffect(() => {
     getRecentDecks();
     fetchSessions();
@@ -89,14 +78,10 @@ export default function RightSidebar(props) {
         onSetOpen={setSidebarOpen}
         docked={sideBarDocked}
         pullright
-        // dashboardPath={dashboardPath}
         styles={
           location.pathname === '/dashboard/welcome'
             ? {
                 sidebar: {
-                  // background: 'white',
-                  // width: '100%',
-                  // minWidth: '3em',
                   display: 'none',
                 },
 
@@ -189,10 +174,10 @@ const SideContent = ({
             </H1>
           </StyledStart>
           {decks.length === 0 && openLastPlayed ? (
-            <Test>
+            <Text>
               {' '}
               <H2 BOLD>No decks played yet...</H2>
-            </Test>
+            </Text>
           ) : (
             openLastPlayed &&
             decks.map(deck => {
@@ -227,10 +212,10 @@ const SideContent = ({
             </H1>
           </StyledStart>
           {viewedDecks.length === 0 && openRecentlyViewed ? (
-            <Test>
+            <Text>
               {' '}
               <H2 BOLD>No decks viewed yet...</H2>
-            </Test>
+            </Text>
           ) : (
             openRecentlyViewed &&
             viewedDecks.map(deck => {
@@ -250,8 +235,6 @@ const SideContent = ({
   );
 };
 
-const Test = styled.div`
-  // background: red
-  // height: 100%;
+const Text = styled.div`
   text-align: center;
 `;
