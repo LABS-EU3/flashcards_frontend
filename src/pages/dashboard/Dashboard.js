@@ -15,7 +15,10 @@ import RightSidebar from '../../components/rightsidebar/RightSidebar';
 import WelcomePage from './routes/WelcomePage/WelcomePage';
 import DeckLibrary from './routes/DeckLibrary/DeckLibrary';
 import SingleDeck from './routes/SingleDeck/SingleDeck';
-import { getRecentDecks } from '../../modules/dashboard/dashboardActions';
+import {
+  getRecentDecks,
+  fetchSessions,
+} from '../../modules/dashboard/dashboardActions';
 import { logoutUser } from '../../modules/user/userActions';
 import Profile from './routes/Profile/Profile';
 import * as g from '../../styles/variables/global';
@@ -64,6 +67,8 @@ export const DashboardComponent = props => {
             dashboard={dashboard}
             // eslint-disable-next-line react/destructuring-assignment
             getRecentDecks={props.getRecentDecks}
+            // eslint-disable-next-line react/destructuring-assignment
+            fetchSessions={props.fetchSessions}
           />
         </DashboardLayout>
       </ModalProvider>
@@ -94,4 +99,5 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   logoutUser,
   getRecentDecks,
+  fetchSessions,
 })(DashboardComponent);

@@ -30,12 +30,14 @@ import {
 import levelIcon from '../../assets/icons/label_important_24px_outlined.svg';
 
 export default function RightSidebar(props) {
-  const { user, getRecentDecks, dashboard } = props;
-  const { recentDecks } = dashboard;
+  const { user, getRecentDecks, dashboard, fetchSessions } = props;
+  const { recentDecks, userSessions } = dashboard;
+  console.log(userSessions);
+  console.log(recentDecks);
   const [decks, setDecks] = useState([]);
   const [viewedDecks, setViewedDecks] = useState([]);
   const onGetRecentDecks = () => {
-    setDecks(recentDecks);
+    setDecks(userSessions);
   };
   const onGetRecentViewedDecks = () => {
     setViewedDecks(recentDecks);
@@ -55,8 +57,9 @@ export default function RightSidebar(props) {
 
   useEffect(() => {
     getRecentDecks();
+    fetchSessions();
     setViewedDecks(recentDecks);
-    setDecks(recentDecks);
+    setDecks(userSessions);
   }, []);
 
   return (
@@ -168,9 +171,9 @@ const SideContent = ({
               return (
                 <Card
                   key={deck.deck_id}
-                  title={deck.deck_name}
+                  title={deck.name}
                   public={deck.public}
-                  totalCard={deck.totalCard}
+                  totalCard={deck.cards_left}
                 />
               );
             })
@@ -208,7 +211,7 @@ const SideContent = ({
                   key={deck.deck_id}
                   title={deck.deck_name}
                   public={deck.public}
-                  totalCard={deck.totalCard}
+                  totalCard={deck.cards_left}
                 />
               );
             })
