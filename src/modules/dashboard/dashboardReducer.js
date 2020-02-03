@@ -389,6 +389,13 @@ const dashboardReducer = (state = initialState, action) => {
         favoriteTags: action.payload,
         loading: false,
       };
+
+    case types.SESSION_COMPLETE:
+      return {
+        ...state,
+        // eslint-disable-next-line no-use-before-define
+        userSessions: removeSession(state.userSessions, action.payload),
+      };
     default:
       return state;
   }
@@ -404,6 +411,10 @@ const filterCards = session => {
   );
 
   return remainingCards;
+};
+
+const removeSession = (sessions, id) => {
+  return sessions.filter(s => s.id !== id);
 };
 
 export default dashboardReducer;
