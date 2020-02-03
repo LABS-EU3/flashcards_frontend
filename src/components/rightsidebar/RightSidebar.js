@@ -143,7 +143,7 @@ const SideContent = ({
             <H1 BOLD>
               Last Played
               <IconButtonWrapper
-                rotate={openLastPlayed}
+                rotate={openLastPlayed.toString()}
                 onClick={handleButtonClickLastPlayed}
               >
                 <MdKeyboardArrowDown
@@ -181,7 +181,7 @@ const SideContent = ({
             <H1 BOLD>
               Last Viewed
               <IconButtonWrapper
-                rotate={openRecentlyViewed}
+                rotate={openRecentlyViewed.toString()}
                 onClick={handleButtonClickRecentlyViewed}
               >
                 <MdKeyboardArrowDown

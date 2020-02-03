@@ -47,7 +47,11 @@ const Decks = ({ cards, deleteCard, dashboard }) => {
   };
 
   useEffect(() => {
-    filterThroughCards();
+    if (cards) {
+      if (cards[0] !== null) {
+        filterThroughCards();
+      }
+    }
   }, [inputValue]);
 
   const handleDelete = card => {
@@ -72,8 +76,11 @@ const Decks = ({ cards, deleteCard, dashboard }) => {
               name="cardSearch"
               placeholder="Search deck"
               onChange={e => {
+                if (cards[0] !== null) {
+                  handleSearchChange(e);
+                  filterThroughCards();
+                }
                 handleSearchChange(e);
-                filterThroughCards();
               }}
               value={inputValue}
             />
