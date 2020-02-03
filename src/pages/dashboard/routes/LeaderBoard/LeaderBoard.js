@@ -98,7 +98,7 @@ export default function LeaderBoard() {
 
   useEffect(() => {
     dispatch(fetchRankings());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Container>

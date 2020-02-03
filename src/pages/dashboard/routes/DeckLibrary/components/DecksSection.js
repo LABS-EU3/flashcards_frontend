@@ -1,5 +1,5 @@
 /* eslint-disable no-plusplus */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { MdCollectionsBookmark, MdDelete } from 'react-icons/md';
@@ -25,10 +25,42 @@ const Decks = ({ decks, isEditMode, setIsEditMode, updateAccess }) => {
   const selectAll = () => {
     const checkboxes = document.getElementsByName('selectThisDeck');
     let i;
-    for (i = 0; i < checkboxes.length; i++) {
-      checkboxes[i].checked = 1;
+    const checkbox = document.getElementsByClassName(`selectall`);
+    if (checkbox[0].checked === false) {
+      for (i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = false;
+        setSelectedDecks([]);
+      }
+    } else {
+      for (i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = true;
+        const deckIds = decks.map(deck => deck.deck_id);
+        setSelectedDecks(deckIds);
+      }
     }
   };
+
+  const selectThisDeck = d => {
+    const checkbox = document.getElementsByClassName(`input-${d.deck_id}`);
+    if (checkbox[0].checked === true) {
+      const foundDeck = selectedDecks.find(() => d.deck_id);
+      if (foundDeck === undefined) {
+        setSelectedDecks([...selectedDecks, d.deck_id]);
+      }
+    } else {
+      const foundDeck = selectedDecks.find(() => d.deck_id);
+      if (foundDeck !== undefined) {
+        const newSelectedDecks = selectedDecks.filter(
+          deck => deck !== d.deck_id,
+        );
+        setSelectedDecks(newSelectedDecks);
+      }
+    }
+  };
+
+  useEffect(() => {
+    console.log(selectedDecks);
+  }, [selectedDecks]);
 
   return (
     <Collection>
@@ -42,17 +74,21 @@ const Decks = ({ decks, isEditMode, setIsEditMode, updateAccess }) => {
             <SelectAll>
               <input
                 type="checkbox"
+                className="selectall"
                 onClick={() => {
                   selectAll();
-                  const deckIds = decks.map(deck => deck.deck_id);
-                  setSelectedDecks(deckIds);
                 }}
               />
               <P>Select All</P>
             </SelectAll>
 
             <H2>
-              <MdDelete />
+              <MdDelete
+                className="delete-icon"
+                onClick={() => {
+                  console.log(selectedDecks);
+                }}
+              />
             </H2>
 
             <button
@@ -83,14 +119,10 @@ const Decks = ({ decks, isEditMode, setIsEditMode, updateAccess }) => {
                 <input
                   type="checkbox"
                   name="selectThisDeck"
+                  className={`input-${d.deck_id}`}
                   value={d.deck_id}
                   onChange={() => {
-                    selectedDecks.push(d.deck_id);
-                    const nonRepeatingIds = selectedDecks.filter(
-                      (a, b) => a === b,
-                    );
-                    setSelectedDecks(nonRepeatingIds);
-                    console.log(selectedDecks);
+                    selectThisDeck(d);
                   }}
                 />
               )}
@@ -111,7 +143,7 @@ const Decks = ({ decks, isEditMode, setIsEditMode, updateAccess }) => {
                   <button
                     type="button"
                     onClick={() => {
-                      history.push('/dashboard/study');
+                      history.push(`/dashboard/study/${d.deck_id}`);
                     }}
                   >
                     <MdCollectionsBookmark
