@@ -17,7 +17,7 @@ export default function Cards({ title, totalCard }) {
         {/* <P>{public}</P> */}
       </InfoHolder>
       <CardCount>
-        <P color="grey">{totalCard} Cards </P>
+        {totalCard ? <P color="grey">{totalCard} Cards </P> : <P>No cards</P>}
         <NavLink to="/dashboard/study">
           <MdCollectionsBookmark
             size="2em"
