@@ -30,7 +30,8 @@ import Settings from './routes/Settings/Settings';
 import Search from './routes/Search/Search';
 
 export const DashboardComponent = props => {
-  const { user, dashboard } = props;
+  // console.log(props.location);
+  const { user, dashboard, location } = props;
   return (
     <CloudinaryContext>
       <ModalProvider backgroundComponent={FadingBackground}>
@@ -60,6 +61,7 @@ export const DashboardComponent = props => {
             </Switch>
           </RouteContainer>
           <RightSidebar
+            location={location}
             user={user}
             dashboard={dashboard}
             getRecentDecks={props.getRecentDecks}

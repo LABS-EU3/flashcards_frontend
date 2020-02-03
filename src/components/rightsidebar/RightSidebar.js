@@ -30,10 +30,9 @@ import {
 import levelIcon from '../../assets/icons/label_important_24px_outlined.svg';
 
 export default function RightSidebar(props) {
-  const { user, getRecentDecks, dashboard, fetchSessions } = props;
+  // console.log(props);
+  const { user, getRecentDecks, dashboard, fetchSessions, location } = props;
   const { recentDecks, userSessions } = dashboard;
-  console.log(userSessions);
-  console.log(recentDecks);
   const [decks, setDecks] = useState([]);
   const [viewedDecks, setViewedDecks] = useState([]);
   const onGetRecentDecks = () => {
@@ -42,6 +41,7 @@ export default function RightSidebar(props) {
   const onGetRecentViewedDecks = () => {
     setViewedDecks(recentDecks);
   };
+
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const mql = window.matchMedia(`(min-width: ${g.desktopMediaBreak}px)`);
@@ -54,6 +54,17 @@ export default function RightSidebar(props) {
   };
 
   mql.addListener(mediaQueryChanged);
+
+  // console.log(location);
+  // const dashboardPath = () => {
+  //   if (location.pathname === '/dashboard/welcome') {
+  //     setSidebarOpen(false);
+  //   } else {
+  //     setSidebarOpen(false);
+  //   }
+  // };
+
+  // console.log(dashboardPath)
 
   useEffect(() => {
     getRecentDecks();
@@ -77,19 +88,36 @@ export default function RightSidebar(props) {
         open={sidebarOpen}
         onSetOpen={setSidebarOpen}
         docked={sideBarDocked}
-        pullRight
-        styles={{
-          sidebar: {
-            background: 'white',
-            width: '100%',
-            minWidth: '3em',
-          },
+        pullright
+        // dashboardPath={dashboardPath}
+        styles={
+          location.pathname === '/dashboard/welcome'
+            ? {
+                sidebar: {
+                  // background: 'white',
+                  // width: '100%',
+                  // minWidth: '3em',
+                  display: 'none',
+                },
 
-          root: {
-            width: '25%',
-            left: 'none',
-          },
-        }}
+                root: {
+                  width: 'none',
+                  left: 'none',
+                },
+              }
+            : {
+                sidebar: {
+                  background: 'white',
+                  width: '100%',
+                  minWidth: '3em',
+                },
+
+                root: {
+                  width: '25%',
+                  left: 'none',
+                },
+              }
+        }
       >
         <div />
       </Sidebar>
