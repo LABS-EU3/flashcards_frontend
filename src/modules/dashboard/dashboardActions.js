@@ -261,11 +261,11 @@ export const startSession = (deckId, onSuccess) => dispatch => {
 };
 
 // eslint-disable-next-line camelcase
-export const rateCard = ({ card_id, deck_id, rating }) => dispatch => {
+export const rateCard = ({ card_id, session_id, rating }) => dispatch => {
   dispatch({ type: types.ON_START_CARD_RATING });
 
   axiosWithAuth()
-    .post(`/cards/scoring`, { card_id, deck_id, rating })
+    .post(`/cards/scoring`, { card_id, session_id, rating })
     .then(() => {
       dispatch({
         type: types.ON_CARD_RATING_SUCCESS,

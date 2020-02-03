@@ -90,7 +90,6 @@ const Decks = ({ decks, isEditMode, setIsEditMode, updateAccess }) => {
                       (a, b) => a === b,
                     );
                     setSelectedDecks(nonRepeatingIds);
-                    console.log(selectedDecks);
                   }}
                 />
               )}

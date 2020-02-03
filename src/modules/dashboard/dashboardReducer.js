@@ -395,7 +395,9 @@ const dashboardReducer = (state = initialState, action) => {
 };
 
 const filterCards = session => {
-  const reviewedCardIds = session.reviewed_cards.map(c => (c ? c.id : null));
+  const reviewedCardIds = session.reviewed_cards.map(c =>
+    c ? c.card_id : null,
+  );
 
   const remainingCards = session.flashcards.filter(
     f => f !== null && !reviewedCardIds.includes(f.id),

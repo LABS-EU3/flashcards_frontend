@@ -99,7 +99,9 @@ const CarouselComponent = ({ match, dashboard, fetchSession }) => {
             swipeable
           >
             {sessionCards.map((data, index) => {
-              return <StudyCard key={index} card={data} />;
+              return (
+                <StudyCard key={index} card={data} sessionId={sessionId} />
+              );
             })}
           </Carousel>
         </CardContainer>
