@@ -211,6 +211,8 @@ export const fetchSessions = () => dispatch => {
         type: types.ON_FETCH_SESSIONS_SUCCESS,
         payload: data.data,
       });
+      // eslint-disable-next-line no-use-before-define
+      markSessionsComplete(data.data);
     })
     .catch(error => {
       dispatch({
@@ -347,4 +349,13 @@ export const getFavoriteTags = () => dispatch => {
       payload: error.message,
     });
   }
+};
+
+const markSessionsComplete = sessions => {
+  sessions.forEach(async s => {
+    if (s.cards_left <= 0) {
+      await axiosWithAuth().put(`/sessions/${s.id}`, { isCompleted: true });
+    }
+  });
+  fetchSessions();
 };
