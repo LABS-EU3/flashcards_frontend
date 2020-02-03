@@ -1,5 +1,5 @@
 /* eslint-disable no-plusplus */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { MdCollectionsBookmark, MdDelete } from 'react-icons/md';
@@ -17,10 +17,15 @@ import {
 } from '../../../styles/DeckLibraryStyles';
 import * as types from '../../../../../modules/dashboard/dashboardTypes';
 
-const Decks = ({ decks, isEditMode, setIsEditMode, updateAccess }) => {
+const Decks = ({
+  decks,
+  isEditMode,
+  setIsEditMode,
+  updateAccess,
+  setSelectedDecks,
+}) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [selectedDecks, setSelectedDecks] = useState([]);
 
   const selectAll = () => {
     const checkboxes = document.getElementsByName('selectThisDeck');
@@ -40,27 +45,18 @@ const Decks = ({ decks, isEditMode, setIsEditMode, updateAccess }) => {
     }
   };
 
-  const selectThisDeck = d => {
-    const checkbox = document.getElementsByClassName(`input-${d.deck_id}`);
-    if (checkbox[0].checked === true) {
-      const foundDeck = selectedDecks.find(() => d.deck_id);
-      if (foundDeck === undefined) {
-        setSelectedDecks([...selectedDecks, d.deck_id]);
-      }
-    } else {
-      const foundDeck = selectedDecks.find(() => d.deck_id);
-      if (foundDeck !== undefined) {
-        const newSelectedDecks = selectedDecks.filter(
-          deck => deck !== d.deck_id,
-        );
-        setSelectedDecks(newSelectedDecks);
+  const selectThisDeck = async () => {
+    const checkboxes = await document.getElementsByName('selectThisDeck');
+    let i;
+    let deckIds = [];
+    for (i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i].checked === true) {
+        const newArrayIds = [...deckIds, Number(checkboxes[i].value)];
+        deckIds = newArrayIds;
+        setSelectedDecks(deckIds);
       }
     }
   };
-
-  useEffect(() => {
-    console.log(selectedDecks);
-  }, [selectedDecks]);
 
   return (
     <Collection>
@@ -86,7 +82,7 @@ const Decks = ({ decks, isEditMode, setIsEditMode, updateAccess }) => {
               <MdDelete
                 className="delete-icon"
                 onClick={() => {
-                  console.log(selectedDecks);
+                  dispatch({ type: types.ON_START_DELETE_CONFIRMATION });
                 }}
               />
             </H2>
@@ -122,7 +118,7 @@ const Decks = ({ decks, isEditMode, setIsEditMode, updateAccess }) => {
                   className={`input-${d.deck_id}`}
                   value={d.deck_id}
                   onChange={() => {
-                    selectThisDeck(d);
+                    selectThisDeck();
                   }}
                 />
               )}

@@ -192,7 +192,6 @@ export const deleteDeck = deckId => dispatch => {
         type: types.ON_DELETE_DECK_SUCCESS,
         payload: data,
       });
-      dispatch({ type: types.ON_DELETE_CONFIRMATION_SUCCESS });
     })
     .catch(error => {
       dispatch({
