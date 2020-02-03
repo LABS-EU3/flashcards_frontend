@@ -30,7 +30,6 @@ import {
 import levelIcon from '../../assets/icons/label_important_24px_outlined.svg';
 
 export default function RightSidebar(props) {
-  // console.log(props);
   const { user, getRecentDecks, dashboard, fetchSessions, location } = props;
   const { recentDecks, userSessions } = dashboard;
   const [decks, setDecks] = useState([]);

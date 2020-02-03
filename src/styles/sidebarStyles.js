@@ -59,7 +59,10 @@ export const CardsStyled = styled.div`
     width: 100%;
   }
 `;
-
+export const CardStyled = styled(CardsStyled)`
+  margin-top: 0;
+  border-radius: 0;
+`;
 export const StyledStart = styled.div`
   font: ${BRAND_FONT};
   text-align: left;
