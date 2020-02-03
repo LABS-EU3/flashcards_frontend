@@ -102,9 +102,9 @@ const ProfileMainSection = ({
                 >
                   <InfoHolder>
                     <H2 BOLD>{d.deck_name}</H2>
-                    {d.tags.map((tag, idx) => (
-                      <P key={`${idx + 1}`}>{tag.name}</P>
-                    ))}
+                    {d.tags.map(
+                      (tag, idx) => tag && <P key={`${idx + 1}`}>{tag.name}</P>,
+                    )}
                   </InfoHolder>
 
                   <CardCount>

@@ -1,156 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
-import './studymode.css';
 import ReactSearchBox from 'react-search-box';
 import { MdCollectionsBookmark, MdKeyboardArrowDown } from 'react-icons/md';
 import { Line } from 'rc-progress';
-import { NavLink } from 'react-router-dom';
 import { H1, H2, H3, P } from '../../../../styles/typography';
+import './studymode.css';
 import {
   fetchUserDecks,
   fetchSessions,
   startSession,
   getRecentDecks,
 } from '../../../../modules/dashboard/dashboardActions';
-
-export const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-export const TopContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-
-  margin-top: 30px;
-  @media (max-width: 900px) {
-    width: 80%;
-    flex-direction: column;
-  }
-`;
-
-export const BottomContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  margin-top: 40px;
-  width: 95%;
-  @media (min-width: 1500px) {
-    width: 75%;
-  }
-  @media (max-width: 900px) {
-    width: 80%;
-    flex-direction: column;
-  }
-`;
-
-export const Card = styled(NavLink)`
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  width: 98%;
-  height: 60px;
-  margin-top: 5%;
-  padding-left: 2%;
-  padding-bottom: 2%;
-  background-color: white;
-  border-radius: 5px;
-`;
-
-export const UpperCardSection = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-export const SLowerCardSection = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-export const SLower = styled.div`
-  display: flex;
-  justify-content: space-around;
-  width: 40%;
-`;
-
-export const MLower = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 90%;
-  margin-top: -4%;
-`;
-
-export const RecentlyViewContainer = styled.div`
-  margin: 10px 10px 10px 20px;
-  width: 100%;
-  @media (min-width: 768px) {
-    display: none;
-  }
-`;
-
-export const SessionContainer = styled.div`
-  align-self: flex-start;
-  margin: 10px 10px 10px 5px;
-  width: 100%;
-`;
-
-export const MasteryContainer = styled.div`
-  margin: 10px 10px 10px 20px;
-  width: 100%;
-`;
-
-export const CardContainer = styled.div`
-  /* display: none; */
-`;
-
-const StyledMyPart = styled(CardContainer).attrs({
-  className: 'container',
-})`
-  &.container {
-    /* display: none; */
-  }
-`;
-
-export const BUTTON = styled.button`
-  height: 40px;
-  border: none;
-  outline: none;
-  background: #ffa987;
-  border-radius: 3px;
-  cursor: pointer;
-`;
-
-export const MyHR = styled.hr`
-  width: 98%;
-  height: 1px;
-  margin-left: 0;
-  border: 0;
-  background: linear-gradient(
-    88.85deg,
-    rgba(210, 31, 60, 0.5) 38.43%,
-    rgba(255, 169, 135, 0.5) 136.86%
-  );
-`;
-
-const IconButtonWrapper = styled.div`
-  float: right;
-  transform: rotate(0deg);
-  overflow: hidden;
-  transition: all 0.3s ease-out;
-  transform: ${props => (props.rotate ? `rotate(180deg)` : '')};
-`;
+import * as StyleComponent from './StudyModeStyles';
 
 // dummy data
-const dummyData = [
+const gameMode = [
   {
     key: '1',
     value: 'Regular',
@@ -231,8 +96,8 @@ const StudyMode = ({
   };
 
   return (
-    <Wrapper>
-      <TopContainer>
+    <StyleComponent.Wrapper>
+      <StyleComponent.TopContainer>
         <H3>Deck</H3>
         <ReactSearchBox
           placeholder="Type the deck name you want to use"
@@ -242,65 +107,74 @@ const StudyMode = ({
         <br />
 
         <H3>Game Mode</H3>
-        <ReactSearchBox placeholder="Regular" data={dummyData} />
+        <ReactSearchBox placeholder="Regular" data={gameMode} />
         <br />
         <br />
         <br />
-
-        <BUTTON onClick={() => startStudyMode(selectedDeckId)}>
+        <StyleComponent.BUTTON onClick={() => startStudyMode(selectedDeckId)}>
           <H3 color="white">Start</H3>
-        </BUTTON>
-      </TopContainer>
-      <BottomContainer>
-        <RecentlyViewContainer>
-          <UpperCardSection>
+        </StyleComponent.BUTTON>
+        <P>{dashboard.error}</P>
+      </StyleComponent.TopContainer>
+      <StyleComponent.BottomContainer>
+        <StyleComponent.RecentlyViewContainer>
+          <StyleComponent.UpperCardSection>
             <H1 lineHeight="1em">Jump back into</H1>
-            <IconButtonWrapper rotate={open3} onClick={handleButtonClick3}>
+            <StyleComponent.IconButtonWrapper
+              rotate={open3}
+              onClick={handleButtonClick3}
+            >
               <MdKeyboardArrowDown
                 size="4em"
                 color="grey"
                 onClick={handleButtonClick3}
                 className="material-icons"
               />
-            </IconButtonWrapper>
-          </UpperCardSection>
-          <MyHR />
+            </StyleComponent.IconButtonWrapper>
+          </StyleComponent.UpperCardSection>
+          <StyleComponent.MyHR />
 
-          <CardContainer className="container" ref={container}>
-            <StyledMyPart>
+          <StyleComponent.CardContainer className="container" ref={container}>
+            <StyleComponent.StyledMyPart>
               {open3 &&
                 decks.map(deck => {
                   return (
-                    <Card to="/dashboard/study" key={deck.deck_id}>
+                    <StyleComponent.Card
+                      to="/dashboard/study"
+                      key={deck.deck_id}
+                    >
                       <H2>{deck.deck_name}</H2>
-                      <SLowerCardSection>
-                        <SLower>
+                      <StyleComponent.SLowerCardSection>
+                        <StyleComponent.SLower>
                           <MdCollectionsBookmark size="2em" color="grey" />
-                        </SLower>
-                      </SLowerCardSection>
-                    </Card>
+                        </StyleComponent.SLower>
+                      </StyleComponent.SLowerCardSection>
+                    </StyleComponent.Card>
                   );
                 })}
-            </StyledMyPart>
-          </CardContainer>
-        </RecentlyViewContainer>
+            </StyleComponent.StyledMyPart>
+          </StyleComponent.CardContainer>
+        </StyleComponent.RecentlyViewContainer>
 
-        <SessionContainer>
-          <UpperCardSection>
+        <StyleComponent.SessionContainer>
+          <StyleComponent.UpperCardSection>
             <H1 lineHeight="1em">Session</H1>
-            <IconButtonWrapper rotate={open1} onClick={handleButtonClick1}>
+            <StyleComponent.IconButtonWrapper
+              rotate={open1}
+              onClick={handleButtonClick1}
+            >
               <MdKeyboardArrowDown
                 size="4em"
                 color="grey"
                 onClick={handleButtonClick1}
                 className="material-icons"
               />
-            </IconButtonWrapper>
-          </UpperCardSection>
-          <MyHR />
+            </StyleComponent.IconButtonWrapper>
+          </StyleComponent.UpperCardSection>
+          <StyleComponent.MyHR />
 
-          <CardContainer className="container">
-            <StyledMyPart>
+          <StyleComponent.CardContainer className="container">
+            <StyleComponent.StyledMyPart>
               {open1 && userSessions.length ? (
                 userSessions.map(data => {
                   // Perform some gymnastics to obtain deck name since
@@ -308,49 +182,55 @@ const StudyMode = ({
                   const deck = userDecks.find(d => d.deck_id === data.deck_id);
                   const deckName = deck ? deck.deck_name : '';
                   return (
-                    <Card
+                    <StyleComponent.Card
                       to={`/dashboard/studysession/${data.id}`}
                       key={data.deck_id}
                     >
                       <H2>{deckName}</H2>
-                      <SLowerCardSection>
+                      <StyleComponent.SLowerCardSection>
                         <P>{data.mode || 'Regular'} mode</P>
-                        <SLower>
+                        <StyleComponent.SLower>
                           <P color="grey">{data.cards_left} Cards left</P>
                           <MdCollectionsBookmark size="2em" color="grey" />
-                        </SLower>
-                      </SLowerCardSection>
-                    </Card>
+                        </StyleComponent.SLower>
+                      </StyleComponent.SLowerCardSection>
+                    </StyleComponent.Card>
                   );
                 })
               ) : (
                 <P>You don&apos;t have any sessions yet</P>
               )}
-            </StyledMyPart>
-          </CardContainer>
-        </SessionContainer>
+            </StyleComponent.StyledMyPart>
+          </StyleComponent.CardContainer>
+        </StyleComponent.SessionContainer>
 
-        <MasteryContainer>
-          <UpperCardSection>
+        <StyleComponent.MasteryContainer>
+          <StyleComponent.UpperCardSection>
             <H1 lineHeight="1em">Mastery</H1>
-            <IconButtonWrapper rotate={open2} onClick={handleButtonClick2}>
+            <StyleComponent.IconButtonWrapper
+              rotate={open2}
+              onClick={handleButtonClick2}
+            >
               <MdKeyboardArrowDown
                 size="4em"
                 color="grey"
                 onClick={handleButtonClick2}
                 className="material-icons"
               />
-            </IconButtonWrapper>
-          </UpperCardSection>
-          <MyHR />
+            </StyleComponent.IconButtonWrapper>
+          </StyleComponent.UpperCardSection>
+          <StyleComponent.MyHR />
 
-          <CardContainer className="container">
+          <StyleComponent.CardContainer className="container">
             {open2 &&
               mastery.map((data, index) => {
                 return (
-                  <Card to="/dashboard/study" key={`card-${index + 1}`}>
+                  <StyleComponent.Card
+                    to="/dashboard/study"
+                    key={`card-${index + 1}`}
+                  >
                     <H2>{data.cardTitle}</H2>
-                    <MLower>
+                    <StyleComponent.MLower>
                       <Line
                         percent={data.percent}
                         strokelinecolor="red"
@@ -361,14 +241,14 @@ const StudyMode = ({
                         className="pBar"
                       />
                       <H2>{data.percent} %</H2>
-                    </MLower>
-                  </Card>
+                    </StyleComponent.MLower>
+                  </StyleComponent.Card>
                 );
               })}
-          </CardContainer>
-        </MasteryContainer>
-      </BottomContainer>
-    </Wrapper>
+          </StyleComponent.CardContainer>
+        </StyleComponent.MasteryContainer>
+      </StyleComponent.BottomContainer>
+    </StyleComponent.Wrapper>
   );
 };
 
