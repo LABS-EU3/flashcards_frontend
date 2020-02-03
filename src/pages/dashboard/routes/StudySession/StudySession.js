@@ -14,19 +14,6 @@ import styled from 'styled-components';
 import { H2 } from '../../../../styles/typography';
 import './studysession.css';
 
-const dummyData = [
-  { id: 1, Question: 'Happiness', score: 10, Answer: 'my answer1' },
-  { id: 4, Question: 'Chinwe', score: 9, Answer: 'my answer2' },
-  { id: 8, Question: 'Bobby', score: 8, Answer: 'my answer3' },
-  { id: 100, Question: 'Alex', score: 7, Answer: 'my answer4' },
-  { id: 10, Question: 'Jane', score: 6, Answer: 'my answer5' },
-  { id: 30, Question: 'Tade', score: 5, Answer: 'my answer6' },
-  { id: 14, Question: 'Miracle', score: 4, Answer: 'my answer7' },
-  { id: 7, Question: 'Peace', score: 3, Answer: 'my answer8' },
-  { id: 25, Question: 'Joy', score: 2, Answer: 'my answer9' },
-  { id: 2, Question: 'Alex', score: 1, Answer: 'my answer10' },
-];
-
 export const Container = styled.div`
   background-color: transparent;
   background: white;
@@ -99,7 +86,7 @@ const CarouselComponent = ({ match, dashboard, fetchSession }) => {
 
   useEffect(() => {
     fetchSession(sessionId);
-  }, []);
+  }, [fetchSession, sessionId]);
 
   return (
     <Container>
@@ -120,7 +107,7 @@ const CarouselComponent = ({ match, dashboard, fetchSession }) => {
 
       <BottomCompDiv>
         <MLower>
-          <H2>Organic Compounds</H2>
+          <H2>{selectedSession.name}</H2>
           <Line
             percent={50}
             strokelinecolor="red"
@@ -130,7 +117,7 @@ const CarouselComponent = ({ match, dashboard, fetchSession }) => {
             strokeColor="#FFA987"
             className="pBar2"
           />
-          <h2 className="bottomh2">15/30 Cards</h2>
+          {/* <h2 className="bottomh2">15/30 Cards</h2> */}
         </MLower>
       </BottomCompDiv>
     </Container>

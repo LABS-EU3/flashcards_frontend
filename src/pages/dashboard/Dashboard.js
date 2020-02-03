@@ -1,9 +1,10 @@
+/* eslint-disable react/destructuring-assignment */
 // Import
 
 // Libraries
 import React from 'react';
 import { connect } from 'react-redux';
-import { Switch, Route } from 'react-router';
+import { Switch, Route, Redirect } from 'react-router';
 import { CloudinaryContext } from 'cloudinary-react';
 import styled from 'styled-components';
 import { ModalProvider } from 'styled-react-modal';
@@ -26,13 +27,10 @@ import Settings from './routes/Settings/Settings';
 import Search from './routes/Search/Search';
 
 export const DashboardComponent = props => {
-  // console.log(props);
   const { user, dashboard } = props;
-  // console.log(dashboard)
   return (
     <CloudinaryContext>
       <ModalProvider backgroundComponent={FadingBackground}>
-        {/* eslint-disable-next-line react/destructuring-assignment */}
         <DashboardLayout user={user} logoutUser={props.logoutUser}>
           <RouteContainer>
             <Switch>
@@ -45,7 +43,6 @@ export const DashboardComponent = props => {
               <Route path="/dashboard/study">
                 <StudyMode
                   dashboard={dashboard}
-                  // eslint-disable-next-line react/destructuring-assignment
                   getRecentDecks={props.getRecentDecks}
                 />
               </Route>
@@ -56,13 +53,12 @@ export const DashboardComponent = props => {
               />
               <Route path="/dashboard/settings" component={Settings} />
               <Route path="/dashboard/search" component={Search} />
+              <Route render={() => <Redirect to="/dashboard/welcome" />} />
             </Switch>
           </RouteContainer>
-          {/* eslint-disable-next-line react/destructuring-assignment  */}
           <RightSidebar
             user={user}
             dashboard={dashboard}
-            // eslint-disable-next-line react/destructuring-assignment
             getRecentDecks={props.getRecentDecks}
           />
         </DashboardLayout>
@@ -77,10 +73,10 @@ const RouteContainer = styled.div`
   background: transparent;
   @media (min-width: ${g.phoneMediaBreak}px) {
     width: 100%;
-    @media (min-width: ${g.desktopMediaBreak}px) {
-      width: 75%;
-      background: transparent;
-    }
+  }
+  @media (min-width: ${g.desktopMediaBreak}px) {
+    width: 75%;
+    background: transparent;
   }
 `;
 

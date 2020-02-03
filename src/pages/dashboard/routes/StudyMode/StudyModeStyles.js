@@ -34,7 +34,7 @@ export const BottomContainer = styled.div`
   }
 `;
 
-export const Card = styled.div`
+export const Card = styled(NavLink)`
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -112,6 +112,7 @@ export const BUTTON = styled.button`
   outline: none;
   background: #ffa987;
   border-radius: 3px;
+  cursor: pointer;
 `;
 
 export const MyHR = styled.hr`
@@ -132,8 +133,4 @@ export const IconButtonWrapper = styled.div`
   overflow: hidden;
   transition: all 0.3s ease-out;
   transform: ${props => (props.rotate ? `rotate(180deg)` : '')};
-`;
-
-export const StyledLink = styled(NavLink)`
-  text-decoration: none;
 `;

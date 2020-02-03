@@ -1,14 +1,13 @@
 /* eslint-disable */
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { H1 } from '../../../styles/typography';
-
 import styled from 'styled-components';
 import Ripples from 'react-ripples';
 
+import { H2, H1, P } from '../../../styles/typography';
 import { rateCard } from '../../../modules/dashboard/dashboardActions';
 
-const StudyCard = ({ card, rateSingeleCard }) => {
+const StudyCard = ({ card, rateSingleCard }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const handlerEvent = event => {
     event.preventDefault();
@@ -16,31 +15,49 @@ const StudyCard = ({ card, rateSingeleCard }) => {
   };
 
   const scoreCard = score => {
-    rateSingeleCard({ deck_id: card.deck_id, card_id: card.id, rating: score });
+    rateSingleCard({ deck_id: card.deck_id, card_id: card.id, rating: score });
   };
   return (
     <div className="scene" onClick={handlerEvent}>
+      <P>❗ Click to flip</P>
       <div className="card">
         {!isFlipped && (
-          <div>
+          <ImageCard>
+            <H2>Question:</H2>
+            {card.image_url_question && (
+              <section>
+                <img
+                  src={card.image_url_question}
+                  alt={`${card.question} question`}
+                />
+              </section>
+            )}
             <H1>{card.question}</H1>
-          </div>
+          </ImageCard>
         )}
         {isFlipped && (
-          <div>
+          <ImageCard>
+            <H2>Answer:</H2>
+            <section>
+              {card.image_url_answer && (
+                <img
+                  src={card.image_url_answer}
+                  alt={`${card.answer} answer`}
+                />
+              )}
+            </section>
             <H1>{card.answer}</H1>
-          </div>
+          </ImageCard>
         )}
       </div>
-
       <EmojisCompDiv>
-        <Ripples color={'#FAFFDF '}>
+        <Ripples color={'#FAFFDF'}>
           <button
-            onClick={() => scoreCard(3)}
+            onClick={() => scoreCard(1)}
             type="button"
             className="emoji btn"
           >
-            &#129303;
+            &#128557;
           </button>
         </Ripples>
         <Ripples color={'#FAFFDF '}>
@@ -52,13 +69,13 @@ const StudyCard = ({ card, rateSingeleCard }) => {
             &#128531;
           </button>
         </Ripples>
-        <Ripples color={'#FAFFDF'}>
+        <Ripples color={'#FAFFDF '}>
           <button
-            onClick={() => scoreCard(1)}
+            onClick={() => scoreCard(3)}
             type="button"
             className="emoji btn"
           >
-            &#128557;
+            &#129303;
           </button>
         </Ripples>
       </EmojisCompDiv>
@@ -72,12 +89,24 @@ export const EmojisCompDiv = styled.div`
   justify-content: space-around;
 `;
 
+export const ImageCard = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h2 {
+    text-decoration: underline;
+  }
+`;
+
 const mapStateToProps = state => {
   return {
     dashboard: state.dashboard,
   };
 };
 
-export default connect(mapStateToProps, { rateSingeleCard: rateCard })(
+export default connect(mapStateToProps, { rateSingleCard: rateCard })(
   StudyCard,
 );

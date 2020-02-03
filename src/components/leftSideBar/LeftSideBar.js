@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-// import { connect } from 'react-redux';
 import RoundedImage from 'react-rounded-image';
 // Styled
 import '../../App.css';
@@ -29,15 +28,14 @@ import {
 
 import { GrowSpace } from '../../styles/displayFlex';
 
-const LeftSideBar = ({ name }) => {
-  const imgUrl = useSelector(state => state.user.credentials.image_url);
+const LeftSideBar = () => {
+  const user = useSelector(state => state.user.credentials);
 
   return (
     <SidebarBody>
       <ProfileImageDiv>
         <RoundedImage
-          // eslint-disable-next-line max-len
-          image={imgUrl || profileDefault}
+          image={user.image_url || profileDefault}
           alt="User's profile"
           imageHeight="100"
           imageWidth="100"
@@ -46,7 +44,7 @@ const LeftSideBar = ({ name }) => {
         />
 
         <H1 REGULAR color={c.WHITE}>
-          {name}
+          {user.full_name}
         </H1>
       </ProfileImageDiv>
 
