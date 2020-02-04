@@ -70,7 +70,7 @@ export default function Settings() {
 
   const loadProfileImg = () => {
     openUploadWidget(
-      ['an', 'array'],
+      ['profile image'],
       `${credentials.full_name}_${credentials.id}`,
       error => {
         // eslint-disable-next-line no-console
