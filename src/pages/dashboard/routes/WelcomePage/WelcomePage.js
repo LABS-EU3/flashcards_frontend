@@ -171,7 +171,7 @@ const RankingViewed = styled.div`
     width: 100%;
   }
   @media (min-width: ${g.desktopMediaBreak}px) {
-    width: 100%;
+    width: 40%;
     background: transparent;
   }
 `;
@@ -182,7 +182,7 @@ const COTPlayed = styled.div`
     width: 100%;
   }
   @media (min-width: ${g.desktopMediaBreak}px) {
-    width: 100%;
+    width: 40%;
     background: transparent;
   }
 `;
@@ -194,7 +194,7 @@ const ReleaseNotes = styled.div`
     width: 100%;
   }
   @media (min-width: ${g.desktopMediaBreak}px) {
-    width: 100%;
+    width: 20%;
     background: transparent;
   }
 `;
@@ -208,13 +208,15 @@ const WelcomeStyle = styled.div`
   @media (min-width: ${g.phoneMediaBreak}px) {
     display: flex;
     flex-direction: column;
+    // justify-content: center;
     width: 100%;
     margin-left: 0;
   }
   @media (min-width: ${g.desktopMediaBreak}px) {
-    width: 100%;
+    width: 130%;
     background: transparent;
     display: flex;
     flex-direction: row;
+    margin-left: 10px;
   }
 `;
