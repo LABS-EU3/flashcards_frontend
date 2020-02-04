@@ -9,11 +9,11 @@ import levelIcon from '../../../../assets/icons/label_important_24px_outlined.sv
 import {
   Image,
   MiddleHolder,
-  BlackContainer,
   XPHolder,
   LevelHolder,
   StyledStart,
   CardStyled,
+  DashBlackContainer,
 } from '../../../../styles/sidebarStyles';
 import { CardFooter } from '../../../../components/DashboardCenterBar/styles';
 import DashboardCenterBar from '../../../../components/DashboardCenterBar/DashboardCenterBar';
@@ -24,7 +24,6 @@ import COTD from './components/COTD';
 import Card from '../../../../components/cards/Cards';
 
 const WelcomePage = ({ getCardOfTheDay, getRecentDecks, dashboard, user }) => {
-  // console.log(dashboard);
   const { cardOfTheDay, recentDecks, userSessions } = dashboard;
 
   useEffect(() => {
@@ -33,9 +32,8 @@ const WelcomePage = ({ getCardOfTheDay, getRecentDecks, dashboard, user }) => {
 
   return (
     <WelcomeStyle>
-      {/* <div className="dashboard-welcome__item"> */}
       <RankingViewed>
-        <BlackContainer>
+        <DashBlackContainer>
           <Image>
             <MiddleHolder>
               <H1>{user.credentials.fullName}!</H1>
@@ -58,7 +56,7 @@ const WelcomePage = ({ getCardOfTheDay, getRecentDecks, dashboard, user }) => {
               </LevelHolder>
             </MiddleHolder>
           </Image>
-        </BlackContainer>
+        </DashBlackContainer>
         <DashboardCenterBar
           getRecentDecks={getRecentDecks}
           recentDecks={recentDecks}
@@ -100,7 +98,6 @@ const WelcomePage = ({ getCardOfTheDay, getRecentDecks, dashboard, user }) => {
           </CardFooter>
         )}
       </COTPlayed>
-      {/* </div> */}
       <ReleaseNotes>
         <DashboardRightBar />
       </ReleaseNotes>
@@ -134,7 +131,7 @@ const COTPlayed = styled.div`
 `;
 
 const ReleaseNotes = styled.div`
-  width: 25%;
+  width: 20%;
   height: 100%;
 `;
 

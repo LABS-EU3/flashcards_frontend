@@ -118,6 +118,10 @@ export const BlackContainer = styled.div`
   align-content: center;
 `;
 
+export const DashBlackContainer = styled(BlackContainer)`
+  border-radius: 10px;
+`;
+
 export const XPHolder = styled.div`
   width: 70%;
   display: flex;
