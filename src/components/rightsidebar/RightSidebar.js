@@ -5,10 +5,14 @@ import { MdKeyboardArrowDown } from 'react-icons/md';
 
 import { Line } from 'rc-progress';
 import styled from 'styled-components';
-
+import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 // components
+// eslint-disable-next-line import/no-duplicates
+import { InfoHolder, CardCount } from '../cards/Cards';
+// eslint-disable-next-line import/no-duplicates
 import Card from '../cards/Cards';
-
+import * as types from '../../modules/dashboard/dashboardTypes';
 // styles
 import { H1, HR, H3, P, H2 } from '../../styles/typography';
 import * as g from '../../styles/variables/global';
@@ -26,7 +30,7 @@ import {
   LevelHolder,
   SectionHolder,
 } from '../../styles/sidebarStyles';
-
+import { CardsFlexs } from '../../pages/dashboard/styles/DeckLibraryStyles';
 import levelIcon from '../../assets/icons/label_important_24px_outlined.svg';
 
 export default function RightSidebar(props) {
@@ -34,6 +38,7 @@ export default function RightSidebar(props) {
   const { recentDecks, userSessions } = dashboard;
   const [decks, setDecks] = useState([]);
   const [viewedDecks, setViewedDecks] = useState([]);
+
   const onGetRecentDecks = () => {
     setDecks(userSessions);
   };
@@ -125,7 +130,7 @@ const SideContent = ({
     setOpenRecentlyViewed(!openRecentlyViewed);
     onGetRecentViewedDecks();
   };
-
+  const dispatch = useDispatch();
   return (
     <SidebarBody>
       <BlackContainer>
@@ -158,7 +163,7 @@ const SideContent = ({
             <H1 BOLD>
               Last Played
               <IconButtonWrapper
-                rotate={openLastPlayed.toString()}
+                rotate={openLastPlayed}
                 onClick={handleButtonClickLastPlayed}
               >
                 <MdKeyboardArrowDown
@@ -184,6 +189,7 @@ const SideContent = ({
                 <Card
                   key={deck.deck_id}
                   title={deck.name}
+                  deck={deck}
                   public={deck.public}
                   totalCard={deck.cards_left}
                 />
@@ -194,9 +200,9 @@ const SideContent = ({
         <ViewedCardsStyled>
           <StyledStart>
             <H1 BOLD>
-              Last Viewed
+              Recently Viewed
               <IconButtonWrapper
-                rotate={openRecentlyViewed.toString()}
+                rotate={openRecentlyViewed}
                 onClick={handleButtonClickRecentlyViewed}
               >
                 <MdKeyboardArrowDown
@@ -219,12 +225,56 @@ const SideContent = ({
             openRecentlyViewed &&
             viewedDecks.map(deck => {
               return (
-                <Card
+                <CardsFlexs
+                  onClick={() => {
+                    dispatch({
+                      type: types.ON_SELECT_DECK,
+                      payload: { ...deck },
+                    });
+                  }}
                   key={deck.deck_id}
-                  title={deck.deck_name}
-                  public={deck.public}
-                  totalCard={deck.cards_left}
-                />
+                  width="90%"
+                  marginLeft="20px"
+                  marginRight="0"
+                >
+                  <NavLink
+                    to={`/dashboard/deck/${deck.deck_id}`}
+                    className="navFlex"
+                  >
+                    <InfoHolder>
+                      <H2 BOLD>{deck.deck_name}</H2>
+                    </InfoHolder>
+
+                    <CardCount>
+                      <P color="grey">
+                        {deck.flashcards[0] === null
+                          ? 0
+                          : deck.flashcards.length}{' '}
+                        Cards
+                      </P>
+                      {/* <button
+                        type="button"
+                        onClick={() => {
+                          history.push(`/dashboard/study/${deck.deck_id}`);
+                        }}
+                      >
+                        <MdCollectionsBookmark
+                          size="2em"
+                          color="grey"
+                          className="studyIcon"
+                        />
+                      </button> */}
+                    </CardCount>
+                  </NavLink>
+                </CardsFlexs>
+                // <Card
+                //   deck={deck}
+                //   key={deck.deck_id}
+                //   id={deck.deck_id}
+                //   title={deck.deck_name}
+                //   public={deck.public}
+                //   totalCard={deck.cards_left}
+                // />
               );
             })
           )}
