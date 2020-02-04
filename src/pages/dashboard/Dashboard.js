@@ -39,7 +39,11 @@ export const DashboardComponent = props => {
             <Switch>
               <Route path="/dashboard/library" component={DeckLibrary} />
               <Route path="/dashboard/welcome">
-                <WelcomePage user={user} dashboard={dashboard} />
+                <WelcomePage
+                  user={user}
+                  dashboard={dashboard}
+                  fetchUserDecks={props.fetchUserDecks}
+                />
               </Route>
               <Route path="/dashboard/deck/:deckId" component={SingleDeck} />
               <Route path="/dashboard/profile">

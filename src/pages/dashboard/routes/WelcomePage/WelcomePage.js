@@ -1,9 +1,11 @@
 /* eslint-disable max-len */
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { connect, useDispatch } from 'react-redux';
 import { Line } from 'rc-progress';
 import styled from 'styled-components';
-
+import { MdAddToPhotos, MdContentCopy } from 'react-icons/md';
+import { useHistory } from 'react-router';
+import * as g from '../../../../styles/variables/global';
 import { H1, HR, H3, P, H2 } from '../../../../styles/typography';
 import levelIcon from '../../../../assets/icons/label_important_24px_outlined.svg';
 import {
@@ -21,9 +23,46 @@ import DashboardRightBar from '../../../../components/DashboardRightBar/Dashboar
 import './styles.css';
 import { getCOTD } from '../../../../modules/dashboard/dashboardActions';
 import COTD from './components/COTD';
+import AddDeckForm from '../../../../components/addDeckForm/AddDeckForm';
+import FancyModal from '../../../../components/modals/CreateResourceModal';
+import * as types from '../../../../modules/dashboard/dashboardTypes';
+import { IconLabel } from '../DeckLibrary/components/TopComponent';
 
 const WelcomePage = ({ getCardOfTheDay, dashboard, user }) => {
-  const { cardOfTheDay, recentDecks, userSessions } = dashboard;
+  const {
+    cardOfTheDay,
+    recentDecks,
+    userSessions,
+    creatingDeck,
+    tags,
+  } = dashboard;
+
+  // const { creatingDeck, userDecks, tags, confirmingDeletion } = dashboard;
+  const [opacity, setOpacity] = useState(0);
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  function toggleDeckModal() {
+    if (creatingDeck) {
+      dispatch({ type: types.ON_DECK_CREATION_CANCELLED });
+    } else {
+      dispatch({ type: types.ON_START_CREATING_DECK });
+    }
+  }
+
+  const createDeck = () => {
+    dispatch({ type: types.ON_START_CREATING_DECK });
+  };
+
+  const viewDecks = () => {
+    history.push('/dashboard/library');
+  };
+
+  function afterOpen() {
+    setTimeout(() => {
+      setOpacity(1);
+    }, 10);
+  }
 
   useEffect(() => {
     getCardOfTheDay();
@@ -56,6 +95,27 @@ const WelcomePage = ({ getCardOfTheDay, dashboard, user }) => {
             </MiddleHolder>
           </Image>
         </DashBlackContainer>
+        <MobileDIv>
+          <FancyModal
+            isOpen={creatingDeck}
+            afterOpen={afterOpen}
+            toggleModal={toggleDeckModal}
+            opacity={opacity}
+            backgroundProps={{ opacity }}
+          >
+            <AddDeckForm tags={tags} />
+          </FancyModal>
+          <IconLabel
+            onClick={createDeck}
+            img={<MdAddToPhotos />}
+            label="Add Deck"
+          />
+          <IconLabel
+            onClick={viewDecks}
+            img={<MdContentCopy />}
+            label="View Decks"
+          />
+        </MobileDIv>
         <DashboardCenterBar recentDecks={recentDecks} />
       </RankingViewed>
       <COTPlayed>
@@ -91,17 +151,52 @@ const mapDispatchToProps = dispatch => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(WelcomePage);
 
+const MobileDIv = styled.div`
+  @media (min-width: ${g.phoneMediaBreak}px) {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    margin-top: 1rem;
+    justify-content: space-evenly;
+  }
+  @media (min-width: ${g.desktopMediaBreak}px) {
+    display: none;
+  }
+`;
+
 const RankingViewed = styled.div`
   width: 40%;
+  @media (min-width: ${g.phoneMediaBreak}px) {
+    width: 100%;
+  }
+  @media (min-width: ${g.desktopMediaBreak}px) {
+    width: 100%;
+    background: transparent;
+  }
 `;
 
 const COTPlayed = styled.div`
   width: 40%;
+  @media (min-width: ${g.phoneMediaBreak}px) {
+    width: 100%;
+  }
+  @media (min-width: ${g.desktopMediaBreak}px) {
+    width: 100%;
+    background: transparent;
+  }
 `;
 
 const ReleaseNotes = styled.div`
   width: 20%;
   height: 100%;
+  @media (min-width: ${g.phoneMediaBreak}px) {
+    width: 100%;
+  }
+  @media (min-width: ${g.desktopMediaBreak}px) {
+    width: 100%;
+    background: transparent;
+  }
 `;
 
 const WelcomeStyle = styled.div`
@@ -109,4 +204,17 @@ const WelcomeStyle = styled.div`
   display: flex;
   flex-direction: row;
   margin-left: 10px;
+
+  @media (min-width: ${g.phoneMediaBreak}px) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 0;
+  }
+  @media (min-width: ${g.desktopMediaBreak}px) {
+    width: 100%;
+    background: transparent;
+    display: flex;
+    flex-direction: row;
+  }
 `;
