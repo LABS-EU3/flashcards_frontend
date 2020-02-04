@@ -208,7 +208,6 @@ const WelcomeStyle = styled.div`
   @media (min-width: ${g.phoneMediaBreak}px) {
     display: flex;
     flex-direction: column;
-    // justify-content: center;
     width: 100%;
     margin-left: 0;
   }
