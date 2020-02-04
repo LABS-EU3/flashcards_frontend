@@ -11,14 +11,22 @@ import {
   fetchSingleSession,
 } from '../../../../modules/dashboard/dashboardActions';
 import styled from 'styled-components';
-import { H2 } from '../../../../styles/typography';
+import { H2, H1, H5 } from '../../../../styles/typography';
 import './studysession.css';
+import { BackArrowButton } from '../../../../styles/buttons';
+import BackArrow from '../../../../assets/icons/Arrow 1.svg';
+import { useHistory } from 'react-router';
 
 export const Container = styled.div`
   background-color: transparent;
   background: white;
   width: 100%;
   height: 100%;
+  h1 {
+    text-align: center;
+    align-self: center;
+    margin: 0 auto;
+  }
   /* margin: 0 auto; */
 `;
 
@@ -81,6 +89,7 @@ export const MLower = styled.div`
 `;
 
 const CarouselComponent = ({ match, dashboard, fetchSession }) => {
+  let history = useHistory();
   const { sessionId } = match.params;
   const { selectedSession, sessionCards } = dashboard;
 
@@ -90,36 +99,61 @@ const CarouselComponent = ({ match, dashboard, fetchSession }) => {
 
   return (
     <Container>
-      <TopCompDiv>
-        <CardContainer>
-          <Carousel
-            showThumbs={false}
-            showIndicators={false}
-            useKeyboardArrows={true}
-            swipeable
+      {sessionCards.length <= 0 ? (
+        <div>
+          <BackArrowButton
+            onClick={() => {
+              history.push('/dashboard/study');
+            }}
           >
-            {sessionCards.map((data, index) => {
-              return <StudyCard key={index} card={data} />;
-            })}
-          </Carousel>
-        </CardContainer>
-      </TopCompDiv>
-
-      <BottomCompDiv>
-        <MLower>
-          <H2>{selectedSession.name}</H2>
-          <Line
-            percent={50}
-            strokelinecolor="red"
-            strokeWidth="4"
-            trailWidth="4"
-            trailColor="#fafafa"
-            strokeColor="#FFA987"
-            className="pBar2"
-          />
-          {/* <h2 className="bottomh2">15/30 Cards</h2> */}
-        </MLower>
-      </BottomCompDiv>
+            <img src={`${BackArrow}`} alt="back arrow" />
+            <H5>Back</H5>
+          </BackArrowButton>
+          <H1>Please add cards to use this deck </H1>
+        </div>
+      ) : (
+        <div>
+          <BackArrowButton
+            onClick={() => {
+              history.push('/dashboard/study');
+            }}
+          >
+            <img src={`${BackArrow}`} alt="back arrow" />
+            <H5>Back</H5>
+          </BackArrowButton>
+          <TopCompDiv>
+            <CardContainer>
+              <Carousel
+                showThumbs={false}
+                showIndicators={false}
+                useKeyboardArrows={true}
+                swipeable
+              >
+                {sessionCards.map((data, index) => {
+                  return (
+                    <StudyCard key={index} card={data} sessionId={sessionId} />
+                  );
+                })}
+              </Carousel>
+            </CardContainer>
+          </TopCompDiv>
+          <BottomCompDiv>
+            <MLower>
+              <H2>{selectedSession.name}</H2>
+              <Line
+                percent={50}
+                strokelinecolor="red"
+                strokeWidth="4"
+                trailWidth="4"
+                trailColor="#fafafa"
+                strokeColor="#FFA987"
+                className="pBar2"
+              />
+              {/* <h2 className="bottomh2">15/30 Cards</h2> */}
+            </MLower>
+          </BottomCompDiv>
+        </div>
+      )}
     </Container>
   );
 };

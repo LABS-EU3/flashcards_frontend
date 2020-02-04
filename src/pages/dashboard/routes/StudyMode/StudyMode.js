@@ -121,7 +121,7 @@ const StudyMode = ({
           <StyleComponent.UpperCardSection>
             <H1 lineHeight="1em">Jump back into</H1>
             <StyleComponent.IconButtonWrapper
-              rotate={open3}
+              rotate={open3.toString()}
               onClick={handleButtonClick3}
             >
               <MdKeyboardArrowDown
@@ -160,7 +160,7 @@ const StudyMode = ({
           <StyleComponent.UpperCardSection>
             <H1 lineHeight="1em">Session</H1>
             <StyleComponent.IconButtonWrapper
-              rotate={open1}
+              rotate={open1.toString()}
               onClick={handleButtonClick1}
             >
               <MdKeyboardArrowDown
@@ -208,7 +208,7 @@ const StudyMode = ({
           <StyleComponent.UpperCardSection>
             <H1 lineHeight="1em">Mastery</H1>
             <StyleComponent.IconButtonWrapper
-              rotate={open2}
+              rotate={open2.toString()}
               onClick={handleButtonClick2}
             >
               <MdKeyboardArrowDown

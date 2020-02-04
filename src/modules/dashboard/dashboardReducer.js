@@ -389,19 +389,32 @@ const dashboardReducer = (state = initialState, action) => {
         favoriteTags: action.payload,
         loading: false,
       };
+
+    case types.SESSION_COMPLETE:
+      return {
+        ...state,
+        // eslint-disable-next-line no-use-before-define
+        userSessions: removeSession(state.userSessions, action.payload),
+      };
     default:
       return state;
   }
 };
 
 const filterCards = session => {
-  const reviewedCardIds = session.reviewed_cards.map(c => (c ? c.id : null));
+  const reviewedCardIds = session.reviewed_cards.map(c =>
+    c ? c.card_id : null,
+  );
 
   const remainingCards = session.flashcards.filter(
     f => f !== null && !reviewedCardIds.includes(f.id),
   );
 
   return remainingCards;
+};
+
+const removeSession = (sessions, id) => {
+  return sessions.filter(s => s.id !== id);
 };
 
 export default dashboardReducer;

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import useAction from '../../../../../utils/useAction';
 import * as action from '../../../../../modules/dashboard/dashboardActions';
 import * as types from '../../../../../modules/dashboard/dashboardTypes';
@@ -22,19 +22,22 @@ const DeleteContainer = styled.div`
   }
 `;
 
-export default function DeleteConfirmation({ deckId }) {
+export default function DecksConfirmation({ selectedDecks, setIsEditMode }) {
   const history = useHistory();
   const dispatch = useDispatch();
   const deleteDeck = useAction(action.deleteDeck);
   return (
     <DeleteContainer>
       <H1 className="confrimationQuestion">
-        Are you sure you would like to delete this deck?
+        Are you sure you would like to delete these decks?
       </H1>
       <LineButton
         type="button"
         onClick={async () => {
-          await deleteDeck(deckId);
+          await selectedDecks.forEach(deck => {
+            deleteDeck(deck);
+          });
+          await setIsEditMode(false);
           await dispatch({ type: types.ON_DELETE_CONFIRMATION_SUCCESS });
           await history.push('/dashboard/library');
         }}

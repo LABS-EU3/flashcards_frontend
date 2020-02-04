@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable react/destructuring-assignment */
 import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
@@ -11,6 +12,7 @@ import {
   fetchUserDecks,
   updateAccessTime,
 } from '../../../../modules/dashboard/dashboardActions';
+import DecksComfirmation from './components/DecksConfirmation';
 
 import * as types from '../../../../modules/dashboard/dashboardTypes';
 
@@ -25,10 +27,11 @@ const DeckLibrary = props => {
   const updateAccess = props.updateAccessTime;
 
   const fetchDecks = props.fetchUserDecks;
-  const { creatingDeck, userDecks, tags } = dashboard;
+  const { creatingDeck, userDecks, tags, confirmingDeletion } = dashboard;
 
   const [opacity, setOpacity] = useState(0);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [selectedDecks, setSelectedDecks] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -40,6 +43,16 @@ const DeckLibrary = props => {
     }
   }
 
+  function toggleConfirmationModal() {
+    if (confirmingDeletion) {
+      dispatch({
+        type: types.ON_DELETE_CONFIRMATION_CANCELED,
+      });
+    } else {
+      dispatch({ type: types.ON_START_DELETE_CONFIRMATION });
+    }
+  }
+
   function afterOpen() {
     setTimeout(() => {
       setOpacity(1);
@@ -48,7 +61,7 @@ const DeckLibrary = props => {
 
   useEffect(() => {
     fetchDecks();
-  }, []);
+  }, [isEditMode]);
 
   return (
     <DeckLibContainer>
@@ -62,12 +75,26 @@ const DeckLibrary = props => {
       >
         <AddDeckForm tags={tags} />
       </FancyModal>
+      <FancyModal
+        isOpen={confirmingDeletion}
+        afterOpen={afterOpen}
+        toggleModal={toggleConfirmationModal}
+        opacity={opacity}
+        backgroundProps={{ opacity }}
+      >
+        <DecksComfirmation
+          selectedDecks={selectedDecks}
+          setIsEditMode={setIsEditMode}
+        />
+      </FancyModal>
 
       <DecksSection
         decks={userDecks}
         setIsEditMode={setIsEditMode}
         isEditMode={isEditMode}
         updateAccess={updateAccess}
+        selectedDecks={selectedDecks}
+        setSelectedDecks={setSelectedDecks}
       />
     </DeckLibContainer>
   );

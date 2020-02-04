@@ -118,6 +118,10 @@ export const CardsFlexs = styled(CardsFlex)`
   padding-left: 1em;
   input {
     margin-right: 1em;
+    &:hover {
+      cursor: pointer;
+    }
+  }
   }
   .navFlex {
     display: flex;
@@ -142,6 +146,19 @@ export const EditModeHolder = styled.div`
     text-decoration: none;
     background: inherit;
     border: 1px solid ${DARK_NEUTRAL_COLOR};
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .delete-icon {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  input {
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
 
