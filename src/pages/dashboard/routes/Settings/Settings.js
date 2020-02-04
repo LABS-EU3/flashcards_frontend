@@ -71,7 +71,7 @@ export default function Settings() {
   const loadProfileImg = () => {
     openUploadWidget(
       ['an', 'array'],
-      'flashcard_front_13',
+      `${credentials.full_name}_${credentials.id}`,
       error => {
         // eslint-disable-next-line no-console
         console.log(error);
