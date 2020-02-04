@@ -42,9 +42,9 @@ export const DashboardComponent = props => {
                 <WelcomePage
                   user={user}
                   dashboard={dashboard}
-                  getRecentDecks={props.getRecentDecks}
+                  // getRecentDecks={props.getRecentDecks}
                   // eslint-disable-next-line react/destructuring-assignment
-                  fetchSessions={props.fetchSessions}
+                  // fetchSessions={props.fetchSessions}
                 />
               </Route>
               <Route path="/dashboard/deck/:deckId" component={SingleDeck} />

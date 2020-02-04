@@ -11,19 +11,18 @@ import {
   MiddleHolder,
   XPHolder,
   LevelHolder,
-  StyledStart,
   CardStyled,
   DashBlackContainer,
 } from '../../../../styles/sidebarStyles';
+import DashboardMiddle from '../../../../components/DashboardCenterBar/DashboardMiddle';
 import { CardFooter } from '../../../../components/DashboardCenterBar/styles';
 import DashboardCenterBar from '../../../../components/DashboardCenterBar/DashboardCenterBar';
 import DashboardRightBar from '../../../../components/DashboardRightBar/DashboardRightBar';
 import './styles.css';
 import { getCOTD } from '../../../../modules/dashboard/dashboardActions';
 import COTD from './components/COTD';
-import Card from '../../../../components/cards/Cards';
 
-const WelcomePage = ({ getCardOfTheDay, getRecentDecks, dashboard, user }) => {
+const WelcomePage = ({ getCardOfTheDay, dashboard, user }) => {
   const { cardOfTheDay, recentDecks, userSessions } = dashboard;
 
   useEffect(() => {
@@ -57,38 +56,11 @@ const WelcomePage = ({ getCardOfTheDay, getRecentDecks, dashboard, user }) => {
             </MiddleHolder>
           </Image>
         </DashBlackContainer>
-        <DashboardCenterBar
-          getRecentDecks={getRecentDecks}
-          recentDecks={recentDecks}
-        />
+        <DashboardCenterBar recentDecks={recentDecks} />
       </RankingViewed>
       <COTPlayed>
         <CardStyled>
-          <StyledStart>
-            <H1 BOLD>
-              Last Played
-              <div>
-                <HR />
-              </div>
-            </H1>
-          </StyledStart>
-          {userSessions.length === 0 ? (
-            <Text>
-              {' '}
-              <H2 BOLD>No decks played yet...</H2>
-            </Text>
-          ) : (
-            userSessions.map(deck => {
-              return (
-                <Card
-                  key={deck.deck_id}
-                  title={deck.name}
-                  public={deck.public}
-                  totalCard={deck.cards_left}
-                />
-              );
-            })
-          )}
+          <DashboardMiddle userSessions={userSessions} />
         </CardStyled>
         {cardOfTheDay && (
           <CardFooter>
@@ -119,9 +91,6 @@ const mapDispatchToProps = dispatch => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(WelcomePage);
 
-const Text = styled.div`
-  text-align: center;
-`;
 const RankingViewed = styled.div`
   width: 40%;
 `;
