@@ -41,8 +41,14 @@ const InputField = ({ title, btnName, setCallback, ...props }) => {
         type="button"
         onClick={() =>
           openUploadWidget(
-            ['an', 'array'],
-            'flashcard_front_13',
+            ['flashcard', 'front', 'back'],
+
+            // ToDo (Replace randomly generated uuid with specific flashcard id)
+            // Makes it so that images can be easily replaced should
+            // the need arise. Current solution fills up Cloudinary.
+
+            // With no id passed in, util generates a random UUID for the image.
+            undefined,
             error => {
               // eslint-disable-next-line no-console
               console.log(error);

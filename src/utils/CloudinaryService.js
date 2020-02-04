@@ -1,5 +1,6 @@
 import { Util } from 'cloudinary-core';
 import sha1 from 'sha1';
+import { v4 } from 'uuid';
 
 /**
  * a signature generation util for signed uploads to Cloudinary,
@@ -56,16 +57,16 @@ export const openUploadWidget = (
   onUploadSuccessCallback,
 ) => {
   const tags = imageTags.length > 0 ? imageTags : [];
-  if (!imageId) {
+  /*   if (!imageId) {
     onUploadFailedCallback('Please choose a unique identifier for this image');
     return;
-  }
+  } */
   const options = {
     tags,
     cloudName: process.env.REACT_APP_CLOUD_NAME,
     uploadSignature: generateSignature,
     apiKey: process.env.REACT_APP_CLOUDINARY_API_KEY,
-    publicId: imageId,
+    publicId: imageId || v4(),
   };
   const scOptions = Util.withSnakeCaseKeys(options);
   window.cloudinary.openUploadWidget(scOptions, (error, photos) => {
