@@ -39,13 +39,7 @@ export const DashboardComponent = props => {
             <Switch>
               <Route path="/dashboard/library" component={DeckLibrary} />
               <Route path="/dashboard/welcome">
-                <WelcomePage
-                  user={user}
-                  dashboard={dashboard}
-                  // getRecentDecks={props.getRecentDecks}
-                  // eslint-disable-next-line react/destructuring-assignment
-                  // fetchSessions={props.fetchSessions}
-                />
+                <WelcomePage user={user} dashboard={dashboard} />
               </Route>
               <Route path="/dashboard/deck/:deckId" component={SingleDeck} />
               <Route path="/dashboard/profile">
