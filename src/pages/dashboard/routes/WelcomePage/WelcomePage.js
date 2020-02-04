@@ -37,7 +37,6 @@ const WelcomePage = ({ getCardOfTheDay, dashboard, user }) => {
     tags,
   } = dashboard;
 
-  // const { creatingDeck, userDecks, tags, confirmingDeletion } = dashboard;
   const [opacity, setOpacity] = useState(0);
   const dispatch = useDispatch();
   const history = useHistory();
