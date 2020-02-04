@@ -15,6 +15,7 @@ export const Container = styled.div`
   color: black;
   background-color: white;
   border-radius: 5px;
+  height: 100%;
 `;
 
 export const FlipCardFront = styled.div`
@@ -57,11 +58,12 @@ export const Main = styled.div`
 export const Main1 = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  // align-items: flex-start;
   justify-content: center;
   text-align: left;
   padding: 1%;
   margin: 2%;
+  height: 150%;
 `;
 export const Main2 = styled.div`
   display: flex;

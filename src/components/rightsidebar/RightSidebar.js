@@ -5,10 +5,14 @@ import { MdKeyboardArrowDown } from 'react-icons/md';
 
 import { Line } from 'rc-progress';
 import styled from 'styled-components';
-
+import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 // components
+// eslint-disable-next-line import/no-duplicates
+import { InfoHolder, CardCount } from '../cards/Cards';
+// eslint-disable-next-line import/no-duplicates
 import Card from '../cards/Cards';
-
+import * as types from '../../modules/dashboard/dashboardTypes';
 // styles
 import { H1, HR, H3, P, H2 } from '../../styles/typography';
 import * as g from '../../styles/variables/global';
@@ -26,20 +30,22 @@ import {
   LevelHolder,
   SectionHolder,
 } from '../../styles/sidebarStyles';
-
+import { CardsFlexs } from '../../pages/dashboard/styles/DeckLibraryStyles';
 import levelIcon from '../../assets/icons/label_important_24px_outlined.svg';
 
 export default function RightSidebar(props) {
-  const { user, getRecentDecks, dashboard } = props;
-  const { recentDecks } = dashboard;
+  const { user, getRecentDecks, dashboard, fetchSessions, location } = props;
+  const { recentDecks, userSessions } = dashboard;
   const [decks, setDecks] = useState([]);
   const [viewedDecks, setViewedDecks] = useState([]);
+
   const onGetRecentDecks = () => {
-    setDecks(recentDecks);
+    setDecks(userSessions);
   };
   const onGetRecentViewedDecks = () => {
     setViewedDecks(recentDecks);
   };
+
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const mql = window.matchMedia(`(min-width: ${g.desktopMediaBreak}px)`);
@@ -55,8 +61,9 @@ export default function RightSidebar(props) {
 
   useEffect(() => {
     getRecentDecks();
+    fetchSessions();
     setViewedDecks(recentDecks);
-    setDecks(recentDecks);
+    setDecks(userSessions);
   }, []);
 
   return (
@@ -74,19 +81,32 @@ export default function RightSidebar(props) {
         open={sidebarOpen}
         onSetOpen={setSidebarOpen}
         docked={sideBarDocked}
-        pullRight
-        styles={{
-          sidebar: {
-            background: 'white',
-            width: '100%',
-            minWidth: '3em',
-          },
+        pullright
+        styles={
+          location.pathname === '/dashboard/welcome'
+            ? {
+                sidebar: {
+                  display: 'none',
+                },
 
-          root: {
-            width: '25%',
-            left: 'none',
-          },
-        }}
+                root: {
+                  width: 'none',
+                  left: 'none',
+                },
+              }
+            : {
+                sidebar: {
+                  background: 'white',
+                  width: '100%',
+                  minWidth: '3em',
+                },
+
+                root: {
+                  width: '25%',
+                  left: 'none',
+                },
+              }
+        }
       >
         <div />
       </Sidebar>
@@ -110,7 +130,7 @@ const SideContent = ({
     setOpenRecentlyViewed(!openRecentlyViewed);
     onGetRecentViewedDecks();
   };
-
+  const dispatch = useDispatch();
   return (
     <SidebarBody>
       <BlackContainer>
@@ -143,7 +163,7 @@ const SideContent = ({
             <H1 BOLD>
               Last Played
               <IconButtonWrapper
-                rotate={openLastPlayed.toString()}
+                rotate={openLastPlayed}
                 onClick={handleButtonClickLastPlayed}
               >
                 <MdKeyboardArrowDown
@@ -158,19 +178,20 @@ const SideContent = ({
             </H1>
           </StyledStart>
           {decks.length === 0 && openLastPlayed ? (
-            <Test>
+            <Text>
               {' '}
               <H2 BOLD>No decks played yet...</H2>
-            </Test>
+            </Text>
           ) : (
             openLastPlayed &&
             decks.map(deck => {
               return (
                 <Card
                   key={deck.deck_id}
-                  title={deck.deck_name}
+                  title={deck.name}
+                  deck={deck}
                   public={deck.public}
-                  totalCard={deck.totalCard}
+                  totalCard={deck.cards_left}
                 />
               );
             })
@@ -179,9 +200,9 @@ const SideContent = ({
         <ViewedCardsStyled>
           <StyledStart>
             <H1 BOLD>
-              Last Viewed
+              Recently Viewed
               <IconButtonWrapper
-                rotate={openRecentlyViewed.toString()}
+                rotate={openRecentlyViewed}
                 onClick={handleButtonClickRecentlyViewed}
               >
                 <MdKeyboardArrowDown
@@ -196,20 +217,64 @@ const SideContent = ({
             </H1>
           </StyledStart>
           {viewedDecks.length === 0 && openRecentlyViewed ? (
-            <Test>
+            <Text>
               {' '}
               <H2 BOLD>No decks viewed yet...</H2>
-            </Test>
+            </Text>
           ) : (
             openRecentlyViewed &&
             viewedDecks.map(deck => {
               return (
-                <Card
+                <CardsFlexs
+                  onClick={() => {
+                    dispatch({
+                      type: types.ON_SELECT_DECK,
+                      payload: { ...deck },
+                    });
+                  }}
                   key={deck.deck_id}
-                  title={deck.deck_name}
-                  public={deck.public}
-                  totalCard={deck.totalCard}
-                />
+                  width="90%"
+                  marginLeft="20px"
+                  marginRight="0"
+                >
+                  <NavLink
+                    to={`/dashboard/deck/${deck.deck_id}`}
+                    className="navFlex"
+                  >
+                    <InfoHolder>
+                      <H2 BOLD>{deck.deck_name}</H2>
+                    </InfoHolder>
+
+                    <CardCount>
+                      <P color="grey">
+                        {deck.flashcards[0] === null
+                          ? 0
+                          : deck.flashcards.length}{' '}
+                        Cards
+                      </P>
+                      {/* <button
+                        type="button"
+                        onClick={() => {
+                          history.push(`/dashboard/study/${deck.deck_id}`);
+                        }}
+                      >
+                        <MdCollectionsBookmark
+                          size="2em"
+                          color="grey"
+                          className="studyIcon"
+                        />
+                      </button> */}
+                    </CardCount>
+                  </NavLink>
+                </CardsFlexs>
+                // <Card
+                //   deck={deck}
+                //   key={deck.deck_id}
+                //   id={deck.deck_id}
+                //   title={deck.deck_name}
+                //   public={deck.public}
+                //   totalCard={deck.cards_left}
+                // />
               );
             })
           )}
@@ -219,8 +284,6 @@ const SideContent = ({
   );
 };
 
-const Test = styled.div`
-  // background: red
-  // height: 100%;
+const Text = styled.div`
   text-align: center;
 `;

@@ -16,7 +16,10 @@ import RightSidebar from '../../components/rightsidebar/RightSidebar';
 import WelcomePage from './routes/WelcomePage/WelcomePage';
 import DeckLibrary from './routes/DeckLibrary/DeckLibrary';
 import SingleDeck from './routes/SingleDeck/SingleDeck';
-import { getRecentDecks } from '../../modules/dashboard/dashboardActions';
+import {
+  getRecentDecks,
+  fetchSessions,
+} from '../../modules/dashboard/dashboardActions';
 import { logoutUser } from '../../modules/user/userActions';
 import Profile from './routes/Profile/Profile';
 import * as g from '../../styles/variables/global';
@@ -27,7 +30,7 @@ import Settings from './routes/Settings/Settings';
 import Search from './routes/Search/Search';
 
 export const DashboardComponent = props => {
-  const { user, dashboard } = props;
+  const { user, dashboard, location } = props;
   return (
     <CloudinaryContext>
       <ModalProvider backgroundComponent={FadingBackground}>
@@ -35,7 +38,13 @@ export const DashboardComponent = props => {
           <RouteContainer>
             <Switch>
               <Route path="/dashboard/library" component={DeckLibrary} />
-              <Route path="/dashboard/welcome" component={WelcomePage} />
+              <Route path="/dashboard/welcome">
+                <WelcomePage
+                  user={user}
+                  dashboard={dashboard}
+                  fetchUserDecks={props.fetchUserDecks}
+                />
+              </Route>
               <Route path="/dashboard/deck/:deckId" component={SingleDeck} />
               <Route path="/dashboard/profile">
                 <Profile user={user} />
@@ -57,9 +66,12 @@ export const DashboardComponent = props => {
             </Switch>
           </RouteContainer>
           <RightSidebar
+            location={location}
             user={user}
             dashboard={dashboard}
             getRecentDecks={props.getRecentDecks}
+            // eslint-disable-next-line react/destructuring-assignment
+            fetchSessions={props.fetchSessions}
           />
         </DashboardLayout>
       </ModalProvider>
@@ -90,4 +102,5 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   logoutUser,
   getRecentDecks,
+  fetchSessions,
 })(DashboardComponent);

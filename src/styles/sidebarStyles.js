@@ -59,7 +59,10 @@ export const CardsStyled = styled.div`
     width: 100%;
   }
 `;
-
+export const CardStyled = styled(CardsStyled)`
+  margin-top: 0;
+  border-radius: 0;
+`;
 export const StyledStart = styled.div`
   font: ${BRAND_FONT};
   text-align: left;
@@ -113,6 +116,10 @@ export const BlackContainer = styled.div`
   overflow: hidden;
   z-index: -1;
   align-content: center;
+`;
+
+export const DashBlackContainer = styled(BlackContainer)`
+  border-radius: 10px;
 `;
 
 export const XPHolder = styled.div`

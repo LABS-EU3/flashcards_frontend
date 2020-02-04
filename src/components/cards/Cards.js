@@ -9,15 +9,16 @@ import * as c from '../../styles/variables/colours';
 import * as g from '../../styles/variables/global';
 import { SLower } from '../../pages/dashboard/routes/StudyMode/StudyModeStyles';
 
-export default function Cards({ title, totalCard }) {
+export default function Cards({ title, deck }) {
   return (
     <CardsFlex>
       <InfoHolder>
         <H2 BOLD>{title}</H2>
-        {/* <P>{public}</P> */}
       </InfoHolder>
       <CardCount>
-        <P color="grey">{totalCard} Cards </P>
+        <P color="grey">
+          {deck.flashcards[0] === null ? 0 : deck.flashcards.length} Cards
+        </P>
         <NavLink to="/dashboard/study">
           <MdCollectionsBookmark
             size="2em"
