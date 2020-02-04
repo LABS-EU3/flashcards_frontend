@@ -211,6 +211,8 @@ export const fetchSessions = () => dispatch => {
         type: types.ON_FETCH_SESSIONS_SUCCESS,
         payload: data.data,
       });
+      // eslint-disable-next-line no-use-before-define
+      markSessionsComplete(data.data, dispatch);
     })
     .catch(error => {
       dispatch({
@@ -261,11 +263,11 @@ export const startSession = (deckId, onSuccess) => dispatch => {
 };
 
 // eslint-disable-next-line camelcase
-export const rateCard = ({ card_id, deck_id, rating }) => dispatch => {
+export const rateCard = ({ card_id, session_id, rating }) => dispatch => {
   dispatch({ type: types.ON_START_CARD_RATING });
 
   axiosWithAuth()
-    .post(`/cards/scoring`, { card_id, deck_id, rating })
+    .post(`/cards/scoring`, { card_id, session_id, rating })
     .then(() => {
       dispatch({
         type: types.ON_CARD_RATING_SUCCESS,
@@ -347,4 +349,14 @@ export const getFavoriteTags = () => dispatch => {
       payload: error.message,
     });
   }
+};
+
+const markSessionsComplete = (sessions, dispatch) => {
+  sessions.forEach(async s => {
+    if (s.cards_left <= 0) {
+      dispatch({ type: types.SESSION_COMPLETE, payload: s.id });
+      await axiosWithAuth().put(`/sessions/${s.id}`, { isCompleted: true });
+    }
+  });
+  fetchSessions();
 };

@@ -7,7 +7,7 @@ import Ripples from 'react-ripples';
 import { H2, H1, P } from '../../../styles/typography';
 import { rateCard } from '../../../modules/dashboard/dashboardActions';
 
-const StudyCard = ({ card, rateSingleCard }) => {
+const StudyCard = ({ card, rateSingleCard, sessionId }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const handlerEvent = event => {
     event.preventDefault();
@@ -15,7 +15,7 @@ const StudyCard = ({ card, rateSingleCard }) => {
   };
 
   const scoreCard = score => {
-    rateSingleCard({ deck_id: card.deck_id, card_id: card.id, rating: score });
+    rateSingleCard({ session_id: sessionId, card_id: card.id, rating: score });
   };
   return (
     <div className="scene" onClick={handlerEvent}>
