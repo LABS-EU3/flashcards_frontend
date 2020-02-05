@@ -30,7 +30,6 @@
   - [Running the tests](#running-the-tests)
   - [Deployment / Build For Production](#deployment-build-for-production)
   - [Linting fix](#linting-fix)
-  - [Coverage reporting](#coverage-reporting)
   - [Eject hidden modules](#eject-hidden-modules)
   - [Scripts](#scripts)
   - [Code Styling Conventions](#code-styling-conventions)
@@ -102,12 +101,6 @@ It correctly bundles React in production mode and optimizes the build for the be
     $ npm lint:fix
 
 Fixes linting automatically.
-
-## Coverage reporting
-
-    $ npm coverage
-
-Reports coverage with disabled test-watching.
 
 ## Eject hidden modules
 
@@ -366,11 +359,11 @@ Remember that this project is licensed under the MIT license, and by submitting 
 
 - **Request a Review** from at least one team member.
   Example:
-  ![Request team member to review PR](https://res.cloudinary.com/elbon/image/upload/v1566290612/Description%20and%20reviewer.png)
+  ![Request team member to review PR]<img src="./src/assets/appimages/pr-review.png" />
 
 - **Resolve Requested Changes**
   Example:
-  ![Resolve Changes](https://res.cloudinary.com/elbon/image/upload/v1566295161/resolve-conversation.png)
+  ![Resolve Changes]<img src="./src/assets/appimages/pr-revolve.png" />
 
 * **All CI status checks should be green**
 
