@@ -11,7 +11,7 @@
 
 [QuickDecks Website](https://sandy-quickdecks.netlify.com/)
 
-[QuickDecks BackEnd](https://sandy-quickdecks.netlify.com/)
+[QuickDecks BackEnd](https://quickdecks.herokuapp.com/)
 
 [Notion Document](https://www.notion.so/EU3-Flashcards-439539312aa04de7b17c2f80da7dd400)
 
