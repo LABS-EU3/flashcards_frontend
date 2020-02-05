@@ -178,56 +178,218 @@ For the app to function correctly, the user must set up their own environment va
   |
   ├── assets
   |   ├── appimages
+  |   |   ├── dashboard.jpg
+  |   |   ├── library.jpg
+  |   |   ├── pr-resolve.png
+  |   |   ├── pr-review.png
+  |   |   └── profile.jpg
   |   ├── icons
+  |   |   ├── add_deck_icon.svg
+  |   |   ├── Arrow 1.svg
+  |   |   ├── dashboard_icon_outlined.svg
+  |   |   ├── GooglePlus-logos-01.png
+  |   |   ├── index.js
+  |   |   ├── label_important_24px_outlined.svg
+  |   |   ├── library_icon_outlined.svg
+  |   |   ├── logout.svg
+  |   |   ├── noun_attention_61745 1.svg
+  |   |   ├── noun_Question_3013473 1.svg
+  |   |   ├── profile_icon_outline.svg
+  |   |   └── settings_24px_outlined.svg
   |   └── images
+  |   |   ├── rectangle_20.png
+  |   |   ├── rectangle.png
+  |   |   ├── undraw_analysis_4jis.svg
+  |   |   ├── undraw_book_lower_mkck.svg
+  |   |   ├── undraw_knowledge_g5gf.svg
+  |   |   ├── undraw_Load_more_2yd7.svg
+  |   |   ├── undraw_online_test_gba7 (1).svg
+  |   |   └── undraw_studying_s3l7.svg
+  |   ├── background.png
+  |   ├── bottomTriangle.svg
+  |   ├── logo.svg
+  |   ├── topTriangle.svg
+  |   ├── user_profile_default.png
+  |   └── vector.png
   |
   ├── components
   |   ├── addCardForm
+  |   |   └── AddCardForm.js
   |   ├── addDeckForm
-  |   |   └── deckTags
+  |   |    ├── deckTags
+  |   |    |   ├── DeckTags.js
+  |   |    |   └── deckTagStyles.js
+  |   |    └── AddDeckForm.js
   |   ├── buttons
+  |   |   └── LightPopButton.js
   |   ├── cards
+  |   |   └── Cards.js
   |   ├── DashboardCenterBar
+  |   |   ├── CardItems.js
+  |   |   ├── DashboardCenterBar.js
+  |   |   └── styles.js
+  |   ├── DashboardRightBar
+  |   |   ├── DashboardRightBar.js
+  |   |   └── styles.js
   |   ├── forgetForm
+  |   |   └── ForgetPasswordForm.js
   |   ├── headerBar
+  |   |   └── TopBar.js
   |   ├── landingCarousel
-  |   |    └── swiperAnimation
+  |   |   ├── swiperAnimation
+  |   |   |   ├── data.js
+  |   |   |   ├── slideItem.js
+  |   |   |   ├── slider.js
+  |   |   |   ├── styles.js
+  |   |   |   └── swiper.js
+  |   |   └── LandingCarousel.js
   |   ├── leftSideBar
+  |   |   └── LeftSideBar.js
   |   ├── loginForm
+  |   |   └── LoginForm.js
   |   ├── modals
+  |   |   ├── CreateResourceModal.js
+  |   |   └── modalStyles.js
   |   ├── ProfileMainPage
+  |   |   ├── ProfileBanner.js
+  |   |   ├── ProfileImage.js
+  |   |   ├── ProfileMainPage.js
+  |   |   ├── ProfileMainSection.js
+  |   |   └── styles.js
   |   ├── resetForm
+  |   |   └── ResetPasswordForm.js
   |   ├── rightsidebar
+  |   |   └── RightSidebar.js
   |   ├── SearchBox
+  |   |   ├── SearchBox.js
+  |   |   └── styles.js
   |   └── signupForm
+  |       └── SignupForm.js
   |
   ├── config
+  |   └── index.js
   |   
   ├── module
   |   ├── dashboard
+  |   |   ├── dashboardActions.js
+  |   |   ├── dashboardReducer.js
+  |   |   └── dashboardTypes.js
   |   └── user
+  |       ├── userActions.js
+  |       ├── userReducer.js
+  |       └── userTypes.js
   |
   ├── pages
   |   ├── dashboard
+  |   |   ├── route
+  |   |   |   ├── DeckLibrary
+  |   |   |   |   ├── components
+  |   |   |   |   |   ├── DecksSection.js
+  |   |   |   |   |   └── TopComponent.js
+  |   |   |   |   └── DeckLibrary.js
+  |   |   |   ├── LeaderBoard
+  |   |   |   |   └── LeaderBoard.js
+  |   |   |   ├── Profile
+  |   |   |   |   └── Profile.js
+  |   |   |   ├── Search
+  |   |   |   |   ├── components.js
+  |   |   |   |   |   ├── SearchResults.js
+  |   |   |   |   |   └── TopSearch.js
+  |   |   |   |   ├── styles
+  |   |   |   |   |   └── serchStyles.js
+  |   |   |   |   └── Search.js
+  |   |   |   ├── Settings
+  |   |   |   |   ├── SettingForms
+  |   |   |   |   |   ├── AccountManagement.js
+  |   |   |   |   |   ├── HelpCenter.js
+  |   |   |   |   |   ├── PasswordManagement.js
+  |   |   |   |   |   └── ProfileManagement.js
+  |   |   |   |   ├── Setting.js
+  |   |   |   |   └── SettingStyles.js
+  |   |   |   ├── SingleDeck
+  |   |   |   |   ├── cardsSection
+  |   |   |   |   |   ├── styles
+  |   |   |   |   |   |   ├── cardsSectionStyles.js
+  |   |   |   |   |   |   └── DeckCardStyles.js
+  |   |   |   |   |   ├── cardsSection.js
+  |   |   |   |   |   └── DeckCard.js
+  |   |   |   |   ├── deleteConfirmation
+  |   |   |   |   |   └── deleteConfirmation.js
+  |   |   |   |   ├── topComponent
+  |   |   |   |   |   └── topComponent.js
+  |   |   |   |   └── SingleDeck.js
+  |   |   |   ├── StudyMode
+  |   |   |   |   ├── studyMode.css
+  |   |   |   |   ├── StudyMode.js
+  |   |   |   |   └── StudyModeStyles.js
+  |   |   |   ├── StudySession
+  |   |   |   |   ├── studySession.css
+  |   |   |   |   └── StudySessionStyles.js
+  |   |   |   ├── WelcomePage
+  |   |   |   |   ├── components
+  |   |   |   |   |   └── COTD.js
+  |   |   |   |   ├── styles
+  |   |   |   |   |   └── COTDStyles.js
+  |   |   |   |   ├── styles.css
+  |   |   |   |   └── WelcomePage.js
+  |   |   |   └── StudyCard.js
+  |   |   ├── styles
+  |   |   |   ├── DashboardStyles.css
+  |   |   |   ├── DeckLibraryStyles.js
+  |   |   |   └── WelcomePageStyles.js
+  |   |   ├── Dashboard.js
+  |   |   └── DashboardLayout.js
+  |   | 
   |   ├── email_confirmation
+  |   |   └── EmailConfirmation.js
+  |   |
   |   ├── forgot_password
+  |   |   └── ForgotPassword.js
+  |   |
   |   ├── landing
+  |   |   └── Landing.js
+  |   |
   |   ├── login
+  |   |   └── Login.js
+  |   |
   |   ├── reset_password
+  |   |   └── ResetPassword.js
+  |   |
   |   └── signup
+  |      └── SignUp.js
   |
   ├── store
+  |      └── index.js
   |
   ├── style
-  |   └──  variable
+  |   ├── variables.js
+  |   |   ├── colours.js
+  |   |   ├── fonts.js
+  |   |   └── global.js
+  |   ├── background.js
+  |   ├── buttons.js
+  |   ├── displayFlex.js
+  |   ├── forms.js
+  |   ├── sidebarStyles.js
+  |   └── typography.js
   |
   ├── utils
+  |   ├── auth.js
+  |   ├── CloudinaryService.js
+  |   ├── comparisionFunctions.js
+  |   ├── deckTags.js
+  |   ├── importAll.js
+  |   ├── PrivateRoute.js
+  |   ├── useAction.js
+  |   └── useDispatchedActions.js
   |   
   ├── App.css
   |
   ├── App.js
   |
-  └── index.css
+  ├── index.css
+  |
+  └── index.js
 
 ```
 
