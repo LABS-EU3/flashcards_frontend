@@ -1,0 +1,9 @@
+{
+  "appId": "com.quickdecks.app",
+  "appName": "Quick Decks",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "public",
+  "cordova": {},
+  "linuxAndroidStudioPath": "../../../../snap/android-studio/82/android-studio/bin/studio.sh"
+}
