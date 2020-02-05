@@ -1,7 +1,7 @@
 
-[![Build Status](https://travis-ci.org/LABS-EU3/shopping_cart_frontend.svg?branch=develop)](https://travis-ci.org/LABS-EU3/flashcards_frontend)
-[![Maintainability](https://api.codeclimate.com/v1/badges/fef3896e6f1133033b85/maintainability)](https://codeclimate.com/github/LABS-EU3/flashcards_frontend/maintainability)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/7c3d3c09-dc9d-426b-aba2-28da9fee44e3/deploy-status)](https://app.netlify.com/sites/eager-euclid-bdab76/deploys)
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8c0f3795-6190-4b12-9051-5abaa6aaab10/deploy-status)](https://app.netlify.com/sites/sandy-quickdecks/deploys)
+
 
 <img src="./src/assets/appimages/profile.jpg" />
 
