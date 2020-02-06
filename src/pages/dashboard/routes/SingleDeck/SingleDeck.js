@@ -64,7 +64,8 @@ const SingleDeck = props => {
   const { deckId } = match.params;
   useEffect(() => {
     props.getSingleDeck(deckId);
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [deckId]);
 
   return (
     <div>

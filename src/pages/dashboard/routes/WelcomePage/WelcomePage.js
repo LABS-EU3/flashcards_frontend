@@ -65,6 +65,7 @@ const WelcomePage = ({ getCardOfTheDay, dashboard, user }) => {
 
   useEffect(() => {
     getCardOfTheDay();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

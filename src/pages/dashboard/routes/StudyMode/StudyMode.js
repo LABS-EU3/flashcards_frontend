@@ -84,6 +84,7 @@ const StudyMode = ({
     !mql.matches ? setOpen2(!open2) : setOpen2(open2);
     getRecentUserDecks();
     setDecks(recentDecks);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mql.matches]);
 
   const history = useHistory();

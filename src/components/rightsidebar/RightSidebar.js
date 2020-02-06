@@ -64,6 +64,7 @@ export default function RightSidebar(props) {
     fetchSessions();
     setViewedDecks(recentDecks);
     setDecks(userSessions);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

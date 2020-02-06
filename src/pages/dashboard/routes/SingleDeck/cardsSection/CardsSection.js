@@ -52,6 +52,7 @@ const Decks = ({ cards, deleteCard, dashboard }) => {
         filterThroughCards();
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputValue]);
 
   const handleDelete = card => {

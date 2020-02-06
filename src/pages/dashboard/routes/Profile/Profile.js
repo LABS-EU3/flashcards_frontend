@@ -7,6 +7,7 @@ import { getFavoriteTags } from '../../../../modules/dashboard/dashboardActions'
 const Profile = ({ user, fetchFavTags }) => {
   useEffect(() => {
     fetchFavTags();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>

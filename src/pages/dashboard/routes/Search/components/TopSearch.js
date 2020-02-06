@@ -98,6 +98,7 @@ function TopSearch({ dashboard, decks, updateSiftedDecks }) {
 
   useEffect(() => {
     filterFunction();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedTags, inputValue, isPublic]);
 
   return (

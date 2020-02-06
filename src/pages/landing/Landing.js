@@ -46,6 +46,7 @@ export default function Landing(props) {
         </div>,
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user.loading]);
 
   return (

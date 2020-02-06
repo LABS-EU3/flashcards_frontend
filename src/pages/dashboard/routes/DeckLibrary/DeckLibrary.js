@@ -61,6 +61,7 @@ const DeckLibrary = props => {
 
   useEffect(() => {
     fetchDecks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isEditMode]);
 
   return (
