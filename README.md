@@ -356,11 +356,11 @@ Remember that this project is licensed under the MIT license, and by submitting 
 
 - **Request a Review** from at least one team member.
   Example:
-  ![Request team member to review PR]<img src="./src/assets/appimages/pr-review.png" />
+  ![Request team member to review PR](https://res.cloudinary.com/quick-decks/image/upload/v1580970564/pr-review_uzrwxt.png)
 
 - **Resolve Requested Changes**
   Example:
-  ![Resolve Changes]<img src="./src/assets/appimages/pr-revolve.png" />
+  ![Resolve Changes](https://res.cloudinary.com/quick-decks/image/upload/v1580970554/pr-resolve_uwuvnv.png)
 
 * **All CI status checks should be green**
 
