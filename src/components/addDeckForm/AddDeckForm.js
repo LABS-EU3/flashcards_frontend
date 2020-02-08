@@ -90,7 +90,24 @@ const Form = props => {
             }
           />
         </CardLabel>
-
+        <CardLabel>
+          {/* THIS FUNCTIONALITY IS ALL WRONG I JUST COPIED AND PASTE */}
+          <H2>Deck Privacy</H2>
+          {touched.tag && errors.tag && (
+            <Text color={c.DANGER_COLOR}>{errors.deckName}</Text>
+          )}
+          <Select
+            onChange={e => {
+              handleChange(e);
+              addTag(e.target.value);
+            }}
+            name="public"
+            border={touched.tag && errors.tag && `2px solid ${c.DANGER_COLOR}`}
+          >
+            <option value="false">Private</option>
+            <option value="true">Public</option>
+          </Select>
+        </CardLabel>
         <CardLabel>
           <H2>Tags</H2>
           {touched.tag && errors.tag && (
@@ -158,7 +175,7 @@ const AddDeckForm = withFormik({
     const { selectedTags, isEditingDeck, selectedDeck } = props.dashboard;
 
     // Obtain an array of only ids for all currently selected tags.
-    const selectedTagIds = selectedTags.map(t => t && t.id);
+    const selectedTagIds = selectedTags.map(t => t && t.id).filter(t => t);
 
     if (isEditingDeck) {
       /**
@@ -206,9 +223,11 @@ const AddDeckForm = withFormik({
        * We're not editing a deck, so we simply get form values and
        * send to the server.
        */
+
       const deck = {
         name: values.deckName,
         tags: selectedTagIds,
+        isPublic: values.public,
       };
 
       props.createDeck(deck, setSubmitting(false));

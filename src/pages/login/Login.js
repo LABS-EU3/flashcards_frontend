@@ -34,6 +34,7 @@ import { CLEAR_RESPONSES } from '../../modules/user/userTypes';
 export default function Login() {
   const history = useHistory();
   const dispatch = useDispatch();
+
   return (
     <FlexRowBackground>
       {getToken() && <Redirect to="/dashboard" />}

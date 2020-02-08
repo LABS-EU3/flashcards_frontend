@@ -1,10 +1,11 @@
 import * as types from './dashboardTypes';
-import deckTags from '../../utils/deckTags';
+import { deckTags } from '../../utils/deckTags';
+import { objectPropertyCompare } from '../../utils/comparisionFunctions';
 
 const initialState = {
   loading: false,
   errors: null,
-  recentCards: {},
+  recentDecks: [],
   creatingDeck: false,
   creatingCard: false,
   deleteingCard: false,
@@ -15,27 +16,35 @@ const initialState = {
   selectedTags: [],
   selectedDeck: {},
   selectedCard: {},
+  userSessions: [],
+  selectedSession: {},
+  sessionCards: [],
   tags: deckTags,
-  showingAnswers: false,
   showMenu: false,
+  confirmingDeletion: false,
+  allDecks: [],
+  siftedDecks: [],
+  cardOfTheDay: {},
+  favoriteTags: [],
 };
 
 const dashboardReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.RECENT_CARDS_START:
+    case types.RECENT_DECKS_START:
       return {
         ...state,
         loading: true,
+        error: '',
       };
 
-    case types.RECENT_CARDS_SUCCESS:
+    case types.RECENT_DECKS_SUCCESS:
       return {
         ...state,
-        loading: true,
-        recentCards: action.payload,
+        loading: false,
+        recentDecks: action.payload,
       };
 
-    case types.RECENT_CARDS_FAILED:
+    case types.RECENT_DECKS_FAILED:
       return {
         ...state,
         loading: false,
@@ -79,6 +88,7 @@ const dashboardReducer = (state = initialState, action) => {
         creatingDeck: false,
         isEditingDeck: false,
         loading: false,
+        selectedDeck: action.payload,
       };
 
     case types.SET_SELECTED_TAGS:
@@ -104,7 +114,6 @@ const dashboardReducer = (state = initialState, action) => {
         selectedCard: {},
         isUpdatingCard: false,
       };
-
     case types.ON_CARD_CREATION_COMPLETE:
       return {
         ...state,
@@ -136,6 +145,7 @@ const dashboardReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
+        error: '',
         selectedDeck: action.payload,
       };
 
@@ -177,15 +187,10 @@ const dashboardReducer = (state = initialState, action) => {
         ...state,
         isUpdatingCard: true,
         loading: true,
+        error: '',
         selectedCard: action.payload,
       };
 
-    case types.TOGGLE_ANSWERS:
-      return {
-        ...state,
-        showingAnswers:
-          action.payload != null ? action.payload : !state.showingAnswers,
-      };
     case types.HAMBURGER_CLICKED:
       return {
         ...state,
@@ -208,10 +213,208 @@ const dashboardReducer = (state = initialState, action) => {
         loading: false,
         errors: action.payload,
       };
+    case types.ON_START_DELETE_CONFIRMATION:
+      return { ...state, confirmingDeletion: true, loading: true };
 
+    case types.ON_DELETE_CONFIRMATION_SUCCESS:
+      return {
+        ...state,
+        confirmingDeletion: false,
+        loading: false,
+      };
+
+    case types.ON_DELETE_CONFIRMATION_CANCELED:
+      return {
+        ...state,
+        loading: false,
+        confirmingDeletion: false,
+      };
+
+    case types.ON_START_FETCH_SESSIONS:
+      return {
+        ...state,
+        loading: true,
+        error: '',
+      };
+
+    case types.ON_FETCH_SESSIONS_SUCCESS:
+      return {
+        ...state,
+        loading: true,
+        error: '',
+        userSessions: action.payload,
+      };
+
+    case types.ON_FETCH_SESSIONS_FAILED:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    case types.ON_START_FETCH_SINGLE_SESSION:
+      return {
+        ...state,
+        loading: true,
+        error: '',
+      };
+
+    case types.ON_FETCH_SINGLE_SESSION_SUCCESS:
+      return {
+        ...state,
+        loading: true,
+        error: '',
+        selectedSession: action.payload,
+        // eslint-disable-next-line no-use-before-define
+        sessionCards: filterCards(action.payload),
+      };
+
+    case types.ON_FETCH_SINGLE_SESSION_FAILED:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    case types.ON_START_CREATE_SESSIONS:
+      return {
+        ...state,
+        loading: true,
+        error: '',
+      };
+
+    case types.ON_CREATE_SESSIONS_SUCCESS:
+      return {
+        ...state,
+        loading: true,
+        error: '',
+        selectedSession: action.payload,
+      };
+
+    case types.ON_CREATE_SESSIONS_FAILED:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case types.ON_START_CARD_RATING:
+      return {
+        ...state,
+        loading: true,
+        error: '',
+      };
+
+    case types.ON_CARD_RATING_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        sessionCards: state.sessionCards.filter(f => f.id !== action.payload),
+      };
+
+    case types.ON_CARD_RATING_FAILED:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    case types.ON_START_GET_ALL_DECKS:
+      return { ...state, loading: false };
+
+    case types.ON_GET_ALL_DECKS_SUCCESS:
+      return {
+        ...state,
+        allDecks: objectPropertyCompare(
+          [...action.payload, ...state.userDecks],
+          'deck_id',
+        ),
+        siftedDecks: objectPropertyCompare(
+          [...action.payload, ...state.userDecks],
+          'deck_id',
+        ),
+        loading: false,
+      };
+
+    case types.ON_GET_ALL_DECKS_FAILED:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload,
+      };
+    case types.ON_DECK_NAME_SEARCH:
+      return {
+        ...state,
+        siftedDecks: action.payload,
+      };
+    case types.ON_START_FETCHING_CARD_OF_THE_DAY:
+      return { ...state, loading: true };
+
+    case types.ON_CARD_OF_THE_DAY_FETCH_FAILED:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload,
+      };
+
+    case types.ON_CARD_OF_THE_DAY_FETCH_SUCCESS:
+      return {
+        ...state,
+        cardOfTheDay: action.payload,
+        loading: false,
+      };
+    case types.ON_START_UPDATE_ACCESS:
+      return { ...state, loading: true };
+
+    case types.ON_UPDATE_ACCESS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload,
+      };
+    case types.ON_UPDATE_ACCESS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+      };
+    case types.ON_START_FETCH_FAV_TAGS:
+      return { ...state, loading: true };
+
+    case types.ON_FETCH_FAV_TAGS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload,
+      };
+    case types.ON_FETCH_FAV_TAGS_SUCCESS:
+      return {
+        ...state,
+        favoriteTags: action.payload,
+        loading: false,
+      };
+
+    case types.SESSION_COMPLETE:
+      return {
+        ...state,
+        // eslint-disable-next-line no-use-before-define
+        userSessions: removeSession(state.userSessions, action.payload),
+      };
     default:
       return state;
   }
+};
+
+const filterCards = session => {
+  const reviewedCardIds = session.reviewed_cards.map(c =>
+    c ? c.card_id : null,
+  );
+
+  const remainingCards = session.flashcards.filter(
+    f => f !== null && !reviewedCardIds.includes(f.id),
+  );
+
+  return remainingCards;
+};
+
+const removeSession = (sessions, id) => {
+  return sessions.filter(s => s.id !== id);
 };
 
 export default dashboardReducer;

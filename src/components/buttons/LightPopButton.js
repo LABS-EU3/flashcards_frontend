@@ -5,8 +5,8 @@ import * as c from '../../styles/variables/colours';
 import * as g from '../../styles/variables/global';
 
 export const LightPop = props => {
-  const { children } = props;
-  return <PinkButton>{children}</PinkButton>;
+  const { children, type } = props;
+  return <PinkButton type={type}>{children}</PinkButton>;
 };
 
 const PinkButton = styled.button`

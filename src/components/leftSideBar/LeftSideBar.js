@@ -1,16 +1,16 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
-// import { connect } from 'react-redux';
 import RoundedImage from 'react-rounded-image';
 // Styled
 import '../../App.css';
 import {
   MdDashboard,
-  MdAddToPhotos,
   MdSettings,
-  MdExitToApp,
   MdPerson,
   MdContentCopy,
+  MdCollectionsBookmark,
+  MdPoll,
 } from 'react-icons/md';
 // assets
 import { withRouter } from 'react-router-dom';
@@ -28,26 +28,23 @@ import {
 
 import { GrowSpace } from '../../styles/displayFlex';
 
-const LeftSideBar = ({ name, logoutUser, history }) => {
-  const onLogout = e => {
-    e.preventDefault();
-    logoutUser(history);
-  };
+const LeftSideBar = () => {
+  const user = useSelector(state => state.user.credentials);
+
   return (
     <SidebarBody>
       <ProfileImageDiv>
         <RoundedImage
-          // eslint-disable-next-line max-len
-          image={profileDefault}
+          image={user.image_url || profileDefault}
           alt="User's profile"
-          imageHeight="150"
-          imageWidth="150"
+          imageHeight="100"
+          imageWidth="100"
           roundedSize="1"
           roundedColor="#FFF"
         />
 
         <H1 REGULAR color={c.WHITE}>
-          {name}
+          {user.full_name}
         </H1>
       </ProfileImageDiv>
 
@@ -62,27 +59,32 @@ const LeftSideBar = ({ name, logoutUser, history }) => {
           text="Profile"
           route="/dashboard/profile"
         />
-        <MenuItem
+        {/* <MenuItem
           img={<MdAddToPhotos size="1.5em" />}
           text="Add Decks"
           route="/dashboard/add_decks"
-        />
+        /> */}
         <MenuItem
           img={<MdContentCopy size="1.5em" />}
           text="Deck Library"
           route="/dashboard/library"
         />
         <MenuItem
+          img={<MdCollectionsBookmark size="1.5em" />}
+          text="Study Mode"
+          route="/dashboard/study"
+        />
+        <MenuItem
+          img={<MdPoll size="1.5em" />}
+          text="Leaderboard"
+          route="/dashboard/leaderboard"
+        />
+
+        <GrowSpace />
+        <MenuItem
           img={<MdSettings size="1.5em" />}
           text="Settings"
           route="/dashboard/settings"
-        />
-        <GrowSpace />
-        <MenuItem
-          img={<MdExitToApp size="1.5em" />}
-          onClick={onLogout}
-          text="Log Out"
-          route="/login"
         />
       </MenuBox>
     </SidebarBody>

@@ -1,0 +1,22 @@
+.dashboard-welcome {
+  display: flex;
+  min-height: 100vh;
+}
+
+.dashboard-welcome__item {
+  width: 50%;
+}
+
+.dashboard-cards_footer {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .dashboard-welcome {
+    flex-direction: column;
+  }
+
+  .dashboard-welcome__item {
+    width: 100%;
+  }
+}

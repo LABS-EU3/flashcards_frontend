@@ -3,7 +3,9 @@ import { NavLink } from 'react-router-dom';
 
 import * as c from '../../../styles/variables/colours';
 
-export const DashboardContainer = styled.div``;
+export const DashboardContainer = styled.div`
+  background: transparent;
+`;
 export const MainContent = styled.div`
   height: 100%;
 `;
@@ -15,6 +17,9 @@ export const SidebarBody = styled.div`
   /* margin: 10px 0; */
 `;
 export const ProfileImageDiv = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   margin-top: 35px;
   text-align: center;
 `;

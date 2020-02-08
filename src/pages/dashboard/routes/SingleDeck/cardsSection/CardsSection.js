@@ -1,21 +1,58 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { MdDelete, MdEdit } from 'react-icons/md';
-import styled from 'styled-components';
-import { H1, HR, H2, P } from '../../../../../styles/typography';
-import { CardsFlex } from '../../../../../components/cards/Cards';
-
+import React, { useState, useEffect } from 'react';
+import { useDispatch, connect } from 'react-redux';
+import { FaSearch } from 'react-icons/fa';
+import { HR } from '../../../../../styles/typography';
+import 'react-image-lightbox/style.css';
 import {
   Collection,
   DecksContainer,
   CollectionLabel,
-  IconWithoutText,
-  CardsActions,
 } from '../../../styles/DeckLibraryStyles';
 import * as types from '../../../../../modules/dashboard/dashboardTypes';
+import { Input } from '../../../../../styles/forms';
+import { NavSearch } from '../../../../../components/SearchBox/styles';
+import DeckCard from './DeckCard';
+import { TopHolder, CardSearch } from './styles/cardSectionStyles';
 
-const Decks = ({ cards, deleteCard, showingAllAnswers }) => {
+const Decks = ({ cards, deleteCard, dashboard }) => {
+  const { singleDeckCards } = dashboard;
   const dispatch = useDispatch();
+  const [inputValue, setInputValue] = useState('');
+
+  const handleSearchChange = event => {
+    setInputValue(event.target.value);
+  };
+
+  const filterThroughCards = async () => {
+    const cardsFiltered =
+      inputValue !== ''
+        ? await cards.filter(card => {
+            return (
+              card.question
+                // regenx replaces all special characters with ''
+                .replace(/[^\w\s]/gi, '')
+                .toUpperCase()
+                .match(inputValue.replace(/[^\w\s]/gi, '').toUpperCase()) ||
+              card.answer
+                .replace(/[^\w\s]/gi, '')
+                .toUpperCase()
+                .match(inputValue.replace(/[^\w\s]/gi, '').toUpperCase())
+            );
+          })
+        : cards;
+    dispatch({
+      type: types.ON_DECK_CARDS_FETCH_SUCCESS,
+      payload: cardsFiltered,
+    });
+  };
+
+  useEffect(() => {
+    if (cards) {
+      if (cards[0] !== null) {
+        filterThroughCards();
+      }
+    }
+  }, [inputValue]);
 
   const handleDelete = card => {
     deleteCard(card);
@@ -28,100 +65,68 @@ const Decks = ({ cards, deleteCard, showingAllAnswers }) => {
 
   return (
     <Collection>
-      <CollectionLabel>
-        <H1>Cards</H1>
-        <HR />
-      </CollectionLabel>
+      <TopHolder>
+        <CollectionLabel>
+          <HR />
+        </CollectionLabel>
+        <CardSearch>
+          <NavSearch>
+            <Input
+              type="text"
+              name="cardSearch"
+              placeholder="Search deck"
+              onChange={e => {
+                if (cards[0] !== null) {
+                  handleSearchChange(e);
+                  filterThroughCards();
+                }
+                handleSearchChange(e);
+              }}
+              value={inputValue}
+            />
+          </NavSearch>
+
+          <FaSearch size={15} className="searchLink" />
+        </CardSearch>
+      </TopHolder>
 
       <DecksContainer>
-        {cards &&
-          cards.map(card => {
-            return (
-              card && (
-                <DeckCard
-                  key={card.id}
-                  card={card}
-                  showingAllAnswers={showingAllAnswers}
-                  handleDelete={handleDelete}
-                  handleUpdate={handleUpdate}
-                />
-              )
-            );
-          })}
+        {inputValue !== ''
+          ? singleDeckCards &&
+            singleDeckCards.map(card => {
+              return (
+                card && (
+                  <DeckCard
+                    key={card.id}
+                    card={card}
+                    handleDelete={handleDelete}
+                    handleUpdate={handleUpdate}
+                  />
+                )
+              );
+            })
+          : cards &&
+            cards.map(card => {
+              return (
+                card && (
+                  <DeckCard
+                    key={card.id}
+                    card={card}
+                    handleDelete={handleDelete}
+                    handleUpdate={handleUpdate}
+                  />
+                )
+              );
+            })}
       </DecksContainer>
     </Collection>
   );
 };
 
-const DeckCard = ({ card, showingAllAnswers, handleDelete, handleUpdate }) => {
-  const [isShowingSingleAnswer, setIsShowingSingleAnswer] = useState(false);
-  const dispatch = useDispatch();
-  const toggleSingleAnswer = () => {
-    if (showingAllAnswers) {
-      dispatch({ type: types.TOGGLE_ANSWERS, payload: false });
-      setIsShowingSingleAnswer(false);
-    } else setIsShowingSingleAnswer(!isShowingSingleAnswer);
+const mapStateToProps = state => {
+  return {
+    dashboard: state.dashboard,
   };
-  return (
-    <CardsFlex
-      onClick={toggleSingleAnswer}
-      width="46%"
-      height="175px"
-      marginLeft="0"
-      marginRight="0"
-    >
-      <DisplayCardFlex>
-        <TextDiv>
-          <H2 BOLD>{card.question}</H2>
-          {showingAllAnswers || isShowingSingleAnswer ? (
-            <P>{card.answer}</P>
-          ) : (
-            <P>####</P>
-          )}
-        </TextDiv>
-        <CardsActions>
-          <IconWithoutText
-            onClick={() => {
-              handleDelete(card);
-            }}
-          >
-            <H2>
-              <MdDelete />
-            </H2>
-          </IconWithoutText>
-          <IconWithoutText
-            onClick={() => {
-              handleUpdate(card);
-            }}
-          >
-            <H2>
-              <MdEdit />
-            </H2>
-          </IconWithoutText>
-        </CardsActions>
-      </DisplayCardFlex>
-    </CardsFlex>
-  );
 };
 
-const TextDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-self; center;
-  width: inherit;
-  align-items: center;
-
-  h2 {
-    max-width: 80%;
-    max-height: 70%;
-  }
-`;
-
-const DisplayCardFlex = styled.div`
-  display: flex;
-  height: 100%;
-  width: 100%;
-`;
-
-export default Decks;
+export default connect(mapStateToProps)(Decks);

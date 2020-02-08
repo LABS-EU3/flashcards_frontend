@@ -1,6 +1,8 @@
+/* eslint-disable max-len */
+/* eslint-disable react/destructuring-assignment */
 import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
-
+import styled from 'styled-components';
 import AddDeckForm from '../../../../components/addDeckForm/AddDeckForm';
 import DecksSection from './components/DecksSection';
 import TopComponent from './components/TopComponent';
@@ -8,19 +10,28 @@ import {
   createDeck,
   fetchTags,
   fetchUserDecks,
+  updateAccessTime,
 } from '../../../../modules/dashboard/dashboardActions';
+import DecksComfirmation from './components/DecksConfirmation';
 
 import * as types from '../../../../modules/dashboard/dashboardTypes';
 
 import FancyModal from '../../../../components/modals/CreateResourceModal';
 
+const DeckLibContainer = styled.div`
+  background: transparent;
+`;
 const DeckLibrary = props => {
+  // eslint-disable-next-line no-shadow
   const { dashboard } = props;
-  // eslint-disable-next-line react/destructuring-assignment
+  const updateAccess = props.updateAccessTime;
+
   const fetchDecks = props.fetchUserDecks;
-  const { creatingDeck, userDecks, tags } = dashboard;
+  const { creatingDeck, userDecks, tags, confirmingDeletion } = dashboard;
 
   const [opacity, setOpacity] = useState(0);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [selectedDecks, setSelectedDecks] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -32,6 +43,16 @@ const DeckLibrary = props => {
     }
   }
 
+  function toggleConfirmationModal() {
+    if (confirmingDeletion) {
+      dispatch({
+        type: types.ON_DELETE_CONFIRMATION_CANCELED,
+      });
+    } else {
+      dispatch({ type: types.ON_START_DELETE_CONFIRMATION });
+    }
+  }
+
   function afterOpen() {
     setTimeout(() => {
       setOpacity(1);
@@ -40,11 +61,11 @@ const DeckLibrary = props => {
 
   useEffect(() => {
     fetchDecks();
-  }, []);
+  }, [isEditMode]);
 
   return (
-    <div>
-      <TopComponent />
+    <DeckLibContainer>
+      <TopComponent setIsEditMode={setIsEditMode} />
       <FancyModal
         isOpen={creatingDeck}
         afterOpen={afterOpen}
@@ -54,9 +75,28 @@ const DeckLibrary = props => {
       >
         <AddDeckForm tags={tags} />
       </FancyModal>
+      <FancyModal
+        isOpen={confirmingDeletion}
+        afterOpen={afterOpen}
+        toggleModal={toggleConfirmationModal}
+        opacity={opacity}
+        backgroundProps={{ opacity }}
+      >
+        <DecksComfirmation
+          selectedDecks={selectedDecks}
+          setIsEditMode={setIsEditMode}
+        />
+      </FancyModal>
 
-      <DecksSection decks={userDecks} />
-    </div>
+      <DecksSection
+        decks={userDecks}
+        setIsEditMode={setIsEditMode}
+        isEditMode={isEditMode}
+        updateAccess={updateAccess}
+        selectedDecks={selectedDecks}
+        setSelectedDecks={setSelectedDecks}
+      />
+    </DeckLibContainer>
   );
 };
 
@@ -70,4 +110,5 @@ export default connect(mapStateToProps, {
   createDeck,
   fetchTags,
   fetchUserDecks,
+  updateAccessTime,
 })(DeckLibrary);

@@ -4,6 +4,7 @@
 import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router';
 import { connect } from 'react-redux';
+import ReactGA from 'react-ga';
 
 // Styles
 import './App.css';
@@ -24,8 +25,12 @@ import { fetchProfile } from './modules/user/userActions';
 // Utils
 import PrivateRoute from './utils/PrivateRoute';
 import { getToken } from './utils/auth';
+import { gTagID } from './config';
 
 function App(props) {
+  ReactGA.initialize(gTagID);
+  ReactGA.pageview(window.location.pathname);
+
   useEffect(() => {
     const token = getToken();
     if (token) {
@@ -36,15 +41,14 @@ function App(props) {
   return (
     <div>
       <TopBar />
-      {/* <PrivateRoute path="/" component={RightSidebar} /> */}
       <Switch>
         <Route exact path="/" component={Landing} />
+        <Route exact path="/auth/:token" component={Landing} />
         <PrivateRoute path="/dashboard" component={Dashboard} />
         <Route path="/forgot" component={ForgotPassword} />
         <Route path="/reset/:token" component={ResetPassword} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
-
         <Route path="/confirm/:token" component={EmailConfirmation} />
       </Switch>
     </div>

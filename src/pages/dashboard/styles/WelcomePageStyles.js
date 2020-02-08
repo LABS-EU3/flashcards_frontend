@@ -9,7 +9,6 @@ export const FlipCardInner = styled.div`
 
 export const Container = styled.div`
   background-color: transparent;
-  background: whitesmoke;
   width: 100%;
   height: 600px;
   perspective: 1000px;
@@ -20,7 +19,7 @@ export const FlipCardFront = styled.div`
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  background-color: #bbb;
+  background-color: transparent;
   color: black;
   transform: rotateY(180deg);
 `;
@@ -50,7 +49,7 @@ export const Main = styled.div`
   flex-direction: column;
   justify-content: center;
   color: black;
-  background-color: white;
+  background-color: transparent;
   border-radius: 5px;
 `;
 export const Main1 = styled.div`
@@ -81,6 +80,6 @@ export const Card = styled.div`
   width: 60%;
   height: 120px;
   margin-top: 5%;
-  background-color: white;
+  background-color: transparent;
   border-radius: 5px;
 `;

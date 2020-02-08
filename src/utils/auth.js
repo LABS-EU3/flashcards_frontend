@@ -28,7 +28,7 @@ export const clearLocalStorage = () => {
 export const getToken = () => {
   try {
     const token = localStorage.getItem(KEY);
-    if (token === null) {
+    if (token === null || !token) {
       return undefined;
     }
     const isExpired = isTokenExpired(token);
